@@ -1,0 +1,5 @@
+{
+  "name": "integratehub",
+  "compatibility_date": "2026-02-19",
+  "main": "src/index.js"
+}
