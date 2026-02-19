@@ -1,10 +1,9 @@
 export default {
-  async fetch(request) {
+  async fetch() {
     return new Response("IntegrateHub radi 🚀", {
-      headers: { "content-type": "text/plain" },
+      headers: {
+        "content-type": "text/plain; charset=utf-8"
+      }
     });
-  },
-};
-
-
-
+  }
+}
