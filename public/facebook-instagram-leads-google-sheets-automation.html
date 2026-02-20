@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230984e3'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{TITLE}} | IntegrateHub.io</title>
-    <meta name="description" content="{{META_DESCRIPTION}}">
-    <meta property="og:title" content="{{TITLE}}">
-    <meta property="og:description" content="{{META_DESCRIPTION}}">
+    <title>How to Automatically Send Facebook and Instagram Leads to Google Sheets | IntegrateHub.io</title>
+    <meta name="description" content="Every time someone fills out your Facebook or Instagram lead ad form, that lead sits in Meta's system waiting for you to manually download a CSV. By the ti">
+    <meta property="og:title" content="How to Automatically Send Facebook and Instagram Leads to Google Sheets">
+    <meta property="og:description" content="Every time someone fills out your Facebook or Instagram lead ad form, that lead sits in Meta's system waiting for you to manually download a CSV. By the ti">
     <meta property="og:type" content="article">
     <style>
         :root {
@@ -165,18 +165,46 @@
 <div class="container">
 
     <div class="breadcrumb">
-        <a href="index.html">Home</a> › <a href="index.html">Integrations</a> › {{TITLE}}
+        <a href="index.html">Home</a> › <a href="index.html">Integrations</a> › How to Automatically Send Facebook and Instagram Leads to Google Sheets
     </div>
 
     <div class="content">
-        <h1>{{TITLE}}</h1>
+        <h1>How to Automatically Send Facebook and Instagram Leads to Google Sheets</h1>
         <p class="reading-time">⏱ 5 min read · Make.com Integration Guide</p>
 
-        {{MAIN_CONTENT}}
+        <p class="intro">Every time someone fills out your Facebook or Instagram lead ad form, that lead sits in Meta&#x27;s system waiting for you to manually download a CSV. By the time you respond, your competitor already called them. This guide shows how to get every new lead into Google Sheets automatically — in real time, no CSV downloads, no manual work.</p>
+<p>Why Manual Lead Export Is Killing Your Conversion Rate</p>
+<p>Speed to lead is the single biggest factor in converting paid ad leads. Most businesses respond within 2-24 hours because they check Meta&#x27;s Lead Center manually once or twice a day. Research consistently shows that responding within 5 minutes makes you 9x more likely to convert a lead than responding within an hour. When you&#x27;re paying $5-20 per lead on Facebook or Instagram ads, slow follow-up is the most expensive mistake you can make. The math is simple: if you spend $500/month on ads and convert 10% of leads, automating follow-up to under 5 minutes can realistically double that conversion rate — turning $500 in ad spend into twice the revenue without spending an extra dollar.</p>
+<p>What This Automation Does</p>
+<p>Every time someone submits your Facebook or Instagram lead ad form, Make.com instantly catches that event and adds a new row to your Google Sheet — name, email, phone number, and any custom fields from your form. Your sales team sees it in real time. No downloading, no importing, no delay. The automation runs 24/7 including nights and weekends when your team is offline — leads that come in at 11pm are in your sheet by 11:00:01pm.</p>
+<h2>What Gets Captured Automatically</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Form Field</th><th>Google Sheets Column</th><th>Example Value</th></tr></thead><tbody><tr><td>First Name</td><td>A: Name</td><td>Sarah Johnson</td></tr><tr><td>Email Address</td><td>B: Email</td><td>sarah@company.com</td></tr><tr><td>Phone Number</td><td>C: Phone</td><td>+1 555 0123</td></tr><tr><td>Ad Name</td><td>D: Source</td><td>Summer Promo 2026</td></tr><tr><td>Submission Time</td><td>E: Timestamp</td><td>2026-02-20 14:32</td></tr></tbody></table></div>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Add a Slack notification as a third step in Make.com — when a new row hits your Google Sheet, Slack pings your sales channel instantly. Response time drops from hours to minutes. Make.com&#x27;s free plan handles this three-step scenario easily.</div>
+<h2>How to Connect Facebook Lead Ads to Google Sheets</h2>
+<ol class="steps">
+<li>Create a free Make.com account — no credit card required</li>
+<li>Click &quot;Create a new scenario&quot; and add Facebook Lead Ads as your trigger module</li>
+<li>Connect your Facebook account and select the Ad Account and the specific Form you want to watch</li>
+<li>Click the + button to add a second module — search for Google Sheets and select &quot;Add a Row&quot;</li>
+<li>Connect your Google account and select the spreadsheet and sheet where leads should land</li>
+<li>Map the fields: drag Name → Name column, Email → Email column, Phone → Phone column</li>
+<li>Optionally add a third module: search Slack and select &quot;Send a Message&quot; — map the lead name and email into the message</li>
+<li>Click &quot;Run once&quot; to test — submit a test lead via your Facebook form and confirm it appears in Sheets within seconds</li>
+<li>Turn the scenario ON — every new lead now lands in your spreadsheet automatically</li>
+</ol>
+<div class="verdict"><strong>Bottom line:</strong> If you&#x27;re spending money on Facebook or Instagram ads and still downloading leads manually, you&#x27;re paying twice — once for the lead and again in lost conversions from slow follow-up. This automation takes 20 minutes to set up once and runs forever. Make.com&#x27;s free plan covers up to 1,000 operations per month, enough for most small businesses running lead gen campaigns. When you scale, the Core plan at $9/month handles thousands of leads.</div>
+
+<div class="faq-section"><h2>Frequently Asked Questions</h2>
+<div class="faq-item"><h3 class="faq-q">Does this work with Instagram lead ads too?</h3><p class="faq-a">Yes — Facebook and Instagram lead ads share the same Meta Ads infrastructure. The Facebook Lead Ads module in Make.com captures leads from both platforms automatically.</p></div>
+<div class="faq-item"><h3 class="faq-q">What if someone submits a lead while Make.com is not running?</h3><p class="faq-a">Make.com checks for new leads on a schedule you set — every 15 minutes on the free plan, instantly on paid plans. Leads submitted between checks are queued and processed on the next run, nothing is lost.</p></div>
+<div class="faq-item"><h3 class="faq-q">Do I need a developer to set this up?</h3><p class="faq-a">No. Make.com&#x27;s visual drag-and-drop builder requires no coding. If you can use Google Sheets, you can build this automation.</p></div>
+<div class="faq-item"><h3 class="faq-q">What happens if my Google Sheet is full or the file is moved?</h3><p class="faq-a">Make.com will log an error and stop the scenario — you&#x27;ll get an email notification so you can fix it before losing any leads.</p></div>
+</div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="zapier-too-expensive-make-com-alternative.html">Zapier Too Expensive? Switch to Make.com and Save $360-840/year</a></li></ul></div>
     </div>
 
     <div class="cta-card" style="padding:0; background:none; border:none;">
-        <a href="{{AFFILIATE_LINK}}" target="_blank" rel="sponsored">
+        <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored">
             <img 
                 src="assets/banners/AD-728x90 – 2.png" 
                 alt="Set up your own workflows for free with Make.com"
