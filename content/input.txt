@@ -63,32 +63,48 @@ Introduction: Every time someone fills out your Facebook or Instagram lead ad fo
 
 Why Manual Lead Export Is Killing Your Conversion Rate
 
-Speed to lead is the single biggest factor in converting paid ad leads. Most businesses respond within 2-24 hours because they check Meta's Lead Center manually once or twice a day. Research consistently shows that responding within 5 minutes makes you 9x more likely to convert a lead than responding within an hour. When you're paying $5-20 per lead on Facebook or Instagram ads, slow follow-up is the most expensive mistake you can make. The math is simple: if you spend $500/month on ads and convert 10% of leads, automating follow-up to under 5 minutes can realistically double that conversion rate — turning $500 in ad spend into twice the revenue without spending an extra dollar.
+Speed to lead is the single biggest factor in converting paid ad leads. Most businesses respond within 2-24 hours because they check Meta's Lead Center manually once or twice a day. Research consistently shows that responding within 5 minutes makes you 9x more likely to convert a lead than responding within an hour. When you're paying $5-20 per lead on Facebook or Instagram ads, slow follow-up is the most expensive mistake you can make.
 
 What This Automation Does
 
-Every time someone submits your Facebook or Instagram lead ad form, Make.com instantly catches that event and adds a new row to your Google Sheet — name, email, phone number, and any custom fields from your form. Your sales team sees it in real time. No downloading, no importing, no delay. The automation runs 24/7 including nights and weekends when your team is offline — leads that come in at 11pm are in your sheet by 11:00:01pm.
+Every time someone submits your Facebook or Instagram lead ad form, Make.com instantly catches that event and adds a new row to your Google Sheet — name, email, phone number, and the ad name so you know which campaign generated the lead. Your sales team sees it in real time. No downloading, no importing, no delay.
+
+Image: assets/screenshots/screenshot-facebook-leads-1.png|Make.com scenario editor — empty canvas ready to build
 
 Table: What Gets Captured Automatically
 Form Field|Google Sheets Column|Example Value
-First Name|A: Name|Sarah Johnson
+First Name + Last Name|A: Name|Sarah Johnson
 Email Address|B: Email|sarah@company.com
 Phone Number|C: Phone|+1 555 0123
 Ad Name|D: Source|Summer Promo 2026
-Submission Time|E: Timestamp|2026-02-20 14:32
+Submission Time|E: Date|2026-02-20
 
-Tech Tip: Add a Slack notification as a third step in Make.com — when a new row hits your Google Sheet, Slack pings your sales channel instantly. Response time drops from hours to minutes. Make.com's free plan handles this three-step scenario easily.
+Tech Tip: Add a Slack notification as a third step in Make.com — when a new row hits your Google Sheet, Slack pings your sales channel instantly. Response time drops from hours to minutes — and that directly impacts your conversion rate.
 
 Workflow Steps: How to Connect Facebook Lead Ads to Google Sheets
-1. Create a free Make.com account — no credit card required
-2. Click "Create a new scenario" and add Facebook Lead Ads as your trigger module
-3. Connect your Facebook account and select the Ad Account and the specific Form you want to watch
-4. Click the + button to add a second module — search for Google Sheets and select "Add a Row"
-5. Connect your Google account and select the spreadsheet and sheet where leads should land
-6. Map the fields: drag Name → Name column, Email → Email column, Phone → Phone column
-7. Optionally add a third module: search Slack and select "Send a Message" — map the lead name and email into the message
-8. Click "Run once" to test — submit a test lead via your Facebook form and confirm it appears in Sheets within seconds
-9. Turn the scenario ON — every new lead now lands in your spreadsheet automatically
+1. Create a free Make.com account — no credit card required. Click "Create a new scenario" on your dashboard.
+2. Click the large purple + button on the canvas and search for "Facebook Lead Ads" — select "Watch Leads" as your trigger
+
+Image: assets/screenshots/screenshot-facebook-leads-2.png|Facebook Lead Ads module — click Create a connection to link your Facebook account
+
+3. Click "Create a connection", name it anything (e.g. "My Facebook connection"), click Save — Facebook OAuth will open automatically
+4. Once connected, select your Facebook Page and the Lead Ad Form you want to watch
+
+Image: assets/screenshots/screenshot-facebook-leads-3.png|Facebook Lead Ads configuration — Connection and Page selection
+
+5. Click the + button on the right of the Facebook module to add a second module — search for "Google Sheets" and select "Add a Row"
+6. Connect your Google account and select the spreadsheet where leads should land — choose "Search by path" and select your file
+
+Image: assets/screenshots/screenshot-facebook-leads-4.png|Google Sheets module connected to Facebook Lead Ads in the scenario canvas
+
+7. Map the fields from Facebook to your Sheet columns — drag Full name to Name column, Email to Email column, Phone number to Phone column, Ad name to Source column, Date created to Date column
+
+Image: assets/screenshots/screenshot-facebook-leads-5.png|Field mapping — Facebook lead data mapped to Google Sheets columns
+
+8. Click Save — Make.com will ask "From which point do you want to start?" — select "From now on" to capture only new leads going forward
+9. Click "Run once" to activate, then turn the scenario ON — the toggle at the bottom of the canvas
+
+Image: assets/screenshots/screenshot-facebook-leads-7.png|Completed Google Sheet with live lead data — Name, Email, Phone, Source and Date columns populated automatically
 
 Verdict: If you're spending money on Facebook or Instagram ads and still downloading leads manually, you're paying twice — once for the lead and again in lost conversions from slow follow-up. This automation takes 20 minutes to set up once and runs forever. Make.com's free plan covers up to 1,000 operations per month, enough for most small businesses running lead gen campaigns. When you scale, the Core plan at $9/month handles thousands of leads.
 
@@ -96,11 +112,11 @@ FAQ:
 Q: Does this work with Instagram lead ads too?
 A: Yes — Facebook and Instagram lead ads share the same Meta Ads infrastructure. The Facebook Lead Ads module in Make.com captures leads from both platforms automatically.
 Q: What if someone submits a lead while Make.com is not running?
-A: Make.com checks for new leads on a schedule you set — every 15 minutes on the free plan, instantly on paid plans. Leads submitted between checks are queued and processed on the next run, nothing is lost.
+A: Make.com checks for new leads on a schedule — every 15 minutes on the free plan, in real time on paid plans. Leads submitted between checks are queued and processed on the next run, nothing is lost.
 Q: Do I need a developer to set this up?
 A: No. Make.com's visual drag-and-drop builder requires no coding. If you can use Google Sheets, you can build this automation.
-Q: What happens if my Google Sheet is full or the file is moved?
-A: Make.com will log an error and stop the scenario — you'll get an email notification so you can fix it before losing any leads.
+Q: What does "From now on" mean when setting up the trigger?
+A: Make.com asks from which point to start processing leads. "From now on" means only new leads submitted after you activate the scenario will be captured. Choose "All" only if you want to import existing leads retroactively.
 
 Internal Links:
 Zapier Too Expensive? Switch to Make.com and Save $360-840/year|zapier-too-expensive-make-com-alternative.html

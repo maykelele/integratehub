@@ -24,6 +24,11 @@ MAKE_AFFILIATE_LINK = "https://www.make.com/en/register?pc=integratehub"
 #                   Kraj FAQ: prazna linija ili novi tag
 #   Internal Links: Linkovi na druge stranice — format: Tekst|slug.html
 #                   Svaki link u novom redu
+#   Screenshot:     Placeholder box dok nemaš pravu sliku
+#                   Format: Screenshot: Opis šta treba da prikazuje
+#                   Zameni sa Image: kada imaš pravi fajl
+#   Image:          Prava slika — format: putanja/do/slike.png|Alt tekst
+#                   Primer: Image: assets/screenshots/make-trigger.png|Make.com trigger setup
 #   ---             Separator između stranica
 #
 #   Sve ostale linije → <p> paragraf
@@ -98,7 +103,7 @@ def format_content(text):
         )
 
     def _flush_faq(items):
-        """Renderuje FAQ accordion iz sakupljenih pitanja."""
+        """Renderuje FAQ sekciju iz sakupljenih pitanja."""
         if not items:
             return
         html_parts.append('<div class="faq-section"><h2>Frequently Asked Questions</h2>')
@@ -132,6 +137,7 @@ def format_content(text):
         is_new_tag = any(line_stripped.startswith(tag) for tag in [
             'Introduction:', 'Tech Tip:', 'Workflow Steps:', 'Verdict:',
             'Python Snippet:', 'Table:', 'FAQ:', 'Internal Links:',
+            'Screenshot:', 'Image:',
             'Slug:', 'Title:', 'Type:', '---'
         ])
 
@@ -196,7 +202,6 @@ def format_content(text):
         # --- FAQ ---
         elif line_stripped.startswith('FAQ:'):
             close_open_blocks()
-            html_parts.append('')  # spacing
             in_faq = True
             faq_items = []
             current_faq_q = None
@@ -206,6 +211,37 @@ def format_content(text):
             close_open_blocks()
             in_internal_links = True
             internal_links = []
+
+        # --- Screenshot placeholder ---
+        elif line_stripped.startswith('Screenshot:'):
+            close_open_blocks()
+            caption = line_stripped.replace('Screenshot:', '').strip()
+            html_parts.append(
+                f'<div class="screenshot-placeholder">'
+                f'<div class="screenshot-placeholder-inner">'
+                f'<span class="screenshot-icon">📷</span>'
+                f'<span class="screenshot-label">Screenshot: {html.escape(caption)}</span>'
+                f'</div>'
+                f'</div>'
+            )
+
+        # --- Image (prava slika) ---
+        elif line_stripped.startswith('Image:'):
+            close_open_blocks()
+            image_data = line_stripped.replace('Image:', '').strip()
+            if '|' in image_data:
+                img_path, alt_text = image_data.split('|', 1)
+                img_path = img_path.strip()
+                alt_text = alt_text.strip()
+            else:
+                img_path = image_data.strip()
+                alt_text = ''
+            html_parts.append(
+                f'<figure class="screenshot">'
+                f'<img src="{html.escape(img_path)}" alt="{html.escape(alt_text)}" loading="lazy">'
+                f'<figcaption>{html.escape(alt_text)}</figcaption>'
+                f'</figure>'
+            )
 
         # --- Python Snippet ---
         elif line_stripped.startswith('Python Snippet:'):
