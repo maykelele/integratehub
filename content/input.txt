@@ -4,11 +4,11 @@ Type: comparison
 
 Introduction: If you're paying $50–$100 a month for Zapier and quietly wondering whether you're getting your money's worth, you're not alone. This guide won't tell you to cancel Zapier immediately — it will give you honest math so you can decide for yourself.
 
-Why Zapier Gets Expensive for Small Business
+H2: Why Zapier Gets Expensive for Small Business
 
 Zapier pricing is based on "tasks" — every individual action your automation performs counts as one task toward your monthly limit. On the surface, 2,000 tasks for $19.99/month sounds generous. The reality hits when you build a real workflow. A simple automation that receives a Facebook lead, adds it to Google Sheets, sends a Slack notification, and emails your sales team counts as 4 tasks — for a single lead. If you receive 200 leads per month, that's 800 tasks from one workflow alone. Most small businesses hit the ceiling within 60 days and upgrade to the $49/month Professional plan without fully understanding why.
 
-Make.com Pricing Explained (Simple Math)
+H2: Make.com Pricing Explained (Simple Math)
 
 Make.com charges for "operations" instead of tasks, but the key difference is pricing structure. The Core plan at $9/month includes 10,000 operations. The same Facebook lead workflow — 200 leads, 4 steps each — runs comfortably on Make.com Core with room for 5-6 additional automations of similar complexity. For a small business running 3-5 active workflows, the monthly difference is typically $30-70. Over 12 months that's $360-840 saved.
 
@@ -21,11 +21,11 @@ Calendly → Google Calendar + Slack alert|300|300|$49/mo|$9/mo
 
 Tech Tip: Before switching, check your Zapier dashboard for "Tasks Used" in the current month. If you're consistently above 80% of your plan limit, Make.com will almost certainly cost you less for the same workflows.
 
-When Zapier Is Still the Better Choice
+H2: When Zapier Is Still the Better Choice
 
 Zapier is not a bad product — stay on it if any of these apply. You use niche apps that Make.com doesn't support: Zapier connects 7,000+ apps versus Make.com's 2,400+. If your CRM or industry-specific software only has a Zapier integration, switching creates more problems than it solves. Your workflows are simple and your team built them — Make.com has a steeper learning curve and that comfort has real value. You're running fewer than 3 workflows and rarely hit task limits — the $30 monthly saving doesn't justify migration time.
 
-When Make.com Saves You Real Money
+H2: When Make.com Saves You Real Money
 
 Make.com becomes the clear winner when you run multi-step workflows with 4+ actions, process high volumes of data, or want visual control over your workflows. Make.com's drag-and-drop scenario builder shows you exactly how data flows between apps — useful when something breaks and you need to debug quickly. If you're just starting out, Make.com's free plan includes 1,000 operations monthly — enough to validate 2-3 workflows before spending anything.
 
@@ -61,11 +61,11 @@ Type: how-to
 
 Introduction: Every time someone fills out your Facebook or Instagram lead ad form, that lead sits in Meta's system waiting for you to manually download a CSV. By the time you respond, your competitor already called them. This guide shows how to get every new lead into Google Sheets automatically — in real time, no CSV downloads, no manual work.
 
-Why Manual Lead Export Is Killing Your Conversion Rate
+H2: Why Manual Lead Export Is Killing Your Conversion Rate
 
 Speed to lead is the single biggest factor in converting paid ad leads. Most businesses respond within 2-24 hours because they check Meta's Lead Center manually once or twice a day. Research consistently shows that responding within 5 minutes makes you 9x more likely to convert a lead than responding within an hour. When you're paying $5-20 per lead on Facebook or Instagram ads, slow follow-up is the most expensive mistake you can make.
 
-What This Automation Does
+H2: What This Automation Does
 
 Every time someone submits your Facebook or Instagram lead ad form, Make.com instantly catches that event and adds a new row to your Google Sheet — name, email, phone number, and the ad name so you know which campaign generated the lead. Your sales team sees it in real time. No downloading, no importing, no delay.
 
@@ -120,3 +120,93 @@ A: Make.com asks from which point to start processing leads. "From now on" means
 
 Internal Links:
 Zapier Too Expensive? Switch to Make.com and Save $360-840/year|zapier-too-expensive-make-com-alternative.html
+
+---
+
+Slug: stripe-payment-failed-automation
+Title: Stripe Payment Failed? Automatically Alert Your Team and Email the Customer Instantly
+Type: how-to
+
+Introduction: A payment fails in Stripe. The customer never hears from you. Two days later they cancel. This happens constantly — because Stripe logs the failure and moves on, and nobody is watching the dashboard 24/7. This guide shows you how to build an automation that reacts the moment a payment fails: the customer gets an email within seconds, and your team gets an alert. No developer needed, no manual checking.
+
+H2: Why Missed Failed Payments Cost You More Than You Think
+
+Every failed payment that goes unaddressed is a potential churn. Customers don't always know their card failed — they assume you'll reach out. When you don't, they assume the worst and move on. Speed matters: a same-day email from you reads as professional and attentive. A silence that lasts three days reads as a company that doesn't care. The good news is this is completely fixable with a simple automation. Once it's set up, it runs forever.
+
+H2: Doesn't Stripe Already Send Failed Payment Emails?
+
+Yes — but with important limitations that make it the wrong solution for most businesses. Stripe's built-in Smart Retries and dunning emails only work for subscription billing (recurring charges). If you send one-time invoices, Stripe won't automatically email your customer at all. Even for subscriptions, the emails are generic Stripe-branded messages that many customers confuse with spam or phishing. You can't add your logo, your tone, or a direct link to update payment details in your own portal. And critically — your team gets no alert. Nobody on your side knows a payment failed unless they check the Stripe dashboard manually. The automation in this guide solves all of that: it works for every invoice type, sends email from your own Gmail account, and notifies your team the same second it fires.
+
+H2: What This Automation Does
+
+When a payment fails in Stripe, Make.com catches the event instantly and runs three actions automatically: it identifies the customer, sends them a personalized email with their invoice details, and your team can add a Slack alert so someone can follow up if needed.
+
+Table: How the Workflow Runs
+Step|What Happens|Tool
+1|Stripe detects a failed invoice payment|Stripe Webhook
+2|Make.com retrieves the customer name and email|Stripe Retrieve a Customer
+3|Customer receives a personalized email with invoice details|Gmail
+
+The whole setup takes about 20 minutes. After that, it runs on its own.
+
+Workflow Steps: How to Set Up the Automation
+
+1. Create a Stripe account and add a test customer — open Stripe, go to Billing → Invoices, and create a test invoice. You'll use Stripe's sandbox mode throughout this guide, so no real payments are involved.
+
+Image: assets/screenshots/screenshot-stripe-reminders-1.png|Stripe sandbox dashboard showing an open invoice for a test customer
+
+2. Log in to Make.com and create a new scenario — click the large + button on the canvas and search for "Stripe." Select the Watch Events module. This is the trigger that listens to your Stripe account.
+
+Image: assets/screenshots/screenshot-stripe-reminders-2.png|Make.com scenario canvas with the Stripe Watch Events module and Create a webhook button
+
+3. Click "Create a webhook" — Make.com will ask you to connect your Stripe account. Use API Key authentication: copy your Secret key from Stripe → Developers → API keys (it starts with sk_test_ for sandbox). Set the Group to "Invoice" and check "Invoice payment failed" as the event to watch.
+
+Image: assets/screenshots/screenshot-stripe-reminders-3.png|Webhook configuration showing Invoice group with Invoice payment failed event selected
+
+4. Add a filter between your Stripe trigger and the next module — click the line between modules and select "Add a filter." Set the label to "Invoice Payment Failed," the condition to Event Type, the operator to Equal to, and the value to invoice.payment_failed. This prevents the workflow from running on unrelated Stripe events.
+
+Image: assets/screenshots/screenshot-stripe-reminders-4.png|Make.com filter setup with condition Event Type equal to invoice.payment_failed
+
+5. Add a Stripe "Retrieve a Customer" module — click the + button and search for Stripe again. Select "Retrieve a Customer." This step is essential: when Stripe sends a payment failed event, it includes the customer's ID but not their name or email. This module fetches the full customer profile.
+
+Image: assets/screenshots/screenshot-stripe-reminders-5.png|Make.com module picker showing Stripe Retrieve a Customer option
+
+6. Map the Customer ID field to the customer object from your Stripe trigger — in the Retrieve a Customer configuration, set Customer ID to "2. Object: Customer" from the previous module. This tells Make.com which customer to look up.
+
+Image: assets/screenshots/screenshot-stripe-reminders-6.png|Retrieve a Customer module with Customer ID mapped to the Stripe event data
+
+7. Add a Gmail "Send an email" module — click + and add Gmail. Connect your Google account when prompted. Map the To field to "7. Email" from the Retrieve a Customer module. For the Subject, type "Payment Failed: Invoice" and then map "2. Object: Number" so each email shows the real invoice number.
+
+Image: assets/screenshots/screenshot-stripe-reminders-7.png|Gmail module showing connection setup with To, Subject and Body fields
+
+8. Map the email body with dynamic fields — in the Body field, write your message and map three fields from Stripe: the customer's name (7. Name), the invoice amount (2. Object: Amount due), and the invoice number (2. Object: Number). The result is a personalized email that looks like it was written by hand.
+
+Image: assets/screenshots/screenshot-stripe-reminders-8.png|Gmail module with To field mapped to customer email and Subject with invoice number
+
+Image: assets/screenshots/screenshot-stripe-reminders-9.png|Gmail body showing dynamic fields mapped — customer name, payment amount, and invoice number
+
+9. Save the scenario — your canvas should now show three modules connected: Stripe Watch Events → Stripe Retrieve a Customer → Gmail Send an email.
+
+Image: assets/screenshots/screenshot-stripe-reminders-10.png|Complete Make.com scenario canvas showing all three modules connected
+
+10. Test the workflow — use the Stripe CLI to send a test event without touching any real data. Run stripe trigger invoice.payment_failed in your terminal. Make.com will process it and send the email to your test customer automatically. If you don't have the Stripe CLI, install it with brew install stripe/stripe-cli/stripe on Mac, then run stripe login first.
+
+Image: assets/screenshots/screenshot-stripe-reminders-11.png|Email inbox showing Payment Failed invoice email received instantly with customer name and invoice number
+
+Tech Tip: After the Gmail module, add a Slack "Create a Message" module to alert your billing channel the moment a payment fails. Something like: "Payment failed — [Customer Name], Invoice [Number], Amount: [Amount Due]. Follow up today." Now both the customer and your team know immediately — and someone can pick up the phone if the customer doesn't respond to the automated email.
+
+Verdict: Failed payments are one of the most preventable forms of revenue loss for small businesses. Stripe's built-in emails only cover subscriptions and arrive as generic Stripe-branded messages — this automation works for every invoice type, sends email from your own account, and alerts your team in the same instant. It takes under 30 minutes to build and runs forever without maintenance.
+
+FAQ:
+Q: Do I need a paid Stripe account to set this up?
+A: No. You can build and test the entire workflow using Stripe's sandbox mode, which is free. When you're ready to go live, switch to your live Stripe API key and the automation works identically.
+Q: What if the same payment fails multiple times?
+A: Stripe sends a new event each time a payment attempt fails. Your Make.com scenario will fire each time, sending a new email. If you want to limit notifications to one per invoice, add a Make.com data store to track which invoices have already triggered an alert.
+Q: Does this work for subscription renewals, not just one-time invoices?
+A: Yes. The invoice.payment_failed event covers both subscription renewals and one-time invoice payments. Any failed charge that generates a Stripe invoice will trigger this workflow.
+Q: Do I need a paid Make.com plan?
+A: The free Make.com plan includes 1,000 operations per month. Each time this scenario runs, it uses 3 operations — one per module. For most small businesses, the free plan is more than enough to get started.
+
+Internal Links:
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html

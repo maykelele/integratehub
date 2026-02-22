@@ -1,5 +1,7 @@
 import os
 import html
+import json
+import re
 
 TEMPLATE_FILE = 'templates/template.html'
 CONTENT_FILE = 'content/input.txt'
@@ -13,8 +15,10 @@ MAKE_AFFILIATE_LINK = "https://www.make.com/en/register?pc=integratehub"
 #   Title:          Naslov stranice (obavezno)
 #   Type:           Tip stranice — how-to | comparison (default: how-to)
 #   Introduction:   Uvodni paragraf + automatski meta description
+#   H2:             Sekcijski naslov (h2)
+#   H3:             Podsekcijski naslov (h3)
 #   Tech Tip:       Žuti info box sa savetom
-#   Workflow Steps: Otvara numerisanu listu koraka
+#   Workflow Steps: Otvara numerisanu listu koraka (h2 naslov + <ol>)
 #   Verdict:        Završni paragraf — zatvara listu ako je otvorena
 #   Python Snippet: Code blok
 #   Table:          Comparison tabela — format: Header1|Header2|Header3
@@ -42,10 +46,70 @@ def extract_field(lines, prefix):
     )
 
 
-def format_content(text):
+def build_howto_schema(title, steps):
+    """Generiše HowTo schema markup za how-to stranice."""
+    if not steps:
+        return ""
+
+    schema_steps = []
+    for i, step_text in enumerate(steps, 1):
+        # Skrati tekst koraka na razumnu dužinu
+        clean_text = step_text[:200] + "..." if len(step_text) > 200 else step_text
+        schema_steps.append({
+            "@type": "HowToStep",
+            "position": i,
+            "name": f"Step {i}",
+            "text": clean_text
+        })
+
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": title,
+        "step": schema_steps
+    }
+
+    return (
+        f'<script type="application/ld+json">\n'
+        f'{json.dumps(schema, indent=2, ensure_ascii=False)}\n'
+        f'</script>'
+    )
+
+
+def build_faq_schema(faq_items):
+    """Generiše FAQ schema markup."""
+    if not faq_items:
+        return ""
+
+    entities = []
+    for q, a in faq_items:
+        entities.append({
+            "@type": "Question",
+            "name": q,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": a
+            }
+        })
+
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": entities
+    }
+
+    return (
+        f'<script type="application/ld+json">\n'
+        f'{json.dumps(schema, indent=2, ensure_ascii=False)}\n'
+        f'</script>'
+    )
+
+
+def format_content(text, page_type='how-to'):
     """Parsira strukturirani tekst i generiše semantički HTML."""
     lines = text.split('\n')
     html_parts = []
+    schema_parts = []
 
     in_code_block = False
     in_list = False
@@ -58,9 +122,9 @@ def format_content(text):
     internal_links = []
     current_faq_q = None
     meta_description = ""
+    howto_steps = []  # Za HowTo schema
 
     def close_open_blocks():
-        """Zatvara sve otvorene blokove."""
         nonlocal in_list, in_table, in_faq, in_internal_links
         nonlocal table_rows, faq_items, internal_links, current_faq_q
 
@@ -84,7 +148,6 @@ def format_content(text):
             in_internal_links = False
 
     def _flush_table(rows):
-        """Renderuje HTML tabelu iz sakupljenih redova."""
         if not rows:
             return
         header = rows[0]
@@ -103,7 +166,6 @@ def format_content(text):
         )
 
     def _flush_faq(items):
-        """Renderuje FAQ sekciju iz sakupljenih pitanja."""
         if not items:
             return
         html_parts.append('<div class="faq-section"><h2>Frequently Asked Questions</h2>')
@@ -115,9 +177,10 @@ def format_content(text):
                 f'</div>'
             )
         html_parts.append('</div>')
+        # Dodaj FAQ schema
+        schema_parts.append(build_faq_schema(items))
 
     def _flush_internal_links(links):
-        """Renderuje 'Related guides' sekciju."""
         if not links:
             return
         items_html = ''
@@ -133,23 +196,19 @@ def format_content(text):
     for line in lines:
         line_stripped = line.strip()
 
-        # Detektujemo novi tag — zatvara prethodni blok
         is_new_tag = any(line_stripped.startswith(tag) for tag in [
             'Introduction:', 'Tech Tip:', 'Workflow Steps:', 'Verdict:',
             'Python Snippet:', 'Table:', 'FAQ:', 'Internal Links:',
-            'Screenshot:', 'Image:',
+            'Screenshot:', 'Image:', 'H2:', 'H3:',
             'Slug:', 'Title:', 'Type:', '---'
         ])
 
         if is_new_tag and (in_table or in_faq or in_internal_links):
             close_open_blocks()
 
-        # Preskači prazne linije i meta polja
         if not line_stripped:
             if in_table:
                 close_open_blocks()
-            elif in_faq:
-                pass  # FAQ dozvoljava prazne linije između Q/A
             continue
 
         if line_stripped.startswith(('Slug:', 'Title:', 'Type:', '---')):
@@ -160,6 +219,17 @@ def format_content(text):
             intro_text = line_stripped.replace('Introduction:', '').strip()
             meta_description = intro_text[:155]
             html_parts.append(f'<p class="intro">{html.escape(intro_text)}</p>')
+
+        # --- H2 ---
+        elif line_stripped.startswith('H2:'):
+            close_open_blocks()
+            h2_text = line_stripped.replace('H2:', '').strip()
+            html_parts.append(f'<h2>{html.escape(h2_text)}</h2>')
+
+        # --- H3 ---
+        elif line_stripped.startswith('H3:'):
+            h3_text = line_stripped.replace('H3:', '').strip()
+            html_parts.append(f'<h3>{html.escape(h3_text)}</h3>')
 
         # --- Tech Tip ---
         elif line_stripped.startswith('Tech Tip:'):
@@ -214,7 +284,8 @@ def format_content(text):
 
         # --- Screenshot placeholder ---
         elif line_stripped.startswith('Screenshot:'):
-            close_open_blocks()
+            if not in_list:
+                close_open_blocks()
             caption = line_stripped.replace('Screenshot:', '').strip()
             html_parts.append(
                 f'<div class="screenshot-placeholder">'
@@ -225,9 +296,10 @@ def format_content(text):
                 f'</div>'
             )
 
-        # --- Image (prava slika) ---
+                # --- Image ---
         elif line_stripped.startswith('Image:'):
-            close_open_blocks()
+            if not in_list:
+                close_open_blocks()
             image_data = line_stripped.replace('Image:', '').strip()
             if '|' in image_data:
                 img_path, alt_text = image_data.split('|', 1)
@@ -236,12 +308,16 @@ def format_content(text):
             else:
                 img_path = image_data.strip()
                 alt_text = ''
-            html_parts.append(
+            figure_html = (
                 f'<figure class="screenshot">'
                 f'<img src="{html.escape(img_path)}" alt="{html.escape(alt_text)}" loading="lazy">'
                 f'<figcaption>{html.escape(alt_text)}</figcaption>'
                 f'</figure>'
             )
+            if in_list:
+                html_parts.append(f'<li class="step-image">{figure_html}</li>')
+            else:
+                html_parts.append(figure_html)
 
         # --- Python Snippet ---
         elif line_stripped.startswith('Python Snippet:'):
@@ -282,25 +358,29 @@ def format_content(text):
                 clean = clean[2:].strip()
             elif len(clean) > 3 and clean[0].isdigit() and clean[2] in '.):':
                 clean = clean[3:].strip()
+            howto_steps.append(clean)  # Sakupljaj korake za schema
             html_parts.append(f'<li>{html.escape(clean)}</li>')
 
         # --- Regularni paragraf ---
         else:
             html_parts.append(f'<p>{html.escape(line_stripped)}</p>')
 
-    # Zatvaranje svih otvorenih blokova na kraju entry-ja
+    # Zatvaranje svih otvorenih blokova
     close_open_blocks()
 
     if in_code_block and code_lines:
         escaped_code = html.escape('\n'.join(code_lines))
         html_parts.append(f'<pre><code>{escaped_code}</code></pre>')
 
-    return '\n'.join(html_parts), meta_description
+    # HowTo schema za how-to stranice
+    if page_type == 'how-to' and howto_steps:
+        schema_parts.insert(0, None)  # Placeholder — title dolazi iz generate_site
+
+    return '\n'.join(html_parts), meta_description, schema_parts, howto_steps
 
 
 def generate_index(template_html, links):
     """Generiše index.html sa listom svih integracija."""
-
     cards = ""
     for l in links:
         description = l.get('description', '')
@@ -331,6 +411,7 @@ def generate_index(template_html, links):
         'Free step-by-step Make.com integration guides. '
         'Automate your business workflows and save hours every week.')
     page = page.replace('{{MAIN_CONTENT}}', index_content)
+    page = page.replace('{{SCHEMA_MARKUP}}', '')
 
     page = page.replace(
         '<p class="reading-time">⏱ 5 min read · Make.com Integration Guide</p>', '')
@@ -367,28 +448,39 @@ def generate_site():
             print(f"⚠️  Preskačem entry bez slug/title")
             continue
 
-        main_body, meta_desc = format_content(entry)
+        main_body, meta_desc, schema_parts, howto_steps = format_content(entry, page_type)
+
+        # Generiši HowTo schema ako je how-to stranica
+        all_schemas = []
+        if page_type == 'how-to' and howto_steps:
+            all_schemas.append(build_howto_schema(title, howto_steps))
+        # Dodaj ostale schema (FAQ itd.) — preskači None placeholder
+        for s in schema_parts:
+            if s is not None:
+                all_schemas.append(s)
+
+        schema_html = '\n'.join(all_schemas)
 
         page = template_html.replace('{{TITLE}}', title)
         page = page.replace('{{META_DESCRIPTION}}', meta_desc)
         page = page.replace('{{MAIN_CONTENT}}', main_body)
+        page = page.replace('{{SCHEMA_MARKUP}}', schema_html)
         page = page.replace('{{AFFILIATE_LINK}}', MAKE_AFFILIATE_LINK)
 
         output_path = os.path.join(OUTPUT_DIR, f"{slug}.html")
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(page)
 
+        print(f"✅ Generisano [{page_type}]: {slug}.html")
+        
         links.append({
             'slug': slug,
             'title': title,
             'type': page_type,
-            'description': meta_desc[:150] + '...' if len(meta_desc) > 150 else meta_desc
+            'description': meta_desc
         })
 
-        print(f"✅ Generisano [{page_type}]: {slug}.html")
-
     index_html = generate_index(template_html, links)
-    index_html = index_html.replace('{{AFFILIATE_LINK}}', MAKE_AFFILIATE_LINK)
     with open(os.path.join(OUTPUT_DIR, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(index_html)
 
