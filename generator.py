@@ -217,7 +217,11 @@ def format_content(text, page_type='how-to'):
         # --- Introduction ---
         if line_stripped.startswith('Introduction:'):
             intro_text = line_stripped.replace('Introduction:', '').strip()
-            meta_description = intro_text[:155]
+            meta_limit = 155
+            if len(intro_text) > meta_limit:
+                meta_description = intro_text[:meta_limit].rsplit(' ', 1)[0] + "..."
+            else:
+                meta_description = intro_text
             html_parts.append(f'<p class="intro">{html.escape(intro_text)}</p>')
 
         # --- H2 ---
