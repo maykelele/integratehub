@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230984e3'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Automatically Send Facebook and Instagram Leads to Google Sheets | IntegrateHub.io</title>
     <meta name="description" content="Every time someone fills out your Facebook or Instagram lead ad form, that lead sits in Meta's system waiting for you to manually download a CSV. By the...">
@@ -115,7 +115,7 @@
     <style>
         :root {
             --primary: #2d3436;
-            --accent: #0984e3;
+            --accent: #0868b4;
             --text: #2d3436;
             --light-bg: #f9f9f9;
         }
@@ -143,12 +143,12 @@
             z-index: 100;
         }
         .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
-        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
         .back-link:hover { text-decoration: underline; }
 
         /* BREADCRUMB */
         .breadcrumb { font-size: 0.85rem; color: #888; margin-bottom: 20px; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
         .breadcrumb a:hover { text-decoration: underline; }
 
         /* CONTENT */
@@ -218,7 +218,7 @@
         .related-guides h3 { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
         .related-guides ul { margin: 0; padding-left: 18px; }
         .related-guides li { margin-bottom: 6px; }
-        .related-guides a { color: var(--accent); text-decoration: none; font-weight: 500; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
         .related-guides a:hover { text-decoration: underline; }
 
         /* SCREENSHOT PLACEHOLDER */
@@ -244,7 +244,7 @@
         code { font-family: 'Courier New', monospace; }
 
         /* CTA */
-        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid #0984e3; padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
         .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
         .cta-card p { color: #555; margin-bottom: 20px; }
         .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
@@ -252,7 +252,7 @@
 
         /* FOOTER */
         footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
-        footer a { color: var(--accent); text-decoration: none; }
+        footer a { color: var(--accent); text-decoration: underline; }
 
         /* RESPONSIVE */
         @media (max-width: 700px) {
@@ -266,9 +266,9 @@
         .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
         .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
-        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: #0984e3; border: none; padding: 0; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
         .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
-        .read-more { font-size: 0.85rem; color: #0984e3; font-weight: 600; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
         @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
         @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
     </style>
@@ -288,7 +288,7 @@
         <a href="index.html">Home</a> › <a href="index.html">Integrations</a> › How to Automatically Send Facebook and Instagram Leads to Google Sheets
     </div>
 
-    <div class="content">
+    <main class="content">
         <h1>How to Automatically Send Facebook and Instagram Leads to Google Sheets</h1>
         <p class="reading-time">⏱ 5 min read · Make.com Integration Guide</p>
 
@@ -297,7 +297,7 @@
 <p>Speed to lead is the single biggest factor in converting paid ad leads. Most businesses respond within 2-24 hours because they check Meta&#x27;s Lead Center manually once or twice a day. Research consistently shows that responding within 5 minutes makes you 9x more likely to convert a lead than responding within an hour. When you&#x27;re paying $5-20 per lead on Facebook or Instagram ads, slow follow-up is the most expensive mistake you can make.</p>
 <h2>What This Automation Does</h2>
 <p>Every time someone submits your Facebook or Instagram lead ad form, Make.com instantly catches that event and adds a new row to your Google Sheet — name, email, phone number, and the ad name so you know which campaign generated the lead. Your sales team sees it in real time. No downloading, no importing, no delay.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-1.png" alt="Make.com scenario editor — empty canvas ready to build" loading="lazy"><figcaption>Make.com scenario editor — empty canvas ready to build</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-1.png" alt="Make.com scenario editor" loading="lazy"><figcaption>Make.com scenario editor — empty canvas ready to build</figcaption></figure>
 <h2>What Gets Captured Automatically</h2>
 <div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Form Field</th><th>Google Sheets Column</th><th>Example Value</th></tr></thead><tbody><tr><td>First Name + Last Name</td><td>A: Name</td><td>Sarah Johnson</td></tr><tr><td>Email Address</td><td>B: Email</td><td>sarah@company.com</td></tr><tr><td>Phone Number</td><td>C: Phone</td><td>+1 555 0123</td></tr><tr><td>Ad Name</td><td>D: Source</td><td>Summer Promo 2026</td></tr><tr><td>Submission Time</td><td>E: Date</td><td>2026-02-20</td></tr></tbody></table></div>
 <div class="tech-tip"><strong>💡 Pro Tip:</strong> Add a Slack notification as a third step in Make.com — when a new row hits your Google Sheet, Slack pings your sales channel instantly. Response time drops from hours to minutes — and that directly impacts your conversion rate.</div>
@@ -305,18 +305,18 @@
 <ol class="steps">
 <li>Create a free Make.com account — no credit card required. Click &quot;Create a new scenario&quot; on your dashboard.</li>
 <li>Click the large purple + button on the canvas and search for &quot;Facebook Lead Ads&quot; — select &quot;Watch Leads&quot; as your trigger</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-2.png" alt="Facebook Lead Ads module — click Create a connection to link your Facebook account" loading="lazy"><figcaption>Facebook Lead Ads module — click Create a connection to link your Facebook account</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-2.png" alt="Facebook Lead Ads module" loading="lazy"><figcaption>Facebook Lead Ads module — click Create a connection to link your Facebook account</figcaption></figure></li>
 <li>Click &quot;Create a connection&quot;, name it anything (e.g. &quot;My Facebook connection&quot;), click Save — Facebook OAuth will open automatically</li>
 <li>Once connected, select your Facebook Page and the Lead Ad Form you want to watch</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-3.png" alt="Facebook Lead Ads configuration — Connection and Page selection" loading="lazy"><figcaption>Facebook Lead Ads configuration — Connection and Page selection</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-3.png" alt="Facebook Lead Ads configuration" loading="lazy"><figcaption>Facebook Lead Ads configuration — Connection and Page selection</figcaption></figure></li>
 <li>Click the + button on the right of the Facebook module to add a second module — search for &quot;Google Sheets&quot; and select &quot;Add a Row&quot;</li>
 <li>Connect your Google account and select the spreadsheet where leads should land — choose &quot;Search by path&quot; and select your file</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-4.png" alt="Google Sheets module connected to Facebook Lead Ads in the scenario canvas" loading="lazy"><figcaption>Google Sheets module connected to Facebook Lead Ads in the scenario canvas</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-4.png" alt="" loading="lazy"><figcaption>Google Sheets module connected to Facebook Lead Ads in the scenario canvas</figcaption></figure></li>
 <li>Map the fields from Facebook to your Sheet columns — drag Full name to Name column, Email to Email column, Phone number to Phone column, Ad name to Source column, Date created to Date column</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-5.png" alt="Field mapping — Facebook lead data mapped to Google Sheets columns" loading="lazy"><figcaption>Field mapping — Facebook lead data mapped to Google Sheets columns</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-5.png" alt="Field mapping" loading="lazy"><figcaption>Field mapping — Facebook lead data mapped to Google Sheets columns</figcaption></figure></li>
 <li>Click Save — Make.com will ask &quot;From which point do you want to start?&quot; — select &quot;From now on&quot; to capture only new leads going forward</li>
 <li>Click &quot;Run once&quot; to activate, then turn the scenario ON — the toggle at the bottom of the canvas</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-7.png" alt="Completed Google Sheet with live lead data — Name, Email, Phone, Source and Date columns populated automatically" loading="lazy"><figcaption>Completed Google Sheet with live lead data — Name, Email, Phone, Source and Date columns populated automatically</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-facebook-leads-7.png" alt="Completed Google Sheet with live lead data" loading="lazy"><figcaption>Completed Google Sheet with live lead data — Name, Email, Phone, Source and Date columns populated automatically</figcaption></figure></li>
 </ol>
 <div class="verdict"><strong>Bottom line:</strong> If you&#x27;re spending money on Facebook or Instagram ads and still downloading leads manually, you&#x27;re paying twice — once for the lead and again in lost conversions from slow follow-up. This automation takes 20 minutes to set up once and runs forever. Make.com&#x27;s free plan covers up to 1,000 operations per month, enough for most small businesses running lead gen campaigns. When you scale, the Core plan at $9/month handles thousands of leads.</div>
 <div class="faq-section"><h2>Frequently Asked Questions</h2>
@@ -326,7 +326,7 @@
 <div class="faq-item"><h3 class="faq-q">What does &quot;From now on&quot; mean when setting up the trigger?</h3><p class="faq-a">Make.com asks from which point to start processing leads. &quot;From now on&quot; means only new leads submitted after you activate the scenario will be captured. Choose &quot;All&quot; only if you want to import existing leads retroactively.</p></div>
 </div>
 <div class="related-guides"><h3>Related Guides</h3><ul><li><a href="zapier-too-expensive-make-com-alternative.html">Zapier Too Expensive? Switch to Make.com and Save $360-840/year</a></li></ul></div>
-    </div>
+    </main>
 
     <div class="cta-card" style="padding:0; background:none; border:none;">
         <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored">

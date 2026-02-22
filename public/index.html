@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230984e3'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make.com Integration Guides | IntegrateHub.io</title>
     <meta name="description" content="Free step-by-step Make.com integration guides. Automate your business workflows and save hours every week.">
@@ -13,7 +13,7 @@
     <style>
         :root {
             --primary: #2d3436;
-            --accent: #0984e3;
+            --accent: #0868b4;
             --text: #2d3436;
             --light-bg: #f9f9f9;
         }
@@ -41,12 +41,12 @@
             z-index: 100;
         }
         .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
-        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
         .back-link:hover { text-decoration: underline; }
 
         /* BREADCRUMB */
         .breadcrumb { font-size: 0.85rem; color: #888; margin-bottom: 20px; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
         .breadcrumb a:hover { text-decoration: underline; }
 
         /* CONTENT */
@@ -116,7 +116,7 @@
         .related-guides h3 { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
         .related-guides ul { margin: 0; padding-left: 18px; }
         .related-guides li { margin-bottom: 6px; }
-        .related-guides a { color: var(--accent); text-decoration: none; font-weight: 500; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
         .related-guides a:hover { text-decoration: underline; }
 
         /* SCREENSHOT PLACEHOLDER */
@@ -142,7 +142,7 @@
         code { font-family: 'Courier New', monospace; }
 
         /* CTA */
-        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid #0984e3; padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
         .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
         .cta-card p { color: #555; margin-bottom: 20px; }
         .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
@@ -150,7 +150,7 @@
 
         /* FOOTER */
         footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
-        footer a { color: var(--accent); text-decoration: none; }
+        footer a { color: var(--accent); text-decoration: underline; }
 
         /* RESPONSIVE */
         @media (max-width: 700px) {
@@ -164,9 +164,9 @@
         .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
         .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
-        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: #0984e3; border: none; padding: 0; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
         .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
-        .read-more { font-size: 0.85rem; color: #0984e3; font-weight: 600; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
         @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
         @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
     </style>
@@ -186,7 +186,7 @@
         <a href="index.html">Home</a> › <a href="index.html">Integrations</a> › Make.com Integration Guides
     </div>
 
-    <div class="content">
+    <main class="content">
         <h1>Make.com Integration Guides</h1>
         
 
@@ -220,7 +220,7 @@
         </div>
         </div>
     
-    </div>
+    </main>
 
     <div class="cta-card" style="padding:0; background:none; border:none;">
         <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored">

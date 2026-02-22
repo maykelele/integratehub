@@ -312,9 +312,22 @@ def format_content(text, page_type='how-to'):
             else:
                 img_path = image_data.strip()
                 alt_text = ''
+            # Avoid redundant alt+figcaption for screen readers
+            # If alt_text exists, use a shortened version for alt attribute
+            if alt_text:
+                alt_short = alt_text.split('—')[0].split('–')[0].strip()
+                if len(alt_short) > 80:
+                    alt_short = alt_short[:80].rsplit(' ', 1)[0]
+                # If shortened version equals full text, use empty alt
+                if alt_short == alt_text:
+                    alt_attr = ''
+                else:
+                    alt_attr = alt_short
+            else:
+                alt_attr = ''
             figure_html = (
                 f'<figure class="screenshot">'
-                f'<img src="{html.escape(img_path)}" alt="{html.escape(alt_text)}" loading="lazy">'
+                f'<img src="{html.escape(img_path)}" alt="{html.escape(alt_attr)}" loading="lazy">'
                 f'<figcaption>{html.escape(alt_text)}</figcaption>'
                 f'</figure>'
             )
