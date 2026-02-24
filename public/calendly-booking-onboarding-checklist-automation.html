@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://integratehub.io/{{SLUG}}.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly | IntegrateHub.io</title>
+    <meta name="description" content="Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling...">
+    <meta property="og:title" content="Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly">
+    <meta property="og:description" content="Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling...">
+    <meta property="og:type" content="article">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Step 1",
+      "text": "Create a free Make.com account — no credit card required. Click \"Create a new scenario\" on your dashboard."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Step 2",
+      "text": "Click the large + button on the canvas and search for \"Calendly\" — you'll see it listed as a verified integration with several module options. Select \"Watch Events\" as your trigger."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Step 3",
+      "text": "Click \"Create a webhook\" — Make.com will open a configuration dialog. Name your webhook (e.g. \"My Calendly Event webhook\") and click \"Create a connection\" to link your Calendly account."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Step 4",
+      "text": "Once your Calendly connection is established, you'll see the webhook configuration. Click \"Create a connection\" and authorize Make.com to access your Calendly account through OAuth."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Step 5",
+      "text": "After connecting, configure the webhook: check \"Invitee Created\" under Events (this triggers when someone books a meeting). Select your Organization URI from the dropdown — this tells Make.com which C..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Step 6",
+      "text": "Add a second Calendly module — click the + button to the right of Watch Events and search for Calendly again. Select \"Get an Event.\" This module fetches the full event details including the scheduled ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 7,
+      "name": "Step 7",
+      "text": "Add a Google Sheets module — click the + button after the Get an Event module, search for \"Google Sheets\" and select \"Add a Row.\""
+    },
+    {
+      "@type": "HowToStep",
+      "position": 8,
+      "name": "Step 8",
+      "text": "Connect your Google account, set Search Method to \"Search by path\", select My Drive, and choose your \"Calendly Onboarding Tracker\" spreadsheet."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 9,
+      "name": "Step 9",
+      "text": "Map the fields from Calendly to your Google Sheet columns — Name from the Watch Events module maps to column A, Email to column B, Event to column C, Start Time from the Get an Event module to column ..."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does this work with Calendly's free plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Calendly's free plan supports webhook integrations through Make.com. You can use this automation with any Calendly tier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if someone cancels or reschedules their booking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Watch Events trigger supports both \"Invitee Created\" and \"Invitee Cancelled\" events. You can add a second scenario that updates the Google Sheet status to \"Cancelled\" when someone cancels — or handle both events in one scenario with a filter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do I need the \"Get an Event\" module — can't Watch Events provide all the data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Watch Events provides the invitee's name, email, and a reference to the event, but not the scheduled start time. The Get an Event module fetches the full event details including when the meeting is actually scheduled."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I customize the onboarding checklist for different event types?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Add a Make.com Router module after Get an Event — route different event types to different Google Sheets rows with customized task lists. For example, \"Discovery Call\" gets one checklist while \"Onboarding Session\" gets another."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a paid Make.com plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The free plan includes 1,000 operations per month. Each time this scenario runs, it uses 4 operations — one per module. That covers 250 bookings per month, more than enough for most freelancers and small agencies."
+      }
+    }
+  ]
+}
+</script>
+    <style>
+        :root {
+            --primary: #2d3436;
+            --accent: #0868b4;
+            --text: #2d3436;
+            --light-bg: #f9f9f9;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        /* WIDER CONTAINER */
+        .container { max-width: 1060px; margin: 0 auto; padding: 40px 30px; }
+        .header-inner { max-width: 1060px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; gap: 20px; }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* BREADCRUMB */
+        .breadcrumb { font-size: 0.85rem; color: #595959; margin-bottom: 20px; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* CONTENT */
+        .content { margin-top: 30px; }
+        h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
+        .reading-time { font-size: 0.85rem; color: #595959; margin-bottom: 25px; }
+        .intro {
+            font-size: 1.15rem; color: #444; margin-bottom: 25px;
+            line-height: 1.8; border-left: 4px solid var(--accent); padding-left: 20px;
+        }
+        h2 { font-size: 1.4rem; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: var(--primary); }
+        h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; color: var(--primary); }
+        p { margin: 0 0 18px 0; }
+
+        /* TECH TIP */
+        .tech-tip {
+            background: #fff3cd; border-left: 4px solid #ffc107;
+            padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0;
+        }
+        .tech-tip strong { display: block; margin-bottom: 6px; }
+
+        /* VERDICT */
+        .verdict {
+            background: #f0f8ff; border-left: 4px solid var(--accent);
+            padding: 20px 24px; margin: 30px 0; border-radius: 0 8px 8px 0;
+            font-size: 1.05rem; line-height: 1.7;
+        }
+        .verdict strong { color: var(--accent); }
+
+        .inline-cta { background: #f0f8ff; padding: 16px 20px; border-radius: 8px; margin: 25px 0; font-size: 1.05rem; line-height: 1.7; }
+        .inline-cta a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+        /* COMPARISON TABLE */
+        .table-wrapper {
+            overflow-x: auto; margin: 20px 0 30px 0;
+            border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .comparison-table thead tr { background: var(--accent); color: white; }
+        .comparison-table th { padding: 12px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .comparison-table td { padding: 11px 16px; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table tbody tr:nth-child(even) { background: #f7f9fc; }
+        .comparison-table tbody tr:hover { background: #eef5ff; }
+
+        /* STEPS */
+        .steps { padding-left: 0; list-style: none; counter-reset: steps; }
+        .steps li { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+        .steps li::before {
+            content: counter(steps); background: var(--accent); color: white;
+            width: 28px; height: 28px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.85rem; flex-shrink: 0; margin-top: 2px;
+        }
+        .steps li.step-image { display: block; padding-left: 0; margin-bottom: 20px; counter-increment: none; }
+        .steps li.step-image::before { display: none; }
+
+        /* FAQ */
+        .faq-section { margin: 40px 0 20px 0; }
+        .faq-section h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid #eee; margin-bottom: 24px; }
+        .faq-item { margin-bottom: 24px; }
+        .faq-q { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin: 0 0 6px 0; }
+        .faq-a { color: #444; margin: 0; line-height: 1.7; }
+
+        /* RELATED GUIDES */
+        .related-guides {
+            background: #f7f9fc; border: 1px solid #e0e8f0;
+            border-radius: 8px; padding: 20px 24px; margin: 30px 0;
+        }
+        .related-guides h3 { font-size: 0.85rem; color: #595959; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
+        .related-guides ul { margin: 0; padding-left: 18px; }
+        .related-guides li { margin-bottom: 6px; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
+        .related-guides a:hover { text-decoration: underline; }
+
+        /* SCREENSHOT PLACEHOLDER */
+        .screenshot-placeholder {
+            background: #f0f4f8; border: 2px dashed #b0c4d8;
+            border-radius: 8px; margin: 24px 0; padding: 32px 20px; text-align: center;
+        }
+        .screenshot-placeholder-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .screenshot-icon { font-size: 2rem; }
+        .screenshot-label { color: #6b8cae; font-size: 0.9rem; font-style: italic; }
+
+        /* SCREENSHOT IMAGE */
+        .screenshot { margin: 24px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .screenshot img { width: 100%; display: block; }
+        .screenshot figcaption { background: #f7f9fc; color: #595959; font-size: 0.82rem; padding: 8px 14px; text-align: center; font-style: italic; }
+
+        /* CODE */
+        pre {
+            background: #2d3436; color: #55efc4; padding: 20px; border-radius: 8px;
+            overflow-x: auto; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; margin: 20px 0; line-height: 1.6;
+        }
+        code { font-family: 'Courier New', monospace; }
+
+        /* CTA */
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
+        .cta-card p { color: #555; margin-bottom: 20px; }
+        .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+        .btn:hover { background: #0773c5; }
+
+        /* FOOTER */
+        footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
+        footer a { color: var(--accent); text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            h1 { font-size: 1.7rem; }
+            .container { padding: 20px 16px; }
+            .comparison-table th, .comparison-table td { padding: 9px 10px; font-size: 0.88rem; }
+        }
+
+        /* INDEX CARD GRID */
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+        .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
+        .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
+        <a href="index.html" class="back-link">← All Integrations</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> › <a href="index.html">Integrations</a> › Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly
+    </div>
+
+    <main class="content">
+        <h1>Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly</h1>
+        <p class="reading-time">⏱ 5 min read · Make.com Integration Guide</p>
+
+        <p class="intro">Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling for context. This guide shows you how to build a Calendly automation that triggers the moment someone books: their details land in a Google Sheet as an onboarding checklist, and your team gets a Slack notification instantly. No code, no manual work, runs forever once set up.</p>
+<h2>Why Manual Booking Follow-Up Costs You Clients</h2>
+<p>Every Calendly booking is a potential client signaling interest — and the window between booking and the actual call is where most freelancers and agencies drop the ball. Without a system, nobody prepares materials, nobody reviews the prospect&#x27;s background, and the call starts cold. The result: you look disorganized, the prospect feels like a number, and your close rate suffers. The fix takes 25 minutes to build and handles every booking automatically from that point forward.</p>
+<h2>Doesn&#x27;t Calendly Already Have Built-In Automations?</h2>
+<p>Yes — Calendly has a &quot;Workflows&quot; feature that can send automatic emails and SMS messages before and after meetings. It&#x27;s useful for basic reminders and follow-ups. But it has real limitations that matter for onboarding. Calendly Workflows can only send emails and SMS — there&#x27;s no way to create a Google Sheet row, build a checklist, or notify your team in Slack. The messages are Calendly-branded templates with limited customization. And there&#x27;s no central tracker where your team can see all upcoming bookings with preparation status. If all you need is a reminder email, Calendly Workflows work fine. But if you want a structured onboarding process — checklist, team alerts, centralized tracking — you need Make.com to connect the tools Calendly can&#x27;t reach.</p>
+<h2>Why Use Make.com for Calendly Automation</h2>
+<p>Make.com connects Calendly to 2,400+ apps with a visual drag-and-drop builder — no code required. For this workflow, the key advantages over doing it manually or using Zapier are clear. Pricing: Make.com&#x27;s free plan includes 1,000 operations per month. This scenario uses 4 operations per booking, covering 250 bookings monthly at zero cost. On Zapier, the same workflow would require the $49/month Professional plan within weeks. Visual builder: Make.com shows you exactly how data flows between Calendly, Google Sheets, and Slack. When something breaks, you can see where and fix it in seconds. Flexibility: need to add a step later — like sending a welcome email or creating a Google Drive folder? Just click + and add a module. The scenario grows with your business.</p>
+<h2>What This Automation Does</h2>
+<p>When someone books a meeting through Calendly, Make.com catches the event instantly and runs three actions: it fetches the full event details, adds a new row to your Google Sheet with the invitee&#x27;s name, email, event type, scheduled time, and a pre-built onboarding checklist — then sends a Slack message to your team channel so someone can start preparing immediately.</p>
+<p class="inline-cta">You can build this entire automation using Make.com&#x27;s free plan in about 25 minutes — no credit card required. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored">Start free on Make.com →</a></p>
+<h2>What Gets Captured Automatically</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Field</th><th>Google Sheets Column</th><th>Example Value</th></tr></thead><tbody><tr><td>Invitee Name</td><td>A: Name</td><td>Sarah Johnson</td></tr><tr><td>Invitee Email</td><td>B: Email</td><td>sarah@company.com</td></tr><tr><td>Event Type</td><td>C: Event Type</td><td>Discovery Call</td></tr><tr><td>Scheduled Date &amp; Time</td><td>D: Date &amp; Time</td><td>2026-02-26 15:30</td></tr><tr><td>Status</td><td>E: Status</td><td>New</td></tr><tr><td>Onboarding Tasks</td><td>F: Onboarding Tasks</td><td>Send welcome email, Prepare docs, Assign team member</td></tr></tbody></table></div>
+<h2>Don&#x27;t Use Slack? Alternatives That Work the Same Way</h2>
+<p>This guide uses Slack for team notifications, but Make.com supports any messaging tool. If your team doesn&#x27;t use Slack, swap the last module for one of these — the rest of the workflow stays identical. Gmail: send a notification email to your team instead. Microsoft Teams: same concept as Slack, select the Teams module and pick your channel. Google Chat: if you&#x27;re already in Google Workspace, this is the simplest swap.</p>
+<h2>How to Build the Calendly Onboarding Automation</h2>
+<ol class="steps">
+<li>Create a free Make.com account — no credit card required. Click &quot;Create a new scenario&quot; on your dashboard.</li>
+<li>Click the large + button on the canvas and search for &quot;Calendly&quot; — you&#x27;ll see it listed as a verified integration with several module options. Select &quot;Watch Events&quot; as your trigger.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-01.png" alt="Calendly module picker" loading="lazy"><figcaption>Calendly module picker — select Watch Events as the trigger</figcaption></figure></li>
+<li>Click &quot;Create a webhook&quot; — Make.com will open a configuration dialog. Name your webhook (e.g. &quot;My Calendly Event webhook&quot;) and click &quot;Create a connection&quot; to link your Calendly account.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-02.png" alt="" loading="lazy"><figcaption>Calendly Watch Events module with Create a webhook button</figcaption></figure></li>
+<li>Once your Calendly connection is established, you&#x27;ll see the webhook configuration. Click &quot;Create a connection&quot; and authorize Make.com to access your Calendly account through OAuth.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-03.png" alt="Webhook creation dialog" loading="lazy"><figcaption>Webhook creation dialog — Create a connection to link your Calendly account</figcaption></figure></li>
+<li>After connecting, configure the webhook: check &quot;Invitee Created&quot; under Events (this triggers when someone books a meeting). Select your Organization URI from the dropdown — this tells Make.com which Calendly account to watch.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-04.png" alt="Webhook configuration" loading="lazy"><figcaption>Webhook configuration — Connection established, Events and Organization URI fields visible</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-05.png" alt="Webhook configured" loading="lazy"><figcaption>Webhook configured — Invitee Created checked and Organization URI selected</figcaption></figure></li>
+<li>Add a second Calendly module — click the + button to the right of Watch Events and search for Calendly again. Select &quot;Get an Event.&quot; This module fetches the full event details including the scheduled start time, which the Watch Events trigger doesn&#x27;t include. Map the Event field from the trigger to the Event URI input.</li>
+<li>Add a Google Sheets module — click the + button after the Get an Event module, search for &quot;Google Sheets&quot; and select &quot;Add a Row.&quot;</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-06.png" alt="Google Sheets module picker" loading="lazy"><figcaption>Google Sheets module picker — select Add a Row</figcaption></figure></li>
+<li>Connect your Google account, set Search Method to &quot;Search by path&quot;, select My Drive, and choose your &quot;Calendly Onboarding Tracker&quot; spreadsheet.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-07.png" alt="Google Sheets connection" loading="lazy"><figcaption>Google Sheets connection — Search by path, My Drive, click to choose spreadsheet</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-08.png" alt="Google Sheets configured" loading="lazy"><figcaption>Google Sheets configured — Calendly Onboarding Tracker spreadsheet selected with Sheet1</figcaption></figure></li>
+<li>Map the fields from Calendly to your Google Sheet columns — Name from the Watch Events module maps to column A, Email to column B, Event to column C, Start Time from the Get an Event module to column D. Type &quot;New&quot; manually in the Status field and &quot;Send welcome email, Prepare docs, Assign team member&quot; in the Onboarding Tasks field.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-10.png" alt="Field mapping" loading="lazy"><figcaption>Field mapping — Calendly data mapped to Google Sheets columns with static onboarding tasks</figcaption></figure></li>
+</ol>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> The Watch Events trigger provides basic invitee data (Name, Email, Event URI), but Start Time comes from the Get an Event module. That&#x27;s why we need both Calendly modules — the trigger catches the booking, and Get an Event fetches the scheduling details.</div>
+<p>10. Add a Slack module — click the + button after Google Sheets, search for &quot;Slack&quot; and select &quot;Send a Message.&quot;</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-11.png" alt="Module picker showing Slack" loading="lazy"><figcaption>Module picker showing Slack — select Send a Message</figcaption></figure>
+<p>11. Click &quot;Create a connection&quot; to link your Slack workspace. Authorize Make.com when prompted.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-12.png" alt="Slack module" loading="lazy"><figcaption>Slack module — Create a connection to authorize your workspace</figcaption></figure>
+<p>12. Configure the Slack message — select your channel (e.g. #all-new-bookings), set Channel type to &quot;Public channel&quot;, and compose your notification message.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-13.png" alt="Slack configuration" loading="lazy"><figcaption>Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready</figcaption></figure>
+<p>13. Write the Slack notification text using mapped fields — include the invitee name, email, event type, and start time. Add a link to your Google Sheet so your team can check the onboarding tracker immediately.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-14.png" alt="Slack message body with mapped fields" loading="lazy"><figcaption>Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link</figcaption></figure>
+<p>14. Save the scenario and click &quot;Run once&quot; — then book a test meeting through your own Calendly link using an incognito browser window. Make.com will process the event and populate your Google Sheet automatically.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-15.png" alt="Google Sheet populated with test booking data" loading="lazy"><figcaption>Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks</figcaption></figure>
+<p>15. Check your Slack channel — the notification arrives within seconds of the booking, with all the details your team needs to start preparing.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-16.png" alt="Slack notification received in #all-new-bookings channel with booking details" loading="lazy"><figcaption>Slack notification received in #all-new-bookings channel with booking details and tracker link</figcaption></figure>
+<p>16. Your completed scenario should show four connected modules: Calendly Watch Events → Calendly Get an Event → Google Sheets Add a Row → Slack Send a Message. Toggle the scenario ON to run it automatically for every new booking.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-17.png" alt="Complete Make.com scenario" loading="lazy"><figcaption>Complete Make.com scenario — four modules connected and running successfully</figcaption></figure>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> The Event Type field currently shows a Calendly API URL instead of a human-readable name like &quot;Discovery Call.&quot; To fix this, add a Calendly &quot;Get an Event Type&quot; module between Get an Event and Google Sheets — it converts the URI into the actual event type name. For most setups this is optional since you&#x27;ll recognize your own event types, but it makes the Google Sheet cleaner.</div>
+<h2>Who Should Use This Automation</h2>
+<p>This workflow is built for anyone who uses Calendly for client-facing bookings and wants a structured preparation process. Freelancers using Calendly for discovery calls or project kickoffs. Agencies onboarding new clients through scheduled intake meetings. Consultants managing multiple bookings across different service types. Small business owners scheduling sales calls and demos. If you book more than 5 calls per week and prepare for each one manually, this automation pays for itself in time saved within the first week.</p>
+<h2>Apps Used in This Automation</h2>
+<p>This workflow connects four tools, all of which have free tiers. Calendly captures the booking and sends the event data. Make.com orchestrates the entire workflow — it&#x27;s the engine that connects everything. Google Sheets stores the onboarding tracker with booking details and checklists. Slack delivers instant team notifications so someone can start preparing immediately.</p>
+<div class="verdict"><strong>Bottom line:</strong> If you&#x27;re using Calendly for client bookings and still preparing for calls manually, you&#x27;re wasting time on every single booking. Calendly&#x27;s built-in Workflows can send reminder emails, but they can&#x27;t build checklists, update spreadsheets, or alert your team in Slack. This automation captures every new booking in a structured Google Sheet with a pre-built checklist and alerts your team instantly. It takes about 25 minutes to build, costs nothing on Make.com&#x27;s free plan (each run uses 4 operations — well within the 1,000 monthly limit), and runs automatically from that point forward.</div>
+<div class="faq-section"><h2>Frequently Asked Questions</h2>
+<div class="faq-item"><h3 class="faq-q">Does this work with Calendly&#x27;s free plan?</h3><p class="faq-a">Yes. Calendly&#x27;s free plan supports webhook integrations through Make.com. You can use this automation with any Calendly tier.</p></div>
+<div class="faq-item"><h3 class="faq-q">What if someone cancels or reschedules their booking?</h3><p class="faq-a">The Watch Events trigger supports both &quot;Invitee Created&quot; and &quot;Invitee Cancelled&quot; events. You can add a second scenario that updates the Google Sheet status to &quot;Cancelled&quot; when someone cancels — or handle both events in one scenario with a filter.</p></div>
+<div class="faq-item"><h3 class="faq-q">Why do I need the &quot;Get an Event&quot; module — can&#x27;t Watch Events provide all the data?</h3><p class="faq-a">Watch Events provides the invitee&#x27;s name, email, and a reference to the event, but not the scheduled start time. The Get an Event module fetches the full event details including when the meeting is actually scheduled.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I customize the onboarding checklist for different event types?</h3><p class="faq-a">Yes. Add a Make.com Router module after Get an Event — route different event types to different Google Sheets rows with customized task lists. For example, &quot;Discovery Call&quot; gets one checklist while &quot;Onboarding Session&quot; gets another.</p></div>
+<div class="faq-item"><h3 class="faq-q">Do I need a paid Make.com plan?</h3><p class="faq-a">The free plan includes 1,000 operations per month. Each time this scenario runs, it uses 4 operations — one per module. That covers 250 bookings per month, more than enough for most freelancers and small agencies.</p></div>
+</div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="facebook-instagram-leads-google-sheets-automation.html">How to Send Facebook and Instagram Leads to Google Sheets Automatically</a></li><li><a href="zapier-too-expensive-make-com-alternative.html">Zapier Too Expensive? Switch to Make.com and Save Up to $840/year</a></li><li><a href="stripe-payment-failed-automation.html">Stripe Payment Failed? Automatically Alert Your Team and Email the Customer</a></li></ul></div>
+    </main>
+
+    <div class="cta-card" style="padding:0; background:none; border:none;">
+        <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored">
+            <img 
+                src="assets/banners/AD-728x90 – 2.png" 
+                alt="Set up your own workflows for free with Make.com"
+                style="width:100%; border-radius:12px; display:block; cursor:pointer;"
+            >
+        </a>
+    </div>
+
+    <footer>
+        <span>© 2026 IntegrateHub.io</span>
+        <span>
+            <a href="about.html">About</a>
+            &nbsp;·&nbsp;
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+            &nbsp;·&nbsp;
+            <a href="privacy-policy.html">Privacy Policy</a>
+            &nbsp;·&nbsp;
+            <a href="index.html">← All Guides</a>
+        </span>
+    </footer>
+
+</div>
+
+</body>
+</html>

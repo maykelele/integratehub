@@ -210,3 +210,139 @@ A: The free Make.com plan includes 1,000 operations per month. Each time this sc
 Internal Links:
 Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
 How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
+
+---
+
+Slug: calendly-booking-onboarding-checklist-automation
+Title: Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly
+Type: how-to
+
+Introduction: Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling for context. This guide shows you how to build a Calendly automation that triggers the moment someone books: their details land in a Google Sheet as an onboarding checklist, and your team gets a Slack notification instantly. No code, no manual work, runs forever once set up.
+
+H2: Why Manual Booking Follow-Up Costs You Clients
+
+Every Calendly booking is a potential client signaling interest — and the window between booking and the actual call is where most freelancers and agencies drop the ball. Without a system, nobody prepares materials, nobody reviews the prospect's background, and the call starts cold. The result: you look disorganized, the prospect feels like a number, and your close rate suffers. The fix takes 25 minutes to build and handles every booking automatically from that point forward.
+
+H2: Doesn't Calendly Already Have Built-In Automations?
+
+Yes — Calendly has a "Workflows" feature that can send automatic emails and SMS messages before and after meetings. It's useful for basic reminders and follow-ups. But it has real limitations that matter for onboarding. Calendly Workflows can only send emails and SMS — there's no way to create a Google Sheet row, build a checklist, or notify your team in Slack. The messages are Calendly-branded templates with limited customization. And there's no central tracker where your team can see all upcoming bookings with preparation status. If all you need is a reminder email, Calendly Workflows work fine. But if you want a structured onboarding process — checklist, team alerts, centralized tracking — you need Make.com to connect the tools Calendly can't reach.
+
+H2: Why Use Make.com for Calendly Automation
+
+Make.com connects Calendly to 2,400+ apps with a visual drag-and-drop builder — no code required. For this workflow, the key advantages over doing it manually or using Zapier are clear. Pricing: Make.com's free plan includes 1,000 operations per month. This scenario uses 4 operations per booking, covering 250 bookings monthly at zero cost. On Zapier, the same workflow would require the $49/month Professional plan within weeks. Visual builder: Make.com shows you exactly how data flows between Calendly, Google Sheets, and Slack. When something breaks, you can see where and fix it in seconds. Flexibility: need to add a step later — like sending a welcome email or creating a Google Drive folder? Just click + and add a module. The scenario grows with your business.
+
+H2: What This Automation Does
+
+When someone books a meeting through Calendly, Make.com catches the event instantly and runs three actions: it fetches the full event details, adds a new row to your Google Sheet with the invitee's name, email, event type, scheduled time, and a pre-built onboarding checklist — then sends a Slack message to your team channel so someone can start preparing immediately.
+
+CTA: You can build this entire automation using Make.com's free plan in about 25 minutes — no credit card required.
+
+Table: What Gets Captured Automatically
+Field|Google Sheets Column|Example Value
+Invitee Name|A: Name|Sarah Johnson
+Invitee Email|B: Email|sarah@company.com
+Event Type|C: Event Type|Discovery Call
+Scheduled Date & Time|D: Date & Time|2026-02-26 15:30
+Status|E: Status|New
+Onboarding Tasks|F: Onboarding Tasks|Send welcome email, Prepare docs, Assign team member
+
+H2: Don't Use Slack? Alternatives That Work the Same Way
+
+This guide uses Slack for team notifications, but Make.com supports any messaging tool. If your team doesn't use Slack, swap the last module for one of these — the rest of the workflow stays identical. Gmail: send a notification email to your team instead. Microsoft Teams: same concept as Slack, select the Teams module and pick your channel. Google Chat: if you're already in Google Workspace, this is the simplest swap.
+
+Workflow Steps: How to Build the Calendly Onboarding Automation
+
+1. Create a free Make.com account — no credit card required. Click "Create a new scenario" on your dashboard.
+
+2. Click the large + button on the canvas and search for "Calendly" — you'll see it listed as a verified integration with several module options. Select "Watch Events" as your trigger.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-01.png|Calendly module picker — select Watch Events as the trigger
+
+3. Click "Create a webhook" — Make.com will open a configuration dialog. Name your webhook (e.g. "My Calendly Event webhook") and click "Create a connection" to link your Calendly account.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-02.png|Calendly Watch Events module with Create a webhook button
+
+4. Once your Calendly connection is established, you'll see the webhook configuration. Click "Create a connection" and authorize Make.com to access your Calendly account through OAuth.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-03.png|Webhook creation dialog — Create a connection to link your Calendly account
+
+5. After connecting, configure the webhook: check "Invitee Created" under Events (this triggers when someone books a meeting). Select your Organization URI from the dropdown — this tells Make.com which Calendly account to watch.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-04.png|Webhook configuration — Connection established, Events and Organization URI fields visible
+
+Image: assets/screenshots/screenshot-calendly-onboarding-05.png|Webhook configured — Invitee Created checked and Organization URI selected
+
+6. Add a second Calendly module — click the + button to the right of Watch Events and search for Calendly again. Select "Get an Event." This module fetches the full event details including the scheduled start time, which the Watch Events trigger doesn't include. Map the Event field from the trigger to the Event URI input.
+
+7. Add a Google Sheets module — click the + button after the Get an Event module, search for "Google Sheets" and select "Add a Row."
+
+Image: assets/screenshots/screenshot-calendly-onboarding-06.png|Google Sheets module picker — select Add a Row
+
+8. Connect your Google account, set Search Method to "Search by path", select My Drive, and choose your "Calendly Onboarding Tracker" spreadsheet.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-07.png|Google Sheets connection — Search by path, My Drive, click to choose spreadsheet
+
+Image: assets/screenshots/screenshot-calendly-onboarding-08.png|Google Sheets configured — Calendly Onboarding Tracker spreadsheet selected with Sheet1
+
+9. Map the fields from Calendly to your Google Sheet columns — Name from the Watch Events module maps to column A, Email to column B, Event to column C, Start Time from the Get an Event module to column D. Type "New" manually in the Status field and "Send welcome email, Prepare docs, Assign team member" in the Onboarding Tasks field.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-10.png|Field mapping — Calendly data mapped to Google Sheets columns with static onboarding tasks
+
+Tech Tip: The Watch Events trigger provides basic invitee data (Name, Email, Event URI), but Start Time comes from the Get an Event module. That's why we need both Calendly modules — the trigger catches the booking, and Get an Event fetches the scheduling details.
+
+10. Add a Slack module — click the + button after Google Sheets, search for "Slack" and select "Send a Message."
+
+Image: assets/screenshots/screenshot-calendly-onboarding-11.png|Module picker showing Slack — select Send a Message
+
+11. Click "Create a connection" to link your Slack workspace. Authorize Make.com when prompted.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-12.png|Slack module — Create a connection to authorize your workspace
+
+12. Configure the Slack message — select your channel (e.g. #all-new-bookings), set Channel type to "Public channel", and compose your notification message.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-13.png|Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready
+
+13. Write the Slack notification text using mapped fields — include the invitee name, email, event type, and start time. Add a link to your Google Sheet so your team can check the onboarding tracker immediately.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-14.png|Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link
+
+14. Save the scenario and click "Run once" — then book a test meeting through your own Calendly link using an incognito browser window. Make.com will process the event and populate your Google Sheet automatically.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-15.png|Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks
+
+15. Check your Slack channel — the notification arrives within seconds of the booking, with all the details your team needs to start preparing.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-16.png|Slack notification received in #all-new-bookings channel with booking details and tracker link
+
+16. Your completed scenario should show four connected modules: Calendly Watch Events → Calendly Get an Event → Google Sheets Add a Row → Slack Send a Message. Toggle the scenario ON to run it automatically for every new booking.
+
+Image: assets/screenshots/screenshot-calendly-onboarding-17.png|Complete Make.com scenario — four modules connected and running successfully
+
+Tech Tip: The Event Type field currently shows a Calendly API URL instead of a human-readable name like "Discovery Call." To fix this, add a Calendly "Get an Event Type" module between Get an Event and Google Sheets — it converts the URI into the actual event type name. For most setups this is optional since you'll recognize your own event types, but it makes the Google Sheet cleaner.
+
+H2: Who Should Use This Automation
+
+This workflow is built for anyone who uses Calendly for client-facing bookings and wants a structured preparation process. Freelancers using Calendly for discovery calls or project kickoffs. Agencies onboarding new clients through scheduled intake meetings. Consultants managing multiple bookings across different service types. Small business owners scheduling sales calls and demos. If you book more than 5 calls per week and prepare for each one manually, this automation pays for itself in time saved within the first week.
+
+H2: Apps Used in This Automation
+
+This workflow connects four tools, all of which have free tiers. Calendly captures the booking and sends the event data. Make.com orchestrates the entire workflow — it's the engine that connects everything. Google Sheets stores the onboarding tracker with booking details and checklists. Slack delivers instant team notifications so someone can start preparing immediately.
+
+Verdict: If you're using Calendly for client bookings and still preparing for calls manually, you're wasting time on every single booking. Calendly's built-in Workflows can send reminder emails, but they can't build checklists, update spreadsheets, or alert your team in Slack. This automation captures every new booking in a structured Google Sheet with a pre-built checklist and alerts your team instantly. It takes about 25 minutes to build, costs nothing on Make.com's free plan (each run uses 4 operations — well within the 1,000 monthly limit), and runs automatically from that point forward.
+
+FAQ:
+Q: Does this work with Calendly's free plan?
+A: Yes. Calendly's free plan supports webhook integrations through Make.com. You can use this automation with any Calendly tier.
+Q: What if someone cancels or reschedules their booking?
+A: The Watch Events trigger supports both "Invitee Created" and "Invitee Cancelled" events. You can add a second scenario that updates the Google Sheet status to "Cancelled" when someone cancels — or handle both events in one scenario with a filter.
+Q: Why do I need the "Get an Event" module — can't Watch Events provide all the data?
+A: Watch Events provides the invitee's name, email, and a reference to the event, but not the scheduled start time. The Get an Event module fetches the full event details including when the meeting is actually scheduled.
+Q: Can I customize the onboarding checklist for different event types?
+A: Yes. Add a Make.com Router module after Get an Event — route different event types to different Google Sheets rows with customized task lists. For example, "Discovery Call" gets one checklist while "Onboarding Session" gets another.
+Q: Do I need a paid Make.com plan?
+A: The free plan includes 1,000 operations per month. Each time this scenario runs, it uses 4 operations — one per module. That covers 250 bookings per month, more than enough for most freelancers and small agencies.
+
+Internal Links:
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html

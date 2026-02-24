@@ -197,7 +197,7 @@ def format_content(text, page_type='how-to'):
         line_stripped = line.strip()
 
         is_new_tag = any(line_stripped.startswith(tag) for tag in [
-            'Introduction:', 'Tech Tip:', 'Workflow Steps:', 'Verdict:',
+            'Introduction:', 'Tech Tip:', 'CTA:', 'Workflow Steps:', 'Verdict:',
             'Python Snippet:', 'Table:', 'FAQ:', 'Internal Links:',
             'Screenshot:', 'Image:', 'H2:', 'H3:',
             'Slug:', 'Title:', 'Type:', '---'
@@ -243,6 +243,15 @@ def format_content(text, page_type='how-to'):
                 f'<div class="tech-tip">'
                 f'<strong>💡 Pro Tip:</strong> {html.escape(tip_text)}'
                 f'</div>'
+            )
+
+        # --- CTA ---
+        elif line_stripped.startswith('CTA:'):
+            close_open_blocks()
+            cta_text = line_stripped.replace('CTA:', '').strip()
+            html_parts.append(
+                f'<p class="inline-cta">{html.escape(cta_text)} '
+                f'<a href="{MAKE_AFFILIATE_LINK}" rel="sponsored">Start free on Make.com →</a></p>'
             )
 
         # --- Workflow Steps ---

@@ -47,28 +47,28 @@
 
 ### Tehničke stvari
 
-- [ ] Dodati `sitemap.xml` generator u Python skriptu
-- [ ] Dodati `robots.txt` u public/ folder
-- [ ] Dodati favicon (IH inicijali, plavi kvadrat — kod već napisan)
-- [ ] Proveriti da affiliate link radi na svim stranicama
-- [ ] Pushati na GitHub → verifikovati Cloudflare Pages deploy
-- [ ] Proveriti da sajt radi na integratehub.io
-- [ ] Registrovati Google Search Console
-- [ ] Submitovati sitemap.xml u Google Search Console
+- [x] Dodati `sitemap.xml` generator u Python skriptu
+- [x] Dodati `robots.txt` u public/ folder
+- [x] Dodati favicon (IH inicijali, plavi kvadrat — kod već napisan)
+- [x] Proveriti da affiliate link radi na svim stranicama
+- [x] Pushati na GitHub → verifikovati Cloudflare Pages deploy
+- [x] Proveriti da sajt radi na integratehub.io
+- [x] Registrovati Google Search Console
+- [x] Submitovati sitemap.xml u Google Search Console
 
 ### Obavezne pravne stranice (zahteva Make.com agreement)
 
-- [ ] **Privacy Policy stranica** — obavezno pre launcha
+- [x] **Privacy Policy stranica** — obavezno pre launcha
   - Mora opisati: kolektovanje podataka, cookies, third-party tehnologije
   - Generator može da je napravi automatski
-- [ ] **Affiliate Disclosure** — obavezno po FTC pravilima
+- [x] **Affiliate Disclosure** — obavezno po FTC pravilima
   - Kratka napomena na svakoj stranici: "This site contains affiliate links. We may earn a commission if you sign up for Make.com through our links."
 
 ### Content pre-launch
 
-- [ ] Gmail → Google Drive (ti radiš Make.com integraciju, pišemo zajedno)
-- [ ] Revidirati 3 postojeće stranice za business audience
-- [ ] Ukupno 4-5 stranica pre prvog publish-a
+- [x] Gmail → Google Drive (ti radiš Make.com integraciju, pišemo zajedno)
+- [x] Revidirati 3 postojeće stranice za business audience
+- [x] Ukupno 4-5 stranica pre prvog publish-a
 
 ---
 
