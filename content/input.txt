@@ -2,7 +2,9 @@ Slug: zapier-too-expensive-make-com-alternative
 Title: Zapier Too Expensive? The Honest Alternative for Small Business (Make.com Review)
 Type: comparison
 
-Introduction: If you're paying $50–$100 a month for Zapier and quietly wondering whether you're getting your money's worth, you're not alone. This guide won't tell you to cancel Zapier immediately — it will give you honest math so you can decide for yourself.
+Meta: Make.com vs Zapier for small business — honest pricing comparison. See exact math on why Make.com saves $360-840/year on identical workflows.
+
+Introduction: If you're paying $50–$100 a month for Zapier and quietly wondering whether you're getting your money's worth, you're not alone. This Make.com vs Zapier comparison won't tell you to cancel immediately — it will give you honest math so you can decide the best Zapier alternative for your small business.
 
 H2: Why Zapier Gets Expensive for Small Business
 
@@ -53,7 +55,9 @@ Q: What happens to my Zapier automations if I switch?
 A: Nothing — they keep running until you manually pause them. You can migrate one workflow at a time and run both platforms in parallel during the transition.
 
 Internal Links:
-How to Send Facebook and Instagram Leads to Google Sheets|facebook-instagram-leads-google-sheets-automation.html
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
 
 ---
 
@@ -61,7 +65,9 @@ Slug: facebook-instagram-leads-google-sheets-automation
 Title: How to Automatically Send Facebook and Instagram Leads to Google Sheets
 Type: how-to
 
-Introduction: Every time someone fills out your Facebook or Instagram lead ad form, that lead sits in Meta's system waiting for you to manually download a CSV. By the time you respond, your competitor already called them. This guide shows how to get every new lead into Google Sheets automatically — in real time, no CSV downloads, no manual work.
+Meta: Connect Facebook Lead Ads to Google Sheets automatically using Make.com. Step-by-step tutorial — real-time lead capture, no CSV downloads.
+
+Introduction: Every time someone fills out your Facebook or Instagram lead ad form, that lead sits in Meta's system waiting for you to manually download a CSV. By the time you respond, your competitor already called them. This Make.com tutorial shows how to connect Facebook Lead Ads to Google Sheets automatically — in real time, no CSV downloads, no manual work.
 
 H2: Why Manual Lead Export Is Killing Your Conversion Rate
 
@@ -121,7 +127,9 @@ Q: What does "From now on" mean when setting up the trigger?
 A: Make.com asks from which point to start processing leads. "From now on" means only new leads submitted after you activate the scenario will be captured. Choose "All" only if you want to import existing leads retroactively.
 
 Internal Links:
-Zapier Too Expensive? Switch to Make.com and Save $360-840/year|zapier-too-expensive-make-com-alternative.html
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
 
 ---
 
@@ -129,7 +137,9 @@ Slug: stripe-payment-failed-automation
 Title: Stripe Payment Failed? Automatically Alert Your Team and Email the Customer Instantly
 Type: how-to
 
-Introduction: A payment fails in Stripe. The customer never hears from you. Two days later they cancel. This happens constantly — because Stripe logs the failure and moves on, and nobody is watching the dashboard 24/7. This guide shows you how to build an automation that reacts the moment a payment fails: the customer gets an email within seconds, and your team gets an alert. No developer needed, no manual checking.
+Meta: Automate Stripe failed payment alerts with Make.com. Send instant customer emails and Slack notifications the moment a payment fails.
+
+Introduction: A payment fails in Stripe. The customer never hears from you. Two days later they cancel. This happens constantly — because Stripe logs the failure and moves on, and nobody is watching the dashboard 24/7. This Make.com tutorial shows you how to automate Stripe failed payment alerts — the automation reacts the moment a payment fails: the customer gets an email within seconds, and your team gets an alert. No developer needed, no manual checking.
 
 H2: Why Missed Failed Payments Cost You More Than You Think
 
@@ -219,7 +229,9 @@ Slug: calendly-booking-onboarding-checklist-automation
 Title: Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly
 Type: how-to
 
-Introduction: Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling for context. This guide shows you how to build a Calendly automation that triggers the moment someone books: their details land in a Google Sheet as an onboarding checklist, and your team gets a Slack notification instantly. No code, no manual work, runs forever once set up.
+Meta: Make.com Calendly automation — auto-create onboarding checklists in Google Sheets and notify your team in Slack on every new booking.
+
+Introduction: Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling for context. This Make.com Calendly automation tutorial triggers the moment someone books: their details land in a Google Sheet as an onboarding checklist, and your team gets a Slack notification instantly. No code, no manual work, runs forever once set up.
 
 H2: Why Manual Booking Follow-Up Costs You Clients
 
@@ -355,7 +367,9 @@ Slug: make-com-vs-n8n-small-business
 Title: Make.com vs n8n: Which Automation Tool Is Right for Non-Technical Small Business?
 Type: comparison
 
-Introduction: You’ve decided to automate your business workflows and narrowed it down to two platforms: Make.com and n8n. Both connect your apps and eliminate manual work — but they’re built for very different users. This guide breaks down the real differences in pricing, ease of use, and practical value so you can pick the right tool without wasting weeks on the wrong one.
+Meta: Make.com vs n8n for non-technical small business — honest comparison of pricing, ease of use, and which tool gets you running faster.
+
+Introduction: You’ve decided to automate your business workflows and narrowed it down to two platforms: Make.com and n8n. Both connect your apps and eliminate manual work — but they’re built for very different users. This Make.com vs n8n comparison for small business breaks down the real differences in pricing, ease of use, and practical value so you can pick the right tool without wasting weeks on the wrong one.
 
 H2: Quick Recommendation
 

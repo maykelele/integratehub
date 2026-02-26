@@ -12,28 +12,71 @@ MAKE_AFFILIATE_LINK = "https://www.make.com/en/register?pc=integratehub"
 # PODRŽANI TAGOVI U input.txt:
 #
 #   Slug:           URL stranice (obavezno)
-#   Title:          Naslov stranice (obavezno)
-#   Type:           Tip stranice — how-to | comparison (default: how-to)
-#   Introduction:   Uvodni paragraf + automatski meta description
-#   H2:             Sekcijski naslov (h2)
-#   H3:             Podsekcijski naslov (h3)
-#   Tech Tip:       Žuti info box sa savetom
-#   Workflow Steps: Otvara numerisanu listu koraka (h2 naslov + <ol>)
-#   Verdict:        Završni paragraf — zatvara listu ako je otvorena
-#   Python Snippet: Code blok
-#   Table:          Comparison tabela — format: Header1|Header2|Header3
-#                   Svaki red: vrednost1|vrednost2|vrednost3
+#                   Primer: Slug: stripe-payment-failed-automation
+#
+#   Title:          Naslov stranice — koristi se kao <h1> i <title> tag (obavezno)
+#                   Primer: Title: Stripe Payment Failed? Automate Alerts with Make.com
+#
+#   Type:           Tip stranice — utiče na schema markup (default: how-to)
+#                   Vrednosti: how-to | comparison
+#
+#   Meta:           SEO meta description — preporučeno, max 155 karaktera
+#                   Keyword treba biti u prvih 60 karaktera
+#                   Ako nije postavljen, koristi se Introduction kao fallback
+#                   Primer: Meta: Make.com vs Zapier for small business — honest pricing comparison.
+#
+#   Introduction:   Uvodni paragraf — prikazuje se kao istaknuti blok sa lijevom bordurom
+#                   Ako Meta: nije postavljen, prvih 155 karaktera postaje meta description
+#                   Primer: Introduction: Every time someone fills out your lead form...
+#
+#   H2:             Sekcijski naslov
+#                   Primer: H2: Why Zapier Gets Expensive for Small Business
+#
+#   H3:             Podsekcijski naslov (unutar H2 sekcije)
+#                   Primer: H3: On Make.com
+#
+#   Tech Tip:       Žuti info box sa praktičnim savetom
+#                   Primer: Tech Tip: Add a Slack notification as a third step...
+#
+#   CTA:            Inline poziv na akciju sa Make.com affiliate linkom
+#                   Primer: CTA: Build this automation for free — no credit card required.
+#
+#   Workflow Steps: Otvara numerisanu listu koraka sa H2 naslovom iznad
+#                   Tekst posle taga postaje naslov sekcije
+#                   Lista se zatvara na prvom sledećem tagu (Verdict, H2, itd.)
+#                   Primer: Workflow Steps: How to Connect Facebook Leads to Google Sheets
+#
+#   Verdict:        Završni zaključni blok — zatvara listu koraka ako je otvorena
+#                   Primer: Verdict: This automation takes 20 minutes to build and runs forever.
+#
+#   Table:          Comparison tabela — tekst posle taga postaje naslov tabele
+#                   Format zaglavlja: Kolona1|Kolona2|Kolona3
+#                   Format redova:    vrednost1|vrednost2|vrednost3
 #                   Kraj tabele: prazna linija ili novi tag
-#   FAQ:            FAQ sekcija — format: Q: pitanje / A: odgovor
+#                   Primer: Table: Real Cost Comparison: Zapier vs Make.com
+#
+#   FAQ:            FAQ sekcija sa schema markup
+#                   Format: Q: pitanje (novi red) A: odgovor
 #                   Kraj FAQ: prazna linija ili novi tag
-#   Internal Links: Linkovi na druge stranice — format: Tekst|slug.html
-#                   Svaki link u novom redu
+#
+#   Internal Links: Linkovi na druge članke — prikazuje se kao "Related Guides" box
+#                   Format: Tekst linka|slug.html
+#                   Svaki link u novom redu, kraj bloka: prazna linija ili novi tag
+#
 #   Screenshot:     Placeholder box dok nemaš pravu sliku
-#                   Format: Screenshot: Opis šta treba da prikazuje
-#                   Zameni sa Image: kada imaš pravi fajl
-#   Image:          Prava slika — format: putanja/do/slike.png|Alt tekst
-#                   Primer: Image: assets/screenshots/make-trigger.png|Make.com trigger setup
-#   ---             Separator između stranica
+#                   Zameni sa Image: kada imaš screenshot
+#                   Primer: Screenshot: Make.com canvas with Stripe trigger
+#
+#   Image:          Prava slika — format: putanja|Caption tekst
+#                   Caption postaje i alt attribute (max 125 karaktera)
+#                   SEO best practice: počni caption sa "Make.com [tema] —"
+#                   Unutar Workflow Steps: automatski se prikazuje između koraka
+#                   Primer: Image: assets/screenshots/make-trigger.png|Make.com Stripe automation — Watch Events trigger setup
+#
+#   Python Snippet: Code blok sa sintax highlightom
+#                   Tekst u sledećim redovima do sledećeg taga postaje kod
+#
+#   ---             Separator između stranica u input.txt
 #
 #   Sve ostale linije → <p> paragraf
 # -----------------------------------------------------------------------
@@ -197,7 +240,7 @@ def format_content(text, page_type='how-to'):
         line_stripped = line.strip()
 
         is_new_tag = any(line_stripped.startswith(tag) for tag in [
-            'Introduction:', 'Tech Tip:', 'CTA:', 'Workflow Steps:', 'Verdict:',
+            'Introduction:', 'Meta:', 'Tech Tip:', 'CTA:', 'Workflow Steps:', 'Verdict:',
             'Python Snippet:', 'Table:', 'FAQ:', 'Internal Links:',
             'Screenshot:', 'Image:', 'H2:', 'H3:',
             'Slug:', 'Title:', 'Type:', '---'
@@ -214,14 +257,24 @@ def format_content(text, page_type='how-to'):
         if line_stripped.startswith(('Slug:', 'Title:', 'Type:', '---')):
             continue
 
-        # --- Introduction ---
-        if line_stripped.startswith('Introduction:'):
-            intro_text = line_stripped.replace('Introduction:', '').strip()
-            meta_limit = 155
-            if len(intro_text) > meta_limit:
-                meta_description = intro_text[:meta_limit].rsplit(' ', 1)[0] + "..."
+        # --- Meta description (optional override) ---
+        if line_stripped.startswith('Meta:'):
+            meta_text = line_stripped.replace('Meta:', '').strip()
+            if len(meta_text) > 155:
+                meta_description = meta_text[:155].rsplit(' ', 1)[0] + "..."
             else:
-                meta_description = intro_text
+                meta_description = meta_text
+
+        # --- Introduction ---
+        elif line_stripped.startswith('Introduction:'):
+            intro_text = line_stripped.replace('Introduction:', '').strip()
+            # Only use intro as fallback if Meta: not already set
+            if not meta_description:
+                meta_limit = 155
+                if len(intro_text) > meta_limit:
+                    meta_description = intro_text[:meta_limit].rsplit(' ', 1)[0] + "..."
+                else:
+                    meta_description = intro_text
             html_parts.append(f'<p class="intro">{html.escape(intro_text)}</p>')
 
         # --- H2 ---
@@ -321,17 +374,12 @@ def format_content(text, page_type='how-to'):
             else:
                 img_path = image_data.strip()
                 alt_text = ''
-            # Avoid redundant alt+figcaption for screen readers
-            # If alt_text exists, use a shortened version for alt attribute
+            # Use full alt_text for SEO — truncate at 125 chars if needed
             if alt_text:
-                alt_short = alt_text.split('—')[0].split('–')[0].strip()
-                if len(alt_short) > 80:
-                    alt_short = alt_short[:80].rsplit(' ', 1)[0]
-                # If shortened version equals full text, use empty alt
-                if alt_short == alt_text:
-                    alt_attr = ''
+                if len(alt_text) > 125:
+                    alt_attr = alt_text[:125].rsplit(' ', 1)[0]
                 else:
-                    alt_attr = alt_short
+                    alt_attr = alt_text
             else:
                 alt_attr = ''
             figure_html = (
@@ -442,7 +490,7 @@ def generate_index(template_html, links):
     page = page.replace(
         '<p class="reading-time">⏱ 5 min read · Make.com Integration Guide</p>', '')
     page = page.replace(
-        '<a href="index.html" class="back-link">← All Integrations</a>', '')
+        '<a href="/" class="back-link">← All Integrations</a>', '')
     page = page.replace(
         '<div class="breadcrumb">',
         '<div class="breadcrumb" style="display:none">')
