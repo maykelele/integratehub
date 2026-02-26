@@ -12,7 +12,7 @@ H2: Make.com Pricing Explained (Simple Math)
 
 Pricing verified February 2026 based on official Zapier and Make.com pricing pages.
 
-Make.com charges for "operations" instead of tasks, but the key difference is pricing structure. The Core plan at $9/month includes 10,000 operations. The same Facebook lead workflow — 200 leads, 4 steps each — runs comfortably on Make.com Core with room for 5-6 additional automations of similar complexity. For a small business running 3-5 active workflows, the monthly difference is typically $30-70. Over 12 months that's $360-840 saved.
+Make.com charges for 'credits' instead of tasks — each module step counts as one credit, which is what other tools call an 'operation'. The key difference is pricing structure. The Core plan at $9/month includes 10,000 operations. The same Facebook lead workflow — 200 leads, 4 steps each — runs comfortably on Make.com Core with room for 5-6 additional automations of similar complexity. For a small business running 3-5 active workflows, the monthly difference is typically $30-70. Over 12 months that's $360-840 saved.
 
 Table: Real Cost Comparison: Zapier vs Make.com
 Workflow|Zapier Tasks/mo|Make Operations/mo|Zapier Cost|Make Cost
@@ -25,7 +25,7 @@ Tech Tip: Before switching, check your Zapier dashboard for "Tasks Used" in the 
 
 H2: When Zapier Is Still the Better Choice
 
-Zapier is not a bad product — stay on it if any of these apply. You use niche apps that Make.com doesn't support: Zapier connects 7,000+ apps versus Make.com's 2,400+. If your CRM or industry-specific software only has a Zapier integration, switching creates more problems than it solves. Your workflows are simple and your team built them — Make.com has a steeper learning curve and that comfort has real value. You're running fewer than 3 workflows and rarely hit task limits — the $30 monthly saving doesn't justify migration time.
+Zapier is not a bad product — stay on it if any of these apply. You use niche apps that Make.com doesn't support: Zapier connects 7,000+ apps versus Make.com's 3,000+. If your CRM or industry-specific software only has a Zapier integration, switching creates more problems than it solves. Your workflows are simple and your team built them — Make.com has a steeper learning curve and that comfort has real value. You're running fewer than 3 workflows and rarely hit task limits — the $30 monthly saving doesn't justify migration time.
 
 H2: When Make.com Saves You Real Money
 
@@ -231,7 +231,7 @@ Yes — Calendly has a "Workflows" feature that can send automatic emails and SM
 
 H2: Why Use Make.com for Calendly Automation
 
-Make.com connects Calendly to 2,400+ apps with a visual drag-and-drop builder — no code required. For this workflow, the key advantages over doing it manually or using Zapier are clear. Pricing: Make.com's free plan includes 1,000 operations per month. This scenario uses 4 operations per booking, covering 250 bookings monthly at zero cost. On Zapier, the same workflow would require the $49/month Professional plan within weeks. Visual builder: Make.com shows you exactly how data flows between Calendly, Google Sheets, and Slack. When something breaks, you can see where and fix it in seconds. Flexibility: need to add a step later — like sending a welcome email or creating a Google Drive folder? Just click + and add a module. The scenario grows with your business.
+Make.com connects Calendly to 3,000+ apps with a visual drag-and-drop builder — no code required. For this workflow, the key advantages over doing it manually or using Zapier are clear. Pricing: Make.com's free plan includes 1,000 operations per month. This scenario uses 4 operations per booking, covering 250 bookings monthly at zero cost. On Zapier, the same workflow would require the $49/month Professional plan within weeks. Visual builder: Make.com shows you exactly how data flows between Calendly, Google Sheets, and Slack. When something breaks, you can see where and fix it in seconds. Flexibility: need to add a step later — like sending a welcome email or creating a Google Drive folder? Just click + and add a module. The scenario grows with your business.
 
 H2: What This Automation Does
 
@@ -387,7 +387,7 @@ H2: Pricing Breakdown — Verified March 2026
 
 Pricing verified February 2026 based on official Make.com and n8n pricing pages. Both platforms update pricing periodically, so check the official sites for the latest details.
 
-Make.com uses an operation-based model. Each module step that runs counts as one operation. A 4-step workflow running once uses 4 operations. The free plan includes 1,000 operations per month. The Core plan starts at $9/month (billed annually) and includes 10,000 operations per month — enough for most small businesses running several active workflows.
+Make.com uses a credit-based model — each module step counts as one credit (what other tools call an 'operation'). A 4-step workflow running once uses 4 operations. The free plan includes 1,000 operations per month. The Core plan starts at $9/month (billed annually) and includes 10,000 operations per month — enough for most small businesses running several active workflows.
 
 n8n Cloud uses an execution-based model. One execution equals one complete workflow run, regardless of how many steps it contains. n8n Cloud plans start at €20/month (billed annually) for 2,500 executions. The Pro plan starts at €50/month (billed annually) with higher limits and unlimited workflows.
 
@@ -425,7 +425,7 @@ Both platforms can produce the same result. The difference is who can build it w
 
 H2: Integrations — Quantity vs. Flexibility
 
-Make.com offers 2,400+ integrations with pre-built modules designed for quick setup without API knowledge.
+Make.com offers 3,000+ integrations with pre-built modules designed for quick setup without API knowledge.
 
 n8n offers hundreds of native integrations and also makes it easy to connect to any API via HTTP Request nodes. For developers, this is a feature. For non-technical users, it can be a barrier.
 
