@@ -6,9 +6,9 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly | IntegrateHub.io</title>
-    <meta name="description" content="Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling...">
+    <meta name="description" content="Make.com Calendly automation — auto-create onboarding checklists in Google Sheets and notify your team in Slack on every new booking.">
     <meta property="og:title" content="Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly">
-    <meta property="og:description" content="Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling...">
+    <meta property="og:description" content="Make.com Calendly automation — auto-create onboarding checklists in Google Sheets and notify your team in Slack on every new booking.">
     <meta property="og:type" content="article">
     <script type="application/ld+json">
 {
@@ -289,22 +289,22 @@
 
 <header>
     <div class="header-inner">
-        <a href="index.html" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
-        <a href="index.html" class="back-link">← All Integrations</a>
+        <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
+        <a href="/" class="back-link">← All Integrations</a>
     </div>
 </header>
 
 <div class="container">
 
     <div class="breadcrumb">
-        <a href="index.html">Home</a> › <a href="index.html">Integrations</a> › Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly
+        <a href="/">Home</a> › <a href="/">Integrations</a> › Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly
     </div>
 
     <main class="content">
         <h1>Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly</h1>
         <p class="reading-time">⏱ 5 min read · Make.com Integration Guide</p>
 
-        <p class="intro">Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling for context. This guide shows you how to build a Calendly automation that triggers the moment someone books: their details land in a Google Sheet as an onboarding checklist, and your team gets a Slack notification instantly. No code, no manual work, runs forever once set up.</p>
+        <p class="intro">Someone books a call through your Calendly link. Then nothing happens — no checklist, no team alert, no preparation. You show up to the call scrambling for context. This Make.com Calendly automation tutorial triggers the moment someone books: their details land in a Google Sheet as an onboarding checklist, and your team gets a Slack notification instantly. No code, no manual work, runs forever once set up.</p>
 <h2>Why Manual Booking Follow-Up Costs You Clients</h2>
 <p>Every Calendly booking is a potential client signaling interest — and the window between booking and the actual call is where most freelancers and agencies drop the ball. Without a system, nobody prepares materials, nobody reviews the prospect&#x27;s background, and the call starts cold. The result: you look disorganized, the prospect feels like a number, and your close rate suffers. The fix takes 25 minutes to build and handles every booking automatically from that point forward.</p>
 <h2>Doesn&#x27;t Calendly Already Have Built-In Automations?</h2>
@@ -322,38 +322,38 @@
 <ol class="steps">
 <li>Create a free Make.com account — no credit card required. Click &quot;Create a new scenario&quot; on your dashboard.</li>
 <li>Click the large + button on the canvas and search for &quot;Calendly&quot; — you&#x27;ll see it listed as a verified integration with several module options. Select &quot;Watch Events&quot; as your trigger.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-01.png" alt="Calendly module picker" loading="lazy"><figcaption>Calendly module picker — select Watch Events as the trigger</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-01.png" alt="Calendly module picker — select Watch Events as the trigger" loading="lazy"><figcaption>Calendly module picker — select Watch Events as the trigger</figcaption></figure></li>
 <li>Click &quot;Create a webhook&quot; — Make.com will open a configuration dialog. Name your webhook (e.g. &quot;My Calendly Event webhook&quot;) and click &quot;Create a connection&quot; to link your Calendly account.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-02.png" alt="" loading="lazy"><figcaption>Calendly Watch Events module with Create a webhook button</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-02.png" alt="Calendly Watch Events module with Create a webhook button" loading="lazy"><figcaption>Calendly Watch Events module with Create a webhook button</figcaption></figure></li>
 <li>Once your Calendly connection is established, you&#x27;ll see the webhook configuration. Click &quot;Create a connection&quot; and authorize Make.com to access your Calendly account through OAuth.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-03.png" alt="Webhook creation dialog" loading="lazy"><figcaption>Webhook creation dialog — Create a connection to link your Calendly account</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-03.png" alt="Webhook creation dialog — Create a connection to link your Calendly account" loading="lazy"><figcaption>Webhook creation dialog — Create a connection to link your Calendly account</figcaption></figure></li>
 <li>After connecting, configure the webhook: check &quot;Invitee Created&quot; under Events (this triggers when someone books a meeting). Select your Organization URI from the dropdown — this tells Make.com which Calendly account to watch.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-04.png" alt="Webhook configuration" loading="lazy"><figcaption>Webhook configuration — Connection established, Events and Organization URI fields visible</figcaption></figure></li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-05.png" alt="Webhook configured" loading="lazy"><figcaption>Webhook configured — Invitee Created checked and Organization URI selected</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-04.png" alt="Webhook configuration — Connection established, Events and Organization URI fields visible" loading="lazy"><figcaption>Webhook configuration — Connection established, Events and Organization URI fields visible</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-05.png" alt="Webhook configured — Invitee Created checked and Organization URI selected" loading="lazy"><figcaption>Webhook configured — Invitee Created checked and Organization URI selected</figcaption></figure></li>
 <li>Add a second Calendly module — click the + button to the right of Watch Events and search for Calendly again. Select &quot;Get an Event.&quot; This module fetches the full event details including the scheduled start time, which the Watch Events trigger doesn&#x27;t include. Map the Event field from the trigger to the Event URI input.</li>
 <li>Add a Google Sheets module — click the + button after the Get an Event module, search for &quot;Google Sheets&quot; and select &quot;Add a Row.&quot;</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-06.png" alt="Google Sheets module picker" loading="lazy"><figcaption>Google Sheets module picker — select Add a Row</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-06.png" alt="Google Sheets module picker — select Add a Row" loading="lazy"><figcaption>Google Sheets module picker — select Add a Row</figcaption></figure></li>
 <li>Connect your Google account, set Search Method to &quot;Search by path&quot;, select My Drive, and choose your &quot;Calendly Onboarding Tracker&quot; spreadsheet.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-07.png" alt="Google Sheets connection" loading="lazy"><figcaption>Google Sheets connection — Search by path, My Drive, click to choose spreadsheet</figcaption></figure></li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-08.png" alt="Google Sheets configured" loading="lazy"><figcaption>Google Sheets configured — Calendly Onboarding Tracker spreadsheet selected with Sheet1</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-07.png" alt="Google Sheets connection — Search by path, My Drive, click to choose spreadsheet" loading="lazy"><figcaption>Google Sheets connection — Search by path, My Drive, click to choose spreadsheet</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-08.png" alt="Google Sheets configured — Calendly Onboarding Tracker spreadsheet selected with Sheet1" loading="lazy"><figcaption>Google Sheets configured — Calendly Onboarding Tracker spreadsheet selected with Sheet1</figcaption></figure></li>
 <li>Map the fields from Calendly to your Google Sheet columns — Name from the Watch Events module maps to column A, Email to column B, Event to column C, Start Time from the Get an Event module to column D. Type &quot;New&quot; manually in the Status field and &quot;Send welcome email, Prepare docs, Assign team member&quot; in the Onboarding Tasks field.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-10.png" alt="Field mapping" loading="lazy"><figcaption>Field mapping — Calendly data mapped to Google Sheets columns with static onboarding tasks</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-10.png" alt="Field mapping — Calendly data mapped to Google Sheets columns with static onboarding tasks" loading="lazy"><figcaption>Field mapping — Calendly data mapped to Google Sheets columns with static onboarding tasks</figcaption></figure></li>
 </ol>
 <div class="tech-tip"><strong>💡 Pro Tip:</strong> The Watch Events trigger provides basic invitee data (Name, Email, Event URI), but Start Time comes from the Get an Event module. That&#x27;s why we need both Calendly modules — the trigger catches the booking, and Get an Event fetches the scheduling details.</div>
 <p>10. Add a Slack module — click the + button after Google Sheets, search for &quot;Slack&quot; and select &quot;Send a Message.&quot;</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-11.png" alt="Module picker showing Slack" loading="lazy"><figcaption>Module picker showing Slack — select Send a Message</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-11.png" alt="Module picker showing Slack — select Send a Message" loading="lazy"><figcaption>Module picker showing Slack — select Send a Message</figcaption></figure>
 <p>11. Click &quot;Create a connection&quot; to link your Slack workspace. Authorize Make.com when prompted.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-12.png" alt="Slack module" loading="lazy"><figcaption>Slack module — Create a connection to authorize your workspace</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-12.png" alt="Slack module — Create a connection to authorize your workspace" loading="lazy"><figcaption>Slack module — Create a connection to authorize your workspace</figcaption></figure>
 <p>12. Configure the Slack message — select your channel (e.g. #all-new-bookings), set Channel type to &quot;Public channel&quot;, and compose your notification message.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-13.png" alt="Slack configuration" loading="lazy"><figcaption>Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-13.png" alt="Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready" loading="lazy"><figcaption>Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready</figcaption></figure>
 <p>13. Write the Slack notification text using mapped fields — include the invitee name, email, event type, and start time. Add a link to your Google Sheet so your team can check the onboarding tracker immediately.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-14.png" alt="Slack message body with mapped fields" loading="lazy"><figcaption>Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-14.png" alt="Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link" loading="lazy"><figcaption>Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link</figcaption></figure>
 <p>14. Save the scenario and click &quot;Run once&quot; — then book a test meeting through your own Calendly link using an incognito browser window. Make.com will process the event and populate your Google Sheet automatically.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-15.png" alt="Google Sheet populated with test booking data" loading="lazy"><figcaption>Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-15.png" alt="Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks" loading="lazy"><figcaption>Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks</figcaption></figure>
 <p>15. Check your Slack channel — the notification arrives within seconds of the booking, with all the details your team needs to start preparing.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-16.png" alt="Slack notification received in #all-new-bookings channel with booking details" loading="lazy"><figcaption>Slack notification received in #all-new-bookings channel with booking details and tracker link</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-16.png" alt="Slack notification received in #all-new-bookings channel with booking details and tracker link" loading="lazy"><figcaption>Slack notification received in #all-new-bookings channel with booking details and tracker link</figcaption></figure>
 <p>16. Your completed scenario should show four connected modules: Calendly Watch Events → Calendly Get an Event → Google Sheets Add a Row → Slack Send a Message. Toggle the scenario ON to run it automatically for every new booking.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-17.png" alt="Complete Make.com scenario" loading="lazy"><figcaption>Complete Make.com scenario — four modules connected and running successfully</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-17.png" alt="Complete Make.com scenario — four modules connected and running successfully" loading="lazy"><figcaption>Complete Make.com scenario — four modules connected and running successfully</figcaption></figure>
 <div class="tech-tip"><strong>💡 Pro Tip:</strong> The Event Type field currently shows a Calendly API URL instead of a human-readable name like &quot;Discovery Call.&quot; To fix this, add a Calendly &quot;Get an Event Type&quot; module between Get an Event and Google Sheets — it converts the URI into the actual event type name. For most setups this is optional since you&#x27;ll recognize your own event types, but it makes the Google Sheet cleaner.</div>
 <h2>Who Should Use This Automation</h2>
 <p>This workflow is built for anyone who uses Calendly for client-facing bookings and wants a structured preparation process. Freelancers using Calendly for discovery calls or project kickoffs. Agencies onboarding new clients through scheduled intake meetings. Consultants managing multiple bookings across different service types. Small business owners scheduling sales calls and demos. If you book more than 5 calls per week and prepare for each one manually, this automation pays for itself in time saved within the first week.</p>
@@ -389,7 +389,7 @@
             &nbsp;·&nbsp;
             <a href="privacy-policy.html">Privacy Policy</a>
             &nbsp;·&nbsp;
-            <a href="index.html">← All Guides</a>
+            <a href="/">← All Guides</a>
         </span>
     </footer>
 
