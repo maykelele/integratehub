@@ -9,6 +9,32 @@ OUTPUT_DIR = 'public'
 MAKE_AFFILIATE_LINK = "https://www.make.com/en/register?pc=integratehub"
 
 # -----------------------------------------------------------------------
+# AFFILIATE LINKS — koristi se sa CTA[key]: tagom u input.txt
+# Format u input.txt:  CTA[make]: Tekst poruke ovde.
+#                      CTA[typeform]: Tekst poruke ovde.
+#                      CTA: Tekst poruke ovde.  (default → make)
+# -----------------------------------------------------------------------
+AFFILIATE_LINKS = {
+    "make": {
+        "url": "https://www.make.com/en/register?pc=integratehub",
+        "cta_text": "Start free on Make.com →",
+    },
+    "typeform": {
+        "url": "https://typeform.cello.so/vGdCoE97A4Z",
+        "cta_text": "Try Typeform free →",
+    },
+    # Dodaj nove affiliate partnere ovde:
+    # "calendly": {
+    #     "url": "https://calendly.com/?ref=integratehub",
+    #     "cta_text": "Try Calendly free →",
+    # },
+    # "pipedrive": {
+    #     "url": "https://pipedrive.com/?ref=integratehub",
+    #     "cta_text": "Try Pipedrive free →",
+    # },
+}
+
+# -----------------------------------------------------------------------
 # PODRŽANI TAGOVI U input.txt:
 #
 #   Slug:           URL stranice (obavezno)
@@ -38,8 +64,13 @@ MAKE_AFFILIATE_LINK = "https://www.make.com/en/register?pc=integratehub"
 #   Tech Tip:       Žuti info box sa praktičnim savetom
 #                   Primer: Tech Tip: Add a Slack notification as a third step...
 #
-#   CTA:            Inline poziv na akciju sa Make.com affiliate linkom
+#   CTA:            Inline poziv na akciju sa default (Make.com) affiliate linkom
 #                   Primer: CTA: Build this automation for free — no credit card required.
+#
+#   CTA[key]:       Inline poziv na akciju sa specifičnim affiliate linkom
+#                   Dostupni ključevi: make, typeform (dodaj nove u AFFILIATE_LINKS)
+#                   Primer: CTA[typeform]: Build your intake form for free.
+#                   Primer: CTA[make]: Build this automation on Make.com's free plan.
 #
 #   Workflow Steps: Otvara numerisanu listu koraka sa H2 naslovom iznad
 #                   Tekst posle taga postaje naslov sekcije
@@ -240,7 +271,7 @@ def format_content(text, page_type='how-to'):
         line_stripped = line.strip()
 
         is_new_tag = any(line_stripped.startswith(tag) for tag in [
-            'Introduction:', 'Meta:', 'Tech Tip:', 'CTA:', 'Workflow Steps:', 'Verdict:',
+            'Introduction:', 'Meta:', 'Tech Tip:', 'CTA', 'Workflow Steps:', 'Verdict:',
             'Python Snippet:', 'Table:', 'FAQ:', 'Internal Links:',
             'Screenshot:', 'Image:', 'H2:', 'H3:',
             'Slug:', 'Title:', 'Type:', '---'
@@ -298,13 +329,21 @@ def format_content(text, page_type='how-to'):
                 f'</div>'
             )
 
-        # --- CTA ---
-        elif line_stripped.startswith('CTA:'):
+        # --- CTA (supports CTA: and CTA[key]:) ---
+        elif line_stripped.startswith('CTA'):
             close_open_blocks()
-            cta_text = line_stripped.replace('CTA:', '').strip()
+            # Parse CTA[key]: or plain CTA:
+            cta_match = re.match(r'^CTA\[(\w+)\]:\s*(.*)', line_stripped)
+            if cta_match:
+                affiliate_key = cta_match.group(1).lower()
+                cta_text = cta_match.group(2).strip()
+            else:
+                affiliate_key = "make"  # default
+                cta_text = line_stripped.replace('CTA:', '').strip()
+            affiliate = AFFILIATE_LINKS.get(affiliate_key, AFFILIATE_LINKS["make"])
             html_parts.append(
                 f'<p class="inline-cta">{html.escape(cta_text)} '
-                f'<a href="{MAKE_AFFILIATE_LINK}" rel="sponsored">Start free on Make.com →</a></p>'
+                f'<a href="{affiliate["url"]}" rel="sponsored">{affiliate["cta_text"]}</a></p>'
             )
 
         # --- Workflow Steps ---
