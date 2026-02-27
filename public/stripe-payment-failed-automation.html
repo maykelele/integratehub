@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="canonical" href="https://integratehub.io/{{SLUG}}.html">
+    <link rel="canonical" href="https://integratehub.io/stripe-payment-failed-automation.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stripe Payment Failed? Automatically Alert Your Team and Email the Customer Instantly | IntegrateHub.io</title>
@@ -11,6 +11,21 @@
     <meta property="og:description" content="Automate Stripe failed payment alerts with Make.com. Send instant customer emails and Slack notifications the moment a payment fails.">
     <meta property="og:type" content="article">
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Stripe Payment Failed? Automatically Alert Your Team and Email the Customer Instantly",
+  "description": "Automate Stripe failed payment alerts with Make.com. Send instant customer emails and Slack notifications the moment a payment fails.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
+  "datePublished": "2026-02-22",
+  "dateModified": "2026-02-22"
+}
+</script>
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "HowTo",
@@ -158,10 +173,18 @@
         .breadcrumb a { color: var(--accent); text-decoration: underline; }
         .breadcrumb a:hover { text-decoration: underline; }
 
+        /* ARTICLE META */
+        .article-meta { font-size: 0.85rem; color: #595959; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .article-meta time { color: #595959; }
+        .article-meta .separator { color: #ccc; }
+        .article-meta .category-badge {
+            background: #f0f4f8; color: var(--accent); padding: 2px 10px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none;
+        }
+
         /* CONTENT */
         .content { margin-top: 30px; }
         h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
-        .reading-time { font-size: 0.85rem; color: #595959; margin-bottom: 25px; }
         .intro {
             font-size: 1.15rem; color: #444; margin-bottom: 25px;
             line-height: 1.8; border-left: 4px solid var(--accent); padding-left: 20px;
@@ -169,6 +192,20 @@
         h2 { font-size: 1.4rem; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: var(--primary); }
         h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; color: var(--primary); }
         p { margin: 0 0 18px 0; }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: #f7f9fc; border: 1px solid #e0e8f0; border-radius: 8px;
+            padding: 20px 24px; margin: 0 0 30px 0;
+        }
+        .toc-title {
+            font-size: 0.85rem; color: #595959; text-transform: uppercase;
+            letter-spacing: 0.06em; margin: 0 0 12px 0; font-weight: 700;
+        }
+        .toc ol { margin: 0; padding-left: 20px; }
+        .toc li { margin-bottom: 6px; font-size: 0.95rem; }
+        .toc a { color: var(--accent); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
 
         /* TECH TIP */
         .tech-tip {
@@ -269,6 +306,7 @@
             h1 { font-size: 1.7rem; }
             .container { padding: 20px 16px; }
             .comparison-table th, .comparison-table td { padding: 9px 10px; font-size: 0.88rem; }
+            .article-meta { gap: 4px; }
         }
 
         /* INDEX CARD GRID */
@@ -278,6 +316,7 @@
         .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
         .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
         .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
+        .card .card-meta { font-size: 0.78rem; color: #999; margin-bottom: 8px; }
         .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
         @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
         @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
@@ -288,57 +327,67 @@
 <header>
     <div class="header-inner">
         <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
-        <a href="/" class="back-link">← All Integrations</a>
+        <a href="/" class="back-link">← All Guides</a>
     </div>
 </header>
 
 <div class="container">
 
     <div class="breadcrumb">
-        <a href="/">Home</a> › <a href="/">Integrations</a> › Stripe Payment Failed? Automatically Alert Your Team and Email the Customer Instantly
+        <a href="/">Home</a> › <a href="/">Payments &amp; Invoicing</a> › Stripe Payment Failed? Automatically Alert Your Team and Email the Customer Instantly
     </div>
 
     <main class="content">
         <h1>Stripe Payment Failed? Automatically Alert Your Team and Email the Customer Instantly</h1>
-        <p class="reading-time">⏱ 5 min read · Make.com Integration Guide</p>
+        <div class="article-meta"><time datetime="2026-02-22">Feb 22, 2026</time> <span class="separator">·</span> <span>⏱ 6 min read</span> <span class="separator">·</span> <span class="category-badge">Payments &amp; Invoicing</span></div>
+
+        <nav class="toc">
+<p class="toc-title">In This Guide</p>
+<ol><li><a href="#why-missed-failed-payments-cost-you-more-than-you-think">Why Missed Failed Payments Cost You More Than You Think</a></li>
+<li><a href="#doesn-t-stripe-already-send-failed-payment-emails">Doesn&#x27;t Stripe Already Send Failed Payment Emails?</a></li>
+<li><a href="#what-this-automation-does">What This Automation Does</a></li>
+<li><a href="#how-to-set-up-the-automation">How to Set Up the Automation</a></li>
+<li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ol>
+</nav>
 
         <p class="intro">A payment fails in Stripe. The customer never hears from you. Two days later they cancel. This happens constantly — because Stripe logs the failure and moves on, and nobody is watching the dashboard 24/7. This Make.com tutorial shows you how to automate Stripe failed payment alerts — the automation reacts the moment a payment fails: the customer gets an email within seconds, and your team gets an alert. No developer needed, no manual checking.</p>
-<h2>Why Missed Failed Payments Cost You More Than You Think</h2>
+<h2 id="why-missed-failed-payments-cost-you-more-than-you-think">Why Missed Failed Payments Cost You More Than You Think</h2>
 <p>Every failed payment that goes unaddressed is a potential churn. Customers don&#x27;t always know their card failed — they assume you&#x27;ll reach out. When you don&#x27;t, they assume the worst and move on. Speed matters: a same-day email from you reads as professional and attentive. A silence that lasts three days reads as a company that doesn&#x27;t care. The good news is this is completely fixable with a simple automation. Once it&#x27;s set up, it runs forever.</p>
-<h2>Doesn&#x27;t Stripe Already Send Failed Payment Emails?</h2>
+<h2 id="doesn-t-stripe-already-send-failed-payment-emails">Doesn&#x27;t Stripe Already Send Failed Payment Emails?</h2>
 <p>Yes — but with important limitations that make it the wrong solution for most businesses. Stripe&#x27;s built-in Smart Retries and dunning emails only work for subscription billing (recurring charges). If you send one-time invoices, Stripe won&#x27;t automatically email your customer at all. Even for subscriptions, the emails are generic Stripe-branded messages that many customers confuse with spam or phishing. You can&#x27;t add your logo, your tone, or a direct link to update payment details in your own portal. And critically — your team gets no alert. Nobody on your side knows a payment failed unless they check the Stripe dashboard manually. The automation in this guide solves all of that: it works for every invoice type, sends email from your own Gmail account, and notifies your team the same second it fires.</p>
-<h2>What This Automation Does</h2>
+<h2 id="what-this-automation-does">What This Automation Does</h2>
 <p>When a payment fails in Stripe, Make.com catches the event instantly and runs three actions automatically: it identifies the customer, sends them a personalized email with their invoice details, and your team can add a Slack alert so someone can follow up if needed.</p>
 <h2>How the Workflow Runs</h2>
 <div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Step</th><th>What Happens</th><th>Tool</th></tr></thead><tbody><tr><td>1</td><td>Stripe detects a failed invoice payment</td><td>Stripe Webhook</td></tr><tr><td>2</td><td>Make.com retrieves the customer name and email</td><td>Stripe Retrieve a Customer</td></tr><tr><td>3</td><td>Customer receives a personalized email with invoice details</td><td>Gmail</td></tr></tbody></table></div>
 <p>The whole setup takes about 20 minutes. After that, it runs on its own.</p>
-<h2>How to Set Up the Automation</h2>
+<h2 id="how-to-set-up-the-automation">How to Set Up the Automation</h2>
 <ol class="steps">
 <li>Create a Stripe account and add a test customer — open Stripe, go to Billing → Invoices, and create a test invoice. You&#x27;ll use Stripe&#x27;s sandbox mode throughout this guide, so no real payments are involved.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-1.png" alt="Stripe sandbox dashboard showing an open invoice for a test customer" loading="lazy"><figcaption>Stripe sandbox dashboard showing an open invoice for a test customer</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-1.png" alt="" loading="lazy"><figcaption>Stripe sandbox dashboard showing an open invoice for a test customer</figcaption></figure></li>
 <li>Log in to Make.com and create a new scenario — click the large + button on the canvas and search for &quot;Stripe.&quot; Select the Watch Events module. This is the trigger that listens to your Stripe account.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-2.png" alt="Make.com scenario canvas with the Stripe Watch Events module and Create a webhook button" loading="lazy"><figcaption>Make.com scenario canvas with the Stripe Watch Events module and Create a webhook button</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-2.png" alt="" loading="lazy"><figcaption>Make.com scenario canvas with the Stripe Watch Events module and Create a webhook button</figcaption></figure></li>
 <li>Click &quot;Create a webhook&quot; — Make.com will ask you to connect your Stripe account. Use API Key authentication: copy your Secret key from Stripe → Developers → API keys (it starts with sk_test_ for sandbox). Set the Group to &quot;Invoice&quot; and check &quot;Invoice payment failed&quot; as the event to watch.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-3.png" alt="Webhook configuration showing Invoice group with Invoice payment failed event selected" loading="lazy"><figcaption>Webhook configuration showing Invoice group with Invoice payment failed event selected</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-3.png" alt="" loading="lazy"><figcaption>Webhook configuration showing Invoice group with Invoice payment failed event selected</figcaption></figure></li>
 <li>Add a filter between your Stripe trigger and the next module — click the line between modules and select &quot;Add a filter.&quot; Set the label to &quot;Invoice Payment Failed,&quot; the condition to Event Type, the operator to Equal to, and the value to invoice.payment_failed. This prevents the workflow from running on unrelated Stripe events.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-4.png" alt="Make.com filter setup with condition Event Type equal to invoice.payment_failed" loading="lazy"><figcaption>Make.com filter setup with condition Event Type equal to invoice.payment_failed</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-4.png" alt="" loading="lazy"><figcaption>Make.com filter setup with condition Event Type equal to invoice.payment_failed</figcaption></figure></li>
 <li>Add a Stripe &quot;Retrieve a Customer&quot; module — click the + button and search for Stripe again. Select &quot;Retrieve a Customer.&quot; This step is essential: when Stripe sends a payment failed event, it includes the customer&#x27;s ID but not their name or email. This module fetches the full customer profile.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-5.png" alt="Make.com module picker showing Stripe Retrieve a Customer option" loading="lazy"><figcaption>Make.com module picker showing Stripe Retrieve a Customer option</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-5.png" alt="" loading="lazy"><figcaption>Make.com module picker showing Stripe Retrieve a Customer option</figcaption></figure></li>
 <li>Map the Customer ID field to the customer object from your Stripe trigger — in the Retrieve a Customer configuration, set Customer ID to &quot;2. Object: Customer&quot; from the previous module. This tells Make.com which customer to look up.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-6.png" alt="Retrieve a Customer module with Customer ID mapped to the Stripe event data" loading="lazy"><figcaption>Retrieve a Customer module with Customer ID mapped to the Stripe event data</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-6.png" alt="" loading="lazy"><figcaption>Retrieve a Customer module with Customer ID mapped to the Stripe event data</figcaption></figure></li>
 <li>Add a Gmail &quot;Send an email&quot; module — click + and add Gmail. Connect your Google account when prompted. Map the To field to &quot;7. Email&quot; from the Retrieve a Customer module. For the Subject, type &quot;Payment Failed: Invoice&quot; and then map &quot;2. Object: Number&quot; so each email shows the real invoice number.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-7.png" alt="Gmail module showing connection setup with To, Subject and Body fields" loading="lazy"><figcaption>Gmail module showing connection setup with To, Subject and Body fields</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-7.png" alt="" loading="lazy"><figcaption>Gmail module showing connection setup with To, Subject and Body fields</figcaption></figure></li>
 <li>Map the email body with dynamic fields — in the Body field, write your message and map three fields from Stripe: the customer&#x27;s name (7. Name), the invoice amount (2. Object: Amount due), and the invoice number (2. Object: Number). The result is a personalized email that looks like it was written by hand.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-8.png" alt="Gmail module with To field mapped to customer email and Subject with invoice number" loading="lazy"><figcaption>Gmail module with To field mapped to customer email and Subject with invoice number</figcaption></figure></li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-9.png" alt="Gmail body showing dynamic fields mapped — customer name, payment amount, and invoice number" loading="lazy"><figcaption>Gmail body showing dynamic fields mapped — customer name, payment amount, and invoice number</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-8.png" alt="" loading="lazy"><figcaption>Gmail module with To field mapped to customer email and Subject with invoice number</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-9.png" alt="" loading="lazy"><figcaption>Gmail body showing dynamic fields mapped — customer name, payment amount, and invoice number</figcaption></figure></li>
 <li>Save the scenario — your canvas should now show three modules connected: Stripe Watch Events → Stripe Retrieve a Customer → Gmail Send an email.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-10.png" alt="Complete Make.com scenario canvas showing all three modules connected" loading="lazy"><figcaption>Complete Make.com scenario canvas showing all three modules connected</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-10.png" alt="" loading="lazy"><figcaption>Complete Make.com scenario canvas showing all three modules connected</figcaption></figure></li>
 <li>Test the workflow — use the Stripe CLI to send a test event without touching any real data. Run stripe trigger invoice.payment_failed in your terminal. Make.com will process it and send the email to your test customer automatically. If you don&#x27;t have the Stripe CLI, install it with brew install stripe/stripe-cli/stripe on Mac, then run stripe login first.</li>
-<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-11.png" alt="Email inbox showing Payment Failed invoice email received instantly with customer name and invoice number" loading="lazy"><figcaption>Email inbox showing Payment Failed invoice email received instantly with customer name and invoice number</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-11.png" alt="" loading="lazy"><figcaption>Email inbox showing Payment Failed invoice email received instantly with customer name and invoice number</figcaption></figure></li>
 </ol>
 <div class="tech-tip"><strong>💡 Pro Tip:</strong> After the Gmail module, add a Slack &quot;Create a Message&quot; module to alert your billing channel the moment a payment fails. Something like: &quot;Payment failed — [Customer Name], Invoice [Number], Amount: [Amount Due]. Follow up today.&quot; Now both the customer and your team know immediately — and someone can pick up the phone if the customer doesn&#x27;t respond to the automated email.</div>
 <div class="verdict"><strong>Bottom line:</strong> Failed payments are one of the most preventable forms of revenue loss for small businesses. Stripe&#x27;s built-in emails only cover subscriptions and arrive as generic Stripe-branded messages — this automation works for every invoice type, sends email from your own account, and alerts your team in the same instant. It takes under 30 minutes to build and runs forever without maintenance.</div>
-<div class="faq-section"><h2>Frequently Asked Questions</h2>
+<div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <div class="faq-item"><h3 class="faq-q">Do I need a paid Stripe account to set this up?</h3><p class="faq-a">No. You can build and test the entire workflow using Stripe&#x27;s sandbox mode, which is free. When you&#x27;re ready to go live, switch to your live Stripe API key and the automation works identically.</p></div>
 <div class="faq-item"><h3 class="faq-q">What if the same payment fails multiple times?</h3><p class="faq-a">Stripe sends a new event each time a payment attempt fails. Your Make.com scenario will fire each time, sending a new email. If you want to limit notifications to one per invoice, add a Make.com data store to track which invoices have already triggered an alert.</p></div>
 <div class="faq-item"><h3 class="faq-q">Does this work for subscription renewals, not just one-time invoices?</h3><p class="faq-a">Yes. The invoice.payment_failed event covers both subscription renewals and one-time invoice payments. Any failed charge that generates a Stripe invoice will trigger this workflow.</p></div>

@@ -2,6 +2,7 @@ import os
 import html
 import json
 import re
+import math
 
 TEMPLATE_FILE = 'templates/template.html'
 CONTENT_FILE = 'content/input.txt'
@@ -35,6 +36,19 @@ AFFILIATE_LINKS = {
 }
 
 # -----------------------------------------------------------------------
+# KATEGORIJE — mapiranje slug → display name
+# Koristi se za breadcrumb i buduće category stranice
+# -----------------------------------------------------------------------
+CATEGORIES = {
+    "lead-capture": "Lead Capture",
+    "payments": "Payments & Invoicing",
+    "onboarding": "Client Onboarding",
+    "comparisons": "Comparisons",
+    "automation-strategy": "Automation Strategy",
+    # Dodaj nove kategorije ovde
+}
+
+# -----------------------------------------------------------------------
 # PODRŽANI TAGOVI U input.txt:
 #
 #   Slug:           URL stranice (obavezno)
@@ -45,6 +59,19 @@ AFFILIATE_LINKS = {
 #
 #   Type:           Tip stranice — utiče na schema markup (default: how-to)
 #                   Vrednosti: how-to | comparison
+#
+#   Date:           Datum objave — format YYYY-MM-DD (preporučeno)
+#                   Koristi se za article meta, schema datePublished, i index sortiranje
+#                   Primer: Date: 2026-02-15
+#
+#   Updated:        Datum poslednjeg update-a — format YYYY-MM-DD (opciono)
+#                   Koristi se za schema dateModified i "(Updated)" oznaku
+#                   Samo za substantial content promene, NE za typo/link fix
+#                   Primer: Updated: 2026-03-01
+#
+#   Category:       Kategorija članka — koristi se za breadcrumb i buduće filtriranje
+#                   Dostupne: lead-capture, payments, onboarding, comparisons, automation-strategy
+#                   Primer: Category: lead-capture
 #
 #   Meta:           SEO meta description — preporučeno, max 155 karaktera
 #                   Keyword treba biti u prvih 60 karaktera
@@ -120,6 +147,69 @@ def extract_field(lines, prefix):
     )
 
 
+def estimate_reading_time(text):
+    """Procenjuje vreme čitanja na osnovu broja reči (200 wpm avg)."""
+    # Ukloni tagove/metapodatke za tačniji count
+    content_lines = []
+    skip_prefixes = ('Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:',
+                     'Meta:', 'Image:', 'Screenshot:', 'Internal Links:', '---')
+    for line in text.split('\n'):
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if any(stripped.startswith(p) for p in skip_prefixes):
+            continue
+        # Ukloni tag prefiks ali zadrži tekst
+        for tag in ('Introduction:', 'H2:', 'H3:', 'Tech Tip:', 'Verdict:',
+                     'Workflow Steps:', 'Table:', 'FAQ:', 'Q:', 'A:', 'CTA:'):
+            if stripped.startswith(tag):
+                stripped = stripped[len(tag):]
+                break
+        content_lines.append(stripped)
+    word_count = len(' '.join(content_lines).split())
+    minutes = max(1, math.ceil(word_count / 200))
+    return minutes
+
+
+def format_date_display(date_str):
+    """Formatira YYYY-MM-DD u human-readable format (Feb 15, 2026)."""
+    if not date_str:
+        return ""
+    try:
+        from datetime import datetime
+        dt = datetime.strptime(date_str, '%Y-%m-%d')
+        return dt.strftime('%b %d, %Y')
+    except ValueError:
+        return date_str
+
+
+def build_article_schema(title, meta_desc, date_published, date_modified=None):
+    """Generiše Article schema markup."""
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title,
+        "description": meta_desc,
+        "publisher": {
+            "@type": "Organization",
+            "name": "IntegrateHub.io",
+            "url": "https://integratehub.io"
+        }
+    }
+    if date_published:
+        schema["datePublished"] = date_published
+    if date_modified:
+        schema["dateModified"] = date_modified
+    elif date_published:
+        schema["dateModified"] = date_published
+
+    return (
+        f'<script type="application/ld+json">\n'
+        f'{json.dumps(schema, indent=2, ensure_ascii=False)}\n'
+        f'</script>'
+    )
+
+
 def build_howto_schema(title, steps):
     """Generiše HowTo schema markup za how-to stranice."""
     if not steps:
@@ -127,7 +217,6 @@ def build_howto_schema(title, steps):
 
     schema_steps = []
     for i, step_text in enumerate(steps, 1):
-        # Skrati tekst koraka na razumnu dužinu
         clean_text = step_text[:200] + "..." if len(step_text) > 200 else step_text
         schema_steps.append({
             "@type": "HowToStep",
@@ -179,6 +268,24 @@ def build_faq_schema(faq_items):
     )
 
 
+def build_toc(h2_headings):
+    """Generiše Table of Contents HTML iz liste H2 naslova."""
+    if len(h2_headings) < 3:
+        return ""  # Ne prikazuj TOC za kratke članke
+
+    items = ""
+    for i, heading in enumerate(h2_headings):
+        anchor = re.sub(r'[^a-z0-9]+', '-', heading.lower()).strip('-')
+        items += f'<li><a href="#{html.escape(anchor)}">{html.escape(heading)}</a></li>\n'
+
+    return (
+        f'<nav class="toc">\n'
+        f'<p class="toc-title">In This Guide</p>\n'
+        f'<ol>{items}</ol>\n'
+        f'</nav>'
+    )
+
+
 def format_content(text, page_type='how-to'):
     """Parsira strukturirani tekst i generiše semantički HTML."""
     lines = text.split('\n')
@@ -197,6 +304,7 @@ def format_content(text, page_type='how-to'):
     current_faq_q = None
     meta_description = ""
     howto_steps = []  # Za HowTo schema
+    h2_headings = []  # Za TOC generaciju
 
     def close_open_blocks():
         nonlocal in_list, in_table, in_faq, in_internal_links
@@ -242,7 +350,8 @@ def format_content(text, page_type='how-to'):
     def _flush_faq(items):
         if not items:
             return
-        html_parts.append('<div class="faq-section"><h2>Frequently Asked Questions</h2>')
+        html_parts.append('<div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>')
+        h2_headings.append('Frequently Asked Questions')
         for q, a in items:
             html_parts.append(
                 f'<div class="faq-item">'
@@ -251,7 +360,6 @@ def format_content(text, page_type='how-to'):
                 f'</div>'
             )
         html_parts.append('</div>')
-        # Dodaj FAQ schema
         schema_parts.append(build_faq_schema(items))
 
     def _flush_internal_links(links):
@@ -274,7 +382,7 @@ def format_content(text, page_type='how-to'):
             'Introduction:', 'Meta:', 'Tech Tip:', 'CTA', 'Workflow Steps:', 'Verdict:',
             'Python Snippet:', 'Table:', 'FAQ:', 'Internal Links:',
             'Screenshot:', 'Image:', 'H2:', 'H3:',
-            'Slug:', 'Title:', 'Type:', '---'
+            'Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:', '---'
         ])
 
         if is_new_tag and (in_table or in_faq or in_internal_links):
@@ -285,7 +393,7 @@ def format_content(text, page_type='how-to'):
                 close_open_blocks()
             continue
 
-        if line_stripped.startswith(('Slug:', 'Title:', 'Type:', '---')):
+        if line_stripped.startswith(('Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:', '---')):
             continue
 
         # --- Meta description (optional override) ---
@@ -299,7 +407,6 @@ def format_content(text, page_type='how-to'):
         # --- Introduction ---
         elif line_stripped.startswith('Introduction:'):
             intro_text = line_stripped.replace('Introduction:', '').strip()
-            # Only use intro as fallback if Meta: not already set
             if not meta_description:
                 meta_limit = 155
                 if len(intro_text) > meta_limit:
@@ -312,7 +419,9 @@ def format_content(text, page_type='how-to'):
         elif line_stripped.startswith('H2:'):
             close_open_blocks()
             h2_text = line_stripped.replace('H2:', '').strip()
-            html_parts.append(f'<h2>{html.escape(h2_text)}</h2>')
+            anchor = re.sub(r'[^a-z0-9]+', '-', h2_text.lower()).strip('-')
+            h2_headings.append(h2_text)
+            html_parts.append(f'<h2 id="{html.escape(anchor)}">{html.escape(h2_text)}</h2>')
 
         # --- H3 ---
         elif line_stripped.startswith('H3:'):
@@ -332,13 +441,12 @@ def format_content(text, page_type='how-to'):
         # --- CTA (supports CTA: and CTA[key]:) ---
         elif line_stripped.startswith('CTA'):
             close_open_blocks()
-            # Parse CTA[key]: or plain CTA:
             cta_match = re.match(r'^CTA\[(\w+)\]:\s*(.*)', line_stripped)
             if cta_match:
                 affiliate_key = cta_match.group(1).lower()
                 cta_text = cta_match.group(2).strip()
             else:
-                affiliate_key = "make"  # default
+                affiliate_key = "make"
                 cta_text = line_stripped.replace('CTA:', '').strip()
             affiliate = AFFILIATE_LINKS.get(affiliate_key, AFFILIATE_LINKS["make"])
             html_parts.append(
@@ -351,7 +459,9 @@ def format_content(text, page_type='how-to'):
             close_open_blocks()
             section_title = line_stripped.replace('Workflow Steps:', '').strip()
             heading = section_title if section_title else 'Implementation Steps'
-            html_parts.append(f'<h2>{html.escape(heading)}</h2>')
+            anchor = re.sub(r'[^a-z0-9]+', '-', heading.lower()).strip('-')
+            h2_headings.append(heading)
+            html_parts.append(f'<h2 id="{html.escape(anchor)}">{html.escape(heading)}</h2>')
             html_parts.append('<ol class="steps">')
             in_list = True
 
@@ -401,7 +511,7 @@ def format_content(text, page_type='how-to'):
                 f'</div>'
             )
 
-                # --- Image ---
+        # --- Image ---
         elif line_stripped.startswith('Image:'):
             if not in_list:
                 close_open_blocks()
@@ -413,14 +523,7 @@ def format_content(text, page_type='how-to'):
             else:
                 img_path = image_data.strip()
                 alt_text = ''
-            # Use full alt_text for SEO — truncate at 125 chars if needed
-            if alt_text:
-                if len(alt_text) > 125:
-                    alt_attr = alt_text[:125].rsplit(' ', 1)[0]
-                else:
-                    alt_attr = alt_text
-            else:
-                alt_attr = ''
+            alt_attr = ''
             figure_html = (
                 f'<figure class="screenshot">'
                 f'<img src="{html.escape(img_path)}" alt="{html.escape(alt_attr)}" loading="lazy">'
@@ -471,7 +574,7 @@ def format_content(text, page_type='how-to'):
                 clean = clean[2:].strip()
             elif len(clean) > 3 and clean[0].isdigit() and clean[2] in '.):':
                 clean = clean[3:].strip()
-            howto_steps.append(clean)  # Sakupljaj korake za schema
+            howto_steps.append(clean)
             html_parts.append(f'<li>{html.escape(clean)}</li>')
 
         # --- Regularni paragraf ---
@@ -489,20 +592,33 @@ def format_content(text, page_type='how-to'):
     if page_type == 'how-to' and howto_steps:
         schema_parts.insert(0, None)  # Placeholder — title dolazi iz generate_site
 
-    return '\n'.join(html_parts), meta_description, schema_parts, howto_steps
+    return '\n'.join(html_parts), meta_description, schema_parts, howto_steps, h2_headings
 
 
 def generate_index(template_html, links):
     """Generiše index.html sa listom svih integracija."""
+    # Sortiraj po datumu (najnoviji prvi), pa po naslovu kao fallback
+    sorted_links = sorted(links, key=lambda x: x.get('date', ''), reverse=True)
+
     cards = ""
-    for l in links:
+    for l in sorted_links:
         description = l.get('description', '')
         if len(description) > 150:
             description = description[:150] + '...'
 
+        date_display = format_date_display(l.get('date', ''))
+        category_name = CATEGORIES.get(l.get('category', ''), '')
+        meta_parts = []
+        if date_display:
+            meta_parts.append(date_display)
+        if category_name:
+            meta_parts.append(category_name)
+        meta_line = ' · '.join(meta_parts)
+
         cards += f"""
         <div class="card">
             <a href="{l['slug']}.html">
+                {'<p class="card-meta">' + html.escape(meta_line) + '</p>' if meta_line else ''}
                 <h2>{html.escape(l['title'])}</h2>
                 <p>{html.escape(description)}</p>
                 <span class="read-more">Read guide →</span>
@@ -525,14 +641,17 @@ def generate_index(template_html, links):
         'Automate your business workflows and save hours every week.')
     page = page.replace('{{MAIN_CONTENT}}', index_content)
     page = page.replace('{{SCHEMA_MARKUP}}', '')
+    page = page.replace('{{SLUG}}', 'index')
+
+    # Index nema article meta, TOC, ili breadcrumb detalje
+    page = page.replace('{{ARTICLE_META}}', '')
+    page = page.replace('{{TOC}}', '')
+    page = page.replace('{{BREADCRUMB}}', '')
 
     page = page.replace(
-        '<p class="reading-time">⏱ 5 min read · Make.com Integration Guide</p>', '')
+        '<a href="/" class="back-link">← All Guides</a>', '')
     page = page.replace(
-        '<a href="/" class="back-link">← All Integrations</a>', '')
-    page = page.replace(
-        '<div class="breadcrumb">',
-        '<div class="breadcrumb" style="display:none">')
+        '<div class="breadcrumb">\n        \n    </div>', '')
 
     page = page.replace('{{AFFILIATE_LINK}}', MAKE_AFFILIATE_LINK)
     return page
@@ -556,41 +675,83 @@ def generate_site():
         slug = extract_field(lines, 'Slug:')
         title = extract_field(lines, 'Title:')
         page_type = extract_field(lines, 'Type:') or 'how-to'
+        date_published = extract_field(lines, 'Date:')
+        date_updated = extract_field(lines, 'Updated:')
+        category = extract_field(lines, 'Category:')
 
         if not slug or not title:
             print(f"⚠️  Preskačem entry bez slug/title")
             continue
 
-        main_body, meta_desc, schema_parts, howto_steps = format_content(entry, page_type)
+        main_body, meta_desc, schema_parts, howto_steps, h2_headings = format_content(entry, page_type)
 
-        # Generiši HowTo schema ako je how-to stranica
+        # --- Reading time ---
+        reading_time = estimate_reading_time(entry)
+
+        # --- TOC ---
+        toc_html = build_toc(h2_headings)
+
+        # --- Article meta (date + reading time + category) ---
+        meta_parts = []
+        if date_published:
+            display_date = format_date_display(date_published)
+            meta_parts.append(f'<time datetime="{html.escape(date_published)}">{html.escape(display_date)}</time>')
+            if date_updated and date_updated != date_published:
+                updated_display = format_date_display(date_updated)
+                meta_parts.append(f'<span>(Updated {html.escape(updated_display)})</span>')
+        meta_parts.append(f'<span class="separator">·</span>')
+        meta_parts.append(f'<span>⏱ {reading_time} min read</span>')
+        if category and category in CATEGORIES:
+            meta_parts.append(f'<span class="separator">·</span>')
+            meta_parts.append(f'<span class="category-badge">{html.escape(CATEGORIES[category])}</span>')
+        article_meta_html = f'<div class="article-meta">{" ".join(meta_parts)}</div>'
+
+        # --- Breadcrumb ---
+        breadcrumb_parts = [f'<a href="/">Home</a>']
+        # Kategorija u breadcrumb — link ka index za sad, later ka category stranici
+        if category and category in CATEGORIES:
+            breadcrumb_parts.append(f'<a href="/">{html.escape(CATEGORIES[category])}</a>')
+        breadcrumb_parts.append(f'{html.escape(title)}')
+        breadcrumb_html = ' › '.join(breadcrumb_parts)
+
+        # --- Schema markup ---
         all_schemas = []
+        # Article schema (uvek)
+        all_schemas.append(build_article_schema(title, meta_desc, date_published, date_updated))
+        # HowTo schema (samo za how-to)
         if page_type == 'how-to' and howto_steps:
             all_schemas.append(build_howto_schema(title, howto_steps))
-        # Dodaj ostale schema (FAQ itd.) — preskači None placeholder
+        # FAQ i ostali schema
         for s in schema_parts:
             if s is not None:
                 all_schemas.append(s)
 
         schema_html = '\n'.join(all_schemas)
 
+        # --- Popunjavanje template-a ---
         page = template_html.replace('{{TITLE}}', title)
+        page = page.replace('{{SLUG}}', slug)
         page = page.replace('{{META_DESCRIPTION}}', meta_desc)
         page = page.replace('{{MAIN_CONTENT}}', main_body)
         page = page.replace('{{SCHEMA_MARKUP}}', schema_html)
         page = page.replace('{{AFFILIATE_LINK}}', MAKE_AFFILIATE_LINK)
+        page = page.replace('{{ARTICLE_META}}', article_meta_html)
+        page = page.replace('{{TOC}}', toc_html)
+        page = page.replace('{{BREADCRUMB}}', breadcrumb_html)
 
         output_path = os.path.join(OUTPUT_DIR, f"{slug}.html")
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(page)
 
-        print(f"✅ Generisano [{page_type}]: {slug}.html")
-        
+        print(f"✅ Generisano [{page_type}]: {slug}.html — {reading_time} min read, date: {date_published or 'N/A'}, category: {category or 'N/A'}")
+
         links.append({
             'slug': slug,
             'title': title,
             'type': page_type,
-            'description': meta_desc
+            'description': meta_desc,
+            'date': date_published,
+            'category': category,
         })
 
     index_html = generate_index(template_html, links)

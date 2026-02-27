@@ -1,6 +1,8 @@
 Slug: zapier-too-expensive-make-com-alternative
 Title: Zapier Too Expensive? The Honest Alternative for Small Business (Make.com Review)
 Type: comparison
+Date: 2026-02-19
+Category: comparisons
 
 Meta: Make.com vs Zapier for small business — honest pricing comparison. See exact math on why Make.com saves $360-840/year on identical workflows.
 
@@ -64,6 +66,8 @@ Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendl
 Slug: facebook-instagram-leads-google-sheets-automation
 Title: How to Automatically Send Facebook and Instagram Leads to Google Sheets
 Type: how-to
+Date: 2026-02-21
+Category: lead-capture
 
 Meta: Connect Facebook Lead Ads to Google Sheets automatically using Make.com. Step-by-step tutorial — real-time lead capture, no CSV downloads.
 
@@ -137,6 +141,8 @@ Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|typef
 Slug: stripe-payment-failed-automation
 Title: Stripe Payment Failed? Automatically Alert Your Team and Email the Customer Instantly
 Type: how-to
+Date: 2026-02-22
+Category: payments
 
 Meta: Automate Stripe failed payment alerts with Make.com. Send instant customer emails and Slack notifications the moment a payment fails.
 
@@ -229,6 +235,8 @@ How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook
 Slug: calendly-booking-onboarding-checklist-automation
 Title: Calendly Automation: Create an Onboarding Checklist and Notify Your Team Instantly
 Type: how-to
+Date: 2026-02-23
+Category: onboarding
 
 Meta: Make.com Calendly automation — auto-create onboarding checklists in Google Sheets and notify your team in Slack on every new booking.
 
@@ -368,6 +376,8 @@ Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|typef
 Slug: make-com-vs-n8n-small-business
 Title: Make.com vs n8n: Which Automation Tool Is Right for Non-Technical Small Business?
 Type: comparison
+Date: 2026-02-24
+Category: comparisons
 
 Meta: Make.com vs n8n for non-technical small business — honest comparison of pricing, ease of use, and which tool gets you running faster.
 
@@ -505,6 +515,8 @@ Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-exp
 Slug: typeform-client-intake-google-sheets-automation
 Title: Typeform to Google Sheets and Slack: Automate Form Responses with Make.com
 Type: how-to
+Date: 2026-02-26
+Category: onboarding
 
 Meta: Connect Typeform to Google Sheets automatically using Make.com. Step-by-step tutorial — instant Slack notifications, no manual data entry.
 
