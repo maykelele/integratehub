@@ -4,6 +4,52 @@ import json
 import re
 import math
 
+INLINE_LINK_RE = re.compile(r'\[([^\]]+)]\(([^)]+)\)')
+
+
+def process_inline_links(text):
+    """
+    Converts inline markdown-style links [text](url) into HTML <a> tags with rel="noopener".
+    Non-link parts are HTML-escaped, while generated <a> tags are preserved.
+    """
+    result_parts = []
+    last_index = 0
+
+    for match in INLINE_LINK_RE.finditer(text):
+        start, end = match.span()
+        # Escape text before the link
+        if start > last_index:
+            result_parts.append(html.escape(text[last_index:start]))
+
+        link_text = match.group(1)
+        url = match.group(2)
+
+        escaped_url = html.escape(url, quote=True)
+        escaped_text = html.escape(link_text)
+
+        if url.startswith('http://') or url.startswith('https://'):
+            # External link: open in new tab
+            result_parts.append(
+                f'<a href="{escaped_url}" target="_blank" rel="noopener">{escaped_text}</a>'
+            )
+        else:
+            # Internal link: same tab
+            result_parts.append(
+                f'<a href="{escaped_url}" rel="noopener">{escaped_text}</a>'
+            )
+        last_index = end
+
+    # No matches — escape whole string
+    if last_index == 0:
+        return html.escape(text)
+
+    # Trailing text after last match
+    if last_index < len(text):
+        result_parts.append(html.escape(text[last_index:]))
+
+    return ''.join(result_parts)
+
+
 TEMPLATE_FILE = 'templates/template.html'
 CONTENT_FILE = 'content/input.txt'
 OUTPUT_DIR = 'public'
@@ -276,7 +322,10 @@ def build_toc(h2_headings):
     items = ""
     for i, heading in enumerate(h2_headings):
         anchor = re.sub(r'[^a-z0-9]+', '-', heading.lower()).strip('-')
-        items += f'<li><a href="#{html.escape(anchor)}">{html.escape(heading)}</a></li>\n'
+        items += (
+            f'<li><a href="#{html.escape(anchor)}" rel="noopener">'
+            f'{html.escape(heading)}</a></li>\n'
+        )
 
     return (
         f'<nav class="toc">\n'
@@ -356,7 +405,7 @@ def format_content(text, page_type='how-to'):
             html_parts.append(
                 f'<div class="faq-item">'
                 f'<h3 class="faq-q">{html.escape(q)}</h3>'
-                f'<p class="faq-a">{html.escape(a)}</p>'
+                f'<p class="faq-a">{process_inline_links(a)}</p>'
                 f'</div>'
             )
         html_parts.append('</div>')
@@ -367,7 +416,10 @@ def format_content(text, page_type='how-to'):
             return
         items_html = ''
         for text, href in links:
-            items_html += f'<li><a href="{html.escape(href)}">{html.escape(text)}</a></li>'
+            items_html += (
+                f'<li><a href="{html.escape(href)}" rel="noopener">'
+                f'{html.escape(text)}</a></li>'
+            )
         html_parts.append(
             f'<div class="related-guides">'
             f'<h3>Related Guides</h3>'
@@ -413,7 +465,7 @@ def format_content(text, page_type='how-to'):
                     meta_description = intro_text[:meta_limit].rsplit(' ', 1)[0] + "..."
                 else:
                     meta_description = intro_text
-            html_parts.append(f'<p class="intro">{html.escape(intro_text)}</p>')
+            html_parts.append(f'<p class="intro">{process_inline_links(intro_text)}</p>')
 
         # --- H2 ---
         elif line_stripped.startswith('H2:'):
@@ -434,7 +486,7 @@ def format_content(text, page_type='how-to'):
             tip_text = line_stripped.replace('Tech Tip:', '').strip()
             html_parts.append(
                 f'<div class="tech-tip">'
-                f'<strong>💡 Pro Tip:</strong> {html.escape(tip_text)}'
+                f'<strong>💡 Pro Tip:</strong> {process_inline_links(tip_text)}'
                 f'</div>'
             )
 
@@ -450,8 +502,8 @@ def format_content(text, page_type='how-to'):
                 cta_text = line_stripped.replace('CTA:', '').strip()
             affiliate = AFFILIATE_LINKS.get(affiliate_key, AFFILIATE_LINKS["make"])
             html_parts.append(
-                f'<p class="inline-cta">{html.escape(cta_text)} '
-                f'<a href="{affiliate["url"]}" rel="sponsored">{affiliate["cta_text"]}</a></p>'
+                f'<p class="inline-cta">{process_inline_links(cta_text)} '
+                f'<a href="{affiliate["url"]}" rel="sponsored noopener">{affiliate["cta_text"]}</a></p>'
             )
 
         # --- Workflow Steps ---
@@ -471,7 +523,7 @@ def format_content(text, page_type='how-to'):
             verdict_text = line_stripped.replace('Verdict:', '').strip()
             html_parts.append(
                 f'<div class="verdict">'
-                f'<strong>Bottom line:</strong> {html.escape(verdict_text)}'
+                f'<strong>Bottom line:</strong> {process_inline_links(verdict_text)}'
                 f'</div>'
             )
 
@@ -575,11 +627,11 @@ def format_content(text, page_type='how-to'):
             elif len(clean) > 3 and clean[0].isdigit() and clean[2] in '.):':
                 clean = clean[3:].strip()
             howto_steps.append(clean)
-            html_parts.append(f'<li>{html.escape(clean)}</li>')
+            html_parts.append(f'<li>{process_inline_links(clean)}</li>')
 
         # --- Regularni paragraf ---
         else:
-            html_parts.append(f'<p>{html.escape(line_stripped)}</p>')
+            html_parts.append(f'<p>{process_inline_links(line_stripped)}</p>')
 
     # Zatvaranje svih otvorenih blokova
     close_open_blocks()
@@ -617,7 +669,7 @@ def generate_index(template_html, links):
 
         cards += f"""
         <div class="card">
-            <a href="{l['slug']}.html">
+            <a href="{l['slug']}.html" rel="noopener">
                 {'<p class="card-meta">' + html.escape(meta_line) + '</p>' if meta_line else ''}
                 <h2>{html.escape(l['title'])}</h2>
                 <p>{html.escape(description)}</p>
@@ -707,10 +759,12 @@ def generate_site():
         article_meta_html = f'<div class="article-meta">{" ".join(meta_parts)}</div>'
 
         # --- Breadcrumb ---
-        breadcrumb_parts = [f'<a href="/">Home</a>']
+        breadcrumb_parts = [f'<a href="/" rel="noopener">Home</a>']
         # Kategorija u breadcrumb — link ka index za sad, later ka category stranici
         if category and category in CATEGORIES:
-            breadcrumb_parts.append(f'<a href="/">{html.escape(CATEGORIES[category])}</a>')
+            breadcrumb_parts.append(
+                f'<a href="/" rel="noopener">{html.escape(CATEGORIES[category])}</a>'
+            )
         breadcrumb_parts.append(f'{html.escape(title)}')
         breadcrumb_html = ' › '.join(breadcrumb_parts)
 

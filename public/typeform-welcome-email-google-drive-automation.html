@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://integratehub.io/typeform-welcome-email-google-drive-automation.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com | IntegrateHub.io</title>
+    <meta name="description" content="Automate Typeform client onboarding with Make.com — send a welcome email and create a Google Drive folder instantly on every form submission.">
+    <meta property="og:title" content="Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com">
+    <meta property="og:description" content="Automate Typeform client onboarding with Make.com — send a welcome email and create a Google Drive folder instantly on every form submission.">
+    <meta property="og:type" content="article">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com",
+  "description": "Automate Typeform client onboarding with Make.com — send a welcome email and create a Google Drive folder instantly on every form submission.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
+  "datePublished": "2026-02-28",
+  "dateModified": "2026-02-28"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Step 1",
+      "text": "Create a free Make.com account — no credit card required. Click \"Create a new scenario\" on your dashboard. You'll see an empty canvas with a large purple + button in the center."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Step 2",
+      "text": "Click the + button and search for \"Typeform\" — select the Watch Responses module marked INSTANT. This uses webhooks to trigger the moment someone submits your form, instead of polling on a schedule. T..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Step 3",
+      "text": "Click \"Add\" to create a new webhook. Name it (e.g. \"Client Onboarding Form\"), connect your Typeform account through OAuth, and select your onboarding form from the Form ID dropdown. Set Enabled to \"Ye..."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does this work with Typeform's free plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Typeform's free plan supports webhook integrations through Make.com. You can use this automation with any Typeform tier, though the free plan limits you to 10 responses per month."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Google Drive need a custom OAuth connection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Google Drive is classified as a restricted API by Google. For personal Gmail accounts, Make.com's default connection may not have access. Creating a custom OAuth client in Google Cloud Console is free and only needs to be done once — after that, the connection works permanently."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my client doesn't have a Google account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That's exactly why we set the share type to \"Anyone with the link\" instead of sharing by email address. This generates a public link that works for anyone, regardless of whether they have a Google account."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I customize the welcome email template?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Gmail module supports HTML in the body field, so you can format the email with headers, links, and styling. You can also add more mapped fields from Typeform — like project type or budget — to make the email more detailed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if the Google Drive folder creation fails?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If any module fails, Make.com stops the scenario and logs the error. The remaining modules — like sending the email — won't run. You can add error handling to retry failed steps or send yourself a notification when something breaks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a paid Make.com plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The free plan includes 1,000 operations per month. Each time this scenario runs, it uses 4 operations — one per module. That covers 250 client submissions per month, more than enough for most freelancers and small agencies."
+      }
+    }
+  ]
+}
+</script>
+    <style>
+        :root {
+            --primary: #2d3436;
+            --accent: #0868b4;
+            --text: #2d3436;
+            --light-bg: #f9f9f9;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        /* WIDER CONTAINER */
+        .container { max-width: 1060px; margin: 0 auto; padding: 40px 30px; }
+        .header-inner { max-width: 1060px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; gap: 20px; }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* BREADCRUMB */
+        .breadcrumb { font-size: 0.85rem; color: #595959; margin-bottom: 20px; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* ARTICLE META */
+        .article-meta { font-size: 0.85rem; color: #595959; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .article-meta time { color: #595959; }
+        .article-meta .separator { color: #ccc; }
+        .article-meta .category-badge {
+            background: #f0f4f8; color: var(--accent); padding: 2px 10px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none;
+        }
+
+        /* CONTENT */
+        .content { margin-top: 30px; }
+        h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
+        .intro {
+            font-size: 1.15rem; color: #444; margin-bottom: 25px;
+            line-height: 1.8; border-left: 4px solid var(--accent); padding-left: 20px;
+        }
+        h2 { font-size: 1.4rem; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: var(--primary); }
+        h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; color: var(--primary); }
+        p { margin: 0 0 18px 0; }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: #f7f9fc; border: 1px solid #e0e8f0; border-radius: 8px;
+            padding: 20px 24px; margin: 0 0 30px 0;
+        }
+        .toc-title {
+            font-size: 0.85rem; color: #595959; text-transform: uppercase;
+            letter-spacing: 0.06em; margin: 0 0 12px 0; font-weight: 700;
+        }
+        .toc ol { margin: 0; padding-left: 20px; }
+        .toc li { margin-bottom: 6px; font-size: 0.95rem; }
+        .toc a { color: var(--accent); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* TECH TIP */
+        .tech-tip {
+            background: #fff3cd; border-left: 4px solid #ffc107;
+            padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0;
+        }
+        .tech-tip strong { display: block; margin-bottom: 6px; }
+
+        /* VERDICT */
+        .verdict {
+            background: #f0f8ff; border-left: 4px solid var(--accent);
+            padding: 20px 24px; margin: 30px 0; border-radius: 0 8px 8px 0;
+            font-size: 1.05rem; line-height: 1.7;
+        }
+        .verdict strong { color: var(--accent); }
+
+        .inline-cta { background: #f0f8ff; padding: 16px 20px; border-radius: 8px; margin: 25px 0; font-size: 1.05rem; line-height: 1.7; }
+        .inline-cta a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+        /* COMPARISON TABLE */
+        .table-wrapper {
+            overflow-x: auto; margin: 20px 0 30px 0;
+            border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .comparison-table thead tr { background: var(--accent); color: white; }
+        .comparison-table th { padding: 12px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .comparison-table td { padding: 11px 16px; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table tbody tr:nth-child(even) { background: #f7f9fc; }
+        .comparison-table tbody tr:hover { background: #eef5ff; }
+
+        /* STEPS */
+        .steps { padding-left: 0; list-style: none; counter-reset: steps; }
+        .steps li { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+        .steps li::before {
+            content: counter(steps); background: var(--accent); color: white;
+            width: 28px; height: 28px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.85rem; flex-shrink: 0; margin-top: 2px;
+        }
+        .steps li.step-image { display: block; padding-left: 0; margin-bottom: 20px; counter-increment: none; }
+        .steps li.step-image::before { display: none; }
+
+        /* FAQ */
+        .faq-section { margin: 40px 0 20px 0; }
+        .faq-section h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid #eee; margin-bottom: 24px; }
+        .faq-item { margin-bottom: 24px; }
+        .faq-q { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin: 0 0 6px 0; }
+        .faq-a { color: #444; margin: 0; line-height: 1.7; }
+
+        /* RELATED GUIDES */
+        .related-guides {
+            background: #f7f9fc; border: 1px solid #e0e8f0;
+            border-radius: 8px; padding: 20px 24px; margin: 30px 0;
+        }
+        .related-guides h3 { font-size: 0.85rem; color: #595959; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
+        .related-guides ul { margin: 0; padding-left: 18px; }
+        .related-guides li { margin-bottom: 6px; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
+        .related-guides a:hover { text-decoration: underline; }
+
+        /* SCREENSHOT PLACEHOLDER */
+        .screenshot-placeholder {
+            background: #f0f4f8; border: 2px dashed #b0c4d8;
+            border-radius: 8px; margin: 24px 0; padding: 32px 20px; text-align: center;
+        }
+        .screenshot-placeholder-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .screenshot-icon { font-size: 2rem; }
+        .screenshot-label { color: #6b8cae; font-size: 0.9rem; font-style: italic; }
+
+        /* SCREENSHOT IMAGE */
+        .screenshot { margin: 24px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .screenshot img { width: 100%; display: block; }
+        .screenshot figcaption { background: #f7f9fc; color: #595959; font-size: 0.82rem; padding: 8px 14px; text-align: center; font-style: italic; }
+
+        /* CODE */
+        pre {
+            background: #2d3436; color: #55efc4; padding: 20px; border-radius: 8px;
+            overflow-x: auto; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; margin: 20px 0; line-height: 1.6;
+        }
+        code { font-family: 'Courier New', monospace; }
+
+        /* CTA */
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
+        .cta-card p { color: #555; margin-bottom: 20px; }
+        .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+        .btn:hover { background: #0773c5; }
+
+        /* FOOTER */
+        footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
+        footer a { color: var(--accent); text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            h1 { font-size: 1.7rem; }
+            .container { padding: 20px 16px; }
+            .comparison-table th, .comparison-table td { padding: 9px 10px; font-size: 0.88rem; }
+            .article-meta { gap: 4px; }
+        }
+
+        /* INDEX CARD GRID */
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+        .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
+        .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
+        .card .card-meta { font-size: 0.78rem; color: #999; margin-bottom: 8px; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
+        <a href="/" class="back-link">← All Guides</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="/" rel="noopener">Home</a> › <a href="/" rel="noopener">Client Onboarding</a> › Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com
+    </div>
+
+    <main class="content">
+        <h1>Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com</h1>
+        <div class="article-meta"><time datetime="2026-02-28">Feb 28, 2026</time> <span class="separator">·</span> <span>⏱ 10 min read</span> <span class="separator">·</span> <span class="category-badge">Client Onboarding</span></div>
+
+        <nav class="toc">
+<p class="toc-title">In This Guide</p>
+<ol><li><a href="#why-your-first-response-defines-the-client-relationship" rel="noopener">Why Your First Response Defines the Client Relationship</a></li>
+<li><a href="#how-the-typeform-to-welcome-email-automation-works" rel="noopener">How the Typeform to Welcome Email Automation Works</a></li>
+<li><a href="#why-not-just-use-typeform-s-native-integrations" rel="noopener">Why Not Just Use Typeform&#x27;s Native Integrations?</a></li>
+<li><a href="#don-t-use-gmail-alternatives-that-work-the-same-way" rel="noopener">Don&#x27;t Use Gmail? Alternatives That Work the Same Way</a></li>
+<li><a href="#how-to-build-the-typeform-client-onboarding-automation" rel="noopener">How to Build the Typeform Client Onboarding Automation</a></li>
+<li><a href="#who-should-use-this-automation" rel="noopener">Who Should Use This Automation</a></li>
+<li><a href="#apps-used-in-this-automation" rel="noopener">Apps Used in This Automation</a></li>
+<li><a href="#frequently-asked-questions" rel="noopener">Frequently Asked Questions</a></li>
+</ol>
+</nav>
+
+        <p class="intro">A potential client fills out your intake form. Then they wait — no welcome email, no shared folder, no sign that anyone is actually working on their project. Meanwhile, you&#x27;re copying their details by hand and creating folders manually. This Make.com tutorial automates the entire first impression: every Typeform submission instantly creates a named Google Drive folder, generates a shareable link, and sends the client a personalized welcome email with direct access to their project folder. No code, no manual steps, runs forever once set up.</p>
+<h2 id="why-your-first-response-defines-the-client-relationship">Why Your First Response Defines the Client Relationship</h2>
+<p>The gap between a client submitting an inquiry and receiving a professional response is where trust is built or lost. Most freelancers and agencies take hours — sometimes days — to manually create a project folder, set up sharing, and send a welcome email. By then the client has already formed an opinion: this team is slow. A welcome email that arrives within seconds of form submission, complete with a shared project folder, signals organization and professionalism. It tells the client their project matters. And it costs you zero effort after the initial 25-minute setup.</p>
+<h2 id="how-the-typeform-to-welcome-email-automation-works">How the Typeform to Welcome Email Automation Works</h2>
+<p>When someone submits your Typeform client onboarding form, Make.com catches the response instantly and runs three actions: it creates a named Google Drive folder inside your &quot;Client Projects&quot; directory, generates a shareable link so the client can access it without needing a Google account, and sends a personalized welcome email with the folder link — all within seconds of the form submission.</p>
+<p class="inline-cta">You can build this entire automation on Make.com&#x27;s free plan in about 25 minutes — no credit card required. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
+<p class="inline-cta">Need a client onboarding form? Build one in minutes with Typeform&#x27;s drag-and-drop form builder. <a href="https://typeform.cello.so/vGdCoE97A4Z" rel="sponsored noopener">Try Typeform free →</a></p>
+<h2>What Happens Automatically on Every Submission</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Action</th><th>Detail</th><th>Example</th></tr></thead><tbody><tr><td>Google Drive folder created</td><td>Named with company + timestamp</td><td>Olive Tree — 2026-02-28</td></tr><tr><td>Shareable link generated</td><td>Anyone with the link can access</td><td>drive.google.com/drive/folders/...</td></tr><tr><td>Welcome email sent</td><td>Personalized with name and folder link</td><td>&quot;Hi John, here&#x27;s your project folder&quot;</td></tr></tbody></table></div>
+<h2 id="why-not-just-use-typeform-s-native-integrations">Why Not Just Use Typeform&#x27;s Native Integrations?</h2>
+<p>Typeform has built-in integrations with Google Drive and email tools. They work for basic setups — but they can&#x27;t do what this workflow does. Typeform&#x27;s native Google Drive integration can upload files, but it can&#x27;t create named folders dynamically based on form responses. There&#x27;s no way to generate a shareable link and include it in an automated email. And if you want the folder name to include the company name and submission date, native integrations don&#x27;t support that kind of dynamic logic. Make.com connects these steps into a single workflow where the output of one action — like the folder ID from Google Drive — feeds directly into the next action — like the shareable link in your welcome email.</p>
+<h2 id="don-t-use-gmail-alternatives-that-work-the-same-way">Don&#x27;t Use Gmail? Alternatives That Work the Same Way</h2>
+<p>This guide uses Gmail for the welcome email, but Make.com supports any email tool. If your team uses a different platform, swap the Gmail module for one of these — the rest of the workflow stays identical. Outlook / Microsoft 365: select the Microsoft 365 Email module and configure it the same way. SMTP: connect any email provider that supports SMTP for full control over sending. SendGrid or Mailgun: for transactional email at scale with better deliverability tracking.</p>
+<h2 id="how-to-build-the-typeform-client-onboarding-automation">How to Build the Typeform Client Onboarding Automation</h2>
+<ol class="steps">
+<li>Create a free Make.com account — no credit card required. Click &quot;Create a new scenario&quot; on your dashboard. You&#x27;ll see an empty canvas with a large purple + button in the center.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-01.png" alt="" loading="lazy"><figcaption>Make.com scenario canvas — empty canvas ready to build a new automation</figcaption></figure></li>
+<li>Click the + button and search for &quot;Typeform&quot; — select the Watch Responses module marked INSTANT. This uses webhooks to trigger the moment someone submits your form, instead of polling on a schedule. The INSTANT version is faster and uses fewer Make.com operations.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-02.png" alt="" loading="lazy"><figcaption>Typeform Watch Responses INSTANT module — webhook configuration dialog</figcaption></figure></li>
+<li>Click &quot;Add&quot; to create a new webhook. Name it (e.g. &quot;Client Onboarding Form&quot;), connect your Typeform account through OAuth, and select your onboarding form from the Form ID dropdown. Set Enabled to &quot;Yes&quot; so the webhook starts listening immediately.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-03.png" alt="" loading="lazy"><figcaption>Typeform webhook configured — connection established, Client Onboarding Form selected, webhook enabled</figcaption></figure></li>
+</ol>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Always choose the INSTANT (webhook) version of the Typeform module over the standard polling version. Webhooks trigger the moment someone submits — polling checks every 15 minutes on the free plan. Your client gets a welcome email in seconds instead of waiting up to 15 minutes.</div>
+<p>4. Add a Google Drive module — click the + button to the right of the Typeform module, search for &quot;Google Drive&quot; and select &quot;Create a Folder.&quot; Click &quot;Create a connection&quot; to link your Google account.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-04.png" alt="" loading="lazy"><figcaption>Google Drive Create a Folder module — click Create a connection to link your Google account</figcaption></figure>
+<p>5. Google Drive is a restricted Google API, which means the standard one-click connection may not work for personal Gmail accounts. If you see an error, you&#x27;ll need to create a custom OAuth client — a free, one-time setup in Google Cloud Console that takes about 10 minutes. Toggle &quot;Advanced settings&quot; on and enter your Client ID and Client Secret from Google Cloud.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-05.png" alt="" loading="lazy"><figcaption>Google Drive connection dialog — Advanced settings with custom OAuth credentials for restricted API access</figcaption></figure>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Google Sheets connects with one click in Make.com, but Google Drive requires a custom OAuth client for personal Gmail accounts. This is a free, one-time setup that takes about 10 minutes. Follow <a href="https://help.make.com/connect-to-google-services-using-a-custom-oauth-client" target="_blank" rel="noopener">Make.com&#x27;s official guide</a> to configure it. Make sure your redirect URI matches exactly — even a trailing slash difference will cause an error.</div>
+<p>6. Configure the Create a Folder module — set New Drive Location to &quot;My Drive&quot;, select your &quot;Client Projects&quot; folder as the parent location, and map the folder name dynamically. Use the Company Name field from Typeform combined with a dash and the Submitted At timestamp. This creates folders like &quot;Olive Tree — 2026-02-28&quot; that sort chronologically and are easy to identify.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-06.png" alt="" loading="lazy"><figcaption>Google Drive Create a Folder — folder name mapped from Typeform Company Name and submission timestamp</figcaption></figure>
+<p>7. Add a second Google Drive module — click the + button after Create a Folder, search for &quot;Google Drive&quot; again and select &quot;Get a Share Link.&quot; This module generates a shareable URL for the folder you just created. Set Choose a Drive to &quot;My Drive&quot;, Select to &quot;Folder&quot;, and map the Folder ID from the previous Create a Folder module. Set Role to &quot;Writer&quot; and Type to &quot;Anyone&quot; — this ensures the client can access the folder without needing a Google account.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-07.png" alt="" loading="lazy"><figcaption>Google Drive Get a Share Link — Folder ID mapped, Role set to Writer, Type set to Anyone</figcaption></figure>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Set the share type to &quot;Anyone&quot; instead of sharing by email address. Not all clients have Google accounts — sharing by email will fail for non-Google users and break your automation. &quot;Anyone with the link&quot; ensures every client can access their folder regardless of what email provider they use.</div>
+<p>8. Add a Gmail module — click the + button after Get a Share Link, search for &quot;Gmail&quot; and select &quot;Send an Email.&quot; Connect your Google account when prompted. Map the To field to the Email Address from your Typeform response. Set the Subject to something clear like &quot;Welcome to IntegrateHub — Next Steps.&quot;</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-09.png" alt="" loading="lazy"><figcaption>Gmail module — To field mapped to Typeform email, Subject line configured</figcaption></figure>
+<p>9. Set Body type to &quot;Collection of contents&quot; and compose your welcome email. Map the client&#x27;s Full Name from Typeform and the Share Link from the Get a Share Link module. The result is a personalized email that includes a direct link to the client&#x27;s project folder — sent automatically within seconds of form submission.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-10.png" alt="" loading="lazy"><figcaption>Gmail body with mapped fields — personalized greeting with client name and Google Drive folder link</figcaption></figure>
+<p>10. Save the scenario — your canvas should now show four connected modules: Typeform Watch Responses → Google Drive Create a Folder → Google Drive Get a Share Link → Gmail Send an Email. Click &quot;Run once&quot; to activate the webhook listener.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-11.png" alt="" loading="lazy"><figcaption>Complete Make.com scenario — four modules connected: Typeform, Google Drive Create Folder, Get Share Link, and Gmail</figcaption></figure>
+<p>11. Test the workflow — open your Typeform link in an incognito browser window and submit a test response with realistic data.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-12.png" alt="" loading="lazy"><figcaption>Typeform live form — test submission with sample company name</figcaption></figure>
+<p>12. Check your Google Drive — the folder appears inside &quot;Client Projects&quot; with the company name and timestamp, exactly as configured. Each new submission creates a separate, organized folder automatically.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-13.png" alt="" loading="lazy"><figcaption>Google Drive Client Projects folder — two automatically created client folders with company names and dates</figcaption></figure>
+<p>13. Check your sent email — the welcome message was sent automatically with the client&#x27;s name and a direct link to their Google Drive folder. The client receives this within seconds of submitting the form.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-welcome-14.png" alt="" loading="lazy"><figcaption>Gmail sent folder — welcome email with personalized greeting and Google Drive folder link delivered automatically</figcaption></figure>
+<p>14. Toggle the scenario ON — flip the switch at the bottom of the canvas to activate the automation. It now runs automatically for every new Typeform submission, creating a folder, generating a share link, and sending the welcome email without any manual work.</p>
+<h2 id="who-should-use-this-automation">Who Should Use This Automation</h2>
+<p>This workflow is built for anyone who takes on clients through an intake form and wants to make a strong first impression automatically. Freelancers who onboard new clients and need a shared workspace for deliverables. Agencies that create project folders for every new client and want to eliminate the manual setup. Consultants who send welcome packets and need a professional, immediate response to inquiries. Small business owners who receive service requests and want clients to feel taken care of from the first interaction. If you onboard more than 3 clients per month, this automation pays for itself in time saved on the first day.</p>
+<h2 id="apps-used-in-this-automation">Apps Used in This Automation</h2>
+<p>This workflow connects three tools, all of which have free tiers. Typeform captures the client onboarding data through a conversational form experience — its free plan supports up to 10 responses per month. Make.com orchestrates the entire workflow, connecting Typeform to Google Drive and Gmail — the free plan includes 1,000 operations per month. Google Drive stores the project folders and generates shareable links — 15 GB of free storage is more than enough for getting started. Gmail sends the personalized welcome email — it works with any standard Gmail account.</p>
+<div class="verdict"><strong>Bottom line:</strong> If you&#x27;re onboarding clients through Typeform and still creating folders and sending welcome emails by hand, you&#x27;re wasting time on every single client — and making a weaker first impression than you should. This automation handles the entire first response: a named Google Drive folder, a shareable link, and a personalized welcome email — all sent within seconds of form submission. It takes about 25 minutes to build, costs nothing on Make.com&#x27;s free plan (each run uses 4 operations — well within the 1,000 monthly limit), and runs automatically from that point forward. Start building this automation now on Make.com&#x27;s free plan — your next client&#x27;s first impression depends on it.</div>
+<div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<div class="faq-item"><h3 class="faq-q">Does this work with Typeform&#x27;s free plan?</h3><p class="faq-a">Yes. Typeform&#x27;s free plan supports webhook integrations through Make.com. You can use this automation with any Typeform tier, though the free plan limits you to 10 responses per month.</p></div>
+<div class="faq-item"><h3 class="faq-q">Why does Google Drive need a custom OAuth connection?</h3><p class="faq-a">Google Drive is classified as a restricted API by Google. For personal Gmail accounts, Make.com&#x27;s default connection may not have access. Creating a custom OAuth client in Google Cloud Console is free and only needs to be done once — after that, the connection works permanently.</p></div>
+<div class="faq-item"><h3 class="faq-q">What if my client doesn&#x27;t have a Google account?</h3><p class="faq-a">That&#x27;s exactly why we set the share type to &quot;Anyone with the link&quot; instead of sharing by email address. This generates a public link that works for anyone, regardless of whether they have a Google account.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I customize the welcome email template?</h3><p class="faq-a">Yes. The Gmail module supports HTML in the body field, so you can format the email with headers, links, and styling. You can also add more mapped fields from Typeform — like project type or budget — to make the email more detailed.</p></div>
+<div class="faq-item"><h3 class="faq-q">What happens if the Google Drive folder creation fails?</h3><p class="faq-a">If any module fails, Make.com stops the scenario and logs the error. The remaining modules — like sending the email — won&#x27;t run. You can add error handling to retry failed steps or send yourself a notification when something breaks.</p></div>
+<div class="faq-item"><h3 class="faq-q">Do I need a paid Make.com plan?</h3><p class="faq-a">The free plan includes 1,000 operations per month. Each time this scenario runs, it uses 4 operations — one per module. That covers 250 client submissions per month, more than enough for most freelancers and small agencies.</p></div>
+</div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="typeform-client-intake-google-sheets-automation.html" rel="noopener">Typeform to Google Sheets and Slack: Automate Form Responses with Make.com</a></li><li><a href="calendly-booking-onboarding-checklist-automation.html" rel="noopener">Calendly Automation: Create an Onboarding Checklist and Notify Your Team</a></li><li><a href="zapier-too-expensive-make-com-alternative.html" rel="noopener">Zapier Too Expensive? Switch to Make.com and Save Up to $840/year</a></li><li><a href="stripe-payment-failed-automation.html" rel="noopener">Stripe Payment Failed? Automatically Alert Your Team and Email the Customer</a></li></ul></div>
+    </main>
+
+    <div class="cta-card" style="padding:0; background:none; border:none;">
+        <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored">
+            <img 
+                src="assets/banners/AD-728x90 – 2.png" 
+                alt="Set up your own workflows for free with Make.com"
+                style="width:100%; border-radius:12px; display:block; cursor:pointer;"
+            >
+        </a>
+    </div>
+
+    <footer>
+        <span>© 2026 IntegrateHub.io</span>
+        <span>
+            <a href="about.html">About</a>
+            &nbsp;·&nbsp;
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+            &nbsp;·&nbsp;
+            <a href="privacy-policy.html">Privacy Policy</a>
+            &nbsp;·&nbsp;
+            <a href="/">← All Guides</a>
+        </span>
+    </footer>
+
+</div>
+
+</body>
+</html>
