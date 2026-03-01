@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://integratehub.io/multi-source-lead-tracking-google-sheets-automation.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com | IntegrateHub.io</title>
+    <meta name="description" content="Track leads from Facebook, Typeform, and website forms in one Google Sheet using Make.com. Upsert logic prevents duplicates automatically.">
+    <meta property="og:title" content="Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com">
+    <meta property="og:description" content="Track leads from Facebook, Typeform, and website forms in one Google Sheet using Make.com. Upsert logic prevents duplicates automatically.">
+    <meta property="og:type" content="article">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com",
+  "description": "Track leads from Facebook, Typeform, and website forms in one Google Sheet using Make.com. Upsert logic prevents duplicates automatically.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
+  "datePublished": "2026-03-02",
+  "dateModified": "2026-03-02"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Step 1",
+      "text": "We start with the website webhook scenario because it's the easiest to test — you send data directly to a URL without needing a Facebook ad or Typeform submission."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Step 2",
+      "text": "Create a free Make.com account — no credit card required. Click \"Create a new scenario\" on your dashboard."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Step 3",
+      "text": "Click the + button on the canvas and search for \"Webhooks\" — select \"Custom webhook.\" Click \"Add\" to create a new webhook, name it (e.g. \"Website Contact Form\"), and click Save. Make.com generates a u..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Step 4",
+      "text": "Click \"Run once\" to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?..."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What happens if the same person submits through all three channels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They appear as a single row in your Google Sheet. The Source column shows all three channels (e.g. \"Facebook; Typeform; Website\"), First Seen keeps the original date, and Last Updated reflects the most recent submission."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why three separate scenarios instead of one?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Make.com doesn't support multiple triggers in a single scenario. Each lead source needs its own trigger module — but all three scenarios write to the same Google Sheet using the same upsert logic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add more lead sources later?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Clone any of the three scenarios, swap the trigger module for your new source (e.g. LinkedIn Lead Gen Forms, Calendly, or another form tool), and adjust the field mapping. The Search Rows → Router → Update/Add pattern stays the same."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if two submissions arrive at the exact same second for the same email?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At small business volume, this is extremely unlikely. If it happens, one scenario may create a duplicate row because the second scenario's Search Rows ran before the first finished writing. For high-volume use cases (100+ leads per day), consider using Make.com data stores instead of Google Sheets for true atomic upsert operations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a paid Make.com plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The free plan includes 1,000 operations per month. Each scenario uses 3-4 operations per lead — that's roughly 250-330 leads per month across all three sources combined. For most small businesses, the free plan handles it comfortably."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why use a Router instead of just trying to update and catching the error?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Router with a fallback branch is more explicit and easier to debug. You can see exactly which path each lead took in the execution log. Error-handler based upsert works too, but it's harder to explain and troubleshoot — especially for non-technical users."
+      }
+    }
+  ]
+}
+</script>
+    <style>
+        :root {
+            --primary: #2d3436;
+            --accent: #0868b4;
+            --text: #2d3436;
+            --light-bg: #f9f9f9;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        /* WIDER CONTAINER */
+        .container { max-width: 1060px; margin: 0 auto; padding: 40px 30px; }
+        .header-inner { max-width: 1060px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; gap: 20px; }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* BREADCRUMB */
+        .breadcrumb { font-size: 0.85rem; color: #595959; margin-bottom: 20px; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* ARTICLE META */
+        .article-meta { font-size: 0.85rem; color: #595959; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .article-meta time { color: #595959; }
+        .article-meta .separator { color: #ccc; }
+        .article-meta .category-badge {
+            background: #f0f4f8; color: var(--accent); padding: 2px 10px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none;
+        }
+
+        /* CONTENT */
+        .content { margin-top: 30px; }
+        h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
+        .intro {
+            font-size: 1.15rem; color: #444; margin-bottom: 25px;
+            line-height: 1.8; border-left: 4px solid var(--accent); padding-left: 20px;
+        }
+        h2 { font-size: 1.4rem; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: var(--primary); }
+        h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; color: var(--primary); }
+        p { margin: 0 0 18px 0; }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: #f7f9fc; border: 1px solid #e0e8f0; border-radius: 8px;
+            padding: 20px 24px; margin: 0 0 30px 0;
+        }
+        .toc-title {
+            font-size: 0.85rem; color: #595959; text-transform: uppercase;
+            letter-spacing: 0.06em; margin: 0 0 12px 0; font-weight: 700;
+        }
+        .toc ol { margin: 0; padding-left: 20px; }
+        .toc li { margin-bottom: 6px; font-size: 0.95rem; }
+        .toc a { color: var(--accent); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* TECH TIP */
+        .tech-tip {
+            background: #fff3cd; border-left: 4px solid #ffc107;
+            padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0;
+        }
+        .tech-tip strong { display: block; margin-bottom: 6px; }
+
+        /* VERDICT */
+        .verdict {
+            background: #f0f8ff; border-left: 4px solid var(--accent);
+            padding: 20px 24px; margin: 30px 0; border-radius: 0 8px 8px 0;
+            font-size: 1.05rem; line-height: 1.7;
+        }
+        .verdict strong { color: var(--accent); }
+
+        .inline-cta { background: #f0f8ff; padding: 16px 20px; border-radius: 8px; margin: 25px 0; font-size: 1.05rem; line-height: 1.7; }
+        .inline-cta a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+        /* COMPARISON TABLE */
+        .table-wrapper {
+            overflow-x: auto; margin: 20px 0 30px 0;
+            border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .comparison-table thead tr { background: var(--accent); color: white; }
+        .comparison-table th { padding: 12px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .comparison-table td { padding: 11px 16px; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table tbody tr:nth-child(even) { background: #f7f9fc; }
+        .comparison-table tbody tr:hover { background: #eef5ff; }
+
+        /* STEPS */
+        .steps { padding-left: 0; list-style: none; counter-reset: steps; }
+        .steps li { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+        .steps li::before {
+            content: counter(steps); background: var(--accent); color: white;
+            width: 28px; height: 28px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.85rem; flex-shrink: 0; margin-top: 2px;
+        }
+        .steps li.step-image { display: block; padding-left: 0; margin-bottom: 20px; counter-increment: none; }
+        .steps li.step-image::before { display: none; }
+
+        /* FAQ */
+        .faq-section { margin: 40px 0 20px 0; }
+        .faq-section h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid #eee; margin-bottom: 24px; }
+        .faq-item { margin-bottom: 24px; }
+        .faq-q { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin: 0 0 6px 0; }
+        .faq-a { color: #444; margin: 0; line-height: 1.7; }
+
+        /* RELATED GUIDES */
+        .related-guides {
+            background: #f7f9fc; border: 1px solid #e0e8f0;
+            border-radius: 8px; padding: 20px 24px; margin: 30px 0;
+        }
+        .related-guides h3 { font-size: 0.85rem; color: #595959; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
+        .related-guides ul { margin: 0; padding-left: 18px; }
+        .related-guides li { margin-bottom: 6px; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
+        .related-guides a:hover { text-decoration: underline; }
+
+        /* SCREENSHOT PLACEHOLDER */
+        .screenshot-placeholder {
+            background: #f0f4f8; border: 2px dashed #b0c4d8;
+            border-radius: 8px; margin: 24px 0; padding: 32px 20px; text-align: center;
+        }
+        .screenshot-placeholder-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .screenshot-icon { font-size: 2rem; }
+        .screenshot-label { color: #6b8cae; font-size: 0.9rem; font-style: italic; }
+
+        /* SCREENSHOT IMAGE */
+        .screenshot { margin: 24px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .screenshot img { width: 100%; display: block; }
+        .screenshot figcaption { background: #f7f9fc; color: #595959; font-size: 0.82rem; padding: 8px 14px; text-align: center; font-style: italic; }
+
+        /* CODE */
+        pre {
+            background: #2d3436; color: #55efc4; padding: 20px; border-radius: 8px;
+            overflow-x: auto; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; margin: 20px 0; line-height: 1.6;
+        }
+        code { font-family: 'Courier New', monospace; }
+
+        /* CTA */
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
+        .cta-card p { color: #555; margin-bottom: 20px; }
+        .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+        .btn:hover { background: #0773c5; }
+
+        /* FOOTER */
+        footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
+        footer a { color: var(--accent); text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            h1 { font-size: 1.7rem; }
+            .container { padding: 20px 16px; }
+            .comparison-table th, .comparison-table td { padding: 9px 10px; font-size: 0.88rem; }
+            .article-meta { gap: 4px; }
+        }
+
+        /* INDEX CARD GRID */
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+        .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
+        .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
+        .card .card-meta { font-size: 0.78rem; color: #999; margin-bottom: 8px; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
+        <a href="/" class="back-link">← All Guides</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="/" rel="noopener">Home</a> › <a href="/" rel="noopener">Lead Capture</a> › Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com
+    </div>
+
+    <main class="content">
+        <h1>Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com</h1>
+        <div class="article-meta"><time datetime="2026-03-02">Mar 02, 2026</time> <span class="separator">·</span> <span>⏱ 15 min read</span> <span class="separator">·</span> <span class="category-badge">Lead Capture</span></div>
+
+        <nav class="toc">
+<p class="toc-title">In This Guide</p>
+<ol><li><a href="#why-most-small-businesses-lose-leads-across-multiple-channels" rel="noopener">Why Most Small Businesses Lose Leads Across Multiple Channels</a></li>
+<li><a href="#what-upsert-means-and-why-it-matters-for-lead-tracking" rel="noopener">What &quot;Upsert&quot; Means and Why It Matters for Lead Tracking</a></li>
+<li><a href="#how-the-multi-source-lead-tracking-automation-works" rel="noopener">How the Multi-Source Lead Tracking Automation Works</a></li>
+<li><a href="#don-t-use-slack-alternatives-that-work-the-same-way" rel="noopener">Don&#x27;t Use Slack? Alternatives That Work the Same Way</a></li>
+<li><a href="#how-to-build-the-website-webhook-scenario-scenario-1" rel="noopener">How to Build the Website Webhook Scenario (Scenario 1)</a></li>
+<li><a href="#how-to-add-typeform-as-a-second-source-scenario-2" rel="noopener">How to Add Typeform as a Second Source (Scenario 2)</a></li>
+<li><a href="#how-to-add-facebook-lead-ads-as-a-third-source-scenario-3" rel="noopener">How to Add Facebook Lead Ads as a Third Source (Scenario 3)</a></li>
+<li><a href="#testing-the-complete-multi-source-setup" rel="noopener">Testing the Complete Multi-Source Setup</a></li>
+<li><a href="#who-should-use-this-automation" rel="noopener">Who Should Use This Automation</a></li>
+<li><a href="#apps-used-in-this-automation" rel="noopener">Apps Used in This Automation</a></li>
+<li><a href="#frequently-asked-questions" rel="noopener">Frequently Asked Questions</a></li>
+</ol>
+</nav>
+
+        <p class="intro">Your leads come from everywhere — Facebook ads, Typeform intake forms, website contact pages — and they all end up in different places. Some sit in Meta&#x27;s lead center, some in Typeform&#x27;s dashboard, some in email. You check three tools, copy data into spreadsheets, and hope you haven&#x27;t missed anyone. This Make.com tutorial shows you how to track leads from multiple sources in one Google Sheet automatically, using upsert logic that prevents duplicate entries when the same person submits through more than one channel.</p>
+<h2 id="why-most-small-businesses-lose-leads-across-multiple-channels">Why Most Small Businesses Lose Leads Across Multiple Channels</h2>
+<p>Most businesses run more than one lead capture channel. A Facebook ad campaign collects names and emails. A Typeform intake form qualifies prospects on the website. A simple contact form catches general inquiries. The problem is not capturing the lead — it&#x27;s knowing where every lead lives and which channel they came from. When the data sits in three different dashboards, follow-up is slow, leads slip through the cracks, and no one can answer the question: &quot;How many new leads came in this week?&quot; A single Google Sheet that auto-populates from every source solves this. And upsert logic — update if the lead exists, insert if they&#x27;re new — ensures one person never appears twice, even if they submit through multiple channels.</p>
+<h2 id="what-upsert-means-and-why-it-matters-for-lead-tracking">What &quot;Upsert&quot; Means and Why It Matters for Lead Tracking</h2>
+<p>Upsert is a database concept: update a record if it already exists, or insert a new one if it doesn&#x27;t. Without upsert logic, the same person who fills out your Facebook ad form and later submits your Typeform intake will appear as two separate rows in your spreadsheet. You end up with duplicate data, conflicting follow-up, and a lead tracker you can&#x27;t trust. With upsert, Make.com checks your Google Sheet for an existing row with the same email address before adding anything. If the email already exists, it updates the row — changing the Source column to show both channels and refreshing the Last Updated date. If the email is new, it adds a fresh row. The result: one clean row per person, no matter how many times they submit across different channels.</p>
+<h2>How Upsert Logic Works</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Scenario</th><th>What Make.com Does</th><th>Result in Google Sheet</th></tr></thead><tbody><tr><td>New lead submits Facebook ad</td><td>Email not found → Insert new row</td><td>New row: Source = &quot;Facebook&quot;</td></tr><tr><td>Same lead submits Typeform later</td><td>Email found → Update existing row</td><td>Same row: Source = &quot;Facebook; Typeform&quot;, Last Updated refreshed</td></tr><tr><td>Different lead submits website form</td><td>Email not found → Insert new row</td><td>New row: Source = &quot;Website&quot;</td></tr><tr><td>Same lead submits website form again</td><td>Email found, same source → Update row</td><td>Same row: Source unchanged, Last Updated refreshed</td></tr></tbody></table></div>
+<p class="inline-cta">Once you build this upsert pattern in Make.com, you can reuse it for any lead source — Facebook, Typeform, website forms, or any future integration. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
+<h2 id="how-the-multi-source-lead-tracking-automation-works">How the Multi-Source Lead Tracking Automation Works</h2>
+<p>This automation uses three separate Make.com scenarios — one per lead source — that all write to the same Google Sheet. Each scenario follows the same pattern: catch the lead, search the sheet by email, and then either update the existing row or add a new one. The scenarios are: Website form leads (via Custom Webhook), Typeform intake form leads (via Typeform INSTANT trigger), and Facebook Lead Ad leads (via Facebook Lead Ads module). All three share the same upsert logic: search by email, route to update or insert, and track the source. Make.com requires separate scenarios because each trigger module runs independently, but the upsert logic stays identical across all sources.</p>
+<p class="inline-cta">You can build all three scenarios on Make.com&#x27;s free plan — no credit card required. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
+<h2>What Gets Tracked in the Lead Tracker Master Sheet</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Column</th><th>Field</th><th>Example Value</th></tr></thead><tbody><tr><td>A: Email</td><td>Email address (lookup key for upsert)</td><td>sarah@brightwave.co</td></tr><tr><td>B: Name</td><td>Full name</td><td>Sarah Mitchell</td></tr><tr><td>C: Phone</td><td>Phone number</td><td>+1 555 0142</td></tr><tr><td>D: Source</td><td>Which channel(s) the lead came from</td><td>Facebook; Typeform</td></tr><tr><td>E: First Seen</td><td>Date the lead first appeared</td><td>2026-03-01</td></tr><tr><td>F: Last Updated</td><td>Date of the most recent submission</td><td>2026-03-03</td></tr><tr><td>G: Notes</td><td>Project details, ad name, or form comments</td><td>Summer Promo 2026 campaign</td></tr></tbody></table></div>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Email is the lookup key for upsert — it&#x27;s the one field that&#x27;s consistent across Facebook Lead Ads, Typeform, and website forms. Every scenario searches by email to determine whether to update or insert.</div>
+<h2 id="don-t-use-slack-alternatives-that-work-the-same-way">Don&#x27;t Use Slack? Alternatives That Work the Same Way</h2>
+<p>This guide focuses on the core lead tracking workflow without a notification step — but you can add one easily. Add a Slack module on the &quot;New Lead&quot; branch of the Router to notify your team only when a brand new lead enters the system, not on every update. If your team doesn&#x27;t use Slack, swap it for Gmail, Microsoft Teams, or Google Chat — the rest of the workflow stays identical.</p>
+<h2 id="how-to-build-the-website-webhook-scenario-scenario-1">How to Build the Website Webhook Scenario (Scenario 1)</h2>
+<ol class="steps">
+<li>We start with the website webhook scenario because it&#x27;s the easiest to test — you send data directly to a URL without needing a Facebook ad or Typeform submission.</li>
+<li>Create a free Make.com account — no credit card required. Click &quot;Create a new scenario&quot; on your dashboard.</li>
+<li>Click the + button on the canvas and search for &quot;Webhooks&quot; — select &quot;Custom webhook.&quot; Click &quot;Add&quot; to create a new webhook, name it (e.g. &quot;Website Contact Form&quot;), and click Save. Make.com generates a unique URL — this is the endpoint your website form will send data to.</li>
+<li>Click &quot;Run once&quot; to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?name=Maria%20Santos&amp;email=maria@thegreenleaf.co&amp;phone=+447700900123&amp;source=Website&amp;notes=Inquiry%20via%20contact%20page — the browser will show &quot;Accepted&quot; and Make.com will capture the five fields automatically.</li>
+</ol>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> For testing, you don&#x27;t need a real website form. Simply paste the webhook URL with parameters into your browser — Make.com receives it identically to a form POST request. When you later connect a real contact form, just set the form action to this same webhook URL.</div>
+<p>4. Add a Google Sheets module — click the + button after the webhook, search for &quot;Google Sheets&quot; and select &quot;Search Rows.&quot; Connect your Google account, select your &quot;Lead Tracker Master&quot; spreadsheet, and set Table contains headers to &quot;Yes.&quot;</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-01.png" alt="Google Sheets Search Rows — connection configured with Lead Tracker Master spreadsheet selected" loading="lazy"><figcaption>Google Sheets Search Rows — connection configured with Lead Tracker Master spreadsheet selected</figcaption></figure>
+<p>5. Configure the search filter — set Column range to &quot;A-CZ&quot;, then under Filter select &quot;Email (A)&quot; as the column, &quot;Text operators: Equal to&quot; as the operator, and map the email field from your webhook module as the value. This tells Make.com to look for an existing row where the email matches.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-02.png" alt="Search Rows filter — Email column A filtered by webhook email address using Text operators Equal to" loading="lazy"><figcaption>Search Rows filter — Email column A filtered by webhook email address using Text operators Equal to</figcaption></figure>
+<p>6. Add a Router module — click the + button after Search Rows and select &quot;Router&quot; from the flow control tools. The Router splits your scenario into two branches: one for existing leads (update) and one for new leads (insert).</p>
+<p>7. Configure the first branch filter — click the line between the Router and the first branch module. Label it &quot;Lead Exists&quot; and set the condition to: &quot;2. Total number of bundles&quot; — &quot;Greater than&quot; — &quot;0&quot;. This branch runs only when Search Rows found a matching email.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-03.png" alt="Router filter — Lead Exists condition with Total number of bundles greater than 0" loading="lazy"><figcaption>Router filter — Lead Exists condition with Total number of bundles greater than 0</figcaption></figure>
+<p>8. On the &quot;Lead Exists&quot; branch, add a Google Sheets &quot;Update a Row&quot; module. Connect it to the same spreadsheet and map the fields. For the Row number, map the row number from the Search Rows result — this tells Make.com which row to update.</p>
+<p>9. Map the Update a Row fields — Email (A) maps to the existing email from Search Rows. Name (B) and Phone (C) map from the webhook data to keep details fresh. For Source (D), use a formula that appends the new source only if it&#x27;s not already listed. In the formula editor, enter: if(contains(2. Source (D); 1. source); 2. Source (D); 2. Source (D) + &quot;; &quot; + 1. source) — this prevents &quot;Website; Website&quot; duplicates while correctly producing &quot;Facebook; Website&quot; when a lead comes from a second channel.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-05.png" alt="Update a Row field mapping — Email, Name, Phone and Source formula with contains logic to prevent duplicate sources" loading="lazy"><figcaption>Update a Row field mapping — Email, Name, Phone and Source formula with contains logic to prevent duplicate sources</figcaption></figure>
+<p>10. For the remaining Update fields — First Seen (E) maps to the existing value from Search Rows (you never overwrite the original date). Last Updated (F) uses the formula: formatDate(now; &quot;YYYY-MM-DD&quot;) — this stamps today&#x27;s date every time the row is updated. Notes (G) maps to the existing notes from Search Rows to preserve the original entry.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-06.png" alt="Update a Row continued — First Seen preserved from existing row, Last Updated with formatDate formula, Notes kept from origin" loading="lazy"><figcaption>Update a Row continued — First Seen preserved from existing row, Last Updated with formatDate formula, Notes kept from original</figcaption></figure>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> The Source formula uses the if/contains pattern to prevent duplicate source names: if the source already contains &quot;Website&quot;, it keeps it as-is. If not, it appends &quot;; Website&quot; to the existing value. When you clone this for Facebook and Typeform scenarios, the same formula works — just the source value changes.</div>
+<p>11. Configure the second branch as a fallback route — click the wrench icon on the second Router branch line. Set &quot;Set the route as a fallback&quot; to Yes. A fallback route runs only when no other branch matches — so if the lead doesn&#x27;t exist (Search Rows returned 0 results), this branch fires automatically. No condition needed.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-09.png" alt="Fallback route configuration — New Lead branch set as fallback, no condition required" loading="lazy"><figcaption>Fallback route configuration — New Lead branch set as fallback, no condition required</figcaption></figure>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Using a fallback route instead of an explicit &quot;equals 0&quot; filter is cleaner and more reliable. If you later add more branches to the Router, the fallback always catches whatever didn&#x27;t match — no risk of a lead slipping between two filters.</div>
+<p>12. On the fallback &quot;New Lead&quot; branch, add a Google Sheets &quot;Add a Row&quot; module. Map all fields directly from the webhook: Email (A) from the webhook email, Name (B) from name, Phone (C) from phone, Source (D) from source, First Seen (E) using formatDate(now; &quot;YYYY-MM-DD&quot;), Last Updated (F) using the same formula, and Notes (G) from notes.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-07.png" alt="Add a Row field mapping — all fields mapped directly from webhook data with formatDate for dates" loading="lazy"><figcaption>Add a Row field mapping — all fields mapped directly from webhook data with formatDate for dates</figcaption></figure>
+<p>13. Save the scenario — your canvas should now show four connected modules: Custom Webhook → Google Sheets Search Rows → Router → two branches (Update a Row and Add a Row).</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-10.png" alt="Complete webhook scenario — Custom Webhook, Search Rows, Router with Lead Exists and fallback New Lead branches" loading="lazy"><figcaption>Complete webhook scenario — Custom Webhook, Search Rows, Router with Lead Exists and fallback New Lead branches</figcaption></figure>
+<p>14. Test the upsert logic — click &quot;Run once&quot;, then send a new lead via browser URL (use a new email that doesn&#x27;t exist in the sheet). Check your Google Sheet — a new row should appear. Then run again with the same email but change the source parameter to &quot;Referral&quot; — the existing row should update with the new source appended and Last Updated refreshed.</p>
+<h2 id="how-to-add-typeform-as-a-second-source-scenario-2">How to Add Typeform as a Second Source (Scenario 2)</h2>
+<p>The Typeform scenario uses identical upsert logic — the only difference is the trigger module and how fields are mapped from Typeform&#x27;s response structure.</p>
+<p>1. Create a new scenario in Make.com. Click the + button and search for &quot;Typeform&quot; — select the Watch Responses module marked INSTANT. This uses webhooks to trigger the moment someone submits, instead of polling every 15 minutes.</p>
+<p>2. Click &quot;Add&quot; to create a new webhook — name it (e.g. &quot;Free Consultation Request webhook&quot;), connect your Typeform account through OAuth, and select your form from the Form ID dropdown.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-11.png" alt="Typeform INSTANT webhook — connection established, Free Consultation Request form selected, webhook enabled" loading="lazy"><figcaption>Typeform INSTANT webhook — connection established, Free Consultation Request form selected, webhook enabled</figcaption></figure>
+<p>3. Add the same module chain as the webhook scenario: Google Sheets Search Rows (same spreadsheet, same email filter) → Router → Update a Row on the &quot;Lead Exists&quot; branch → Add a Row on the fallback &quot;New Lead&quot; branch.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-14.png" alt="Typeform scenario Google Sheets connection — Search by path, Lead Tracker Master spreadsheet selected" loading="lazy"><figcaption>Typeform scenario Google Sheets connection — Search by path, Lead Tracker Master spreadsheet selected</figcaption></figure>
+<p>4. The key mapping difference is the Source formula in the Update module. Since Typeform doesn&#x27;t send a &quot;source&quot; field, you hardcode the source name. In the Source (D) formula editor, enter: if(contains(2. Source (D); &quot;Typeform&quot;); 2. Source (D); 2. Source (D) + &quot;; Typeform&quot;) — this uses the literal string &quot;Typeform&quot; instead of a mapped field.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-13.png" alt="Typeform Update a Row mapping — Mappable Answers for Name and Phone, Source formula with hardcoded Typeform value" loading="lazy"><figcaption>Typeform Update a Row mapping — Mappable Answers for Name and Phone, Source formula with hardcoded Typeform value</figcaption></figure>
+<p>5. Save the scenario. The complete Typeform scenario looks identical to the webhook version — same Search Rows, same Router, same two branches — just with a Typeform trigger instead of a Custom Webhook.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-12.png" alt="Complete Typeform scenario — Typeform Watch Responses, Search Rows, Router with Update and Add branches" loading="lazy"><figcaption>Complete Typeform scenario — Typeform Watch Responses, Search Rows, Router with Update and Add branches</figcaption></figure>
+<p>6. Test by submitting your Typeform with a test entry — use an email that already exists in the sheet from the webhook test. The Source column should update to show both channels (e.g. &quot;Website; Typeform&quot;) and Last Updated should refresh.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-15.png" alt="Typeform live form — test submission with sample data" loading="lazy"><figcaption>Typeform live form — test submission with sample data</figcaption></figure>
+<p class="inline-cta">Need a client intake form? Build one in minutes with Typeform&#x27;s drag-and-drop form builder. <a href="https://typeform.cello.so/vGdCoE97A4Z" rel="sponsored noopener">Try Typeform free →</a></p>
+<h2 id="how-to-add-facebook-lead-ads-as-a-third-source-scenario-3">How to Add Facebook Lead Ads as a Third Source (Scenario 3)</h2>
+<p>The Facebook scenario follows the same upsert pattern. The trigger is different, and the field names come from Facebook&#x27;s lead data structure instead of webhook parameters.</p>
+<p>1. Create a new scenario. Click + and search for &quot;Facebook Lead Ads&quot; — select the &quot;New Lead&quot; module (INSTANT webhook version). Click &quot;Create a webhook&quot;, connect your Facebook account, select your Page, and choose your lead form (e.g. &quot;Get Your Free Quote&quot;).</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-16.png" alt="Facebook Lead Ads New Lead webhook — connection configured with Page and Get Your Free Quote form selected" loading="lazy"><figcaption>Facebook Lead Ads New Lead webhook — connection configured with Page and Get Your Free Quote form selected</figcaption></figure>
+<p>2. Add the same module chain: Google Sheets Search Rows → Router → Update a Row / Add a Row. The structure is identical to the other two scenarios.</p>
+<p>3. Map Facebook field data to your Google Sheet columns. For the Add a Row module (new leads): Email (A) maps to Field data: email, Name (B) to Field data: Full name, Phone (C) to Field data: Phone number, and Source (D) is hardcoded as &quot;Facebook&quot;.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-18.png" alt="Facebook Add a Row mapping — Field data mapped to columns with hardcoded Facebook source" loading="lazy"><figcaption>Facebook Add a Row mapping — Field data mapped to columns with hardcoded Facebook source</figcaption></figure>
+<p>4. For the Update a Row module, the Source formula uses the same pattern with &quot;Facebook&quot; hardcoded: if(contains(2. Source (D); &quot;Facebook&quot;); 2. Source (D); 2. Source (D) + &quot;; Facebook&quot;)</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-17.png" alt="Facebook Update a Row mapping — Field data for Name and Phone, Source formula with hardcoded Facebook value" loading="lazy"><figcaption>Facebook Update a Row mapping — Field data for Name and Phone, Source formula with hardcoded Facebook value</figcaption></figure>
+<p>5. Save the scenario. All three scenarios now live in your Make.com dashboard, each handling a different lead source but sharing the same Google Sheet and the same upsert logic.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-20.png" alt="Make.com dashboard — Multi-source Leads folder with all three scenarios: Website Leads, Typeform Leads, Facebook Leads" loading="lazy"><figcaption>Make.com dashboard — Multi-source Leads folder with all three scenarios: Website Leads, Typeform Leads, Facebook Leads</figcaption></figure>
+<h2 id="testing-the-complete-multi-source-setup">Testing the Complete Multi-Source Setup</h2>
+<p>Once all three scenarios are active, your Lead Tracker Master sheet populates automatically from every channel. Each lead appears once — with the Source column showing every channel they came through and the Last Updated column reflecting the most recent interaction.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-19.png" alt="Google Sheet with leads from all three sources — multi-source entries showing Facebook; Typeform and Facebook; Website in Sou" loading="lazy"><figcaption>Google Sheet with leads from all three sources — multi-source entries showing Facebook; Typeform and Facebook; Website in Source column</figcaption></figure>
+<p>The key rows to verify in your test: a lead that exists only in one source (single source name), a lead that submitted through two channels (both sources joined with a semicolon), and the Last Updated date that changed when a duplicate submission came in while First Seen stayed the same.</p>
+<h2 id="who-should-use-this-automation">Who Should Use This Automation</h2>
+<p>This workflow is built for any business that captures leads from more than one channel and needs a single source of truth. Agencies running Facebook ads and collecting Typeform intake forms from the same prospects. Freelancers with a website contact form and social media ad campaigns running simultaneously. Consultants who get referrals through multiple channels and need to track first contact. Small businesses spending money on ads and losing track of which leads came from which campaign. If you&#x27;re manually checking three dashboards and copying data between them, this automation eliminates that work permanently.</p>
+<h2 id="apps-used-in-this-automation">Apps Used in This Automation</h2>
+<p>This workflow connects four tools, all with free tiers. Make.com orchestrates all three scenarios — the free plan includes 1,000 operations per month. Google Sheets stores the Lead Tracker Master with upsert logic — 15 GB of free storage. Typeform captures intake form data — the free plan supports webhook integrations. Facebook Lead Ads captures ad-generated leads — works with any active ad account.</p>
+<div class="verdict"><strong>Bottom line:</strong> If your leads come from more than one channel — and for most businesses they do — tracking them manually across separate dashboards is a guaranteed way to lose people and waste ad spend. This automation consolidates Facebook ads, Typeform forms, and website inquiries into one Google Sheet with upsert logic that prevents duplicates automatically. Each scenario takes about 20 minutes to build, and the upsert pattern is identical across all three — build one, clone the logic twice. The entire setup runs on Make.com&#x27;s free plan (each scenario uses 3-4 operations per lead, well within the 1,000 monthly limit) and works without maintenance from that point forward. Start with the webhook scenario — it takes 15 minutes and you can test it immediately.</div>
+<div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<div class="faq-item"><h3 class="faq-q">What happens if the same person submits through all three channels?</h3><p class="faq-a">They appear as a single row in your Google Sheet. The Source column shows all three channels (e.g. &quot;Facebook; Typeform; Website&quot;), First Seen keeps the original date, and Last Updated reflects the most recent submission.</p></div>
+<div class="faq-item"><h3 class="faq-q">Why three separate scenarios instead of one?</h3><p class="faq-a">Make.com doesn&#x27;t support multiple triggers in a single scenario. Each lead source needs its own trigger module — but all three scenarios write to the same Google Sheet using the same upsert logic.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I add more lead sources later?</h3><p class="faq-a">Yes. Clone any of the three scenarios, swap the trigger module for your new source (e.g. LinkedIn Lead Gen Forms, Calendly, or another form tool), and adjust the field mapping. The Search Rows → Router → Update/Add pattern stays the same.</p></div>
+<div class="faq-item"><h3 class="faq-q">What if two submissions arrive at the exact same second for the same email?</h3><p class="faq-a">At small business volume, this is extremely unlikely. If it happens, one scenario may create a duplicate row because the second scenario&#x27;s Search Rows ran before the first finished writing. For high-volume use cases (100+ leads per day), consider using Make.com data stores instead of Google Sheets for true atomic upsert operations.</p></div>
+<div class="faq-item"><h3 class="faq-q">Do I need a paid Make.com plan?</h3><p class="faq-a">The free plan includes 1,000 operations per month. Each scenario uses 3-4 operations per lead — that&#x27;s roughly 250-330 leads per month across all three sources combined. For most small businesses, the free plan handles it comfortably.</p></div>
+<div class="faq-item"><h3 class="faq-q">Why use a Router instead of just trying to update and catching the error?</h3><p class="faq-a">The Router with a fallback branch is more explicit and easier to debug. You can see exactly which path each lead took in the execution log. Error-handler based upsert works too, but it&#x27;s harder to explain and troubleshoot — especially for non-technical users.</p></div>
+</div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="facebook-instagram-leads-google-sheets-automation.html" rel="noopener">How to Send Facebook and Instagram Leads to Google Sheets Automatically</a></li><li><a href="typeform-client-intake-google-sheets-automation.html" rel="noopener">Typeform to Google Sheets and Slack: Automate Form Responses with Make.com</a></li><li><a href="zapier-too-expensive-make-com-alternative.html" rel="noopener">Zapier Too Expensive? Switch to Make.com and Save Up to $840/year</a></li><li><a href="calendly-booking-onboarding-checklist-automation.html" rel="noopener">Calendly Automation: Create an Onboarding Checklist and Notify Your Team</a></li><li><a href="typeform-welcome-email-google-drive-automation.html" rel="noopener">Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com</a></li></ul></div>
+    </main>
+
+    <div class="cta-card" style="padding:0; background:none; border:none;">
+        <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored">
+            <img 
+                src="assets/banners/AD-728x90 – 2.png" 
+                alt="Set up your own workflows for free with Make.com"
+                style="width:100%; border-radius:12px; display:block; cursor:pointer;"
+            >
+        </a>
+    </div>
+
+    <footer>
+        <span>© 2026 IntegrateHub.io</span>
+        <span>
+            <a href="about.html">About</a>
+            &nbsp;·&nbsp;
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+            &nbsp;·&nbsp;
+            <a href="privacy-policy.html">Privacy Policy</a>
+            &nbsp;·&nbsp;
+            <a href="/">← All Guides</a>
+        </span>
+    </footer>
+
+</div>
+
+</body>
+</html>

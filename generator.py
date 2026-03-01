@@ -575,7 +575,7 @@ def format_content(text, page_type='how-to'):
             else:
                 img_path = image_data.strip()
                 alt_text = ''
-            alt_attr = ''
+            alt_attr = alt_text[:125] if alt_text else ''
             figure_html = (
                 f'<figure class="screenshot">'
                 f'<img src="{html.escape(img_path)}" alt="{html.escape(alt_attr)}" loading="lazy">'
