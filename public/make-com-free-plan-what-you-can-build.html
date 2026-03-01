@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://integratehub.io/make-com-free-plan-what-you-can-build.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make.com Free Plan: What You Can Actually Build (With Real Limits Explained) | IntegrateHub.io</title>
+    <meta name="description" content="Make.com free plan includes 1,000 operations and 2 active scenarios. See exactly what you can build, when to upgrade, and real math on limits.">
+    <meta property="og:title" content="Make.com Free Plan: What You Can Actually Build (With Real Limits Explained)">
+    <meta property="og:description" content="Make.com free plan includes 1,000 operations and 2 active scenarios. See exactly what you can build, when to upgrade, and real math on limits.">
+    <meta property="og:type" content="article">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Make.com Free Plan: What You Can Actually Build (With Real Limits Explained)",
+  "description": "Make.com free plan includes 1,000 operations and 2 active scenarios. See exactly what you can build, when to upgrade, and real math on limits.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
+  "datePublished": "2026-03-02",
+  "dateModified": "2026-03-02"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Make.com's free plan really free forever?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. There's no trial period and no credit card required. The free plan has no time limit — you can use it indefinitely as long as you stay within the 1,000 operations and 2 active scenarios per month."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when I hit 1,000 operations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your active scenarios pause until the next billing cycle (monthly reset). No data is lost, but no new events are processed until the limit resets or you upgrade. Make.com sends a warning at 80% usage so you can plan ahead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I build more than 2 scenarios on the free plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — you can build and save as many scenarios as you want. The limit is on active (turned on) scenarios: only 2 can run simultaneously. You can switch which ones are active at any time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do webhook triggers use operations while waiting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Webhook (INSTANT) triggers don't consume credits while waiting — there's no scheduled run, so no credit is used. Credits are consumed only when data arrives and the scenario actually executes. This is why we recommend webhook triggers for every free plan automation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Core plan $9/month or more?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "$9/month when billed annually ($108/year). Monthly billing is higher — some sources list it around $10.59/month. Annual billing saves roughly 15% and is the better deal for any ongoing automation setup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use Make.com's AI features on the free plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Make AI Tools and Make AI Agents are only available on Core ($9/mo) and above. The free plan includes the full visual builder and 3,000+ app integrations, but AI-powered modules require a paid plan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do unused credits roll over to the next month?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Based on how Make.com's billing works, credits reset at the start of each cycle — unused credits on the free plan don't carry over. Check your Organization → Usage dashboard to confirm your current cycle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I upgrade to Core and then downgrade back to Free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Make.com deactivates all your scenarios immediately. You'll need to manually choose which 2 to keep active — the rest stay saved but won't run until you reactivate them or upgrade again."
+      }
+    }
+  ]
+}
+</script>
+    <style>
+        :root {
+            --primary: #2d3436;
+            --accent: #0868b4;
+            --text: #2d3436;
+            --light-bg: #f9f9f9;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        /* WIDER CONTAINER */
+        .container { max-width: 1060px; margin: 0 auto; padding: 40px 30px; }
+        .header-inner { max-width: 1060px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; gap: 20px; }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* BREADCRUMB */
+        .breadcrumb { font-size: 0.85rem; color: #595959; margin-bottom: 20px; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* ARTICLE META */
+        .article-meta { font-size: 0.85rem; color: #595959; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .article-meta time { color: #595959; }
+        .article-meta .separator { color: #ccc; }
+        .article-meta .category-badge {
+            background: #f0f4f8; color: var(--accent); padding: 2px 10px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none;
+        }
+
+        /* CONTENT */
+        .content { margin-top: 30px; }
+        h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
+        .intro {
+            font-size: 1.15rem; color: #444; margin-bottom: 25px;
+            line-height: 1.8; border-left: 4px solid var(--accent); padding-left: 20px;
+        }
+        h2 { font-size: 1.4rem; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: var(--primary); }
+        h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; color: var(--primary); }
+        p { margin: 0 0 18px 0; }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: #f7f9fc; border: 1px solid #e0e8f0; border-radius: 8px;
+            padding: 20px 24px; margin: 0 0 30px 0;
+        }
+        .toc-title {
+            font-size: 0.85rem; color: #595959; text-transform: uppercase;
+            letter-spacing: 0.06em; margin: 0 0 12px 0; font-weight: 700;
+        }
+        .toc ol { margin: 0; padding-left: 20px; }
+        .toc li { margin-bottom: 6px; font-size: 0.95rem; }
+        .toc a { color: var(--accent); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* TECH TIP */
+        .tech-tip {
+            background: #fff3cd; border-left: 4px solid #ffc107;
+            padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0;
+        }
+        .tech-tip strong { display: block; margin-bottom: 6px; }
+
+        /* VERDICT */
+        .verdict {
+            background: #f0f8ff; border-left: 4px solid var(--accent);
+            padding: 20px 24px; margin: 30px 0; border-radius: 0 8px 8px 0;
+            font-size: 1.05rem; line-height: 1.7;
+        }
+        .verdict strong { color: var(--accent); }
+
+        .inline-cta { background: #f0f8ff; padding: 16px 20px; border-radius: 8px; margin: 25px 0; font-size: 1.05rem; line-height: 1.7; }
+        .inline-cta a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+        /* COMPARISON TABLE */
+        .table-wrapper {
+            overflow-x: auto; margin: 20px 0 30px 0;
+            border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .comparison-table thead tr { background: var(--accent); color: white; }
+        .comparison-table th { padding: 12px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .comparison-table td { padding: 11px 16px; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table tbody tr:nth-child(even) { background: #f7f9fc; }
+        .comparison-table tbody tr:hover { background: #eef5ff; }
+
+        /* STEPS */
+        .steps { padding-left: 0; list-style: none; counter-reset: steps; }
+        .steps li { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+        .steps li::before {
+            content: counter(steps); background: var(--accent); color: white;
+            width: 28px; height: 28px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.85rem; flex-shrink: 0; margin-top: 2px;
+        }
+        .steps li.step-image { display: block; padding-left: 0; margin-bottom: 20px; counter-increment: none; }
+        .steps li.step-image::before { display: none; }
+
+        /* FAQ */
+        .faq-section { margin: 40px 0 20px 0; }
+        .faq-section h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid #eee; margin-bottom: 24px; }
+        .faq-item { margin-bottom: 24px; }
+        .faq-q { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin: 0 0 6px 0; }
+        .faq-a { color: #444; margin: 0; line-height: 1.7; }
+
+        /* RELATED GUIDES */
+        .related-guides {
+            background: #f7f9fc; border: 1px solid #e0e8f0;
+            border-radius: 8px; padding: 20px 24px; margin: 30px 0;
+        }
+        .related-guides h3 { font-size: 0.85rem; color: #595959; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
+        .related-guides ul { margin: 0; padding-left: 18px; }
+        .related-guides li { margin-bottom: 6px; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
+        .related-guides a:hover { text-decoration: underline; }
+
+        /* SCREENSHOT PLACEHOLDER */
+        .screenshot-placeholder {
+            background: #f0f4f8; border: 2px dashed #b0c4d8;
+            border-radius: 8px; margin: 24px 0; padding: 32px 20px; text-align: center;
+        }
+        .screenshot-placeholder-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .screenshot-icon { font-size: 2rem; }
+        .screenshot-label { color: #6b8cae; font-size: 0.9rem; font-style: italic; }
+
+        /* SCREENSHOT IMAGE */
+        .screenshot { margin: 24px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .screenshot img { width: 100%; display: block; }
+        .screenshot figcaption { background: #f7f9fc; color: #595959; font-size: 0.82rem; padding: 8px 14px; text-align: center; font-style: italic; }
+
+        /* CODE */
+        pre {
+            background: #2d3436; color: #55efc4; padding: 20px; border-radius: 8px;
+            overflow-x: auto; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; margin: 20px 0; line-height: 1.6;
+        }
+        code { font-family: 'Courier New', monospace; }
+
+        /* CTA */
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
+        .cta-card p { color: #555; margin-bottom: 20px; }
+        .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+        .btn:hover { background: #0773c5; }
+
+        /* FOOTER */
+        footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
+        footer a { color: var(--accent); text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            h1 { font-size: 1.7rem; }
+            .container { padding: 20px 16px; }
+            .comparison-table th, .comparison-table td { padding: 9px 10px; font-size: 0.88rem; }
+            .article-meta { gap: 4px; }
+        }
+
+        /* INDEX CARD GRID */
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+        .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
+        .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
+        .card .card-meta { font-size: 0.78rem; color: #999; margin-bottom: 8px; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
+        <a href="/" class="back-link">← All Guides</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="/" rel="noopener">Home</a> › <a href="/" rel="noopener">Automation Strategy</a> › Make.com Free Plan: What You Can Actually Build (With Real Limits Explained)
+    </div>
+
+    <main class="content">
+        <h1>Make.com Free Plan: What You Can Actually Build (With Real Limits Explained)</h1>
+        <div class="article-meta"><time datetime="2026-03-02">Mar 02, 2026</time> <span class="separator">·</span> <span>⏱ 16 min read</span> <span class="separator">·</span> <span class="category-badge">Automation Strategy</span></div>
+
+        <nav class="toc">
+<p class="toc-title">In This Guide</p>
+<ol><li><a href="#make-com-free-plan-limits-what-you-actually-get" rel="noopener">Make.com Free Plan Limits — What You Actually Get</a></li>
+<li><a href="#how-operations-work-the-math-that-matters" rel="noopener">How Operations Work — The Math That Matters</a></li>
+<li><a href="#what-you-can-actually-build-on-the-free-plan-real-examples" rel="noopener">What You Can Actually Build on the Free Plan — Real Examples</a></li>
+<li><a href="#realistic-free-plan-setup-a-working-example" rel="noopener">Realistic Free Plan Setup — A Working Example</a></li>
+<li><a href="#when-the-free-plan-is-not-enough" rel="noopener">When the Free Plan Is NOT Enough</a></li>
+<li><a href="#free-plan-vs-core-plan-what-9-month-gets-you" rel="noopener">Free Plan vs. Core Plan — What $9/Month Gets You</a></li>
+<li><a href="#how-to-maximize-the-free-plan-before-upgrading" rel="noopener">How to Maximize the Free Plan Before Upgrading</a></li>
+<li><a href="#who-the-free-plan-is-actually-built-for" rel="noopener">Who the Free Plan Is Actually Built For</a></li>
+<li><a href="#where-make-com-s-free-plan-stands-against-competitors" rel="noopener">Where Make.com&#x27;s Free Plan Stands Against Competitors</a></li>
+<li><a href="#what-happens-at-the-edges-details-most-articles-skip" rel="noopener">What Happens at the Edges — Details Most Articles Skip</a></li>
+<li><a href="#apps-used-in-free-plan-automations" rel="noopener">Apps Used in Free Plan Automations</a></li>
+<li><a href="#frequently-asked-questions" rel="noopener">Frequently Asked Questions</a></li>
+</ol>
+</nav>
+
+        <p class="intro">Every article about Make.com mentions the free plan — but nobody shows you what 1,000 operations actually gets you in practice. Can you run a real business workflow on it, or is it just a demo tier that forces an upgrade? This guide breaks down the Make.com free plan with real math and real examples from automations we&#x27;ve built and tested, so you know exactly what fits, what doesn&#x27;t, and when the $9/month Core plan (annual billing) becomes worth it.</p>
+<h2 id="make-com-free-plan-limits-what-you-actually-get">Make.com Free Plan Limits — What You Actually Get</h2>
+<p>Make.com&#x27;s free plan is not a trial — it has no time limit, no credit card requirement, and no feature lockout on core automation capabilities. Here&#x27;s what&#x27;s included as of early 2026, based on Make.com&#x27;s official pricing page.</p>
+<h2>Make.com Free Plan — Full Breakdown</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Feature</th><th>Free Plan Limit</th><th>What It Means in Practice</th></tr></thead><tbody><tr><td>Operations (credits)</td><td>1,000 per month</td><td>Each standard module step uses 1 credit — a 3-step workflow uses 3 per run. AI modules (not available on free) may consume more</td></tr><tr><td>Active scenarios</td><td>2 at a time</td><td>You can only have 2 scenarios turned ON simultaneously — build more, but only 2 run</td></tr><tr><td>Minimum run interval</td><td>15 minutes</td><td>Polling triggers check every 15 min at fastest — webhook (INSTANT) triggers fire immediately</td></tr><tr><td>Data transfer</td><td>0.5 GB (500 MB) per month</td><td>Covers most text-based workflows — large file transfers (images, PDFs) eat this faster</td></tr><tr><td>Maximum file size</td><td>5 MB per file</td><td>Limits individual file uploads — fine for spreadsheets and text, too small for large images or videos</td></tr><tr><td>App integrations</td><td>3,000+ apps</td><td>Same library as paid plans — no app restrictions</td></tr><tr><td>Routers and filters</td><td>Included</td><td>You can build branching logic, conditional paths, and multi-step workflows</td></tr><tr><td>Visual builder</td><td>Full access</td><td>Same drag-and-drop editor as Core, Pro, and Teams plans</td></tr></tbody></table></div>
+<p>The key constraint is the combination of 1,000 operations and 2 active scenarios. Each individually is manageable — together they define what you can realistically automate.</p>
+<h2 id="how-operations-work-the-math-that-matters">How Operations Work — The Math That Matters</h2>
+<p>An operation — Make.com now officially calls them &quot;credits&quot; — is consumed every time a module in your scenario processes data. Most standard modules (Google Sheets, Slack, Gmail, Stripe, etc.) cost 1 credit per step, though some advanced modules like Code or AI can consume more. If your scenario has 3 standard modules — trigger, Google Sheets, Slack — each run costs 3 credits. If the trigger checks for new data and finds nothing, that check still costs 1 credit on polling triggers. This is where the free plan math gets tricky.</p>
+<h3>Polling Triggers vs. Webhook (INSTANT) Triggers</h3>
+<p>This distinction is critical for free plan users. A polling trigger — like &quot;Watch New Rows&quot; in Google Sheets — checks for data on a schedule. On the free plan, the minimum interval is 15 minutes. If that scenario runs 24/7, that means 4 checks per hour, 96 per day, roughly 2,880 per month — just from one trigger checking, even when there&#x27;s no new data. Make&#x27;s help center confirms that trigger modules use 1 credit per run even when no new data is found. In practice, you&#x27;ll hit 1,000 credits in roughly 10 days and Make.com pauses the scenario — your automation goes dark for the remaining 20 days of the month.</p>
+<p>A webhook (INSTANT) trigger — like &quot;Watch Responses INSTANT&quot; in Typeform or &quot;Watch Events&quot; in Calendly — sits dormant and only fires when data arrives. Because there&#x27;s no scheduled run, no credits are consumed while waiting. If you get 50 form submissions per month and each scenario runs 3 modules, that&#x27;s 150 credits total. Massive difference.</p>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> On the free plan, always use INSTANT (webhook) triggers when available. They consume zero operations while idle — polling triggers burn through your 1,000 monthly limit even when nothing happens. This single choice is the difference between a usable free plan and one that runs dry in 10 days.</div>
+<h2 id="what-you-can-actually-build-on-the-free-plan-real-examples">What You Can Actually Build on the Free Plan — Real Examples</h2>
+<p>Here&#x27;s where it gets practical. We&#x27;ve built and documented every automation below. The operations math is based on real scenarios, not theoretical estimates.</p>
+<h2>Real Automations That Fit the Free Plan</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Automation</th><th>Ops Per Run</th><th>Monthly Volume That Fits</th><th>Tutorial</th></tr></thead><tbody><tr><td>Facebook Leads → Google Sheets (2 modules)</td><td>2</td><td>Up to 500 leads/mo</td><td>Our Facebook Leads guide</td></tr><tr><td>Typeform → Google Sheets + Slack (3 modules)</td><td>3</td><td>Up to 330 submissions/mo</td><td>Our Typeform Intake guide</td></tr><tr><td>Calendly → Get Event → Google Sheets + Slack (4 modules)</td><td>4</td><td>Up to 250 bookings/mo</td><td>Our Calendly Onboarding guide</td></tr><tr><td>Stripe failed payment → Retrieve Customer → Gmail (3 modules)</td><td>3</td><td>Up to 330 events/mo</td><td>Our Stripe Alerts guide</td></tr><tr><td>Typeform → Google Drive folder → Share Link → Gmail (4 modules)</td><td>4</td><td>Up to 250 submissions/mo</td><td>Our Typeform Welcome Email guide</td></tr></tbody></table></div>
+<p>The catch: you can only run 2 of these simultaneously. With 2 active scenarios, a realistic free plan setup might be one lead capture automation (Facebook or Typeform to Google Sheets) plus one notification automation (Calendly to Slack or Stripe to Gmail). That covers the highest-value workflows for most small businesses.</p>
+<h2 id="realistic-free-plan-setup-a-working-example">Realistic Free Plan Setup — A Working Example</h2>
+<p>Here&#x27;s a concrete scenario for a freelancer using the free plan to run two active automations side by side.</p>
+<h3>Scenario 1: Typeform Intake → Google Sheets + Slack (3 ops/run)</h3>
+<p>A client fills out your intake form on Typeform. Make.com catches the submission instantly (webhook — 0 idle cost), adds the data to Google Sheets, and sends a Slack notification. At 30 new inquiries per month, that&#x27;s 90 operations.</p>
+<h3>Scenario 2: Calendly Booking → Get Event → Google Sheets + Slack (4 ops/run)</h3>
+<p>Someone books a discovery call. Make.com catches the event (webhook), fetches the event details, adds a row to your onboarding tracker, and pings your team on Slack. At 20 bookings per month, that&#x27;s 80 operations.</p>
+<h3>Total: 170 operations per month — 17% of the free plan limit.</h3>
+<p>That leaves 830 operations unused. The free plan is not just a demo tier for this kind of usage — it&#x27;s genuinely sufficient for a freelancer or early-stage business processing low to moderate volume across two channels.</p>
+<h2 id="when-the-free-plan-is-not-enough">When the Free Plan Is NOT Enough</h2>
+<p>The free plan breaks down in predictable ways. Here&#x27;s when you&#x27;ll hit the wall.</p>
+<h3>You Need More Than 2 Active Scenarios</h3>
+<p>This is the most common upgrade trigger. If you want to run lead capture from Facebook, client intake from Typeform, and failed payment alerts from Stripe simultaneously — that&#x27;s 3 scenarios. The free plan caps you at 2. You&#x27;d need to deactivate one to activate another, which means one workflow stops running until you manually switch it back.</p>
+<h3>You Use Polling Triggers</h3>
+<p>Any scenario that uses a polling trigger (Watch New Rows, Watch New Emails, Watch New Leads via polling) will burn through operations fast. A single polling scenario checking every 15 minutes costs roughly 2,880 operations per month — almost 3x your entire free budget. If your integration doesn&#x27;t support webhooks, the free plan won&#x27;t work for continuous monitoring.</p>
+<h3>You Process High Volume</h3>
+<p>Even with webhook triggers, volume can exceed the limit. A multi-source lead tracker running 3 scenarios at 4 operations each, processing 100 leads per month across all sources, uses 1,200 operations — just over the 1,000 limit. Our multi-source lead tracking guide uses 3 separate scenarios, which also exceeds the 2-scenario cap.</p>
+<h3>You Need Faster Polling</h3>
+<p>The 15-minute minimum interval means polling triggers won&#x27;t catch events faster than every 15 minutes. If you need near-real-time data checks (not webhook-triggered), the Core plan&#x27;s 1-minute interval is a significant upgrade.</p>
+<h2>Free Plan Dealbreakers — Quick Reference</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Situation</th><th>Why Free Plan Fails</th><th>Solution</th></tr></thead><tbody><tr><td>3+ active workflows needed</td><td>2-scenario cap</td><td>Upgrade to Core ($9/mo) for unlimited scenarios</td></tr><tr><td>Using polling triggers</td><td>Burns 2,880+ ops/mo on empty checks</td><td>Switch to webhook triggers or upgrade</td></tr><tr><td>100+ leads/mo across 3+ sources</td><td>Ops exceed 1,000 and scenarios exceed 2</td><td>Upgrade to Core ($9/mo)</td></tr><tr><td>Need real-time polling checks</td><td>15-minute minimum interval</td><td>Core offers 1-minute intervals</td></tr></tbody></table></div>
+<p class="inline-cta">If you&#x27;re hitting any of these limits, Make.com&#x27;s Core plan at $9/month removes all of them — unlimited scenarios, 10,000 operations, and 1-minute polling intervals. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
+<h2 id="free-plan-vs-core-plan-what-9-month-gets-you">Free Plan vs. Core Plan — What $9/Month Gets You</h2>
+<p>The Core plan is where Make.com becomes a serious business tool. Here&#x27;s exactly what changes for $9/month (billed annually — monthly billing runs slightly higher around $10.59/month).</p>
+<h2>Free vs. Core — Side-by-Side Comparison</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Feature</th><th>Free Plan ($0/mo)</th><th>Core Plan ($9/mo)</th><th>Why It Matters</th></tr></thead><tbody><tr><td>Operations</td><td>1,000/month</td><td>10,000/month</td><td>10x capacity — enough for 5-10 active workflows at moderate volume</td></tr><tr><td>Active scenarios</td><td>2</td><td>Unlimited</td><td>Run every workflow simultaneously without juggling on/off states</td></tr><tr><td>Minimum interval</td><td>15 minutes</td><td>1 minute</td><td>Polling triggers check much faster — critical for time-sensitive workflows</td></tr><tr><td>Data transfer</td><td>0.5 GB/month</td><td>5 GB/month</td><td>10x data — handles file-heavy workflows like Google Drive automations</td></tr><tr><td>Maximum file size</td><td>5 MB</td><td>100 MB</td><td>Free plan blocks large file uploads — Core handles images, PDFs, and documents</td></tr><tr><td>Make AI Tools</td><td>Not available</td><td>Included</td><td>AI-powered modules (text generation, classification) require Core or higher</td></tr><tr><td>Make AI Agents</td><td>Not available</td><td>Included</td><td>Building AI agents within Make.com requires a paid plan</td></tr><tr><td>Make API access</td><td>No</td><td>Yes (60 calls/min)</td><td>Build custom integrations and trigger scenarios programmatically</td></tr></tbody></table></div>
+<p>The $9/month upgrade is the single biggest value jump in Make.com&#x27;s pricing tiers. You go from a carefully constrained sandbox — 2 scenarios, 5 MB file limit, no AI tools — to a platform that can realistically run a small business&#x27;s entire automation stack with unlimited scenarios, 100 MB files, and AI capabilities. For context: running multi-step workflows on Zapier requires a paid plan starting at $19.99/month, and costs scale quickly with task volume — many small businesses end up paying $49/month or more for workflows that run comfortably on Make.com Core at $9/month.</p>
+<h2 id="how-to-maximize-the-free-plan-before-upgrading">How to Maximize the Free Plan Before Upgrading</h2>
+<p>If you&#x27;re not ready to pay, these strategies stretch the free plan as far as possible.</p>
+<p>Use webhook (INSTANT) triggers exclusively. This is non-negotiable on the free plan. Webhook triggers consume zero operations while idle — polling triggers will exhaust your budget before the month is half over.</p>
+<p>Choose your 2 active scenarios strategically. Pick the two workflows that deliver the highest business impact. A lead capture automation and a client notification automation typically provide the most value per operation spent.</p>
+<p>Turn off scenarios you&#x27;re not actively using. You can build and save more than 2 scenarios — you just can&#x27;t have more than 2 active simultaneously. If you only need a specific workflow on certain days or weeks, toggle it on as needed and deactivate the other.</p>
+<p>Minimize modules per scenario. Every module costs 1 operation per run. If you can achieve the same result with 3 modules instead of 4, you save 25% of operations over the month. Sometimes combining steps or removing optional modules makes the difference.</p>
+<p>Test with &quot;Run once&quot; instead of leaving scenarios active. When building and debugging, use the manual &quot;Run once&quot; button instead of activating the scenario. This gives you controlled, predictable operation usage during development.</p>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Before upgrading, check your operation usage in Make.com&#x27;s dashboard (Organization → Usage). If you&#x27;re consistently using fewer than 500 operations per month, the free plan is still serving you well — don&#x27;t upgrade out of anxiety. If you&#x27;re hitting 800+ regularly, the Core plan at $9/month is the most cost-effective upgrade in the automation tool market.</div>
+<h2 id="who-the-free-plan-is-actually-built-for">Who the Free Plan Is Actually Built For</h2>
+<p>The free plan works well for three specific groups. People evaluating Make.com before committing — you get the full visual builder, 3,000+ integrations, and enough operations to build and test 2-3 real workflows without spending anything. Freelancers and solopreneurs with low-volume workflows — if you process fewer than 50 events per month across 1-2 automations, the free plan handles it comfortably. Side projects and personal automation — managing a small newsletter, tracking a hobby project, or automating personal tasks that don&#x27;t require high volume or multiple simultaneous scenarios.</p>
+<p>The free plan is not built for agencies managing multiple clients, businesses running 3+ concurrent workflows, or anyone relying on polling-based triggers for time-sensitive data.</p>
+<h2 id="where-make-com-s-free-plan-stands-against-competitors">Where Make.com&#x27;s Free Plan Stands Against Competitors</h2>
+<p>Zapier&#x27;s free plan includes 100 tasks per month and limits you to two-step Zaps — one trigger and one action, no multi-step workflows. One important difference: Zapier triggers don&#x27;t count as tasks, only actions do. So a two-step Zap uses 1 task per run, not 2. Zapier also allows unlimited Zaps (not capped at 5), but the 100-task monthly limit restricts how much they can actually run. Make.com&#x27;s free plan gives you 10x the volume (1,000 credits), multi-step scenarios with routers, filters, and branching logic, and the same visual builder as paid plans. The trade-off is that Make.com limits you to 2 active scenarios, while Zapier lets you create as many two-step Zaps as your task budget allows. For most business use cases, one multi-step Make.com scenario replaces 2-3 Zapier Zaps — and you have far more capacity to run them.</p>
+<p>n8n offers a free self-hosted option with unlimited executions, but requires a server, Docker setup, and ongoing maintenance. n8n Cloud starts at around €20/month and charges per workflow execution (not per step like Make.com), which can be cheaper for complex scenarios but more expensive at low volume. If you have the technical skills, n8n&#x27;s self-hosted tier is more powerful. If you don&#x27;t, Make.com&#x27;s free plan gets you running in minutes with zero infrastructure.</p>
+<h2 id="what-happens-at-the-edges-details-most-articles-skip">What Happens at the Edges — Details Most Articles Skip</h2>
+<p>Credits reset each billing cycle. If you use 400 of your 1,000 monthly credits, the remaining 600 don&#x27;t carry over — most users report that unused free plan credits simply expire at month&#x27;s end. Plan your usage accordingly, especially if you have seasonal volume spikes.</p>
+<p>If you upgrade to Core and later downgrade to Free, Make.com deactivates all your scenarios. You&#x27;ll need to manually choose which 2 to reactivate — the rest stay saved but dormant. If you built 8 active workflows on Core, going back to Free means 6 of them stop running immediately.</p>
+<p>The free plan includes access to Make.com&#x27;s Data Store feature for storing key-value data within scenarios, but limits vary by plan and can change — check your plan&#x27;s comparison page before relying on it for production workflows. For most automations in this guide, Google Sheets serves the same purpose without hitting Data Store constraints.</p>
+<p>One more nuance worth understanding: Make.com&#x27;s help center confirms that trigger modules consume 1 credit per run even when no new data is found. This applies to all polling triggers — every scheduled check costs you, whether there&#x27;s data or not. Webhook triggers eliminate this entirely because there&#x27;s no scheduled run to charge for.</p>
+<h2 id="apps-used-in-free-plan-automations">Apps Used in Free Plan Automations</h2>
+<p>Every automation referenced in this guide uses tools with free tiers. Make.com orchestrates the workflows — the free plan includes 1,000 operations per month. Google Sheets stores data and serves as a lightweight database. Slack delivers team notifications instantly. Gmail sends automated emails from your personal account. Typeform captures client intake data through conversational forms. Calendly handles booking and scheduling. Stripe processes payments and triggers event alerts. Facebook Lead Ads captures leads from paid ad campaigns. All of these connect to Make.com on the free plan with no restrictions.</p>
+<div class="verdict"><strong>Bottom line:</strong> Make.com&#x27;s free plan is more capable than most people assume — and more limited than the marketing suggests. With 1,000 operations, 2 active scenarios, and webhook triggers, you can run 1-2 genuine business workflows at low to moderate volume indefinitely. That&#x27;s enough to validate whether automation works for your business before spending anything. But the moment you need a third concurrent workflow, process more than a few hundred events, or use polling triggers, the free plan becomes a bottleneck. The Core plan at $9/month removes every constraint that matters — unlimited scenarios, 10,000 operations, and 1-minute polling. For most small businesses, it&#x27;s the best $9/month you&#x27;ll spend. Start on the free plan, build your highest-value workflow today, and upgrade when the limits tell you to — not before.</div>
+<div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<div class="faq-item"><h3 class="faq-q">Is Make.com&#x27;s free plan really free forever?</h3><p class="faq-a">Yes. There&#x27;s no trial period and no credit card required. The free plan has no time limit — you can use it indefinitely as long as you stay within the 1,000 operations and 2 active scenarios per month.</p></div>
+<div class="faq-item"><h3 class="faq-q">What happens when I hit 1,000 operations?</h3><p class="faq-a">Your active scenarios pause until the next billing cycle (monthly reset). No data is lost, but no new events are processed until the limit resets or you upgrade. Make.com sends a warning at 80% usage so you can plan ahead.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I build more than 2 scenarios on the free plan?</h3><p class="faq-a">Yes — you can build and save as many scenarios as you want. The limit is on active (turned on) scenarios: only 2 can run simultaneously. You can switch which ones are active at any time.</p></div>
+<div class="faq-item"><h3 class="faq-q">Do webhook triggers use operations while waiting?</h3><p class="faq-a">No. Webhook (INSTANT) triggers don&#x27;t consume credits while waiting — there&#x27;s no scheduled run, so no credit is used. Credits are consumed only when data arrives and the scenario actually executes. This is why we recommend webhook triggers for every free plan automation.</p></div>
+<div class="faq-item"><h3 class="faq-q">Is the Core plan $9/month or more?</h3><p class="faq-a">$9/month when billed annually ($108/year). Monthly billing is higher — some sources list it around $10.59/month. Annual billing saves roughly 15% and is the better deal for any ongoing automation setup.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I use Make.com&#x27;s AI features on the free plan?</h3><p class="faq-a">No. Make AI Tools and Make AI Agents are only available on Core ($9/mo) and above. The free plan includes the full visual builder and 3,000+ app integrations, but AI-powered modules require a paid plan.</p></div>
+<div class="faq-item"><h3 class="faq-q">Do unused credits roll over to the next month?</h3><p class="faq-a">Based on how Make.com&#x27;s billing works, credits reset at the start of each cycle — unused credits on the free plan don&#x27;t carry over. Check your Organization → Usage dashboard to confirm your current cycle.</p></div>
+<div class="faq-item"><h3 class="faq-q">What happens if I upgrade to Core and then downgrade back to Free?</h3><p class="faq-a">Make.com deactivates all your scenarios immediately. You&#x27;ll need to manually choose which 2 to keep active — the rest stay saved but won&#x27;t run until you reactivate them or upgrade again.</p></div>
+</div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="facebook-instagram-leads-google-sheets-automation.html" rel="noopener">How to Send Facebook and Instagram Leads to Google Sheets Automatically</a></li><li><a href="typeform-client-intake-google-sheets-automation.html" rel="noopener">Typeform to Google Sheets and Slack: Automate Form Responses with Make.com</a></li><li><a href="calendly-booking-onboarding-checklist-automation.html" rel="noopener">Calendly Automation: Create an Onboarding Checklist and Notify Your Team</a></li><li><a href="stripe-payment-failed-automation.html" rel="noopener">Stripe Payment Failed? Automatically Alert Your Team and Email the Customer</a></li><li><a href="typeform-welcome-email-google-drive-automation.html" rel="noopener">Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com</a></li><li><a href="multi-source-lead-tracking-google-sheets-automation.html" rel="noopener">Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com</a></li><li><a href="zapier-too-expensive-make-com-alternative.html" rel="noopener">Zapier Too Expensive? Switch to Make.com and Save Up to $840/year</a></li><li><a href="make-com-vs-n8n-small-business.html" rel="noopener">Make.com vs n8n: Which Automation Tool Is Right for Non-Technical Small Business?</a></li></ul></div>
+    </main>
+
+    <div class="cta-card" style="padding:0; background:none; border:none;">
+        <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored">
+            <img 
+                src="assets/banners/AD-728x90 – 2.png" 
+                alt="Set up your own workflows for free with Make.com"
+                style="width:100%; border-radius:12px; display:block; cursor:pointer;"
+            >
+        </a>
+    </div>
+
+    <footer>
+        <span>© 2026 IntegrateHub.io</span>
+        <span>
+            <a href="about.html">About</a>
+            &nbsp;·&nbsp;
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+            &nbsp;·&nbsp;
+            <a href="privacy-policy.html">Privacy Policy</a>
+            &nbsp;·&nbsp;
+            <a href="/">← All Guides</a>
+        </span>
+    </footer>
+
+</div>
+
+</body>
+</html>

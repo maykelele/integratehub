@@ -1,6 +1,6 @@
 # IntegrateHub.io — Content & Roadmap
 
-## Published Articles (8)
+## Published Articles (9)
 
 | # | Slug | Type | Date | Category |
 |---|------|------|------|----------|
@@ -12,9 +12,12 @@
 | 6 | typeform-client-intake-google-sheets-automation | how-to | 2026-02-26 | onboarding |
 | 7 | typeform-welcome-email-google-drive-automation | how-to | 2026-02-28 | onboarding |
 | 8 | multi-source-lead-tracking-google-sheets-automation | how-to | 2026-03-02 | lead-capture |
+| 9 | make-com-free-plan-what-you-can-build | how-to | 2026-03-05 | automation-strategy |
 
 ### Pending Internal Links
-- Add link to article 8 FROM articles 2 and 6. Don't update lastmod.
+
+
+Do NOT update sitemap lastmod on these — internal link additions are not substantial changes.
 
 ## Affiliate Programs
 
@@ -40,7 +43,7 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - Stripe new customer → Google Drive folder + welcome email + Slack
 
 ### Write After 10+ How-To Articles Exist
-- Make.com Free Plan: What You Can Actually Build (cornerstone/pillar article)
+- ~~Make.com Free Plan: What You Can Actually Build (cornerstone/pillar article)~~ → PUBLISHED as #9
 - Make.com vs Zapier Professional plan — specific pricing breakdown
 
 ### Requires New Affiliate First
@@ -62,4 +65,4 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 ## Content Mix Target
 - 70% how-to tutorials (affiliate conversion)
 - 30% comparison articles (higher buyer intent)
-- Current: 6 how-to / 2 comparison = 75% / 25% ✅
+- Current: 7 how-to / 2 comparison = 78% / 22% (on track — next article should be comparison or strategy to rebalance)

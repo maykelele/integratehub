@@ -26,6 +26,8 @@
 - INSTANT modules: always recommend over polling, explain difference.
 - CTA tags: use CTA[key]: format. Plain CTA: defaults to Make.com. Place at natural points, not aggressively.
 - Inline links: [text](url) for external references in Tech Tips and paragraphs.
+- **Cornerstone/pillar articles:** no screenshots needed. Focus on math, tables, internal links to how-to tutorials. Type stays `how-to` in generator for schema purposes.
+- **Pricing claims:** always add "(annual billing)" on first mention. Include monthly price if known. Verify against official pricing page before publish.
 
 ## Technical Learnings
 - Google Drive is a restricted API — requires custom OAuth client (free, one-time). Google Sheets works with default Make.com OAuth.
@@ -38,6 +40,10 @@
 - Custom Webhook: no API key, no data structure, no special settings needed. Test by pasting URL with params in browser.
 - Facebook Lead Ads testing: Meta testing tool (developers.facebook.com/tools/lead-ads-testing/) sends dummy data. Polling "Watch Leads" with "All" can pick up test leads without running an ad.
 - Upsert pattern: Search Rows (by email) → Router → "Lead Exists" (Total bundles > 0) → Update a Row / fallback → Add a Row.
+- **Make.com credits vs operations:** Make rebranded operations → credits (mid-2025). Standard modules = 1 credit. AI modules and Code module can consume >1 credit. For free plan articles, this distinction matters less because AI Tools aren't available on free.
+- **Make.com polling cost:** Trigger modules consume 1 credit per run even when no new data is found. Webhook (INSTANT) triggers consume 0 credits while idle. On free plan (15-min interval), one polling trigger burns ~2,880 credits/month — 3x the entire budget.
+- **Make.com free plan limits (verified March 2026):** 1,000 credits/mo, 2 active scenarios, 15-min polling, 0.5 GB transfer, 5 MB max file size. No AI Tools, no AI Agents. Credits don't roll over.
+- **Make.com Core plan ($9/mo annual, ~$10.59 monthly):** 10,000 credits, unlimited scenarios, 1-min polling, 5 GB transfer, 100 MB file size, AI Tools + Agents included, API access (60 calls/min).
 
 ## Generator Backlog
 1. ~~Image alt tag fix~~ — FIXED. Cursor prompt: `In generator.py, find alt_attr = '' inside Image handler. Change to alt_attr = alt_text[:125] if alt_text else ''`
@@ -48,3 +54,5 @@
 - Homepage stays Make.com focused until 15+ articles.
 - Comparison articles convert better than how-to (higher buyer intent).
 - Content plan and article tracking live in CONTENT.md.
+- Cornerstone article (#9 make-com-free-plan) published early (at 9 articles instead of 10+) because research was thorough and content quality justified it.
+- Pricing verification workflow: check official pricing page + own dashboard screenshot before publishing any pricing claims. Third-party sources often have outdated data.
