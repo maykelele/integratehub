@@ -8,6 +8,8 @@ Meta: Make.com vs Zapier for small business — honest pricing comparison. See e
 
 Introduction: If you're paying $50–$100 a month for Zapier and quietly wondering whether you're getting your money's worth, you're not alone. This Make.com vs Zapier comparison won't tell you to cancel immediately — it will give you honest math so you can decide the best Zapier alternative for your small business.
 
+CTA[newsletter]: Get one tested automation tutorial per week — no fluff, no spam.
+
 H2: Why Zapier Gets Expensive for Small Business
 
 Zapier pricing is based on "tasks" — every individual action your automation performs counts as one task toward your monthly limit. On the surface, 2,000 tasks for $19.99/month sounds generous. The reality hits when you build a real workflow. A simple automation that receives a Facebook lead, adds it to Google Sheets, sends a Slack notification, and emails your sales team counts as 4 tasks — for a single lead. If you receive 200 leads per month, that's 800 tasks from one workflow alone. Most small businesses hit the task limits quickly and upgrade to higher Professional plan tiers, which can reach $49/month or more depending on usage.
@@ -786,6 +788,8 @@ Meta: Track leads from Facebook, Typeform, and website forms in one Google Sheet
 
 Introduction: Your leads come from everywhere — Facebook ads, Typeform intake forms, website contact pages — and they all end up in different places. Some sit in Meta's lead center, some in Typeform's dashboard, some in email. You check three tools, copy data into spreadsheets, and hope you haven't missed anyone. This Make.com tutorial shows you how to track leads from multiple sources in one Google Sheet automatically, using upsert logic that prevents duplicate entries when the same person submits through more than one channel.
 
+CTA[newsletter]: Get one tested automation tutorial per week — no fluff, no spam.
+
 H2: Why Most Small Businesses Lose Leads Across Multiple Channels
 
 Most businesses run more than one lead capture channel. A Facebook ad campaign collects names and emails. A Typeform intake form qualifies prospects on the website. A simple contact form catches general inquiries. The problem is not capturing the lead — it's knowing where every lead lives and which channel they came from. When the data sits in three different dashboards, follow-up is slow, leads slip through the cracks, and no one can answer the question: "How many new leads came in this week?" A single Google Sheet that auto-populates from every source solves this. And upsert logic — update if the lead exists, insert if they're new — ensures one person never appears twice, even if they submit through multiple channels.
@@ -979,6 +983,8 @@ Category: automation-strategy
 Meta: Make.com free plan includes 1,000 operations and 2 active scenarios. See exactly what you can build, when to upgrade, and real math on limits.
 
 Introduction: Every article about Make.com mentions the free plan — but nobody shows you what 1,000 operations actually gets you in practice. Can you run a real business workflow on it, or is it just a demo tier that forces an upgrade? This guide breaks down the Make.com free plan with real math and real examples from automations we've built and tested, so you know exactly what fits, what doesn't, and when the $9/month Core plan (annual billing) becomes worth it.
+
+CTA[newsletter]: Get one tested automation tutorial per week — no fluff, no spam.
 
 H2: Make.com Free Plan Limits — What You Actually Get
 

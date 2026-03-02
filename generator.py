@@ -70,6 +70,10 @@ AFFILIATE_LINKS = {
         "url": "https://typeform.cello.so/vGdCoE97A4Z",
         "cta_text": "Try Typeform free →",
     },
+    "newsletter": {
+        "url": "https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=inline_cta",
+        "cta_text": "Subscribe free →",
+    },
     # Dodaj nove affiliate partnere ovde:
     # "calendly": {
     #     "url": "https://calendly.com/?ref=integratehub",
@@ -706,6 +710,10 @@ def generate_index(template_html, links):
         '<div class="breadcrumb">\n        \n    </div>', '')
 
     page = page.replace('{{AFFILIATE_LINK}}', MAKE_AFFILIATE_LINK)
+    page = page.replace(
+        '<div class="newsletter-cta"',
+        '<!-- newsletter hidden on index --><div class="newsletter-cta" style="display:none"'
+    )
     return page
 
 

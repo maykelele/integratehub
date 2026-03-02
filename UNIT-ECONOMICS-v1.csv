@@ -1,0 +1,113 @@
+INTEGRATEHUB.IO — UNIT ECONOMICS MODEL v1.0
+March 2026,,,,,,
+,,,,,,
+SECTION 1: MAKE.COM COMMISSION ASSUMPTIONS,,,,,,
+,,,,,,
+Parameter,Value,Notes,,,,
+Commission rate,35%,Per referred paying customer,,,,
+Commission period,12 months,Not lifetime — resets after 12mo,,,,
+Average customer plan,€25/mo,Conservative mid-point of €20-30 range,,,,
+Commission per customer per month,€8.75,35% × €25,,,,
+Average SMB retention,6 months,Conservative — many cancel or downgrade,,,,
+Effective revenue per referral (lifetime),€52.50,€8.75 × 6 months,,,,
+,,,,,,
+SECTION 2: FUNNEL ASSUMPTIONS,,,,,,
+,,,,,,
+Funnel Stage,Conservative Rate,Optimistic Rate,Notes,,,
+Sessions → Article reads,70%,85%,Bounce rate adjustment,,,
+Article reads → Affiliate link clicks,1.5%,3%,CTA placement quality,,,
+Clicks → Trial signups,25%,40%,Make.com free plan converts well,,,
+Trial → Paid conversion,35%,50%,Make.com has good trial-to-paid,,,
+Overall: Sessions → Paying customer,0.09%,0.51%,Full funnel combined,,,
+,,,,,,
+SECTION 3: REQUIRED TRAFFIC PER REVENUE TARGET,,,,,,
+,,,,,,
+Monthly Revenue Target,New Customers Needed/Mo,Sessions Needed (Conservative),Sessions Needed (Optimistic),Cumulative Active Customers,Monthly Make.com Commission
+€300,6,6667,1176,35,€306
+€500,10,11111,1961,60,€525
+€750,14,15556,2745,84,€735
+€1000,19,21111,3725,114,€998
+€1500,29,32222,5686,171,€1496
+€2000,38,42222,6667,228,€1995
+€2500,48,53333,8497,285,€2494
+€3500,67,74444,11765,399,€3491
+,,,,,,
+SECTION 4: MULTI-AFFILIATE REVENUE MODEL,,,,,,
+,,,,,,
+Assumes 4 active affiliate programs by Month 12,,,,,,
+,,,,,,
+Affiliate Program,Avg Commission/Mo Per Customer,Target Active Customers (M24),Monthly Revenue Contribution,Notes,,
+Make.com,€8.75,120,€1050,35% × €25 avg plan,,
+Typeform,€5.00,40,€200,Estimate — lower ARPU,,
+n8n Cloud,€6.00,30,€180,Growing tool — good potential,,
+HubSpot,€15.00,15,€225,Higher ARPU — harder to convert,,
+Airtable,€5.50,25,€138,Mid-range commission,,
+TOTAL,,,€1793,Conservative M24 multi-affiliate estimate,,
+,,,,,,
+SECTION 5: NEWSLETTER REVENUE MODEL,,,,,,
+,,,,,,
+Subscriber Count,Network CPM (Beehiiv Boost),Direct Sponsorship CPM,Sends/Month,Monthly Revenue (Network),Monthly Revenue (Direct)
+500,€8,—,2,€8,€0
+1000,€10,—,2,€20,€0
+2000,€12,—,2,€48,€0
+3000,€15,€35,2,€90,€210
+5000,€18,€40,2,€180,€400
+8000,€20,€45,2,€320,€720
+10000,€22,€50,2,€440,€1000
+,,,,,,
+Note: Direct sponsorships require active outreach and are harder to secure before 5K subscribers,,,,,,
+Realistic assumption: network ads only until Month 18-24,,,,,,
+,,,,,,
+SECTION 6: BLUEPRINT SALES MODEL,,,,,,
+,,,,,,
+Scenario,Monthly Traffic,Email List,Bundle Price,Conversion Rate,Monthly Revenue,Notes
+Conservative (M18),8000,1500,€39,0.10%,€59,Low conversion without brand trust
+Mid (M24),15000,3000,€39,0.20%,€234,Better trust + larger list
+Optimistic (M30),25000,5000,€39,0.30%,€293,Direct sponsorship + affiliates pull attention
+,,,,,,
+Conclusion: Blueprint sales are meaningful only as supplementary income — not a primary revenue stream at this scale,,,,,,
+,,,,,,
+SECTION 7: COMBINED REVENUE PROJECTIONS,,,,,,
+,,,,,,
+Timeframe,Affiliate (Conservative),Affiliate (Realistic),Newsletter,Blueprint Sales,TOTAL Conservative,TOTAL Realistic
+Month 6,€50,€200,€0,€0,€50,€200
+Month 12,€150,€400,€30,€0,€180,€430
+Month 18,€350,€750,€80,€50,€480,€880
+Month 24,€700,€1400,€150,€150,€1000,€1700
+Month 30,€900,€1900,€250,€200,€1350,€2350
+Month 36,€1200,€2500,€400,€250,€1850,€3150
+,,,,,,
+SECTION 8: BREAK-EVEN ANALYSIS,,,,,,
+,,,,,,
+Opportunity cost: 15h/week × 4 weeks = 60h/month,,,,,,
+Minimum acceptable hourly rate: €15/h (low bar),,,,,,
+Monthly break-even revenue: €900,,,,,,
+,,,,,,
+At realistic trajectory: Break-even around Month 20-22,,,,,,
+At conservative trajectory: Break-even around Month 28-30,,,,,,
+,,,,,,
+Key question at each checkpoint: Is revenue/hour trending toward or away from acceptable rate?,,,,,,
+,,,,,,
+SECTION 9: SENSITIVITY ANALYSIS — WHAT CHANGES THE MATH MOST,,,,,,
+,,,,,,
+Variable,Current Assumption,If Better (+50%),If Worse (-50%),Impact Level
+Affiliate CTR from articles,1.5%,+€500/mo at M24,−€350/mo at M24,HIGH
+Trial-to-paid conversion,35%,+€300/mo at M24,−€250/mo at M24,HIGH
+Average customer retention,6 months,+€400/mo at M24,−€350/mo at M24,HIGH
+Make.com commission rate,35%,+€350/mo at M24,−€350/mo at M24,HIGH
+Monthly sessions,15000 at M24,+€700/mo,−€500/mo,VERY HIGH
+Newsletter CPM,€15,+€50/mo,−€30/mo,LOW
+Blueprint conversion,0.20%,+€100/mo,−€80/mo,LOW
+,,,,,,
+Conclusion: Traffic volume and affiliate CTR are the highest-leverage variables. Newsletter and blueprints move the needle less than assumed.,,,,,,
+,,,,,,
+SECTION 10: RISK-ADJUSTED PROBABILITY,,,,,,
+,,,,,,
+Scenario,Probability,Month 36 Revenue,Key Condition
+Conservative achieved,40%,€1000-1800/mo,No major Google updates or affiliate changes
+Realistic achieved,35%,€2000-3500/mo,4+ affiliates active + steady SEO growth
+Below conservative,20%,€300-1000/mo,AI erosion >40% or Make.com affiliate changes
+Project abandoned,5%,€0,Burnout before month 18
+,,,,,,
+Expected value (probability-weighted): ~€1400-1800/mo at Month 36,,,,,,
+This is the honest central estimate for planning purposes.,,,,,,
