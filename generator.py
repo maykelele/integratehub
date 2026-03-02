@@ -70,6 +70,7 @@ AFFILIATE_LINKS = {
         "url": "https://typeform.cello.so/vGdCoE97A4Z",
         "cta_text": "Try Typeform free →",
     },
+    # --- Newsletter opt-in (not an affiliate — uses CTA[newsletter]: tag) ---
     "newsletter": {
         "url": "https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=inline_cta",
         "cta_text": "Subscribe free →",
@@ -148,6 +149,8 @@ CATEGORIES = {
 #                   Dostupni ključevi: make, typeform (dodaj nove u AFFILIATE_LINKS)
 #                   Primer: CTA[typeform]: Build your intake form for free.
 #                   Primer: CTA[make]: Build this automation on Make.com's free plan.
+#                   Primer: CTA[newsletter]: Get one tested automation tutorial per week.
+#                   Napomena: newsletter nije affiliate — koristi se za Beehiiv opt-in CTA.
 #
 #   Workflow Steps: Otvara numerisanu listu koraka sa H2 naslovom iznad
 #                   Tekst posle taga postaje naslov sekcije
