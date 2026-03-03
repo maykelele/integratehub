@@ -59,11 +59,11 @@ Q: What happens to my Zapier automations if I switch?
 A: Nothing — they keep running until you manually pause them. You can migrate one workflow at a time and run both platforms in parallel during the transition.
 
 Internal Links:
-How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
-Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
-Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
-Make.com Free Plan: What You Can Actually Build|make-com-free-plan-what-you-can-build.html
-Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|lead-follow-up-slack-reminder-automation.html
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|/facebook-instagram-leads-google-sheets-automation
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calendly-booking-onboarding-checklist-automation
+Make.com Free Plan: What You Can Actually Build|/make-com-free-plan-what-you-can-build
+Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|/lead-follow-up-slack-reminder-automation
 
 ---
 
@@ -90,7 +90,7 @@ Image: assets/screenshots/screenshot-facebook-leads-1.png|Make.com scenario edit
 Table: What Gets Captured Automatically
 Form Field|Google Sheets Column|Example Value
 First Name + Last Name|A: Name|Sarah Johnson
-Email Address|B: Email|sarah@company.com
+Email Address|B: Email|sarah[at]company.com
 Phone Number|C: Phone|+1 555 0123
 Ad Name|D: Source|Summer Promo 2026
 Submission Time|E: Date|2026-02-20
@@ -135,12 +135,12 @@ Q: What does "From now on" mean when setting up the trigger?
 A: Make.com asks from which point to start processing leads. "From now on" means only new leads submitted after you activate the scenario will be captured. Choose "All" only if you want to import existing leads retroactively.
 
 Internal Links:
-Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
-Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
-Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
-Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|typeform-client-intake-google-sheets-automation.html
-Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com|multi-source-lead-tracking-google-sheets-automation.html
-Make.com Free Plan: What You Can Actually Build|make-com-free-plan-what-you-can-build.html
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calendly-booking-onboarding-checklist-automation
+Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|/typeform-client-intake-google-sheets-automation
+Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com|/multi-source-lead-tracking-google-sheets-automation
+Make.com Free Plan: What You Can Actually Build|/make-com-free-plan-what-you-can-build
 
 ---
 
@@ -233,8 +233,8 @@ Q: Do I need a paid Make.com plan?
 A: The free Make.com plan includes 1,000 operations per month. Each time this scenario runs, it uses 3 operations — one per module. For most small businesses, the free plan is more than enough to get started.
 
 Internal Links:
-Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
-How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|/facebook-instagram-leads-google-sheets-automation
 
 ---
 
@@ -269,7 +269,7 @@ CTA: You can build this entire automation using Make.com's free plan in about 25
 Table: What Gets Captured Automatically
 Field|Google Sheets Column|Example Value
 Invitee Name|A: Name|Sarah Johnson
-Invitee Email|B: Email|sarah@company.com
+Invitee Email|B: Email|sarah[at]company.com
 Event Type|C: Event Type|Discovery Call
 Scheduled Date & Time|D: Date & Time|2026-02-26 15:30
 Status|E: Status|New
@@ -372,11 +372,11 @@ Q: Do I need a paid Make.com plan?
 A: The free plan includes 1,000 operations per month. Each time this scenario runs, it uses 4 operations — one per module. That covers 250 bookings per month, more than enough for most freelancers and small agencies.
 
 Internal Links:
-How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
-Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
-Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
-Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|typeform-client-intake-google-sheets-automation.html
-Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com|typeform-welcome-email-google-drive-automation
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|/facebook-instagram-leads-google-sheets-automation
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
+Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|/typeform-client-intake-google-sheets-automation
+Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com|/typeform-welcome-email-google-drive-automation
 
 ---
 
@@ -512,12 +512,12 @@ Q: How many automations can I run on Make.com’s free plan?
 A: The free plan includes 1,000 operations per month. A typical 4-step workflow uses 4 operations per run, which is about 250 runs per month — enough to validate multiple workflows before upgrading.
 
 Internal Links:
-Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
-How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
-Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
-Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
-Make.com Free Plan: What You Can Actually Build|make-com-free-plan-what-you-can-build.html
-Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|lead-follow-up-slack-reminder-automation.html
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calendly-booking-onboarding-checklist-automation
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|/facebook-instagram-leads-google-sheets-automation
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+Make.com Free Plan: What You Can Actually Build|/make-com-free-plan-what-you-can-build
+Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|/lead-follow-up-slack-reminder-automation
 
 ---
 
@@ -550,7 +550,7 @@ CTA[typeform]: Need a client intake form? Build one in minutes with Typeform's d
 Table: What Gets Captured Automatically
 Form Field|Google Sheets Column|Example Value
 Full Name|A: Name|Sarah Mitchell
-Email Address|B: Email|sarah@brightwave.co
+Email Address|B: Email|sarah[at]brightwave.co
 Company Name|C: Company|Brightwave Marketing
 Budget Range|D: Budget|$5K-10K
 Project Description|E: Project|Website redesign with landing page and CRM integration
@@ -773,10 +773,10 @@ Q: Do I need a paid Make.com plan?
 A: The free plan includes 1,000 operations per month. Each time this scenario runs, it uses 4 operations — one per module. That covers 250 client submissions per month, more than enough for most freelancers and small agencies.
 
 Internal Links:
-Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|typeform-client-intake-google-sheets-automation.html
-Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
-Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
-Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
+Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|/typeform-client-intake-google-sheets-automation
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calendly-booking-onboarding-checklist-automation
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
 
 ---
 
@@ -817,7 +817,7 @@ CTA[make]: You can build all three scenarios on Make.com's free plan — no cred
 
 Table: What Gets Tracked in the Lead Tracker Master Sheet
 Column|Field|Example Value
-A: Email|Email address (lookup key for upsert)|sarah@brightwave.co
+A: Email|Email address (lookup key for upsert)|sarah[at]brightwave.co
 B: Name|Full name|Sarah Mitchell
 C: Phone|Phone number|+1 555 0142
 D: Source|Which channel(s) the lead came from|Facebook; Typeform
@@ -839,7 +839,7 @@ We start with the website webhook scenario because it's the easiest to test — 
 
 2. Click the + button on the canvas and search for "Webhooks" — select "Custom webhook." Click "Add" to create a new webhook, name it (e.g. "Website Contact Form"), and click Save. Make.com generates a unique URL — this is the endpoint your website form will send data to.
 
-3. Click "Run once" to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?name=Maria%20Santos&email=maria@thegreenleaf.co&phone=+447700900123&source=Website&notes=Inquiry%20via%20contact%20page — the browser will show "Accepted" and Make.com will capture the five fields automatically.
+3. Click "Run once" to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?name=Maria%20Santos&email=maria[at]thegreenleaf.co&phone=+447700900123&source=Website&notes=Inquiry%20via%20contact%20page — the browser will show "Accepted" and Make.com will capture the five fields automatically.
 
 Tech Tip: For testing, you don't need a real website form. Simply paste the webhook URL with parameters into your browser — Make.com receives it identically to a form POST request. When you later connect a real contact form, just set the form action to this same webhook URL.
 
@@ -968,12 +968,12 @@ Q: Why use a Router instead of just trying to update and catching the error?
 A: The Router with a fallback branch is more explicit and easier to debug. You can see exactly which path each lead took in the execution log. Error-handler based upsert works too, but it's harder to explain and troubleshoot — especially for non-technical users.
 
 Internal Links:
-How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
-Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|typeform-client-intake-google-sheets-automation.html
-Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
-Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
-Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com|typeform-welcome-email-google-drive-automation.html
-Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|lead-follow-up-slack-reminder-automation.html
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|/facebook-instagram-leads-google-sheets-automation
+Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|/typeform-client-intake-google-sheets-automation
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calendly-booking-onboarding-checklist-automation
+Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com|/typeform-welcome-email-google-drive-automation
+Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|/lead-follow-up-slack-reminder-automation
 
 ---
 
@@ -1158,15 +1158,15 @@ Q: What happens if I upgrade to Core and then downgrade back to Free?
 A: Make.com deactivates all your scenarios immediately. You'll need to manually choose which 2 to keep active — the rest stay saved but won't run until you reactivate them or upgrade again.
 
 Internal Links:
-How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
-Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|typeform-client-intake-google-sheets-automation.html
-Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
-Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
-Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com|typeform-welcome-email-google-drive-automation.html
-Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com|multi-source-lead-tracking-google-sheets-automation.html
-Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
-Make.com vs n8n: Which Automation Tool Is Right for Non-Technical Small Business?|make-com-vs-n8n-small-business.html
-Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|lead-follow-up-slack-reminder-automation.html
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|/facebook-instagram-leads-google-sheets-automation
+Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|/typeform-client-intake-google-sheets-automation
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calendly-booking-onboarding-checklist-automation
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
+Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com|/typeform-welcome-email-google-drive-automation
+Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com|/multi-source-lead-tracking-google-sheets-automation
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+Make.com vs n8n: Which Automation Tool Is Right for Non-Technical Small Business?|/make-com-vs-n8n-small-business
+Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|/lead-follow-up-slack-reminder-automation
 
 ---
 
@@ -1330,10 +1330,10 @@ Q: Why not use a webhook trigger instead of polling?
 A: There's no external event to trigger a webhook when a lead goes cold — the absence of action is the trigger. Polling is the only way to detect that a lead has sat untouched for a specific time period. This is one of the few cases where polling is the right approach.
 
 Internal Links:
-Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com|multi-source-lead-tracking-google-sheets-automation.html
-How to Send Facebook and Instagram Leads to Google Sheets Automatically|facebook-instagram-leads-google-sheets-automation.html
-Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|typeform-client-intake-google-sheets-automation.html
-Calendly Automation: Create an Onboarding Checklist and Notify Your Team|calendly-booking-onboarding-checklist-automation.html
-Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|stripe-payment-failed-automation.html
-Make.com Free Plan: What You Can Actually Build|make-com-free-plan-what-you-can-build.html
-Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|zapier-too-expensive-make-com-alternative.html
+Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com|/multi-source-lead-tracking-google-sheets-automation
+How to Send Facebook and Instagram Leads to Google Sheets Automatically|/facebook-instagram-leads-google-sheets-automation
+Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|/typeform-client-intake-google-sheets-automation
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calendly-booking-onboarding-checklist-automation
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
+Make.com Free Plan: What You Can Actually Build|/make-com-free-plan-what-you-can-build
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative

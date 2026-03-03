@@ -676,7 +676,7 @@ def generate_index(template_html, links):
 
         cards += f"""
         <div class="card">
-            <a href="{l['slug']}.html" rel="noopener">
+            <a href="/{l['slug']}" rel="noopener">
                 {'<p class="card-meta">' + html.escape(meta_line) + '</p>' if meta_line else ''}
                 <h2>{html.escape(l['title'])}</h2>
                 <p>{html.escape(description)}</p>
@@ -701,6 +701,7 @@ def generate_index(template_html, links):
     page = page.replace('{{MAIN_CONTENT}}', index_content)
     page = page.replace('{{SCHEMA_MARKUP}}', '')
     page = page.replace('{{SLUG}}', 'index')
+    page = page.replace('{{CANONICAL_URL}}', '')  # homepage canonical = https://integratehub.io/
 
     # Index nema article meta, TOC, ili breadcrumb detalje
     page = page.replace('{{ARTICLE_META}}', '')
@@ -796,6 +797,8 @@ def generate_site():
         # --- Popunjavanje template-a ---
         page = template_html.replace('{{TITLE}}', title)
         page = page.replace('{{SLUG}}', slug)
+        canonical_url = slug  # clean URL without .html
+        page = page.replace('{{CANONICAL_URL}}', canonical_url)
         page = page.replace('{{META_DESCRIPTION}}', meta_desc)
         page = page.replace('{{MAIN_CONTENT}}', main_body)
         page = page.replace('{{SCHEMA_MARKUP}}', schema_html)
