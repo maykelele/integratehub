@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://integratehub.io/lead-follow-up-slack-reminder-automation.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours (Make.com) | IntegrateHub.io</title>
+    <meta name="description" content="Automate lead follow-up reminders with Make.com and Slack. Get alerts when leads go cold for 24+ hours — no leads slip through the cracks.">
+    <meta property="og:title" content="Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours (Make.com)">
+    <meta property="og:description" content="Automate lead follow-up reminders with Make.com and Slack. Get alerts when leads go cold for 24+ hours — no leads slip through the cracks.">
+    <meta property="og:type" content="article">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours (Make.com)",
+  "description": "Automate lead follow-up reminders with Make.com and Slack. Get alerts when leads go cold for 24+ hours — no leads slip through the cracks.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
+  "datePublished": "2026-03-03",
+  "dateModified": "2026-03-03"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours (Make.com)",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Step 1",
+      "text": "Create a new scenario in Make.com — click \"Create a new scenario\" on your dashboard. You'll see an empty canvas ready to build."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Step 2",
+      "text": "Click the + button and search for \"Google Sheets\" — select \"Search Rows.\" This module scans your lead tracker for rows matching specific criteria. Connect your Google account, select your Lead Tracker..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Step 3",
+      "text": "Configure the Search Rows filter with two conditions. First condition: Status (H) — set the operator to \"Text operators: Not equal to\" and the value to \"Contacted.\" Second condition: add an AND rule, ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Step 4",
+      "text": "Add a Filter module between Search Rows and the next module — click the dotted line after the Google Sheets module and select \"Set up a filter.\" This filter checks whether each lead is older than 24 h..."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I change the 24-hour threshold to something else?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. In the filter formula, change addDays(now; -1) to any interval you need. For 48 hours, use addDays(now; -2). For 12 hours, use addHours(now; -12). The logic stays the same — only the time window changes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my team uses the sheet for leads from manual entry too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This automation doesn't care how the lead got into the sheet. As long as the row has a First Seen date and the Status column is empty, it will be checked. Manual entries work identically to automated ones."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the filter module consume Make.com operations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Filters in Make.com don't count as operations — they evaluate conditions without consuming credits. Only actual module executions (Search Rows, Slack, Update a Row) count toward your monthly limit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if my team forgets to type \"Contacted\" in the Status column?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The lead will trigger one Slack reminder (because Reminded gets set to \"Yes\" after the first alert), but it won't keep reminding every hour. If you want recurring reminders until someone follows up, you'd need to modify the scenario to check Reminded ≠ \"Yes\" only for leads within a certain window, or reset the Reminded column periodically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run this on Make.com's free plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Technically yes, but it's not ideal. The hourly polling trigger alone uses about 720 operations per month — 72% of the free plan's 1,000 limit. The Core plan at $9/month (annual billing) with 10,000 operations is a better fit for any scheduled automation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why not use a webhook trigger instead of polling?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There's no external event to trigger a webhook when a lead goes cold — the absence of action is the trigger. Polling is the only way to detect that a lead has sat untouched for a specific time period. This is one of the few cases where polling is the right approach."
+      }
+    }
+  ]
+}
+</script>
+    <style>
+        :root {
+            --primary: #2d3436;
+            --accent: #0868b4;
+            --text: #2d3436;
+            --light-bg: #f9f9f9;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        /* WIDER CONTAINER */
+        .container { max-width: 1060px; margin: 0 auto; padding: 40px 30px; }
+        .header-inner { max-width: 1060px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; gap: 20px; }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* BREADCRUMB */
+        .breadcrumb { font-size: 0.85rem; color: #595959; margin-bottom: 20px; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* ARTICLE META */
+        .article-meta { font-size: 0.85rem; color: #595959; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .article-meta time { color: #595959; }
+        .article-meta .separator { color: #ccc; }
+        .article-meta .category-badge {
+            background: #f0f4f8; color: var(--accent); padding: 2px 10px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none;
+        }
+
+        /* CONTENT */
+        .content { margin-top: 30px; }
+        h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
+        .intro {
+            font-size: 1.15rem; color: #444; margin-bottom: 25px;
+            line-height: 1.8; border-left: 4px solid var(--accent); padding-left: 20px;
+        }
+        h2 { font-size: 1.4rem; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: var(--primary); }
+        h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; color: var(--primary); }
+        p { margin: 0 0 18px 0; }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: #f7f9fc; border: 1px solid #e0e8f0; border-radius: 8px;
+            padding: 20px 24px; margin: 0 0 30px 0;
+        }
+        .toc-title {
+            font-size: 0.85rem; color: #595959; text-transform: uppercase;
+            letter-spacing: 0.06em; margin: 0 0 12px 0; font-weight: 700;
+        }
+        .toc ol { margin: 0; padding-left: 20px; }
+        .toc li { margin-bottom: 6px; font-size: 0.95rem; }
+        .toc a { color: var(--accent); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* TECH TIP */
+        .tech-tip {
+            background: #fff3cd; border-left: 4px solid #ffc107;
+            padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0;
+        }
+        .tech-tip strong { display: block; margin-bottom: 6px; }
+
+        /* VERDICT */
+        .verdict {
+            background: #f0f8ff; border-left: 4px solid var(--accent);
+            padding: 20px 24px; margin: 30px 0; border-radius: 0 8px 8px 0;
+            font-size: 1.05rem; line-height: 1.7;
+        }
+        .verdict strong { color: var(--accent); }
+
+        .inline-cta { background: #f0f8ff; padding: 16px 20px; border-radius: 8px; margin: 25px 0; font-size: 1.05rem; line-height: 1.7; }
+        .inline-cta a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+        /* COMPARISON TABLE */
+        .table-wrapper {
+            overflow-x: auto; margin: 20px 0 30px 0;
+            border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .comparison-table thead tr { background: var(--accent); color: white; }
+        .comparison-table th { padding: 12px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .comparison-table td { padding: 11px 16px; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table tbody tr:nth-child(even) { background: #f7f9fc; }
+        .comparison-table tbody tr:hover { background: #eef5ff; }
+
+        /* STEPS */
+        .steps { padding-left: 0; list-style: none; counter-reset: steps; }
+        .steps li { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+        .steps li::before {
+            content: counter(steps); background: var(--accent); color: white;
+            width: 28px; height: 28px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.85rem; flex-shrink: 0; margin-top: 2px;
+        }
+        .steps li.step-image { display: block; padding-left: 0; margin-bottom: 20px; counter-increment: none; }
+        .steps li.step-image::before { display: none; }
+
+        /* FAQ */
+        .faq-section { margin: 40px 0 20px 0; }
+        .faq-section h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid #eee; margin-bottom: 24px; }
+        .faq-item { margin-bottom: 24px; }
+        .faq-q { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin: 0 0 6px 0; }
+        .faq-a { color: #444; margin: 0; line-height: 1.7; }
+
+        /* RELATED GUIDES */
+        .related-guides {
+            background: #f7f9fc; border: 1px solid #e0e8f0;
+            border-radius: 8px; padding: 20px 24px; margin: 30px 0;
+        }
+        .related-guides h3 { font-size: 0.85rem; color: #595959; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
+        .related-guides ul { margin: 0; padding-left: 18px; }
+        .related-guides li { margin-bottom: 6px; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
+        .related-guides a:hover { text-decoration: underline; }
+
+        /* SCREENSHOT PLACEHOLDER */
+        .screenshot-placeholder {
+            background: #f0f4f8; border: 2px dashed #b0c4d8;
+            border-radius: 8px; margin: 24px 0; padding: 32px 20px; text-align: center;
+        }
+        .screenshot-placeholder-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .screenshot-icon { font-size: 2rem; }
+        .screenshot-label { color: #6b8cae; font-size: 0.9rem; font-style: italic; }
+
+        /* SCREENSHOT IMAGE */
+        .screenshot { margin: 24px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .screenshot img { width: 100%; display: block; }
+        .screenshot figcaption { background: #f7f9fc; color: #595959; font-size: 0.82rem; padding: 8px 14px; text-align: center; font-style: italic; }
+
+        /* CODE */
+        pre {
+            background: #2d3436; color: #55efc4; padding: 20px; border-radius: 8px;
+            overflow-x: auto; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; margin: 20px 0; line-height: 1.6;
+        }
+        code { font-family: 'Courier New', monospace; }
+
+        /* CTA */
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
+        .cta-card p { color: #555; margin-bottom: 20px; }
+        .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+        .btn:hover { background: #0773c5; }
+
+        /* FOOTER */
+        footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
+        footer a { color: var(--accent); text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            h1 { font-size: 1.7rem; }
+            .container { padding: 20px 16px; }
+            .comparison-table th, .comparison-table td { padding: 9px 10px; font-size: 0.88rem; }
+            .article-meta { gap: 4px; }
+        }
+
+        /* INDEX CARD GRID */
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+        .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
+        .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
+        .card .card-meta { font-size: 0.78rem; color: #999; margin-bottom: 8px; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
+        <a href="/" class="back-link">← All Guides</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="/" rel="noopener">Home</a> › <a href="/" rel="noopener">Lead Capture</a> › Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours (Make.com)
+    </div>
+
+    <main class="content">
+        <h1>Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours (Make.com)</h1>
+        <div class="article-meta"><time datetime="2026-03-03">Mar 03, 2026</time> <span class="separator">·</span> <span>⏱ 14 min read</span> <span class="separator">·</span> <span class="category-badge">Lead Capture</span></div>
+
+        <nav class="toc">
+<p class="toc-title">In This Guide</p>
+<ol><li><a href="#why-slow-follow-up-is-the-most-expensive-mistake-in-lead-generation" rel="noopener">Why Slow Follow-Up Is the Most Expensive Mistake in Lead Generation</a></li>
+<li><a href="#how-the-lead-follow-up-reminder-automation-works" rel="noopener">How the Lead Follow-Up Reminder Automation Works</a></li>
+<li><a href="#why-this-scenario-uses-polling-instead-of-webhooks" rel="noopener">Why This Scenario Uses Polling Instead of Webhooks</a></li>
+<li><a href="#what-you-need-before-starting" rel="noopener">What You Need Before Starting</a></li>
+<li><a href="#don-t-use-slack-alternatives-that-work-the-same-way" rel="noopener">Don&#x27;t Use Slack? Alternatives That Work the Same Way</a></li>
+<li><a href="#how-to-build-the-lead-follow-up-reminder-automation" rel="noopener">How to Build the Lead Follow-Up Reminder Automation</a></li>
+<li><a href="#how-many-operations-does-this-use" rel="noopener">How Many Operations Does This Use?</a></li>
+<li><a href="#how-to-use-this-with-your-existing-lead-capture-automations" rel="noopener">How to Use This With Your Existing Lead Capture Automations</a></li>
+<li><a href="#who-should-use-this-automation" rel="noopener">Who Should Use This Automation</a></li>
+<li><a href="#apps-used-in-this-automation" rel="noopener">Apps Used in This Automation</a></li>
+<li><a href="#frequently-asked-questions" rel="noopener">Frequently Asked Questions</a></li>
+</ol>
+</nav>
+
+        <p class="intro">Leads come in from Facebook ads, Typeform forms, website inquiries — and then nothing happens. Nobody follows up for a day, sometimes two. By then the lead has moved on, and the money you spent acquiring them is wasted. This Make.com tutorial builds an automated follow-up reminder that scans your Google Sheet every hour and sends a Slack alert the moment a lead goes 24 hours without contact. No code, no manual checking, no more forgotten leads.</p>
+<h2 id="why-slow-follow-up-is-the-most-expensive-mistake-in-lead-generation">Why Slow Follow-Up Is the Most Expensive Mistake in Lead Generation</h2>
+<p>You already know speed to lead matters — but the real cost is invisible. The probability of converting a lead drops dramatically with every hour that passes. Contact a lead within the first hour and your chances are significantly higher than if you wait even a few hours. By the 24-hour mark, most leads have either moved on, filled out a competitor&#x27;s form, or simply forgotten why they reached out in the first place. If you&#x27;re spending $5-20 per lead on Facebook ads or running Typeform intake forms on your website, every lead that goes cold without follow-up is money you&#x27;ve already spent and can&#x27;t recover. The fix isn&#x27;t hiring more people or checking your spreadsheet more often. It&#x27;s a simple automation that watches your lead tracker and alerts your team the moment someone falls through the cracks.</p>
+<h2 id="how-the-lead-follow-up-reminder-automation-works">How the Lead Follow-Up Reminder Automation Works</h2>
+<p>This automation runs on a schedule — every hour, Make.com checks your Google Sheet for leads that meet three conditions: they were submitted more than 24 hours ago, nobody has marked them as &quot;Contacted,&quot; and no reminder has been sent yet. For every lead that matches, Make.com sends a Slack message to your team channel with the lead&#x27;s name, email, source, and submission date. Then it marks the row as &quot;Reminded&quot; so you don&#x27;t get the same alert again next hour.</p>
+<h2>How the Workflow Runs</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Step</th><th>What Happens</th><th>Tool</th></tr></thead><tbody><tr><td>1</td><td>Search for leads with no follow-up and no prior reminder</td><td>Google Sheets Search Rows</td></tr><tr><td>2</td><td>Filter leads older than 24 hours</td><td>Make.com Filter</td></tr><tr><td>3</td><td>Send alert to your team channel</td><td>Slack</td></tr><tr><td>4</td><td>Mark lead as reminded so it doesn&#x27;t repeat</td><td>Google Sheets Update a Row</td></tr></tbody></table></div>
+<p class="inline-cta">You can build this automation on Make.com in about 20 minutes. The Core plan at $9/month (annual billing) tends to work best for scheduled scenarios — read why below. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
+<h2 id="why-this-scenario-uses-polling-instead-of-webhooks">Why This Scenario Uses Polling Instead of Webhooks</h2>
+<p>If you&#x27;ve read our other tutorials, you know we always recommend INSTANT (webhook) triggers — they fire the moment data arrives and consume zero operations while idle. This automation is different. There&#x27;s no external event to trigger a webhook. Nothing &quot;happens&quot; when a lead goes cold — the absence of action is the trigger. The only way to detect that is to check your spreadsheet on a schedule and compare timestamps. That&#x27;s what polling does: Make.com runs the scenario at a fixed interval (every hour) and looks for leads that match your criteria.</p>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Polling triggers consume 1 operation every time they run, even when no matching leads are found. At a 60-minute interval, that&#x27;s 720 operations per month just from the trigger alone. On the free plan (1,000 operations/month), this leaves only 280 operations for actual lead processing. The Core plan at $9/month (annual billing) with 10,000 operations handles this comfortably. If you&#x27;re already running other scenarios, the Core plan tends to be more practical for most small businesses running scheduled automations.</div>
+<h2 id="what-you-need-before-starting">What You Need Before Starting</h2>
+<p>This automation reads from a Google Sheet that serves as your lead tracker. Here&#x27;s the sheet structure used throughout this tutorial — your lead tracker should follow this layout, with columns A through I.</p>
+<h2>Lead Tracker Sheet Structure</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Column</th><th>Header</th><th>Purpose</th><th>Who Fills It</th></tr></thead><tbody><tr><td>A</td><td>Email</td><td>Lead&#x27;s email address</td><td>Automation (from lead source)</td></tr><tr><td>B</td><td>Name</td><td>Lead&#x27;s full name</td><td>Automation (from lead source)</td></tr><tr><td>C</td><td>Phone</td><td>Phone number</td><td>Automation (from lead source)</td></tr><tr><td>D</td><td>Source</td><td>Which channel the lead came from</td><td>Automation (from lead source)</td></tr><tr><td>E</td><td>First Seen</td><td>Date the lead first entered the sheet (format: YYYY-MM-DD)</td><td>Automation (from lead source)</td></tr><tr><td>F</td><td>Last Updated</td><td>Most recent activity date</td><td>Automation (from lead source)</td></tr><tr><td>G</td><td>Notes</td><td>Project details or ad campaign name</td><td>Automation (from lead source)</td></tr><tr><td>H</td><td>Status</td><td>&quot;Contacted&quot; when someone follows up</td><td>Your team (manual)</td></tr><tr><td>I</td><td>Reminded</td><td>&quot;Yes&quot; after Make.com sends a reminder</td><td>Automation (this scenario)</td></tr></tbody></table></div>
+<p>The key columns for this automation are Status (H) and Reminded (I). Status is where your team manually types &quot;Contacted&quot; after reaching out to a lead — any lead without this is considered uncontacted. Reminded is where Make.com writes &quot;Yes&quot; after sending a Slack alert, which prevents the same reminder from firing every hour for the same person. Columns A through G come from your lead capture process, whether that&#x27;s Facebook ads, Typeform forms, website contact pages, or manual entry.</p>
+<h2 id="don-t-use-slack-alternatives-that-work-the-same-way">Don&#x27;t Use Slack? Alternatives That Work the Same Way</h2>
+<p>This guide uses Slack for team alerts, but Make.com supports any messaging tool. If your team doesn&#x27;t use Slack, swap the Slack module for one of these — the rest of the workflow stays identical. Gmail: send an alert email to your sales team instead. Microsoft Teams: same concept as Slack, select the Teams module and pick your channel. Google Chat: if you&#x27;re already in Google Workspace, this is the simplest swap.</p>
+<h2 id="how-to-build-the-lead-follow-up-reminder-automation">How to Build the Lead Follow-Up Reminder Automation</h2>
+<ol class="steps">
+<li>Create a new scenario in Make.com — click &quot;Create a new scenario&quot; on your dashboard. You&#x27;ll see an empty canvas ready to build.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-01.png" alt="Make.com scenario canvas — empty canvas ready to build a new automation" loading="lazy"><figcaption>Make.com scenario canvas — empty canvas ready to build a new automation</figcaption></figure></li>
+<li>Click the + button and search for &quot;Google Sheets&quot; — select &quot;Search Rows.&quot; This module scans your lead tracker for rows matching specific criteria. Connect your Google account, select your Lead Tracker Master spreadsheet, and set Sheet Name to Sheet1. Set Table contains headers to Yes.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-02.png" alt="Google Sheets Search Rows — Lead Tracker Master spreadsheet selected with Sheet1" loading="lazy"><figcaption>Google Sheets Search Rows — Lead Tracker Master spreadsheet selected with Sheet1</figcaption></figure></li>
+<li>Configure the Search Rows filter with two conditions. First condition: Status (H) — set the operator to &quot;Text operators: Not equal to&quot; and the value to &quot;Contacted.&quot; Second condition: add an AND rule, set Reminded (I) — operator &quot;Text operators: Not equal to&quot; — value &quot;Yes.&quot; This ensures Make.com only returns leads that haven&#x27;t been contacted and haven&#x27;t already received a reminder.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-03.png" alt="Search Rows filter — Status not equal to Contacted AND Reminded not equal to Yes" loading="lazy"><figcaption>Search Rows filter — Status not equal to Contacted AND Reminded not equal to Yes</figcaption></figure></li>
+<li>Add a Filter module between Search Rows and the next module — click the dotted line after the Google Sheets module and select &quot;Set up a filter.&quot; This filter checks whether each lead is older than 24 hours. Label it &quot;Older than 24 hours.&quot; In the Condition field, enter: parseDate( First Seen (E) ; &quot;YYYY-MM-DD&quot; ) as the left side, set the operator to &quot;Numeric operators: Less than&quot;, and enter addDays( now ; -1 ) as the right side.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-04.png" alt="Make.com filter — parseDate formula comparing First Seen to addDays now minus 1" loading="lazy"><figcaption>Make.com filter — parseDate formula comparing First Seen to addDays now minus 1</figcaption></figure></li>
+</ol>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Your First Seen column stores dates as text (e.g. &quot;2026-03-01&quot;), not as actual date objects. The parseDate function converts that text string into a real date that Make.com can compare. Without parseDate, the filter will fail silently — Make.com can&#x27;t compare a text string to a date. This is one of the most common gotchas when working with Google Sheets dates in Make.com. Note: this formula assumes your First Seen column contains text in YYYY-MM-DD format. If your Google Sheet uses a native date format instead of text, you can skip parseDate and compare the column value directly against addDays(now; -1).</div>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> Make sure your timezone setting in Make.com matches your Google Sheet timezone. Make.com uses the timezone from your Organization settings, and Google Sheets uses the timezone from File → Settings. If these don&#x27;t match, a &quot;24 hour&quot; check could actually trigger at 22 or 26 hours depending on the offset.</div>
+<p>5. Add a Slack module — click the + button after the filter, search for &quot;Slack&quot; and select &quot;Send a Message.&quot; Connect your Slack workspace and select your alert channel (e.g. #lead-followup). Set Channel type to match your channel — public or private.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-05.png" alt="Slack module — connection configured with lead-followup channel selected" loading="lazy"><figcaption>Slack module — connection configured with lead-followup channel selected</figcaption></figure>
+<p>6. Compose the Slack notification using mapped fields from the Google Sheets Search Rows module. Include the lead&#x27;s name, email, source, and submission date so your team has everything they need to follow up immediately.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-06.png" alt="Slack message body with mapped fields — Cold Lead alert with Name, Email, Source and First Seen date" loading="lazy"><figcaption>Slack message body with mapped fields — Cold Lead alert with Name, Email, Source and First Seen date</figcaption></figure>
+<p>7. Add a Google Sheets &quot;Update a Row&quot; module after Slack — this marks the lead as reminded so the same alert doesn&#x27;t fire again next hour. Connect it to the same Lead Tracker Master spreadsheet. Map the Row number from the Search Rows result. Set the Reminded (I) column to &quot;Yes&quot; and map all other columns from the Search Rows data so existing values are preserved.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-09.png" alt="Google Sheets Update a Row — Row number mapped, Lead Tracker Master selected" loading="lazy"><figcaption>Google Sheets Update a Row — Row number mapped, Lead Tracker Master selected</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-10.png" alt="Update a Row field mapping — all columns preserved from Search Rows, Reminded set to Yes" loading="lazy"><figcaption>Update a Row field mapping — all columns preserved from Search Rows, Reminded set to Yes</figcaption></figure>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> When updating a row, Make.com will overwrite any column you leave empty with a blank value — erasing your existing data. Always map the original values from Search Rows back into every column except the one you&#x27;re changing (Reminded). This preserves your lead data while only updating the reminder status.</div>
+<p>8. Save the scenario — your canvas should now show three connected modules with a filter: Google Sheets Search Rows → Filter (Older than 24h) → Slack Send a Message → Google Sheets Update a Row.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-08.png" alt="Complete Make.com scenario — Search Rows, filter, Slack, and Update a Row connected" loading="lazy"><figcaption>Complete Make.com scenario — Search Rows, filter, Slack, and Update a Row connected</figcaption></figure>
+<p>9. Test the workflow — make sure your Google Sheet has at least one lead with a First Seen date older than 24 hours, an empty Status column, and an empty Reminded column. Click &quot;Run once&quot; on the scenario.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-07.png" alt="Google Sheet before test — leads with Status and Reminded columns ready for automation" loading="lazy"><figcaption>Google Sheet before test — leads with Status and Reminded columns ready for automation</figcaption></figure>
+<p>10. Check your results — Make.com should process only the leads that match all three conditions (older than 24h, not contacted, not yet reminded). Your Slack channel receives an alert for each qualifying lead, and the Reminded column updates to &quot;Yes&quot; automatically.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-11.png" alt="Scenario executed successfully — all modules showing green checkmarks with 2 leads processed" loading="lazy"><figcaption>Scenario executed successfully — all modules showing green checkmarks with 2 leads processed</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-12.png" alt="Slack notifications received in #lead-followup — two cold lead alerts with full details" loading="lazy"><figcaption>Slack notifications received in #lead-followup — two cold lead alerts with full details</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-cold-lead-reminder-13.png" alt="Google Sheet after test — Reminded column shows Yes for processed leads, Contacted leads untouched" loading="lazy"><figcaption>Google Sheet after test — Reminded column shows Yes for processed leads, Contacted leads untouched</figcaption></figure>
+<p>11. Set up scheduling — click the clock icon on the Google Sheets trigger module. Set the interval to run every 60 minutes. This means Make.com checks your lead tracker once per hour and alerts your team about any lead that&#x27;s gone cold since the last check. Toggle the scenario ON to activate it.</p>
+<h2 id="how-many-operations-does-this-use">How Many Operations Does This Use?</h2>
+<p>Understanding the operation cost helps you decide which Make.com plan works for this scenario.</p>
+<p>Every hour, the scenario runs and consumes at minimum 1 operation for the Search Rows module — even if no cold leads are found. When cold leads are found, each one costs 2 additional operations: 1 for the Slack message and 1 for the Update a Row. The filter module itself doesn&#x27;t consume operations.</p>
+<h2>Monthly Operation Cost Estimates</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Situation</th><th>Operations Per Run</th><th>Monthly Total (hourly schedule)</th></tr></thead><tbody><tr><td>No cold leads found (typical)</td><td>1</td><td>~720/month</td></tr><tr><td>2 cold leads per day on average</td><td>1 + (2 × 2) = 5</td><td>~1,440/month (720 base + 720 for leads)</td></tr><tr><td>5 cold leads per day on average</td><td>1 + (2 × 5) = 11</td><td>~2,160/month</td></tr></tbody></table></div>
+<p>These are estimates based on the 3-module scenario described in this tutorial. Actual usage may vary depending on how many leads match the filter on each run and whether you add extra modules later (e.g. a Gmail notification alongside Slack).</p>
+<p>On the free plan (1,000 operations/month), the trigger alone consumes 720 operations — leaving only 280 for actual lead processing. That&#x27;s roughly 140 cold lead alerts before hitting the limit, which may be enough for very low volume. For most businesses, the Core plan at $9/month (annual billing) with 10,000 operations tends to be more practical for scheduled automations.</p>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> If you&#x27;re on the free plan and want to reduce operation usage, change the scheduling interval from 60 minutes to 120 minutes (every 2 hours). This cuts the base cost from 720 to 360 operations per month — giving you more room for actual lead processing. The trade-off is that some leads might wait up to 26 hours before triggering an alert instead of 25.</div>
+<h2 id="how-to-use-this-with-your-existing-lead-capture-automations">How to Use This With Your Existing Lead Capture Automations</h2>
+<p>This scenario is designed to work alongside any lead capture automation that writes to the same Google Sheet. If you built the multi-source lead tracking automation from our previous tutorial, your leads already land in the Lead Tracker Master from Facebook ads, Typeform forms, and website webhooks. This follow-up reminder runs independently — it doesn&#x27;t care where the lead came from, only that the First Seen date is older than 24 hours and nobody has followed up.</p>
+<p>The workflow across your automations looks like this: a lead arrives from any source and lands in the sheet (handled by your existing lead capture scenarios). This scenario checks the sheet every hour and sends a Slack reminder for any lead that&#x27;s gone 24 hours without contact. Your team sees the Slack alert, follows up with the lead, and manually types &quot;Contacted&quot; in the Status column. The next time the scenario runs, that lead is skipped.</p>
+<h2 id="who-should-use-this-automation">Who Should Use This Automation</h2>
+<p>This workflow is built for any business that captures leads and needs to ensure timely follow-up. Agencies running paid ad campaigns where every lead has a real acquisition cost. Freelancers juggling multiple lead sources who can&#x27;t check every dashboard daily. Sales teams where leads are assigned manually and sometimes fall through the cracks. Small business owners who handle follow-up themselves and need a safety net for busy days. If you&#x27;re spending money to acquire leads — through ads, content marketing, or referral programs — this automation ensures none of that investment is wasted by slow follow-up.</p>
+<h2 id="apps-used-in-this-automation">Apps Used in This Automation</h2>
+<p>This workflow connects two tools. Make.com orchestrates the scheduled check and alert logic — the Core plan at $9/month (annual billing) tends to be more practical for polling scenarios due to operation consumption. Google Sheets stores your lead tracker and serves as the data source for the automation. Slack delivers the team alerts — any free Slack workspace works.</p>
+<div class="verdict"><strong>Bottom line:</strong> If leads are entering your pipeline and nobody is tracking follow-up timing, you&#x27;re losing money on every lead that goes cold. This automation takes 20 minutes to build and catches every lead that sits untouched for more than 24 hours — sending your team a Slack alert with all the details they need to follow up immediately. It works with any lead source that writes to your Google Sheet, uses a simple &quot;Reminded&quot; flag to prevent duplicate alerts, and runs automatically every hour without maintenance. For scheduled automations like this, the Core plan at $9/month tends to be more practical — polling scenarios consume more operations than webhook-based automations. Start with a free Make.com account to build and test the scenario, then upgrade when you&#x27;re ready to run it on a schedule.</div>
+<div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<div class="faq-item"><h3 class="faq-q">Can I change the 24-hour threshold to something else?</h3><p class="faq-a">Yes. In the filter formula, change addDays(now; -1) to any interval you need. For 48 hours, use addDays(now; -2). For 12 hours, use addHours(now; -12). The logic stays the same — only the time window changes.</p></div>
+<div class="faq-item"><h3 class="faq-q">What if my team uses the sheet for leads from manual entry too?</h3><p class="faq-a">This automation doesn&#x27;t care how the lead got into the sheet. As long as the row has a First Seen date and the Status column is empty, it will be checked. Manual entries work identically to automated ones.</p></div>
+<div class="faq-item"><h3 class="faq-q">Does the filter module consume Make.com operations?</h3><p class="faq-a">No. Filters in Make.com don&#x27;t count as operations — they evaluate conditions without consuming credits. Only actual module executions (Search Rows, Slack, Update a Row) count toward your monthly limit.</p></div>
+<div class="faq-item"><h3 class="faq-q">What happens if my team forgets to type &quot;Contacted&quot; in the Status column?</h3><p class="faq-a">The lead will trigger one Slack reminder (because Reminded gets set to &quot;Yes&quot; after the first alert), but it won&#x27;t keep reminding every hour. If you want recurring reminders until someone follows up, you&#x27;d need to modify the scenario to check Reminded ≠ &quot;Yes&quot; only for leads within a certain window, or reset the Reminded column periodically.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I run this on Make.com&#x27;s free plan?</h3><p class="faq-a">Technically yes, but it&#x27;s not ideal. The hourly polling trigger alone uses about 720 operations per month — 72% of the free plan&#x27;s 1,000 limit. The Core plan at $9/month (annual billing) with 10,000 operations is a better fit for any scheduled automation.</p></div>
+<div class="faq-item"><h3 class="faq-q">Why not use a webhook trigger instead of polling?</h3><p class="faq-a">There&#x27;s no external event to trigger a webhook when a lead goes cold — the absence of action is the trigger. Polling is the only way to detect that a lead has sat untouched for a specific time period. This is one of the few cases where polling is the right approach.</p></div>
+</div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="multi-source-lead-tracking-google-sheets-automation.html" rel="noopener">Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com</a></li><li><a href="facebook-instagram-leads-google-sheets-automation.html" rel="noopener">How to Send Facebook and Instagram Leads to Google Sheets Automatically</a></li><li><a href="typeform-client-intake-google-sheets-automation.html" rel="noopener">Typeform to Google Sheets and Slack: Automate Form Responses with Make.com</a></li><li><a href="calendly-booking-onboarding-checklist-automation.html" rel="noopener">Calendly Automation: Create an Onboarding Checklist and Notify Your Team</a></li><li><a href="stripe-payment-failed-automation.html" rel="noopener">Stripe Payment Failed? Automatically Alert Your Team and Email the Customer</a></li><li><a href="make-com-free-plan-what-you-can-build.html" rel="noopener">Make.com Free Plan: What You Can Actually Build</a></li><li><a href="zapier-too-expensive-make-com-alternative.html" rel="noopener">Zapier Too Expensive? Switch to Make.com and Save Up to $840/year</a></li></ul></div>
+    </main>
+
+    <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px; margin:40px 0 30px 0; text-align:center;">
+        <h2 style="border:none; margin-top:0; font-size:1.3rem; color:#2d3436;">Get automation tutorials in your inbox</h2>
+        <p style="color:#555; margin-bottom:20px; font-size:1rem;">One practical workflow per week. No fluff, no spam — just tested automations for service businesses.</p>
+        <a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=article_cta" target="_blank" rel="noopener nofollow" style="background:#0868b4; color:white; padding:14px 30px; border-radius:6px; text-decoration:none; display:inline-block; font-weight:600; font-size:1rem; transition:background 0.2s;">Subscribe free →</a>
+    </div>
+
+    <div class="cta-card" style="padding:0; background:none; border:none;">
+        <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored noopener">
+            <img 
+                src="assets/banners/AD-728x90 – 2.png" 
+                alt="Set up your own workflows for free with Make.com"
+                style="width:100%; border-radius:12px; display:block; cursor:pointer;"
+            >
+        </a>
+    </div>
+
+    <footer>
+        <span>© 2026 IntegrateHub.io</span>
+        <span>
+            <a href="about.html">About</a>
+            &nbsp;·&nbsp;
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+            &nbsp;·&nbsp;
+            <a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=footer" target="_blank" rel="noopener nofollow">Newsletter</a>
+            &nbsp;·&nbsp;
+            <a href="privacy-policy.html">Privacy Policy</a>
+            &nbsp;·&nbsp;
+            <a href="/">← All Guides</a>
+        </span>
+    </footer>
+
+</div>
+
+</body>
+</html>

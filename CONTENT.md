@@ -1,6 +1,6 @@
 # IntegrateHub.io — Content & Roadmap
 
-## Published Articles (9)
+## Published Articles (10) | In Progress (0)
 
 | # | Slug | Type | Date | Category |
 |---|------|------|------|----------|
@@ -13,9 +13,9 @@
 | 7 | typeform-welcome-email-google-drive-automation | how-to | 2026-02-28 | onboarding |
 | 8 | multi-source-lead-tracking-google-sheets-automation | how-to | 2026-03-02 | lead-capture |
 | 9 | make-com-free-plan-what-you-can-build | how-to | 2026-03-05 | automation-strategy |
+| 10 | lead-follow-up-slack-reminder-automation | how-to | 2026-03-07 | lead-capture |
 
 ### Pending Internal Links
-
 
 Do NOT update sitemap lastmod on these — internal link additions are not substantial changes.
 
@@ -25,10 +25,11 @@ Do NOT update sitemap lastmod on these — internal link additions are not subst
 |---------|--------|------|
 | Make.com | ✅ ACTIVE | https://www.make.com/en/register?pc=integratehub |
 | Typeform | ✅ ACTIVE | https://typeform.cello.so/vGdCoE97A4Z |
+| Beehiiv (newsletter) | ✅ ACTIVE | https://automationfix.beehiiv.com/subscribe |
 | Calendly | ❌ No program | — |
-| Pipedrive | 🔜 Planned | Apply when first Pipedrive article is drafted |
-| HubSpot | 🔜 Planned | Apply when first HubSpot article is drafted |
-| Airtable | 🔜 Planned | Apply when first Airtable article is drafted |
+| Pipedrive | ❌ Deprioritized | HubSpot competitor, difficult affiliate registration. Not pursuing. |
+| HubSpot | 🔜 Planned | Applied March 2026, waiting for answer. No articles before response |
+| Airtable | ✅ ACTIVE | https://airtable.com/invite/r/wuQK7yct | Not affiliate, but can be used as a credit for airtable subscriptions; We should write articles where Airtable is involved; since it can attract traffic. |
 
 **Rule:** Don't write an article for a planned affiliate tool until the affiliate is approved. No point driving traffic without earning from it.
 
@@ -38,9 +39,11 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 
 ### Ready to Write (have enough knowledge + tools)
 - Filter Calendly bookings → only qualified leads to CRM
-- Lead goes cold → automatic 24h Slack reminder
 - Make.com Error Handling: How to Prevent Duplicate Data and Partial Failures (from real experience)
 - Stripe new customer → Google Drive folder + welcome email + Slack
+- Typeform → OpenAI lead qualification → Google Sheets + Slack (AI layer na existing lead capture seriji; zahteva Make.com Core plan — AI Tools nisu na free)
+- Gmail + OpenAI: Auto-draft replies to new lead emails
+- Google Docs + OpenAI: Auto-generate client proposals from intake form data
 
 ### Write After 10+ How-To Articles Exist
 - ~~Make.com Free Plan: What You Can Actually Build (cornerstone/pillar article)~~ → PUBLISHED as #9
@@ -65,4 +68,15 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 ## Content Mix Target
 - 70% how-to tutorials (affiliate conversion)
 - 30% comparison articles (higher buyer intent)
-- Current: 7 how-to / 2 comparison = 78% / 22% (on track — next article should be comparison or strategy to rebalance)
+- Current: 8 how-to / 2 comparison = 80% / 20% (next article should be comparison to rebalance toward 70/30)
+
+## Newsletter
+
+- **Platform:** Beehiiv (free plan, up to 2,500 subscribers)
+- **Name:** The Automation Fix
+- **Subscribe URL:** https://automationfix.beehiiv.com/subscribe
+- **Handle:** automationfix.beehiiv.com
+- **Status:** Active — first test issue sent March 2026
+- **Workflow:** Each new article = repurposed newsletter issue (~45 min)
+- **CTA tag:** CTA[newsletter]: in input.txt for inline opt-in
+- **UTM pattern:** ?utm_source=integratehub&utm_medium=article_cta (site), ?utm_source=newsletter&utm_medium=email&utm_campaign=issue_XX (email)

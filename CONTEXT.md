@@ -25,6 +25,7 @@
 - Verdict: end with actionable CTA mentioning Make.com free plan.
 - INSTANT modules: always recommend over polling, explain difference.
 - CTA tags: use CTA[key]: format. Plain CTA: defaults to Make.com. Place at natural points, not aggressively.
+- CTA[newsletter]: use sparingly in cornerstone/pillar articles and high-engagement tutorials. Not an affiliate — drives Beehiiv opt-in. Don't put in every article, only where reader is most engaged.
 - Inline links: [text](url) for external references in Tech Tips and paragraphs.
 - **Cornerstone/pillar articles:** no screenshots needed. Focus on math, tables, internal links to how-to tutorials. Type stays `how-to` in generator for schema purposes.
 - **Pricing claims:** always add "(annual billing)" on first mention. Include monthly price if known. Verify against official pricing page before publish.
@@ -44,11 +45,14 @@
 - **Make.com polling cost:** Trigger modules consume 1 credit per run even when no new data is found. Webhook (INSTANT) triggers consume 0 credits while idle. On free plan (15-min interval), one polling trigger burns ~2,880 credits/month — 3x the entire budget.
 - **Make.com free plan limits (verified March 2026):** 1,000 credits/mo, 2 active scenarios, 15-min polling, 0.5 GB transfer, 5 MB max file size. No AI Tools, no AI Agents. Credits don't roll over.
 - **Make.com Core plan ($9/mo annual, ~$10.59 monthly):** 10,000 credits, unlimited scenarios, 1-min polling, 5 GB transfer, 100 MB file size, AI Tools + Agents included, API access (60 calls/min).
+- **Make.com parseDate for Google Sheets dates:** When a Google Sheets column stores dates as text (e.g. "2026-03-01"), use `parseDate(value; "YYYY-MM-DD")` to convert to a real date before comparing. Without parseDate, filters comparing text to dates fail silently. If the column uses native Google Sheets date format, parseDate is not needed.
+- **Polling is correct when "absence of action" is the trigger:** Webhook triggers can't detect that something didn't happen (e.g. no follow-up in 24h). Polling (scheduled check) is the only option for time-based inactivity detection. Cost: ~720 ops/month at 60-min interval.
 
 ## Generator Backlog
 1. ~~Image alt tag fix~~ — FIXED. Cursor prompt: `In generator.py, find alt_attr = '' inside Image handler. Change to alt_attr = alt_text[:125] if alt_text else ''`
 2. Build time badge — new tag `Build Time: 25`, display `🛠 ~25 min` next to reading time. Priority: medium.
 3. Cleanup rel="noopener" on internal/anchor links — cosmetic. Priority: low.
+4. HowTo schema incomplete — generator stops counting Workflow Steps when it encounters Image: or Tech Tip: tags inside the step list (they trigger `close_open_blocks`). Result: HowTo schema only includes steps before the first Image/Tech Tip, not all 11. Fix requires changing `format_content()` logic so Image and Tech Tip don't close `in_list`. Must test all existing articles after change. Priority: medium.
 
 ## Key Decisions Log
 - Homepage stays Make.com focused until 15+ articles.
