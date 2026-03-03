@@ -585,7 +585,7 @@ def format_content(text, page_type='how-to'):
             alt_attr = alt_text[:125] if alt_text else ''
             figure_html = (
                 f'<figure class="screenshot">'
-                f'<img src="{html.escape(img_path)}" alt="{html.escape(alt_attr)}" loading="lazy">'
+                f'<img src="{html.escape(img_path)}" alt="{html.escape(alt_attr)}" width="1060" loading="lazy">'
                 f'<figcaption>{html.escape(alt_text)}</figcaption>'
                 f'</figure>'
             )
@@ -694,7 +694,7 @@ def generate_index(template_html, links):
         </div>
     """
 
-    page = template_html.replace('{{TITLE}}', 'Make.com Integration Guides')
+    page = template_html.replace('{{TITLE}}', 'Make.com Integration Guides | IntegrateHub.io')
     page = page.replace('{{META_DESCRIPTION}}',
         'Free step-by-step Make.com integration guides. '
         'Automate your business workflows and save hours every week.')
