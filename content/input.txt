@@ -235,6 +235,7 @@ A: The free Make.com plan includes 1,000 operations per month. Each time this sc
 Internal Links:
 Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
 How to Send Facebook and Instagram Leads to Google Sheets Automatically|/facebook-instagram-leads-google-sheets-automation
+Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack|/stripe-new-customer-airtable-tracker-automation
 
 ---
 
@@ -377,6 +378,7 @@ Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-ex
 Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
 Typeform to Google Sheets and Slack: Automate Form Responses with Make.com|/typeform-client-intake-google-sheets-automation
 Typeform to Welcome Email and Google Drive Folder: Automate Client Onboarding with Make.com|/typeform-welcome-email-google-drive-automation
+Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack|/stripe-new-customer-airtable-tracker-automation
 
 ---
 
@@ -1167,6 +1169,7 @@ Track Leads from Facebook, Typeform, and Web Forms in One Sheet with Make.com|/m
 Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
 Make.com vs n8n: Which Automation Tool Is Right for Non-Technical Small Business?|/make-com-vs-n8n-small-business
 Lead Follow-Up Reminder: Get a Slack Alert When No One Contacts a Lead in 24 Hours|/lead-follow-up-slack-reminder-automation
+Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack|/stripe-new-customer-airtable-tracker-automation
 
 ---
 
@@ -1337,3 +1340,121 @@ Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calend
 Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
 Make.com Free Plan: What You Can Actually Build|/make-com-free-plan-what-you-can-build
 Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+
+---
+
+Slug: stripe-new-customer-airtable-tracker-automation
+Title: Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack
+Type: how-to
+Date: 2026-03-04
+Category: onboarding
+
+Meta: Stripe new customer automation with Make.com — auto-add clients to Airtable and send Slack notifications the moment someone signs up.
+
+Introduction: A new customer signs up in Stripe. Their name sits in your payment dashboard — and nowhere else. Your team doesn't know, nobody starts onboarding, and you find out three days later when you happen to check. This Make.com Stripe automation fixes that instantly: the moment a new customer appears in Stripe, their details land in an Airtable client tracker and your team gets a Slack notification. No code, no manual entry, runs forever once built.
+
+H2: Why Stripe's Dashboard Isn't Enough for Client Tracking
+
+Stripe is built for payments, not client management. It stores customer names and emails, but it doesn't notify your team when someone new signs up, track onboarding status, or let multiple people collaborate on client notes. If you're a freelancer or agency juggling 10-50 active clients, you need a dedicated tracker — and you need it updated automatically, not by someone remembering to copy-paste from Stripe every morning.
+
+H2: What This Stripe to Airtable Automation Does
+
+When a new customer is created in Stripe, Make.com catches the event instantly via webhook and runs two actions: it creates a new record in your Airtable client tracker with the customer's name, email, Stripe ID, and signup date, then sends a formatted Slack message to your team's channel. The whole thing takes about 25 minutes to build.
+
+Table: How the Workflow Runs
+Step|What Happens|Tool
+1|New customer is created in Stripe|Stripe Webhook (INSTANT)
+2|Client record is added to Airtable with name, email, and date|Airtable
+3|Team gets a Slack notification with client details|Slack
+
+Tech Tip: This automation uses Stripe's Watch Events module with webhooks — it triggers instantly when a new customer appears, using zero Make.com operations while idle. Unlike polling triggers that check every 15 minutes and consume operations on every check, webhooks only fire when there's actual data. On the free plan (1,000 operations per month), this means you're only using operations when real customers sign up.
+
+H2: Why Airtable Instead of Google Sheets for Client Tracking
+
+Several tutorials on this site use Google Sheets for tracking — it's free and everyone knows it. But for client tracking specifically, Airtable is the better choice. Airtable gives you structured field types: an Email field that validates addresses, a Single Select dropdown for status tracking ("New", "Onboarding", "Active"), and a Date field that formats dates automatically. You can switch to a Kanban view to see your onboarding pipeline at a glance — drag clients from "New" to "Onboarding" to "Active" without editing cells. Google Sheets can log data, but it can't enforce structure. Airtable's free plan includes 1,000 records per base and up to 5 editors — more than enough for most service businesses tracking clients.
+
+CTA[airtable]: Create your free Airtable client tracker — no credit card needed.
+
+H2: Don't Use Slack? Alternatives That Work the Same Way
+
+This guide uses Slack for team notifications, but Make.com supports any messaging tool. If your team doesn't use Slack, swap the last module for one of these — the rest of the workflow stays identical. Gmail: send a notification email to your team instead. Microsoft Teams: same concept as Slack, select the Teams module and pick your channel. Google Chat: if you're already in Google Workspace, this is the simplest swap.
+
+CTA[make]: Start building this automation for free on Make.com — no credit card needed.
+
+H2: What You Need Before Starting
+
+You'll need four things ready before opening Make.com. A Stripe account — sandbox mode works perfectly for testing (no real charges). An Airtable account with a base called "Client Tracker" containing a table called "Clients" with these columns: Name (text), Email (email), Stripe Customer ID (text), Plan (text), Amount Paid (currency), Date Joined (date), Status (single select with "New", "Onboarding", "Active"), and Notes (long text). A Slack workspace with a channel for notifications (this guide uses #new-client, you can name yours anything). And a free Make.com account.
+
+Image: assets/screenshots/screenshot-stripe-airtable-01.png|Make.com Stripe Airtable automation — Airtable Client Tracker base with columns configured
+
+Workflow Steps: How to Build the Stripe to Airtable Client Tracker Automation
+
+1. Create a test customer in Stripe — open your Stripe Dashboard and switch to sandbox mode using the toggle in the top-right corner. Go to Customers and click "+ Add customer." Enter a name and email, then click "Add customer." You'll use this test customer to trigger the automation later.
+
+Image: assets/screenshots/screenshot-stripe-airtable-02.png|Make.com Stripe automation — Stripe sandbox Create customer dialog
+
+2. Log in to Make.com and create a new scenario — click "Create a new scenario" on your dashboard. You'll see an empty canvas with a large purple + button in the center.
+
+Image: assets/screenshots/screenshot-stripe-airtable-03.png|Make.com Stripe Airtable scenario — empty canvas ready to build
+
+3. Click the + button and search for "Stripe" — select the Watch Events module. Click "Create a webhook" to set up the trigger. Connect your Stripe account using OAuth or API Key (copy your Secret key from Stripe → Developers → API keys — it starts with sk_test_ in sandbox mode). Set the Group to "Customer" and the Event to "Customer created." Click Save.
+
+Image: assets/screenshots/screenshot-stripe-airtable-04.png|Make.com Stripe webhook — Group set to Customer, Event set to Customer created
+
+Tech Tip: This tutorial uses the customer.created event, which fires whenever a new customer is added to Stripe — whether through Checkout, a manual invoice, or the dashboard. If you only want to track customers who have actually completed a payment, use checkout.session.completed instead. The setup is identical — just select "Checkout" as the Group and check "Checkout session completed."
+
+4. The Stripe module is now on your canvas with the webhook connected — you'll see the webhook name in the module configuration and "Immediately as data arrives" in the bottom toolbar, confirming this is an INSTANT trigger.
+
+Image: assets/screenshots/screenshot-stripe-airtable-05.png|Make.com Stripe Watch Events module — webhook connected and ready
+
+5. Click the + button to the right of the Stripe module, search for "Airtable" and select "Create a Record." Click "Create a connection" — Make.com will open a dialog where you select Airtable OAuth as the connection type. Name the connection anything (e.g. "My Airtable OAuth connection") and click Save. Airtable's authorization screen will open — grant Make.com access to your bases.
+
+Image: assets/screenshots/screenshot-stripe-airtable-06.png|Make.com Airtable module — Create a connection button to link your Airtable account
+
+Image: assets/screenshots/screenshot-stripe-airtable-07.png|Make.com Airtable OAuth — connection type and name configuration
+
+6. Once connected, select your Base ("Client Tracker") and Table ("Clients") from the dropdowns. Airtable fields will appear automatically. Map them from the Stripe trigger: Name to "1. Object: Name", Email to "1. Object: Email", and Stripe Customer ID to "1. Object: ID" (this starts with cus_ and is useful for reference).
+
+Image: assets/screenshots/screenshot-stripe-airtable-08.png|Make.com Airtable field mapping — Name, Email, and Stripe Customer ID mapped from Stripe
+
+7. Scroll down to map the remaining fields. Leave Amount Paid empty — the customer.created event doesn't include payment data. For Date Joined, map "1. Object: Created" directly — Airtable converts the Stripe timestamp automatically, no formatDate function needed. For Status, click the "Map" toggle to enable manual input and type "New" — this sets every new client's status to "New" by default. Leave Notes empty — your team fills this in manually during onboarding.
+
+Image: assets/screenshots/screenshot-stripe-airtable-09.png|Make.com Airtable field mapping — Date Joined, Status set to New, Notes empty
+
+8. Add a Slack module — click the + button after Airtable, search for "Slack" and select "Send a Message." Connect your Slack workspace through OAuth. Set Channel Type to "Public channel" and select your #new-client channel. In the Text field, compose a message using mapped fields from the Airtable module: include the client's name, email, Stripe Customer ID, and join date. Use Slack's bold formatting (*text*) for labels to make the notification scannable.
+
+Image: assets/screenshots/screenshot-stripe-airtable-11.png|Make.com Slack module — channel selected and message template with mapped client fields
+
+9. Test the automation — click "Run once" at the bottom of the Make.com canvas. The scenario starts listening for Stripe events. Switch to your Stripe Dashboard, go to Customers, and create another test customer with a different name and email. Switch back to Make.com — the scenario should fire within seconds, showing green checkmarks and a "1" badge on each module.
+
+Image: assets/screenshots/screenshot-stripe-airtable-13.png|Make.com Stripe Airtable Slack automation — successful test run with green checkmarks on all modules
+
+10. Verify the results — check your Airtable Client Tracker table. A new row should appear with the customer's name, email, Stripe ID, and today's date, with Status set to "New." Then check your Slack #new-client channel for the formatted notification.
+
+Image: assets/screenshots/screenshot-stripe-airtable-10.png|Make.com Stripe automation result — Airtable Client Tracker with auto-populated client row
+
+Image: assets/screenshots/screenshot-stripe-airtable-12.png|Make.com Stripe automation result — Slack notification with new client details
+
+11. Turn the scenario on — click the toggle at the bottom-left of the canvas to activate the scenario. Since this uses a webhook trigger, it runs immediately when data arrives — no polling interval needed.
+
+CTA: Try Make.com's free plan — 1,000 operations per month, enough for hundreds of new client signups.
+
+Verdict: Every new Stripe customer that goes untracked is a missed onboarding opportunity. This automation takes 25 minutes to build and gives your team instant visibility into every new signup — no dashboard checking, no copy-pasting, no delays. Make.com's free plan handles over 300 new customers per month with this workflow (3 operations per run), and Airtable's free plan stores up to 1,000 client records. Start with the free plans for both and upgrade only when your client volume demands it.
+
+FAQ:
+Q: Do I need a paid Stripe account to set this up?
+A: No. You can build and test the entire workflow using Stripe's sandbox mode, which is free. When you're ready to go live, switch to your live Stripe API key and the automation works identically.
+Q: Is Airtable free for client tracking?
+A: Yes. Airtable's free plan includes 1,000 records per base and up to 5 editors — more than enough for most small businesses. You only need to upgrade if you exceed 1,000 client records or need advanced features like custom automations.
+Q: What if I want to track the payment amount and plan name too?
+A: Use checkout.session.completed as your Stripe trigger instead of customer.created. This event includes full payment details — amount, product name, and subscription info. The Airtable and Slack setup stays identical, you just map different fields.
+Q: How many Make.com operations does this use?
+A: 3 operations per new customer — one for the Stripe trigger, one for the Airtable record, one for the Slack message. On the free plan (1,000 operations per month), that's enough for over 300 new customers monthly.
+Q: Can I add more columns to Airtable later without rebuilding?
+A: Yes. Add any new column to your Airtable base, then open the Airtable module in Make.com — the new field appears automatically. Map it and save. No need to rebuild the scenario from scratch.
+
+Internal Links:
+Zapier Too Expensive? Switch to Make.com and Save Up to $840/year|/zapier-too-expensive-make-com-alternative
+Stripe Payment Failed? Automatically Alert Your Team and Email the Customer|/stripe-payment-failed-automation
+Make.com Free Plan: What You Can Actually Build|/make-com-free-plan-what-you-can-build
+Calendly Automation: Create an Onboarding Checklist and Notify Your Team|/calendly-booking-onboarding-checklist-automation

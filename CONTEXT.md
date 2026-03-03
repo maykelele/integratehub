@@ -11,7 +11,10 @@
 ## Working Rules
 - **Generator/template changes:** NEVER edit files directly. Provide a Cursor AI prompt for every change.
 - **Anonymity:** hard constraint — no personal branding anywhere.
-- **URLs:** keep .html extensions — static site, removing requires redirect rules for no benefit.
+- **URLs:** no .html extensions anywhere — canonicals, internal links, sitemap, index cards all use clean URLs (e.g. /slug not /slug.html). Cloudflare Pages redirects .html to clean URLs.
+- **Example emails in tables:** use [at] instead of @ (e.g. sarah[at]brightwave.co) to avoid Cloudflare Email Obfuscation ghost links.
+- **Page titles:** no brand suffix on articles. Only homepage keeps " | IntegrateHub.io". Aim for under 60 chars but don't sacrifice keywords.
+- **Standalone pages** (about, privacy-policy, affiliate-disclosure): maintained manually, not via generator.py. Must manually add canonical tags and keep consistent with generator conventions.
 - **Sitemap lastmod:** only update for substantial content changes, NOT for internal link additions or typo fixes.
 - **Internal linking:** add links to related articles on every new publish.
 - **Screenshots:** screenshot-[topic]-[number].png. When cloning similar scenarios, screenshot only differences.
@@ -53,6 +56,7 @@
 2. Build time badge — new tag `Build Time: 25`, display `🛠 ~25 min` next to reading time. Priority: medium.
 3. Cleanup rel="noopener" on internal/anchor links — cosmetic. Priority: low.
 4. HowTo schema incomplete — generator stops counting Workflow Steps when it encounters Image: or Tech Tip: tags inside the step list (they trigger `close_open_blocks`). Result: HowTo schema only includes steps before the first Image/Tech Tip, not all 11. Fix requires changing `format_content()` logic so Image and Tech Tip don't close `in_list`. Must test all existing articles after change. Priority: medium.
+5. Article schema — add "author" (Organization: IntegrateHub.io) and "image" (first Image: tag from article content) to build_article_schema output. Both improve rich result eligibility. Priority: medium.
 
 ## Key Decisions Log
 - Homepage stays Make.com focused until 15+ articles.

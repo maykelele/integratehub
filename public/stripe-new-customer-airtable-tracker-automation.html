@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://integratehub.io/stripe-new-customer-airtable-tracker-automation">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack</title>
+    <meta name="description" content="Stripe new customer automation with Make.com — auto-add clients to Airtable and send Slack notifications the moment someone signs up.">
+    <meta property="og:title" content="Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack">
+    <meta property="og:description" content="Stripe new customer automation with Make.com — auto-add clients to Airtable and send Slack notifications the moment someone signs up.">
+    <meta property="og:type" content="article">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack",
+  "description": "Stripe new customer automation with Make.com — auto-add clients to Airtable and send Slack notifications the moment someone signs up.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
+  "datePublished": "2026-03-04",
+  "dateModified": "2026-03-04"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Step 1",
+      "text": "Create a test customer in Stripe — open your Stripe Dashboard and switch to sandbox mode using the toggle in the top-right corner. Go to Customers and click \"+ Add customer.\" Enter a name and email, t..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Step 2",
+      "text": "Log in to Make.com and create a new scenario — click \"Create a new scenario\" on your dashboard. You'll see an empty canvas with a large purple + button in the center."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Step 3",
+      "text": "Click the + button and search for \"Stripe\" — select the Watch Events module. Click \"Create a webhook\" to set up the trigger. Connect your Stripe account using OAuth or API Key (copy your Secret key fr..."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need a paid Stripe account to set this up?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You can build and test the entire workflow using Stripe's sandbox mode, which is free. When you're ready to go live, switch to your live Stripe API key and the automation works identically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Airtable free for client tracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Airtable's free plan includes 1,000 records per base and up to 5 editors — more than enough for most small businesses. You only need to upgrade if you exceed 1,000 client records or need advanced features like custom automations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I want to track the payment amount and plan name too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use checkout.session.completed as your Stripe trigger instead of customer.created. This event includes full payment details — amount, product name, and subscription info. The Airtable and Slack setup stays identical, you just map different fields."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many Make.com operations does this use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "3 operations per new customer — one for the Stripe trigger, one for the Airtable record, one for the Slack message. On the free plan (1,000 operations per month), that's enough for over 300 new customers monthly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add more columns to Airtable later without rebuilding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Add any new column to your Airtable base, then open the Airtable module in Make.com — the new field appears automatically. Map it and save. No need to rebuild the scenario from scratch."
+      }
+    }
+  ]
+}
+</script>
+    <style>
+        :root {
+            --primary: #2d3436;
+            --accent: #0868b4;
+            --text: #2d3436;
+            --light-bg: #f9f9f9;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        /* WIDER CONTAINER */
+        .container { max-width: 1060px; margin: 0 auto; padding: 40px 30px; }
+        .header-inner { max-width: 1060px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; gap: 20px; }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* BREADCRUMB */
+        .breadcrumb { font-size: 0.85rem; color: #595959; margin-bottom: 20px; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* ARTICLE META */
+        .article-meta { font-size: 0.85rem; color: #595959; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .article-meta time { color: #595959; }
+        .article-meta .separator { color: #ccc; }
+        .article-meta .category-badge {
+            background: #f0f4f8; color: var(--accent); padding: 2px 10px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none;
+        }
+
+        /* CONTENT */
+        .content { margin-top: 30px; }
+        h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
+        .intro {
+            font-size: 1.15rem; color: #444; margin-bottom: 25px;
+            line-height: 1.8; border-left: 4px solid var(--accent); padding-left: 20px;
+        }
+        h2 { font-size: 1.4rem; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: var(--primary); }
+        h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; color: var(--primary); }
+        p { margin: 0 0 18px 0; }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: #f7f9fc; border: 1px solid #e0e8f0; border-radius: 8px;
+            padding: 20px 24px; margin: 0 0 30px 0;
+        }
+        .toc-title {
+            font-size: 0.85rem; color: #595959; text-transform: uppercase;
+            letter-spacing: 0.06em; margin: 0 0 12px 0; font-weight: 700;
+        }
+        .toc ol { margin: 0; padding-left: 20px; }
+        .toc li { margin-bottom: 6px; font-size: 0.95rem; }
+        .toc a { color: var(--accent); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* TECH TIP */
+        .tech-tip {
+            background: #fff3cd; border-left: 4px solid #ffc107;
+            padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0;
+        }
+        .tech-tip strong { display: block; margin-bottom: 6px; }
+
+        /* VERDICT */
+        .verdict {
+            background: #f0f8ff; border-left: 4px solid var(--accent);
+            padding: 20px 24px; margin: 30px 0; border-radius: 0 8px 8px 0;
+            font-size: 1.05rem; line-height: 1.7;
+        }
+        .verdict strong { color: var(--accent); }
+
+        .inline-cta { background: #f0f8ff; padding: 16px 20px; border-radius: 8px; margin: 25px 0; font-size: 1.05rem; line-height: 1.7; }
+        .inline-cta a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+        /* COMPARISON TABLE */
+        .table-wrapper {
+            overflow-x: auto; margin: 20px 0 30px 0;
+            border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .comparison-table thead tr { background: var(--accent); color: white; }
+        .comparison-table th { padding: 12px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .comparison-table td { padding: 11px 16px; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table tbody tr:nth-child(even) { background: #f7f9fc; }
+        .comparison-table tbody tr:hover { background: #eef5ff; }
+
+        /* STEPS */
+        .steps { padding-left: 0; list-style: none; counter-reset: steps; }
+        .steps li { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+        .steps li::before {
+            content: counter(steps); background: var(--accent); color: white;
+            width: 28px; height: 28px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.85rem; flex-shrink: 0; margin-top: 2px;
+        }
+        .steps li.step-image { display: block; padding-left: 0; margin-bottom: 20px; counter-increment: none; }
+        .steps li.step-image::before { display: none; }
+
+        /* FAQ */
+        .faq-section { margin: 40px 0 20px 0; }
+        .faq-section h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid #eee; margin-bottom: 24px; }
+        .faq-item { margin-bottom: 24px; }
+        .faq-q { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin: 0 0 6px 0; }
+        .faq-a { color: #444; margin: 0; line-height: 1.7; }
+
+        /* RELATED GUIDES */
+        .related-guides {
+            background: #f7f9fc; border: 1px solid #e0e8f0;
+            border-radius: 8px; padding: 20px 24px; margin: 30px 0;
+        }
+        .related-guides h3 { font-size: 0.85rem; color: #595959; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
+        .related-guides ul { margin: 0; padding-left: 18px; }
+        .related-guides li { margin-bottom: 6px; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
+        .related-guides a:hover { text-decoration: underline; }
+
+        /* SCREENSHOT PLACEHOLDER */
+        .screenshot-placeholder {
+            background: #f0f4f8; border: 2px dashed #b0c4d8;
+            border-radius: 8px; margin: 24px 0; padding: 32px 20px; text-align: center;
+        }
+        .screenshot-placeholder-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .screenshot-icon { font-size: 2rem; }
+        .screenshot-label { color: #6b8cae; font-size: 0.9rem; font-style: italic; }
+
+        /* SCREENSHOT IMAGE */
+        .screenshot { margin: 24px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .screenshot img { width: 100%; display: block; }
+        .screenshot figcaption { background: #f7f9fc; color: #595959; font-size: 0.82rem; padding: 8px 14px; text-align: center; font-style: italic; }
+
+        /* CODE */
+        pre {
+            background: #2d3436; color: #55efc4; padding: 20px; border-radius: 8px;
+            overflow-x: auto; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; margin: 20px 0; line-height: 1.6;
+        }
+        code { font-family: 'Courier New', monospace; }
+
+        /* CTA */
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
+        .cta-card p { color: #555; margin-bottom: 20px; }
+        .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+        .btn:hover { background: #0773c5; }
+
+        /* FOOTER */
+        footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
+        footer a { color: var(--accent); text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            h1 { font-size: 1.7rem; }
+            .container { padding: 20px 16px; }
+            .comparison-table th, .comparison-table td { padding: 9px 10px; font-size: 0.88rem; }
+            .article-meta { gap: 4px; }
+        }
+
+        /* INDEX CARD GRID */
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+        .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
+        .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
+        .card .card-meta { font-size: 0.78rem; color: #999; margin-bottom: 8px; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
+        <a href="/" class="back-link">← All Guides</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="/" rel="noopener">Home</a> › <a href="/" rel="noopener">Client Onboarding</a> › Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack
+    </div>
+
+    <main class="content">
+        <h1>Stripe New Customer? Auto-Track in Airtable and Notify Your Team via Slack</h1>
+        <div class="article-meta"><time datetime="2026-03-04">Mar 04, 2026</time> <span class="separator">·</span> <span>⏱ 9 min read</span> <span class="separator">·</span> <span class="category-badge">Client Onboarding</span></div>
+
+        <nav class="toc">
+<p class="toc-title">In This Guide</p>
+<ol><li><a href="#why-stripe-s-dashboard-isn-t-enough-for-client-tracking" rel="noopener">Why Stripe&#x27;s Dashboard Isn&#x27;t Enough for Client Tracking</a></li>
+<li><a href="#what-this-stripe-to-airtable-automation-does" rel="noopener">What This Stripe to Airtable Automation Does</a></li>
+<li><a href="#why-airtable-instead-of-google-sheets-for-client-tracking" rel="noopener">Why Airtable Instead of Google Sheets for Client Tracking</a></li>
+<li><a href="#don-t-use-slack-alternatives-that-work-the-same-way" rel="noopener">Don&#x27;t Use Slack? Alternatives That Work the Same Way</a></li>
+<li><a href="#what-you-need-before-starting" rel="noopener">What You Need Before Starting</a></li>
+<li><a href="#how-to-build-the-stripe-to-airtable-client-tracker-automation" rel="noopener">How to Build the Stripe to Airtable Client Tracker Automation</a></li>
+<li><a href="#frequently-asked-questions" rel="noopener">Frequently Asked Questions</a></li>
+</ol>
+</nav>
+
+        <p class="intro">A new customer signs up in Stripe. Their name sits in your payment dashboard — and nowhere else. Your team doesn&#x27;t know, nobody starts onboarding, and you find out three days later when you happen to check. This Make.com Stripe automation fixes that instantly: the moment a new customer appears in Stripe, their details land in an Airtable client tracker and your team gets a Slack notification. No code, no manual entry, runs forever once built.</p>
+<h2 id="why-stripe-s-dashboard-isn-t-enough-for-client-tracking">Why Stripe&#x27;s Dashboard Isn&#x27;t Enough for Client Tracking</h2>
+<p>Stripe is built for payments, not client management. It stores customer names and emails, but it doesn&#x27;t notify your team when someone new signs up, track onboarding status, or let multiple people collaborate on client notes. If you&#x27;re a freelancer or agency juggling 10-50 active clients, you need a dedicated tracker — and you need it updated automatically, not by someone remembering to copy-paste from Stripe every morning.</p>
+<h2 id="what-this-stripe-to-airtable-automation-does">What This Stripe to Airtable Automation Does</h2>
+<p>When a new customer is created in Stripe, Make.com catches the event instantly via webhook and runs two actions: it creates a new record in your Airtable client tracker with the customer&#x27;s name, email, Stripe ID, and signup date, then sends a formatted Slack message to your team&#x27;s channel. The whole thing takes about 25 minutes to build.</p>
+<h2>How the Workflow Runs</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Step</th><th>What Happens</th><th>Tool</th></tr></thead><tbody><tr><td>1</td><td>New customer is created in Stripe</td><td>Stripe Webhook (INSTANT)</td></tr><tr><td>2</td><td>Client record is added to Airtable with name, email, and date</td><td>Airtable</td></tr><tr><td>3</td><td>Team gets a Slack notification with client details</td><td>Slack</td></tr></tbody></table></div>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> This automation uses Stripe&#x27;s Watch Events module with webhooks — it triggers instantly when a new customer appears, using zero Make.com operations while idle. Unlike polling triggers that check every 15 minutes and consume operations on every check, webhooks only fire when there&#x27;s actual data. On the free plan (1,000 operations per month), this means you&#x27;re only using operations when real customers sign up.</div>
+<h2 id="why-airtable-instead-of-google-sheets-for-client-tracking">Why Airtable Instead of Google Sheets for Client Tracking</h2>
+<p>Several tutorials on this site use Google Sheets for tracking — it&#x27;s free and everyone knows it. But for client tracking specifically, Airtable is the better choice. Airtable gives you structured field types: an Email field that validates addresses, a Single Select dropdown for status tracking (&quot;New&quot;, &quot;Onboarding&quot;, &quot;Active&quot;), and a Date field that formats dates automatically. You can switch to a Kanban view to see your onboarding pipeline at a glance — drag clients from &quot;New&quot; to &quot;Onboarding&quot; to &quot;Active&quot; without editing cells. Google Sheets can log data, but it can&#x27;t enforce structure. Airtable&#x27;s free plan includes 1,000 records per base and up to 5 editors — more than enough for most service businesses tracking clients.</p>
+<p class="inline-cta">Create your free Airtable client tracker — no credit card needed. <a href="https://airtable.com/invite/r/wuQK7yct" rel="sponsored noopener">Try Airtable free →</a></p>
+<h2 id="don-t-use-slack-alternatives-that-work-the-same-way">Don&#x27;t Use Slack? Alternatives That Work the Same Way</h2>
+<p>This guide uses Slack for team notifications, but Make.com supports any messaging tool. If your team doesn&#x27;t use Slack, swap the last module for one of these — the rest of the workflow stays identical. Gmail: send a notification email to your team instead. Microsoft Teams: same concept as Slack, select the Teams module and pick your channel. Google Chat: if you&#x27;re already in Google Workspace, this is the simplest swap.</p>
+<p class="inline-cta">Start building this automation for free on Make.com — no credit card needed. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
+<h2 id="what-you-need-before-starting">What You Need Before Starting</h2>
+<p>You&#x27;ll need four things ready before opening Make.com. A Stripe account — sandbox mode works perfectly for testing (no real charges). An Airtable account with a base called &quot;Client Tracker&quot; containing a table called &quot;Clients&quot; with these columns: Name (text), Email (email), Stripe Customer ID (text), Plan (text), Amount Paid (currency), Date Joined (date), Status (single select with &quot;New&quot;, &quot;Onboarding&quot;, &quot;Active&quot;), and Notes (long text). A Slack workspace with a channel for notifications (this guide uses #new-client, you can name yours anything). And a free Make.com account.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-01.png" alt="Make.com Stripe Airtable automation — Airtable Client Tracker base with columns configured" width="1060" loading="lazy"><figcaption>Make.com Stripe Airtable automation — Airtable Client Tracker base with columns configured</figcaption></figure>
+<h2 id="how-to-build-the-stripe-to-airtable-client-tracker-automation">How to Build the Stripe to Airtable Client Tracker Automation</h2>
+<ol class="steps">
+<li>Create a test customer in Stripe — open your Stripe Dashboard and switch to sandbox mode using the toggle in the top-right corner. Go to Customers and click &quot;+ Add customer.&quot; Enter a name and email, then click &quot;Add customer.&quot; You&#x27;ll use this test customer to trigger the automation later.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-02.png" alt="Make.com Stripe automation — Stripe sandbox Create customer dialog" width="1060" loading="lazy"><figcaption>Make.com Stripe automation — Stripe sandbox Create customer dialog</figcaption></figure></li>
+<li>Log in to Make.com and create a new scenario — click &quot;Create a new scenario&quot; on your dashboard. You&#x27;ll see an empty canvas with a large purple + button in the center.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-03.png" alt="Make.com Stripe Airtable scenario — empty canvas ready to build" width="1060" loading="lazy"><figcaption>Make.com Stripe Airtable scenario — empty canvas ready to build</figcaption></figure></li>
+<li>Click the + button and search for &quot;Stripe&quot; — select the Watch Events module. Click &quot;Create a webhook&quot; to set up the trigger. Connect your Stripe account using OAuth or API Key (copy your Secret key from Stripe → Developers → API keys — it starts with sk_test_ in sandbox mode). Set the Group to &quot;Customer&quot; and the Event to &quot;Customer created.&quot; Click Save.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-04.png" alt="Make.com Stripe webhook — Group set to Customer, Event set to Customer created" width="1060" loading="lazy"><figcaption>Make.com Stripe webhook — Group set to Customer, Event set to Customer created</figcaption></figure></li>
+</ol>
+<div class="tech-tip"><strong>💡 Pro Tip:</strong> This tutorial uses the customer.created event, which fires whenever a new customer is added to Stripe — whether through Checkout, a manual invoice, or the dashboard. If you only want to track customers who have actually completed a payment, use checkout.session.completed instead. The setup is identical — just select &quot;Checkout&quot; as the Group and check &quot;Checkout session completed.&quot;</div>
+<p>4. The Stripe module is now on your canvas with the webhook connected — you&#x27;ll see the webhook name in the module configuration and &quot;Immediately as data arrives&quot; in the bottom toolbar, confirming this is an INSTANT trigger.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-05.png" alt="Make.com Stripe Watch Events module — webhook connected and ready" width="1060" loading="lazy"><figcaption>Make.com Stripe Watch Events module — webhook connected and ready</figcaption></figure>
+<p>5. Click the + button to the right of the Stripe module, search for &quot;Airtable&quot; and select &quot;Create a Record.&quot; Click &quot;Create a connection&quot; — Make.com will open a dialog where you select Airtable OAuth as the connection type. Name the connection anything (e.g. &quot;My Airtable OAuth connection&quot;) and click Save. Airtable&#x27;s authorization screen will open — grant Make.com access to your bases.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-06.png" alt="Make.com Airtable module — Create a connection button to link your Airtable account" width="1060" loading="lazy"><figcaption>Make.com Airtable module — Create a connection button to link your Airtable account</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-07.png" alt="Make.com Airtable OAuth — connection type and name configuration" width="1060" loading="lazy"><figcaption>Make.com Airtable OAuth — connection type and name configuration</figcaption></figure>
+<p>6. Once connected, select your Base (&quot;Client Tracker&quot;) and Table (&quot;Clients&quot;) from the dropdowns. Airtable fields will appear automatically. Map them from the Stripe trigger: Name to &quot;1. Object: Name&quot;, Email to &quot;1. Object: Email&quot;, and Stripe Customer ID to &quot;1. Object: ID&quot; (this starts with cus_ and is useful for reference).</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-08.png" alt="Make.com Airtable field mapping — Name, Email, and Stripe Customer ID mapped from Stripe" width="1060" loading="lazy"><figcaption>Make.com Airtable field mapping — Name, Email, and Stripe Customer ID mapped from Stripe</figcaption></figure>
+<p>7. Scroll down to map the remaining fields. Leave Amount Paid empty — the customer.created event doesn&#x27;t include payment data. For Date Joined, map &quot;1. Object: Created&quot; directly — Airtable converts the Stripe timestamp automatically, no formatDate function needed. For Status, click the &quot;Map&quot; toggle to enable manual input and type &quot;New&quot; — this sets every new client&#x27;s status to &quot;New&quot; by default. Leave Notes empty — your team fills this in manually during onboarding.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-09.png" alt="Make.com Airtable field mapping — Date Joined, Status set to New, Notes empty" width="1060" loading="lazy"><figcaption>Make.com Airtable field mapping — Date Joined, Status set to New, Notes empty</figcaption></figure>
+<p>8. Add a Slack module — click the + button after Airtable, search for &quot;Slack&quot; and select &quot;Send a Message.&quot; Connect your Slack workspace through OAuth. Set Channel Type to &quot;Public channel&quot; and select your #new-client channel. In the Text field, compose a message using mapped fields from the Airtable module: include the client&#x27;s name, email, Stripe Customer ID, and join date. Use Slack&#x27;s bold formatting (*text*) for labels to make the notification scannable.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-11.png" alt="Make.com Slack module — channel selected and message template with mapped client fields" width="1060" loading="lazy"><figcaption>Make.com Slack module — channel selected and message template with mapped client fields</figcaption></figure>
+<p>9. Test the automation — click &quot;Run once&quot; at the bottom of the Make.com canvas. The scenario starts listening for Stripe events. Switch to your Stripe Dashboard, go to Customers, and create another test customer with a different name and email. Switch back to Make.com — the scenario should fire within seconds, showing green checkmarks and a &quot;1&quot; badge on each module.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-13.png" alt="Make.com Stripe Airtable Slack automation — successful test run with green checkmarks on all modules" width="1060" loading="lazy"><figcaption>Make.com Stripe Airtable Slack automation — successful test run with green checkmarks on all modules</figcaption></figure>
+<p>10. Verify the results — check your Airtable Client Tracker table. A new row should appear with the customer&#x27;s name, email, Stripe ID, and today&#x27;s date, with Status set to &quot;New.&quot; Then check your Slack #new-client channel for the formatted notification.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-10.png" alt="Make.com Stripe automation result — Airtable Client Tracker with auto-populated client row" width="1060" loading="lazy"><figcaption>Make.com Stripe automation result — Airtable Client Tracker with auto-populated client row</figcaption></figure>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-airtable-12.png" alt="Make.com Stripe automation result — Slack notification with new client details" width="1060" loading="lazy"><figcaption>Make.com Stripe automation result — Slack notification with new client details</figcaption></figure>
+<p>11. Turn the scenario on — click the toggle at the bottom-left of the canvas to activate the scenario. Since this uses a webhook trigger, it runs immediately when data arrives — no polling interval needed.</p>
+<p class="inline-cta">Try Make.com&#x27;s free plan — 1,000 operations per month, enough for hundreds of new client signups. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
+<div class="verdict"><strong>Bottom line:</strong> Every new Stripe customer that goes untracked is a missed onboarding opportunity. This automation takes 25 minutes to build and gives your team instant visibility into every new signup — no dashboard checking, no copy-pasting, no delays. Make.com&#x27;s free plan handles over 300 new customers per month with this workflow (3 operations per run), and Airtable&#x27;s free plan stores up to 1,000 client records. Start with the free plans for both and upgrade only when your client volume demands it.</div>
+<div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<div class="faq-item"><h3 class="faq-q">Do I need a paid Stripe account to set this up?</h3><p class="faq-a">No. You can build and test the entire workflow using Stripe&#x27;s sandbox mode, which is free. When you&#x27;re ready to go live, switch to your live Stripe API key and the automation works identically.</p></div>
+<div class="faq-item"><h3 class="faq-q">Is Airtable free for client tracking?</h3><p class="faq-a">Yes. Airtable&#x27;s free plan includes 1,000 records per base and up to 5 editors — more than enough for most small businesses. You only need to upgrade if you exceed 1,000 client records or need advanced features like custom automations.</p></div>
+<div class="faq-item"><h3 class="faq-q">What if I want to track the payment amount and plan name too?</h3><p class="faq-a">Use checkout.session.completed as your Stripe trigger instead of customer.created. This event includes full payment details — amount, product name, and subscription info. The Airtable and Slack setup stays identical, you just map different fields.</p></div>
+<div class="faq-item"><h3 class="faq-q">How many Make.com operations does this use?</h3><p class="faq-a">3 operations per new customer — one for the Stripe trigger, one for the Airtable record, one for the Slack message. On the free plan (1,000 operations per month), that&#x27;s enough for over 300 new customers monthly.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I add more columns to Airtable later without rebuilding?</h3><p class="faq-a">Yes. Add any new column to your Airtable base, then open the Airtable module in Make.com — the new field appears automatically. Map it and save. No need to rebuild the scenario from scratch.</p></div>
+</div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/zapier-too-expensive-make-com-alternative" rel="noopener">Zapier Too Expensive? Switch to Make.com and Save Up to $840/year</a></li><li><a href="/stripe-payment-failed-automation" rel="noopener">Stripe Payment Failed? Automatically Alert Your Team and Email the Customer</a></li><li><a href="/make-com-free-plan-what-you-can-build" rel="noopener">Make.com Free Plan: What You Can Actually Build</a></li><li><a href="/calendly-booking-onboarding-checklist-automation" rel="noopener">Calendly Automation: Create an Onboarding Checklist and Notify Your Team</a></li></ul></div>
+    </main>
+
+    <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px; margin:40px 0 30px 0; text-align:center;">
+        <h2 style="border:none; margin-top:0; font-size:1.3rem; color:#2d3436;">Get automation tutorials in your inbox</h2>
+        <p style="color:#555; margin-bottom:20px; font-size:1rem;">One practical workflow per week. No fluff, no spam — just tested automations for service businesses.</p>
+        <a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=article_cta" target="_blank" rel="noopener nofollow" style="background:#0868b4; color:white; padding:14px 30px; border-radius:6px; text-decoration:none; display:inline-block; font-weight:600; font-size:1rem; transition:background 0.2s;">Subscribe free →</a>
+    </div>
+
+    <div class="cta-card" style="padding:0; background:none; border:none;">
+        <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored noopener">
+            <img 
+                src="assets/banners/AD-728x90 – 2.png" 
+                alt="Set up your own workflows for free with Make.com"
+                style="width:100%; border-radius:12px; display:block; cursor:pointer;"
+            >
+        </a>
+    </div>
+
+    <footer>
+        <span>© 2026 IntegrateHub.io</span>
+        <span>
+            <a href="about.html">About</a>
+            &nbsp;·&nbsp;
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+            &nbsp;·&nbsp;
+            <a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=footer" target="_blank" rel="noopener nofollow">Newsletter</a>
+            &nbsp;·&nbsp;
+            <a href="privacy-policy.html">Privacy Policy</a>
+            &nbsp;·&nbsp;
+            <a href="/">← All Guides</a>
+        </span>
+    </footer>
+
+</div>
+
+</body>
+</html>

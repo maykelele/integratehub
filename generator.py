@@ -75,6 +75,10 @@ AFFILIATE_LINKS = {
         "url": "https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=inline_cta",
         "cta_text": "Subscribe free →",
     },
+    "airtable": {
+        "url": "https://airtable.com/invite/r/wuQK7yct",
+        "cta_text": "Try Airtable free →",
+    },
     # Dodaj nove affiliate partnere ovde:
     # "calendly": {
     #     "url": "https://calendly.com/?ref=integratehub",

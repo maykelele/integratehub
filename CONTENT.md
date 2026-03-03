@@ -12,8 +12,9 @@
 | 6 | typeform-client-intake-google-sheets-automation | how-to | 2026-02-26 | onboarding |
 | 7 | typeform-welcome-email-google-drive-automation | how-to | 2026-02-28 | onboarding |
 | 8 | multi-source-lead-tracking-google-sheets-automation | how-to | 2026-03-02 | lead-capture |
-| 9 | make-com-free-plan-what-you-can-build | how-to | 2026-03-05 | automation-strategy |
-| 10 | lead-follow-up-slack-reminder-automation | how-to | 2026-03-07 | lead-capture |
+| 9 | make-com-free-plan-what-you-can-build | guide | 2026-03-05 | automation-strategy |
+| 10 | lead-follow-up-slack-reminder-automation | how-to | 2026-03-03 | lead-capture |
+| 11 | tripe-new-customer-airtable-tracker-automation | how-to | 2026-03-04 | onboarding |
 
 ### Pending Internal Links
 
@@ -28,7 +29,7 @@ Do NOT update sitemap lastmod on these — internal link additions are not subst
 | Beehiiv (newsletter) | ✅ ACTIVE | https://automationfix.beehiiv.com/subscribe |
 | Calendly | ❌ No program | — |
 | Pipedrive | ❌ Deprioritized | HubSpot competitor, difficult affiliate registration. Not pursuing. |
-| HubSpot | 🔜 Planned | Applied March 2026, waiting for answer. No articles before response |
+| HubSpot | ❌ Rejected (reapply at 1K monthly visitors) | Rejected March 2026 — site below 1,000 monthly visitors minimum. Reapply when GSC confirms 1K+. No HubSpot articles until approved. |
 | Airtable | ✅ ACTIVE | https://airtable.com/invite/r/wuQK7yct | Not affiliate, but can be used as a credit for airtable subscriptions; We should write articles where Airtable is involved; since it can attract traffic. |
 
 **Rule:** Don't write an article for a planned affiliate tool until the affiliate is approved. No point driving traffic without earning from it.
@@ -37,26 +38,30 @@ Do NOT update sitemap lastmod on these — internal link additions are not subst
 
 This is a living list — reorder based on what makes sense, not rigid scheduling.
 
-### Ready to Write (have enough knowledge + tools)
-- Filter Calendly bookings → only qualified leads to CRM
-- Make.com Error Handling: How to Prevent Duplicate Data and Partial Failures (from real experience)
-- Stripe new customer → Google Drive folder + welcome email + Slack
-- Typeform → OpenAI lead qualification → Google Sheets + Slack (AI layer na existing lead capture seriji; zahteva Make.com Core plan — AI Tools nisu na free)
-- Gmail + OpenAI: Auto-draft replies to new lead emails
-- Google Docs + OpenAI: Auto-generate client proposals from intake form data
+### Next 5 Articles (Active Queue)
 
-### Write After 10+ How-To Articles Exist
-- ~~Make.com Free Plan: What You Can Actually Build (cornerstone/pillar article)~~ → PUBLISHED as #9
-- Make.com vs Zapier Professional plan — specific pricing breakdown
+| Priority | Idea | Type | Category | Affiliates | Notes |
+|----------|------|------|----------|------------|-------|
+| #12 | Google Forms → Airtable client CRM + Slack alert | how-to | lead-capture | Make.com, Airtable | Free stack alternative to Typeform intake. Targets "free CRM" keyword cluster. |
+| #13 | Make.com vs Zapier Professional plan — specific pricing breakdown | comparison | comparisons | Make.com | Rebalances content mix toward 70/30. High buyer intent. Link to #1 and #9. Needs fresh pricing research + "Last verified" date. |
+| #14 | Stripe subscription cancelled → feedback email + Google Sheets log | how-to | payments | Make.com | Churn prevention angle. Strong pain point, low competition. Extends Stripe series (#3, #11). |
+| #15 | Weekly client report: Google Sheets → email every Monday | how-to | reporting | Make.com | Scheduled automation pattern. Agency use case. Scheduling + email formatting. |
+
+### Ready to Write (Backlog)
+- Typeform → OpenAI lead qualification → Google Sheets + Slack (AI layer; requires Make.com Core plan)
+- Gmail + OpenAI: Auto-draft replies to new lead emails (requires Core plan)
+- Google Docs + OpenAI: Auto-generate client proposals from intake form data (requires Core plan)
+- Filter Calendly bookings → only qualified leads to CRM
+- ~~Stripe new customer → Google Drive folder + welcome email + Slack~~ → Replaced by #11 (Airtable version avoids overlap with #7)
+- Stripe daily balance → Google Sheets + Slack summary (freelancer/agency daily financial snapshot)
+- Airtable + Google Calendar sync for client bookings (onboarding events auto-created from Airtable)
+- WordPress form lead → Google Sheets + Slack + auto-reply email (huge keyword cluster, different audience from #2)
+- Make.com Error Handling: How to Prevent Duplicate Data and Partial Failures (from real experience)
 
 ### Requires New Affiliate First
-- HubSpot free → Google Sheets real-time sync (needs HubSpot affiliate)
-- Auto-assign leads from contact form + Pipedrive (needs Pipedrive affiliate)
-- Airtable as automation database (needs Airtable affiliate)
-
-### Advanced / Experimental
-- Typeform → AI Agent lead qualification → Slack
-- Weekly client report → Google Sheets + email every Monday
+- HubSpot free → Google Sheets real-time sync (needs HubSpot affiliate — applied March 2026, waiting)
+- ~~Auto-assign leads from contact form + Pipedrive~~ → Deprioritized with Pipedrive
+- ~~Airtable as automation database~~ → Replaced by concrete Airtable articles (#11, #12)
 
 ### Authority Series (after 15+ articles, phase 2)
 - Why Most Automations Break After 3-6 Months
@@ -67,8 +72,10 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 
 ## Content Mix Target
 - 70% how-to tutorials (affiliate conversion)
-- 30% comparison articles (higher buyer intent)
-- Current: 8 how-to / 2 comparison = 80% / 20% (next article should be comparison to rebalance toward 70/30)
+- 20% comparison articles (higher buyer intent)
+- 10% guides/resource content (authority, internal links)
+- Current: 8 how-to / 2 comparison / 1 guide = 70% / 20% / 10% ✅
+- After next 5: 8 how-to / 2 comparison / 1 guide = 73% / 20% / 7% (on target)
 
 ## Newsletter
 
