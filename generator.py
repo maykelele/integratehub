@@ -124,6 +124,11 @@ CATEGORIES = {
 #                   Samo za substantial content promene, NE za typo/link fix
 #                   Primer: Updated: 2026-03-01
 #
+#   Build Time:     Procenjeno vreme izgradnje automatizacije u minutima (opciono)
+#                   Prikazuje se kao 🛠 ~XX min pored reading time u article meta
+#                   Za comparison članke obično se ne koristi
+#                   Primer: Build Time: 25
+#
 #   Category:       Kategorija članka — koristi se za breadcrumb i buduće filtriranje
 #                   Dostupne: lead-capture, payments, onboarding, comparisons, automation-strategy
 #                   Primer: Category: lead-capture
@@ -227,7 +232,7 @@ def estimate_reading_time(text):
     # Ukloni tagove/metapodatke za tačniji count
     content_lines = []
     skip_prefixes = ('Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:',
-                     'Meta:', 'Image:', 'Screenshot:', 'Internal Links:', '---')
+                     'Build Time:', 'Meta:', 'Image:', 'Screenshot:', 'Internal Links:', '---')
     for line in text.split('\n'):
         stripped = line.strip()
         if not stripped:
@@ -475,7 +480,7 @@ def format_content(text, page_type='how-to'):
             'Introduction:', 'Meta:', 'Tech Tip:', 'CTA', 'Workflow Steps:', 'Verdict:',
             'Python Snippet:', 'Table:', 'FAQ:', 'Internal Links:',
             'Screenshot:', 'Image:', 'H2:', 'H3:',
-            'Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:', '---'
+            'Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:', 'Build Time:', '---'
         ])
 
         if is_new_tag and (in_table or in_faq or in_internal_links):
@@ -486,7 +491,7 @@ def format_content(text, page_type='how-to'):
                 close_open_blocks()
             continue
 
-        if line_stripped.startswith(('Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:', '---')):
+        if line_stripped.startswith(('Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:', 'Build Time:', '---')):
             continue
 
         # --- Meta description (optional override) ---
@@ -788,6 +793,7 @@ def generate_site():
         date_published = extract_field(lines, 'Date:')
         date_updated = extract_field(lines, 'Updated:')
         category = extract_field(lines, 'Category:')
+        build_time = extract_field(lines, 'Build Time:')
 
         if not slug or not title:
             print(f"⚠️  Preskačem entry bez slug/title")
@@ -811,6 +817,9 @@ def generate_site():
                 meta_parts.append(f'<span>(Updated {html.escape(updated_display)})</span>')
         meta_parts.append(f'<span class="separator">·</span>')
         meta_parts.append(f'<span>⏱ {reading_time} min read</span>')
+        if build_time:
+            meta_parts.append(f'<span class="separator">·</span>')
+            meta_parts.append(f'<span>🛠 ~{html.escape(build_time)} min build</span>')
         if category and category in CATEGORIES:
             meta_parts.append(f'<span class="separator">·</span>')
             meta_parts.append(f'<span class="category-badge">{html.escape(CATEGORIES[category])}</span>')

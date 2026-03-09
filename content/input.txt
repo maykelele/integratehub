@@ -72,6 +72,7 @@ Title: Send Facebook & Instagram Leads to Google Sheets Automatically
 Type: how-to
 Date: 2026-02-21
 Category: lead-capture
+Build Time: 15
 
 Meta: Connect Facebook Lead Ads to Google Sheets automatically using Make.com. Step-by-step tutorial — real-time lead capture, no CSV downloads.
 
@@ -149,6 +150,7 @@ Title: Stripe Payment Failed: Alert Team + Email Customer
 Type: how-to
 Date: 2026-02-22
 Category: payments
+Build Time: 20
 
 Meta: Automate Stripe failed payment alerts with Make.com. Send instant customer emails and Slack notifications the moment a payment fails.
 
@@ -244,6 +246,7 @@ Title: Calendly Automation: Onboarding Checklist + Slack Alert
 Type: how-to
 Date: 2026-02-23
 Category: onboarding
+Build Time: 25
 
 Meta: Make.com Calendly automation — auto-create onboarding checklists in Google Sheets and notify your team in Slack on every new booking.
 
@@ -528,6 +531,7 @@ Title: Typeform to Google Sheets and Slack with Make.com
 Type: how-to
 Date: 2026-02-26
 Category: onboarding
+Build Time: 20
 
 Meta: Connect Typeform to Google Sheets automatically using Make.com. Step-by-step tutorial — instant Slack notifications, no manual data entry.
 
@@ -658,6 +662,7 @@ Title: Typeform to Welcome Email + Google Drive: Make.com
 Type: how-to
 Date: 2026-02-28
 Category: onboarding
+Build Time: 25
 
 Meta: Automate Typeform client onboarding with Make.com — send a welcome email and create a Google Drive folder instantly on every form submission.
 
@@ -788,6 +793,7 @@ Title: Track Leads from Multiple Sources in One Google Sheet
 Type: how-to
 Date: 2026-03-01
 Category: lead-capture
+Build Time: 30
 
 Meta: Track leads from Facebook, Typeform, and website forms in one Google Sheet using Make.com. Upsert logic prevents duplicates automatically.
 
@@ -1180,6 +1186,7 @@ Title: Lead Follow-Up Slack Alert: No Contact in 24h
 Type: how-to
 Date: 2026-03-03
 Category: lead-capture
+Build Time: 20
 
 Meta: Automate lead follow-up reminders with Make.com and Slack. Get alerts when leads go cold for 24+ hours — no leads slip through the cracks.
 
@@ -1350,6 +1357,7 @@ Title: Stripe New Customer: Auto-Track in Airtable + Slack
 Type: how-to
 Date: 2026-03-04
 Category: onboarding
+Build Time: 20
 
 Meta: Stripe new customer automation with Make.com — auto-add clients to Airtable and send Slack notifications the moment someone signs up.
 
@@ -1469,6 +1477,7 @@ Title: Google Forms to Airtable CRM Automation + Slack Alerts (Make.com)
 Type: how-to
 Date: 2026-03-09
 Category: lead-capture
+Build Time: 25
 
 Meta: Google Forms to Airtable CRM automation with Make.com — auto-capture client intake data and alert your team on Slack in under 25 minutes.
 
