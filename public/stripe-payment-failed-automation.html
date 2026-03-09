@@ -16,11 +16,17 @@
   "@type": "Article",
   "headline": "Stripe Payment Failed: Alert Team + Email Customer",
   "description": "Automate Stripe failed payment alerts with Make.com. Send instant customer emails and Slack notifications the moment a payment fails.",
+  "author": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
   "publisher": {
     "@type": "Organization",
     "name": "IntegrateHub.io",
     "url": "https://integratehub.io"
   },
+  "image": "https://integratehub.io/assets/screenshots/screenshot-stripe-reminders-1.png",
   "datePublished": "2026-02-22",
   "dateModified": "2026-02-22"
 }
@@ -384,8 +390,8 @@
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-10.png" alt="Complete Make.com scenario canvas showing all three modules connected" width="1060" loading="lazy"><figcaption>Complete Make.com scenario canvas showing all three modules connected</figcaption></figure></li>
 <li>Test the workflow — use the Stripe CLI to send a test event without touching any real data. Run stripe trigger invoice.payment_failed in your terminal. Make.com will process it and send the email to your test customer automatically. If you don&#x27;t have the Stripe CLI, install it with brew install stripe/stripe-cli/stripe on Mac, then run stripe login first.</li>
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-reminders-11.png" alt="Email inbox showing Payment Failed invoice email received instantly with customer name and invoice number" width="1060" loading="lazy"><figcaption>Email inbox showing Payment Failed invoice email received instantly with customer name and invoice number</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> After the Gmail module, add a Slack &quot;Create a Message&quot; module to alert your billing channel the moment a payment fails. Something like: &quot;Payment failed — [Customer Name], Invoice [Number], Amount: [Amount Due]. Follow up today.&quot; Now both the customer and your team know immediately — and someone can pick up the phone if the customer doesn&#x27;t respond to the automated email.</div></li>
 </ol>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> After the Gmail module, add a Slack &quot;Create a Message&quot; module to alert your billing channel the moment a payment fails. Something like: &quot;Payment failed — [Customer Name], Invoice [Number], Amount: [Amount Due]. Follow up today.&quot; Now both the customer and your team know immediately — and someone can pick up the phone if the customer doesn&#x27;t respond to the automated email.</div>
 <div class="verdict"><strong>Bottom line:</strong> Failed payments are one of the most preventable forms of revenue loss for small businesses. Stripe&#x27;s built-in emails only cover subscriptions and arrive as generic Stripe-branded messages — this automation works for every invoice type, sends email from your own account, and alerts your team in the same instant. It takes under 30 minutes to build and runs forever without maintenance.</div>
 <div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <div class="faq-item"><h3 class="faq-q">Do I need a paid Stripe account to set this up?</h3><p class="faq-a">No. You can build and test the entire workflow using Stripe&#x27;s sandbox mode, which is free. When you&#x27;re ready to go live, switch to your live Stripe API key and the automation works identically.</p></div>

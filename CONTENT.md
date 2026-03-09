@@ -15,6 +15,7 @@
 | 9 | make-com-free-plan-what-you-can-build | guide | 2026-03-05 | automation-strategy |
 | 10 | lead-follow-up-slack-reminder-automation | how-to | 2026-03-03 | lead-capture |
 | 11 | tripe-new-customer-airtable-tracker-automation | how-to | 2026-03-04 | onboarding |
+| 12 | google-forms-airtable-client-crm-automation | how-to | 2026-03-09 | lead-capture |
 
 ### Pending Internal Links
 
@@ -42,7 +43,6 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 
 | Priority | Idea | Type | Category | Affiliates | Notes |
 |----------|------|------|----------|------------|-------|
-| #12 | Google Forms → Airtable client CRM + Slack alert | how-to | lead-capture | Make.com, Airtable | Free stack alternative to Typeform intake. Targets "free CRM" keyword cluster. |
 | #13 | Make.com vs Zapier Professional plan — specific pricing breakdown | comparison | comparisons | Make.com | Rebalances content mix toward 70/30. High buyer intent. Link to #1 and #9. Needs fresh pricing research + "Last verified" date. |
 | #14 | Stripe subscription cancelled → feedback email + Google Sheets log | how-to | payments | Make.com | Churn prevention angle. Strong pain point, low competition. Extends Stripe series (#3, #11). |
 | #15 | Weekly client report: Google Sheets → email every Monday | how-to | reporting | Make.com | Scheduled automation pattern. Agency use case. Scheduling + email formatting. |

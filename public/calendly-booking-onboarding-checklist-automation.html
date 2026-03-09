@@ -16,11 +16,17 @@
   "@type": "Article",
   "headline": "Calendly Automation: Onboarding Checklist + Slack Alert",
   "description": "Make.com Calendly automation — auto-create onboarding checklists in Google Sheets and notify your team in Slack on every new booking.",
+  "author": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
   "publisher": {
     "@type": "Organization",
     "name": "IntegrateHub.io",
     "url": "https://integratehub.io"
   },
+  "image": "https://integratehub.io/assets/screenshots/screenshot-calendly-onboarding-01.png",
   "datePublished": "2026-02-23",
   "dateModified": "2026-02-23"
 }
@@ -84,6 +90,48 @@
       "position": 9,
       "name": "Step 9",
       "text": "Map the fields from Calendly to your Google Sheet columns — Name from the Watch Events module maps to column A, Email to column B, Event to column C, Start Time from the Get an Event module to column ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 10,
+      "name": "Step 10",
+      "text": "Add a Slack module — click the + button after Google Sheets, search for \"Slack\" and select \"Send a Message.\""
+    },
+    {
+      "@type": "HowToStep",
+      "position": 11,
+      "name": "Step 11",
+      "text": "Click \"Create a connection\" to link your Slack workspace. Authorize Make.com when prompted."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 12,
+      "name": "Step 12",
+      "text": "Configure the Slack message — select your channel (e.g. #all-new-bookings), set Channel type to \"Public channel\", and compose your notification message."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 13,
+      "name": "Step 13",
+      "text": "Write the Slack notification text using mapped fields — include the invitee name, email, event type, and start time. Add a link to your Google Sheet so your team can check the onboarding tracker immed..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 14,
+      "name": "Step 14",
+      "text": "Save the scenario and click \"Run once\" — then book a test meeting through your own Calendly link using an incognito browser window. Make.com will process the event and populate your Google Sheet autom..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 15,
+      "name": "Step 15",
+      "text": "Check your Slack channel — the notification arrives within seconds of the booking, with all the details your team needs to start preparing."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 16,
+      "name": "Step 16",
+      "text": "Your completed scenario should show four connected modules: Calendly Watch Events → Calendly Get an Event → Google Sheets Add a Row → Slack Send a Message. Toggle the scenario ON to run it automatical..."
     }
   ]
 }
@@ -391,23 +439,23 @@
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-08.png" alt="Google Sheets configured — Calendly Onboarding Tracker spreadsheet selected with Sheet1" width="1060" loading="lazy"><figcaption>Google Sheets configured — Calendly Onboarding Tracker spreadsheet selected with Sheet1</figcaption></figure></li>
 <li>Map the fields from Calendly to your Google Sheet columns — Name from the Watch Events module maps to column A, Email to column B, Event to column C, Start Time from the Get an Event module to column D. Type &quot;New&quot; manually in the Status field and &quot;Send welcome email, Prepare docs, Assign team member&quot; in the Onboarding Tasks field.</li>
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-10.png" alt="Field mapping — Calendly data mapped to Google Sheets columns with static onboarding tasks" width="1060" loading="lazy"><figcaption>Field mapping — Calendly data mapped to Google Sheets columns with static onboarding tasks</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> The Watch Events trigger provides basic invitee data (Name, Email, Event URI), but Start Time comes from the Get an Event module. That&#x27;s why we need both Calendly modules — the trigger catches the booking, and Get an Event fetches the scheduling details.</div></li>
+<li>Add a Slack module — click the + button after Google Sheets, search for &quot;Slack&quot; and select &quot;Send a Message.&quot;</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-11.png" alt="Module picker showing Slack — select Send a Message" width="1060" loading="lazy"><figcaption>Module picker showing Slack — select Send a Message</figcaption></figure></li>
+<li>Click &quot;Create a connection&quot; to link your Slack workspace. Authorize Make.com when prompted.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-12.png" alt="Slack module — Create a connection to authorize your workspace" width="1060" loading="lazy"><figcaption>Slack module — Create a connection to authorize your workspace</figcaption></figure></li>
+<li>Configure the Slack message — select your channel (e.g. #all-new-bookings), set Channel type to &quot;Public channel&quot;, and compose your notification message.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-13.png" alt="Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready" width="1060" loading="lazy"><figcaption>Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready</figcaption></figure></li>
+<li>Write the Slack notification text using mapped fields — include the invitee name, email, event type, and start time. Add a link to your Google Sheet so your team can check the onboarding tracker immediately.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-14.png" alt="Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link" width="1060" loading="lazy"><figcaption>Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link</figcaption></figure></li>
+<li>Save the scenario and click &quot;Run once&quot; — then book a test meeting through your own Calendly link using an incognito browser window. Make.com will process the event and populate your Google Sheet automatically.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-15.png" alt="Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks" width="1060" loading="lazy"><figcaption>Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks</figcaption></figure></li>
+<li>Check your Slack channel — the notification arrives within seconds of the booking, with all the details your team needs to start preparing.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-16.png" alt="Slack notification received in #all-new-bookings channel with booking details and tracker link" width="1060" loading="lazy"><figcaption>Slack notification received in #all-new-bookings channel with booking details and tracker link</figcaption></figure></li>
+<li>Your completed scenario should show four connected modules: Calendly Watch Events → Calendly Get an Event → Google Sheets Add a Row → Slack Send a Message. Toggle the scenario ON to run it automatically for every new booking.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-17.png" alt="Complete Make.com scenario — four modules connected and running successfully" width="1060" loading="lazy"><figcaption>Complete Make.com scenario — four modules connected and running successfully</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> The Event Type field currently shows a Calendly API URL instead of a human-readable name like &quot;Discovery Call.&quot; To fix this, add a Calendly &quot;Get an Event Type&quot; module between Get an Event and Google Sheets — it converts the URI into the actual event type name. For most setups this is optional since you&#x27;ll recognize your own event types, but it makes the Google Sheet cleaner.</div></li>
 </ol>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> The Watch Events trigger provides basic invitee data (Name, Email, Event URI), but Start Time comes from the Get an Event module. That&#x27;s why we need both Calendly modules — the trigger catches the booking, and Get an Event fetches the scheduling details.</div>
-<p>10. Add a Slack module — click the + button after Google Sheets, search for &quot;Slack&quot; and select &quot;Send a Message.&quot;</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-11.png" alt="Module picker showing Slack — select Send a Message" width="1060" loading="lazy"><figcaption>Module picker showing Slack — select Send a Message</figcaption></figure>
-<p>11. Click &quot;Create a connection&quot; to link your Slack workspace. Authorize Make.com when prompted.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-12.png" alt="Slack module — Create a connection to authorize your workspace" width="1060" loading="lazy"><figcaption>Slack module — Create a connection to authorize your workspace</figcaption></figure>
-<p>12. Configure the Slack message — select your channel (e.g. #all-new-bookings), set Channel type to &quot;Public channel&quot;, and compose your notification message.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-13.png" alt="Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready" width="1060" loading="lazy"><figcaption>Slack configuration — channel set to all-new-bookings, Public channel type, Text field ready</figcaption></figure>
-<p>13. Write the Slack notification text using mapped fields — include the invitee name, email, event type, and start time. Add a link to your Google Sheet so your team can check the onboarding tracker immediately.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-14.png" alt="Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link" width="1060" loading="lazy"><figcaption>Slack message body with mapped fields — New Booking notification with Name, Email, Event, Date and tracker link</figcaption></figure>
-<p>14. Save the scenario and click &quot;Run once&quot; — then book a test meeting through your own Calendly link using an incognito browser window. Make.com will process the event and populate your Google Sheet automatically.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-15.png" alt="Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks" width="1060" loading="lazy"><figcaption>Google Sheet populated with test booking data — Name, Email, Event Type, Date, Status and Onboarding Tasks</figcaption></figure>
-<p>15. Check your Slack channel — the notification arrives within seconds of the booking, with all the details your team needs to start preparing.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-16.png" alt="Slack notification received in #all-new-bookings channel with booking details and tracker link" width="1060" loading="lazy"><figcaption>Slack notification received in #all-new-bookings channel with booking details and tracker link</figcaption></figure>
-<p>16. Your completed scenario should show four connected modules: Calendly Watch Events → Calendly Get an Event → Google Sheets Add a Row → Slack Send a Message. Toggle the scenario ON to run it automatically for every new booking.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-calendly-onboarding-17.png" alt="Complete Make.com scenario — four modules connected and running successfully" width="1060" loading="lazy"><figcaption>Complete Make.com scenario — four modules connected and running successfully</figcaption></figure>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> The Event Type field currently shows a Calendly API URL instead of a human-readable name like &quot;Discovery Call.&quot; To fix this, add a Calendly &quot;Get an Event Type&quot; module between Get an Event and Google Sheets — it converts the URI into the actual event type name. For most setups this is optional since you&#x27;ll recognize your own event types, but it makes the Google Sheet cleaner.</div>
 <h2 id="who-should-use-this-automation">Who Should Use This Automation</h2>
 <p>This workflow is built for anyone who uses Calendly for client-facing bookings and wants a structured preparation process. Freelancers using Calendly for discovery calls or project kickoffs. Agencies onboarding new clients through scheduled intake meetings. Consultants managing multiple bookings across different service types. Small business owners scheduling sales calls and demos. If you book more than 5 calls per week and prepare for each one manually, this automation pays for itself in time saved within the first week.</p>
 <h2 id="apps-used-in-this-automation">Apps Used in This Automation</h2>

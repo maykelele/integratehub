@@ -55,8 +55,8 @@
 1. ~~Image alt tag fix~~ — FIXED. Cursor prompt: `In generator.py, find alt_attr = '' inside Image handler. Change to alt_attr = alt_text[:125] if alt_text else ''`
 2. Build time badge — new tag `Build Time: 25`, display `🛠 ~25 min` next to reading time. Priority: medium.
 3. Cleanup rel="noopener" on internal/anchor links — cosmetic. Priority: low.
-4. HowTo schema incomplete — generator stops counting Workflow Steps when it encounters Image: or Tech Tip: tags inside the step list (they trigger `close_open_blocks`). Result: HowTo schema only includes steps before the first Image/Tech Tip, not all 11. Fix requires changing `format_content()` logic so Image and Tech Tip don't close `in_list`. Must test all existing articles after change. Priority: medium.
-5. Article schema — add "author" (Organization: IntegrateHub.io) and "image" (first Image: tag from article content) to build_article_schema output. Both improve rich result eligibility. Priority: medium.
+4. HowTo schema incomplete — FIXED. Generator stops counting Workflow Steps when it encounters Image: or Tech Tip: tags inside the step list (they trigger `close_open_blocks`). Result: HowTo schema only includes steps before the first Image/Tech Tip, not all 11. Fix requires changing `format_content()` logic so Image and Tech Tip don't close `in_list`. Must test all existing articles after change. Priority: medium.
+5. Article schema — FIXED. Add "author" (Organization: IntegrateHub.io) and "image" (first Image: tag from article content) to build_article_schema output. Both improve rich result eligibility. Priority: medium.
 
 ## Key Decisions Log
 - Homepage stays Make.com focused until 15+ articles.

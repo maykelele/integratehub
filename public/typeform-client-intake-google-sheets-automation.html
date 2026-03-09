@@ -16,11 +16,17 @@
   "@type": "Article",
   "headline": "Typeform to Google Sheets and Slack with Make.com",
   "description": "Connect Typeform to Google Sheets automatically using Make.com. Step-by-step tutorial — instant Slack notifications, no manual data entry.",
+  "author": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
   "publisher": {
     "@type": "Organization",
     "name": "IntegrateHub.io",
     "url": "https://integratehub.io"
   },
+  "image": "https://integratehub.io/assets/screenshots/screenshot-typeform-intake-01.png",
   "datePublished": "2026-02-26",
   "dateModified": "2026-02-26"
 }
@@ -54,6 +60,66 @@
       "position": 4,
       "name": "Step 4",
       "text": "Click \"Add\" to create a new webhook — Make.com will open a configuration dialog. Name your webhook (e.g. \"My Typeform Events webhook\"), connect your Typeform account through OAuth, and select your \"Pr..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Step 5",
+      "text": "Add a Google Sheets module — click the + button to the right of the Typeform module, search for \"Google Sheets\" and select \"Add a Row.\""
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Step 6",
+      "text": "Connect your Google account, set Search Method to \"Search by path\", select My Drive, and choose your \"Client Intake Tracker\" spreadsheet."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 7,
+      "name": "Step 7",
+      "text": "Map the fields from Typeform to your Google Sheet columns — Name (A) maps to Full Name, Email (B) to Email Address, Company (C) to Company Name, Budget (D) to Budget Range, Project (E) to Project Desc..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 8,
+      "name": "Step 8",
+      "text": "Add a Slack module — click the + button after Google Sheets, search for \"Slack\" and select \"Send a Message.\" Connect your Slack workspace when prompted."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 9,
+      "name": "Step 9",
+      "text": "Compose the Slack notification using mapped fields — include the client name, email, company, budget, and project description. Add a link to your Google Sheet so your team can check the tracker immedi..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 10,
+      "name": "Step 10",
+      "text": "Save the scenario — your canvas should now show three modules connected: Typeform Watch Responses → Google Sheets Add a Row → Slack Send a Message. Click \"Run once\" to activate the webhook listener."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 11,
+      "name": "Step 11",
+      "text": "Test the workflow — open your Typeform link in an incognito browser window and submit a test response. Make.com will process it instantly, add a row to your Google Sheet, and send a Slack notification..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 12,
+      "name": "Step 12",
+      "text": "Check your Google Sheet — the test submission appears as a new row with all fields populated automatically, including the date and \"New\" status."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 13,
+      "name": "Step 13",
+      "text": "Check your Slack channel — the notification arrives within seconds of the form submission, with all the details your team needs to start the intake process."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 14,
+      "name": "Step 14",
+      "text": "Toggle the scenario ON — flip the switch at the bottom of the canvas from \"Run once\" to active. The scenario now runs automatically for every new Typeform submission."
     }
   ]
 }
@@ -341,27 +407,27 @@
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-04.png" alt="Typeform Watch Responses INSTANT module — webhook-based trigger for real-time processing" width="1060" loading="lazy"><figcaption>Typeform Watch Responses INSTANT module — webhook-based trigger for real-time processing</figcaption></figure></li>
 <li>Click &quot;Add&quot; to create a new webhook — Make.com will open a configuration dialog. Name your webhook (e.g. &quot;My Typeform Events webhook&quot;), connect your Typeform account through OAuth, and select your &quot;Project Request Form&quot; from the Form ID dropdown.</li>
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-03.png" alt="Typeform webhook configuration — connection established, form selected, webhook enabled" width="1060" loading="lazy"><figcaption>Typeform webhook configuration — connection established, form selected, webhook enabled</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> In the Typeform INSTANT module configuration, set Completed to &quot;Yes&quot; — this ensures Make.com only processes fully submitted forms, not partial responses where someone abandoned the form halfway through.</div></li>
+<li>Add a Google Sheets module — click the + button to the right of the Typeform module, search for &quot;Google Sheets&quot; and select &quot;Add a Row.&quot;</li>
+<li>Connect your Google account, set Search Method to &quot;Search by path&quot;, select My Drive, and choose your &quot;Client Intake Tracker&quot; spreadsheet.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-05.png" alt="Google Sheets module — connection configured with Client Intake Tracker spreadsheet selected" width="1060" loading="lazy"><figcaption>Google Sheets module — connection configured with Client Intake Tracker spreadsheet selected</figcaption></figure></li>
+<li>Map the fields from Typeform to your Google Sheet columns — Name (A) maps to Full Name, Email (B) to Email Address, Company (C) to Company Name, Budget (D) to Budget Range, Project (E) to Project Description. For Date (F), use the Typeform submission timestamp. Type &quot;New&quot; manually in the Status (G) field.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-06.png" alt="Field mapping — Typeform response data mapped to Google Sheets columns" width="1060" loading="lazy"><figcaption>Field mapping — Typeform response data mapped to Google Sheets columns</figcaption></figure></li>
+<li>Add a Slack module — click the + button after Google Sheets, search for &quot;Slack&quot; and select &quot;Send a Message.&quot; Connect your Slack workspace when prompted.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-07.png" alt="Slack module — connection and channel configuration with client-intake channel selected" width="1060" loading="lazy"><figcaption>Slack module — connection and channel configuration with client-intake channel selected</figcaption></figure></li>
+<li>Compose the Slack notification using mapped fields — include the client name, email, company, budget, and project description. Add a link to your Google Sheet so your team can check the tracker immediately.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-08.png" alt="Slack message body with mapped Typeform fields — New Project Request notification with all client details" width="1060" loading="lazy"><figcaption>Slack message body with mapped Typeform fields — New Project Request notification with all client details</figcaption></figure></li>
+<li>Save the scenario — your canvas should now show three modules connected: Typeform Watch Responses → Google Sheets Add a Row → Slack Send a Message. Click &quot;Run once&quot; to activate the webhook listener.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-12.png" alt="Complete Make.com scenario — three modules connected and ready to run" width="1060" loading="lazy"><figcaption>Complete Make.com scenario — three modules connected and ready to run</figcaption></figure></li>
+<li>Test the workflow — open your Typeform link in an incognito browser window and submit a test response. Make.com will process it instantly, add a row to your Google Sheet, and send a Slack notification.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-09.png" alt="Typeform live form — test submission with sample client data" width="1060" loading="lazy"><figcaption>Typeform live form — test submission with sample client data</figcaption></figure></li>
+<li>Check your Google Sheet — the test submission appears as a new row with all fields populated automatically, including the date and &quot;New&quot; status.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-10.png" alt="Google Sheet populated with test data — Name, Email, Company, Budget, Project, Date and Status columns filled" width="1060" loading="lazy"><figcaption>Google Sheet populated with test data — Name, Email, Company, Budget, Project, Date and Status columns filled</figcaption></figure></li>
+<li>Check your Slack channel — the notification arrives within seconds of the form submission, with all the details your team needs to start the intake process.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-11.png" alt="Slack notification in #client-intake channel — complete project request details with tracker link" width="1060" loading="lazy"><figcaption>Slack notification in #client-intake channel — complete project request details with tracker link</figcaption></figure></li>
+<li>Toggle the scenario ON — flip the switch at the bottom of the canvas from &quot;Run once&quot; to active. The scenario now runs automatically for every new Typeform submission.</li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> Want to filter by budget? Add a Make.com Router module after Typeform — route high-budget submissions ($5K+) to a priority Slack channel and lower budgets to a standard queue. This way your senior team members see high-value leads first without sorting through every submission.</div></li>
 </ol>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> In the Typeform INSTANT module configuration, set Completed to &quot;Yes&quot; — this ensures Make.com only processes fully submitted forms, not partial responses where someone abandoned the form halfway through.</div>
-<p>5. Add a Google Sheets module — click the + button to the right of the Typeform module, search for &quot;Google Sheets&quot; and select &quot;Add a Row.&quot;</p>
-<p>6. Connect your Google account, set Search Method to &quot;Search by path&quot;, select My Drive, and choose your &quot;Client Intake Tracker&quot; spreadsheet.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-05.png" alt="Google Sheets module — connection configured with Client Intake Tracker spreadsheet selected" width="1060" loading="lazy"><figcaption>Google Sheets module — connection configured with Client Intake Tracker spreadsheet selected</figcaption></figure>
-<p>7. Map the fields from Typeform to your Google Sheet columns — Name (A) maps to Full Name, Email (B) to Email Address, Company (C) to Company Name, Budget (D) to Budget Range, Project (E) to Project Description. For Date (F), use the Typeform submission timestamp. Type &quot;New&quot; manually in the Status (G) field.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-06.png" alt="Field mapping — Typeform response data mapped to Google Sheets columns" width="1060" loading="lazy"><figcaption>Field mapping — Typeform response data mapped to Google Sheets columns</figcaption></figure>
-<p>8. Add a Slack module — click the + button after Google Sheets, search for &quot;Slack&quot; and select &quot;Send a Message.&quot; Connect your Slack workspace when prompted.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-07.png" alt="Slack module — connection and channel configuration with client-intake channel selected" width="1060" loading="lazy"><figcaption>Slack module — connection and channel configuration with client-intake channel selected</figcaption></figure>
-<p>9. Compose the Slack notification using mapped fields — include the client name, email, company, budget, and project description. Add a link to your Google Sheet so your team can check the tracker immediately.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-08.png" alt="Slack message body with mapped Typeform fields — New Project Request notification with all client details" width="1060" loading="lazy"><figcaption>Slack message body with mapped Typeform fields — New Project Request notification with all client details</figcaption></figure>
-<p>10. Save the scenario — your canvas should now show three modules connected: Typeform Watch Responses → Google Sheets Add a Row → Slack Send a Message. Click &quot;Run once&quot; to activate the webhook listener.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-12.png" alt="Complete Make.com scenario — three modules connected and ready to run" width="1060" loading="lazy"><figcaption>Complete Make.com scenario — three modules connected and ready to run</figcaption></figure>
-<p>11. Test the workflow — open your Typeform link in an incognito browser window and submit a test response. Make.com will process it instantly, add a row to your Google Sheet, and send a Slack notification.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-09.png" alt="Typeform live form — test submission with sample client data" width="1060" loading="lazy"><figcaption>Typeform live form — test submission with sample client data</figcaption></figure>
-<p>12. Check your Google Sheet — the test submission appears as a new row with all fields populated automatically, including the date and &quot;New&quot; status.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-10.png" alt="Google Sheet populated with test data — Name, Email, Company, Budget, Project, Date and Status columns filled" width="1060" loading="lazy"><figcaption>Google Sheet populated with test data — Name, Email, Company, Budget, Project, Date and Status columns filled</figcaption></figure>
-<p>13. Check your Slack channel — the notification arrives within seconds of the form submission, with all the details your team needs to start the intake process.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-typeform-intake-11.png" alt="Slack notification in #client-intake channel — complete project request details with tracker link" width="1060" loading="lazy"><figcaption>Slack notification in #client-intake channel — complete project request details with tracker link</figcaption></figure>
-<p>14. Toggle the scenario ON — flip the switch at the bottom of the canvas from &quot;Run once&quot; to active. The scenario now runs automatically for every new Typeform submission.</p>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> Want to filter by budget? Add a Make.com Router module after Typeform — route high-budget submissions ($5K+) to a priority Slack channel and lower budgets to a standard queue. This way your senior team members see high-value leads first without sorting through every submission.</div>
 <h2 id="who-should-use-this-automation">Who Should Use This Automation</h2>
 <p>This workflow is built for anyone who collects client information through forms and needs a structured intake process. Freelancers using Typeform for project inquiries or discovery call requests. Agencies collecting briefs from new clients through intake forms. Consultants qualifying leads based on budget range and project scope. Small business owners receiving service requests through their website. If you receive more than 5 form submissions per week and process each one manually, this automation saves you time on the first day.</p>
 <h2 id="apps-used-in-this-automation">Apps Used in This Automation</h2>

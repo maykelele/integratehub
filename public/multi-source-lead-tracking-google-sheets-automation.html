@@ -16,11 +16,17 @@
   "@type": "Article",
   "headline": "Track Leads from Multiple Sources in One Google Sheet",
   "description": "Track leads from Facebook, Typeform, and website forms in one Google Sheet using Make.com. Upsert logic prevents duplicates automatically.",
+  "author": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
   "publisher": {
     "@type": "Organization",
     "name": "IntegrateHub.io",
     "url": "https://integratehub.io"
   },
+  "image": "https://integratehub.io/assets/screenshots/screenshot-multi-leads-01.png",
   "datePublished": "2026-03-01",
   "dateModified": "2026-03-01"
 }
@@ -54,6 +60,72 @@
       "position": 4,
       "name": "Step 4",
       "text": "Click \"Run once\" to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Step 5",
+      "text": "Add a Google Sheets module — click the + button after the webhook, search for \"Google Sheets\" and select \"Search Rows.\" Connect your Google account, select your \"Lead Tracker Master\" spreadsheet, and ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Step 6",
+      "text": "Configure the search filter — set Column range to \"A-CZ\", then under Filter select \"Email (A)\" as the column, \"Text operators: Equal to\" as the operator, and map the email field from your webhook modu..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 7,
+      "name": "Step 7",
+      "text": "Add a Router module — click the + button after Search Rows and select \"Router\" from the flow control tools. The Router splits your scenario into two branches: one for existing leads (update) and one f..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 8,
+      "name": "Step 8",
+      "text": "Configure the first branch filter — click the line between the Router and the first branch module. Label it \"Lead Exists\" and set the condition to: \"2. Total number of bundles\" — \"Greater than\" — \"0\"...."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 9,
+      "name": "Step 9",
+      "text": "On the \"Lead Exists\" branch, add a Google Sheets \"Update a Row\" module. Connect it to the same spreadsheet and map the fields. For the Row number, map the row number from the Search Rows result — this..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 10,
+      "name": "Step 10",
+      "text": "Map the Update a Row fields — Email (A) maps to the existing email from Search Rows. Name (B) and Phone (C) map from the webhook data to keep details fresh. For Source (D), use a formula that appends ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 11,
+      "name": "Step 11",
+      "text": "For the remaining Update fields — First Seen (E) maps to the existing value from Search Rows (you never overwrite the original date). Last Updated (F) uses the formula: formatDate(now; \"YYYY-MM-DD\") —..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 12,
+      "name": "Step 12",
+      "text": "Configure the second branch as a fallback route — click the wrench icon on the second Router branch line. Set \"Set the route as a fallback\" to Yes. A fallback route runs only when no other branch matc..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 13,
+      "name": "Step 13",
+      "text": "On the fallback \"New Lead\" branch, add a Google Sheets \"Add a Row\" module. Map all fields directly from the webhook: Email (A) from the webhook email, Name (B) from name, Phone (C) from phone, Source ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 14,
+      "name": "Step 14",
+      "text": "Save the scenario — your canvas should now show four connected modules: Custom Webhook → Google Sheets Search Rows → Router → two branches (Update a Row and Add a Row)."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 15,
+      "name": "Step 15",
+      "text": "Test the upsert logic — click \"Run once\", then send a new lead via browser URL (use a new email that doesn't exist in the sheet). Check your Google Sheet — a new row should appear. Then run again with..."
     }
   ]
 }
@@ -360,29 +432,29 @@
 <li>Create a free Make.com account — no credit card required. Click &quot;Create a new scenario&quot; on your dashboard.</li>
 <li>Click the + button on the canvas and search for &quot;Webhooks&quot; — select &quot;Custom webhook.&quot; Click &quot;Add&quot; to create a new webhook, name it (e.g. &quot;Website Contact Form&quot;), and click Save. Make.com generates a unique URL — this is the endpoint your website form will send data to.</li>
 <li>Click &quot;Run once&quot; to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?name=Maria%20Santos&amp;email=maria[at]thegreenleaf.co&amp;phone=+447700900123&amp;source=Website&amp;notes=Inquiry%20via%20contact%20page — the browser will show &quot;Accepted&quot; and Make.com will capture the five fields automatically.</li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> For testing, you don&#x27;t need a real website form. Simply paste the webhook URL with parameters into your browser — Make.com receives it identically to a form POST request. When you later connect a real contact form, just set the form action to this same webhook URL.</div></li>
+<li>Add a Google Sheets module — click the + button after the webhook, search for &quot;Google Sheets&quot; and select &quot;Search Rows.&quot; Connect your Google account, select your &quot;Lead Tracker Master&quot; spreadsheet, and set Table contains headers to &quot;Yes.&quot;</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-01.png" alt="Google Sheets Search Rows — connection configured with Lead Tracker Master spreadsheet selected" width="1060" loading="lazy"><figcaption>Google Sheets Search Rows — connection configured with Lead Tracker Master spreadsheet selected</figcaption></figure></li>
+<li>Configure the search filter — set Column range to &quot;A-CZ&quot;, then under Filter select &quot;Email (A)&quot; as the column, &quot;Text operators: Equal to&quot; as the operator, and map the email field from your webhook module as the value. This tells Make.com to look for an existing row where the email matches.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-02.png" alt="Search Rows filter — Email column A filtered by webhook email address using Text operators Equal to" width="1060" loading="lazy"><figcaption>Search Rows filter — Email column A filtered by webhook email address using Text operators Equal to</figcaption></figure></li>
+<li>Add a Router module — click the + button after Search Rows and select &quot;Router&quot; from the flow control tools. The Router splits your scenario into two branches: one for existing leads (update) and one for new leads (insert).</li>
+<li>Configure the first branch filter — click the line between the Router and the first branch module. Label it &quot;Lead Exists&quot; and set the condition to: &quot;2. Total number of bundles&quot; — &quot;Greater than&quot; — &quot;0&quot;. This branch runs only when Search Rows found a matching email.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-03.png" alt="Router filter — Lead Exists condition with Total number of bundles greater than 0" width="1060" loading="lazy"><figcaption>Router filter — Lead Exists condition with Total number of bundles greater than 0</figcaption></figure></li>
+<li>On the &quot;Lead Exists&quot; branch, add a Google Sheets &quot;Update a Row&quot; module. Connect it to the same spreadsheet and map the fields. For the Row number, map the row number from the Search Rows result — this tells Make.com which row to update.</li>
+<li>Map the Update a Row fields — Email (A) maps to the existing email from Search Rows. Name (B) and Phone (C) map from the webhook data to keep details fresh. For Source (D), use a formula that appends the new source only if it&#x27;s not already listed. In the formula editor, enter: if(contains(2. Source (D); 1. source); 2. Source (D); 2. Source (D) + &quot;; &quot; + 1. source) — this prevents &quot;Website; Website&quot; duplicates while correctly producing &quot;Facebook; Website&quot; when a lead comes from a second channel.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-05.png" alt="Update a Row field mapping — Email, Name, Phone and Source formula with contains logic to prevent duplicate sources" width="1060" loading="lazy"><figcaption>Update a Row field mapping — Email, Name, Phone and Source formula with contains logic to prevent duplicate sources</figcaption></figure></li>
+<li>For the remaining Update fields — First Seen (E) maps to the existing value from Search Rows (you never overwrite the original date). Last Updated (F) uses the formula: formatDate(now; &quot;YYYY-MM-DD&quot;) — this stamps today&#x27;s date every time the row is updated. Notes (G) maps to the existing notes from Search Rows to preserve the original entry.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-06.png" alt="Update a Row continued — First Seen preserved from existing row, Last Updated with formatDate formula, Notes kept from origin" width="1060" loading="lazy"><figcaption>Update a Row continued — First Seen preserved from existing row, Last Updated with formatDate formula, Notes kept from original</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> The Source formula uses the if/contains pattern to prevent duplicate source names: if the source already contains &quot;Website&quot;, it keeps it as-is. If not, it appends &quot;; Website&quot; to the existing value. When you clone this for Facebook and Typeform scenarios, the same formula works — just the source value changes.</div></li>
+<li>Configure the second branch as a fallback route — click the wrench icon on the second Router branch line. Set &quot;Set the route as a fallback&quot; to Yes. A fallback route runs only when no other branch matches — so if the lead doesn&#x27;t exist (Search Rows returned 0 results), this branch fires automatically. No condition needed.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-09.png" alt="Fallback route configuration — New Lead branch set as fallback, no condition required" width="1060" loading="lazy"><figcaption>Fallback route configuration — New Lead branch set as fallback, no condition required</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> Using a fallback route instead of an explicit &quot;equals 0&quot; filter is cleaner and more reliable. If you later add more branches to the Router, the fallback always catches whatever didn&#x27;t match — no risk of a lead slipping between two filters.</div></li>
+<li>On the fallback &quot;New Lead&quot; branch, add a Google Sheets &quot;Add a Row&quot; module. Map all fields directly from the webhook: Email (A) from the webhook email, Name (B) from name, Phone (C) from phone, Source (D) from source, First Seen (E) using formatDate(now; &quot;YYYY-MM-DD&quot;), Last Updated (F) using the same formula, and Notes (G) from notes.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-07.png" alt="Add a Row field mapping — all fields mapped directly from webhook data with formatDate for dates" width="1060" loading="lazy"><figcaption>Add a Row field mapping — all fields mapped directly from webhook data with formatDate for dates</figcaption></figure></li>
+<li>Save the scenario — your canvas should now show four connected modules: Custom Webhook → Google Sheets Search Rows → Router → two branches (Update a Row and Add a Row).</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-10.png" alt="Complete webhook scenario — Custom Webhook, Search Rows, Router with Lead Exists and fallback New Lead branches" width="1060" loading="lazy"><figcaption>Complete webhook scenario — Custom Webhook, Search Rows, Router with Lead Exists and fallback New Lead branches</figcaption></figure></li>
+<li>Test the upsert logic — click &quot;Run once&quot;, then send a new lead via browser URL (use a new email that doesn&#x27;t exist in the sheet). Check your Google Sheet — a new row should appear. Then run again with the same email but change the source parameter to &quot;Referral&quot; — the existing row should update with the new source appended and Last Updated refreshed.</li>
 </ol>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> For testing, you don&#x27;t need a real website form. Simply paste the webhook URL with parameters into your browser — Make.com receives it identically to a form POST request. When you later connect a real contact form, just set the form action to this same webhook URL.</div>
-<p>4. Add a Google Sheets module — click the + button after the webhook, search for &quot;Google Sheets&quot; and select &quot;Search Rows.&quot; Connect your Google account, select your &quot;Lead Tracker Master&quot; spreadsheet, and set Table contains headers to &quot;Yes.&quot;</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-01.png" alt="Google Sheets Search Rows — connection configured with Lead Tracker Master spreadsheet selected" width="1060" loading="lazy"><figcaption>Google Sheets Search Rows — connection configured with Lead Tracker Master spreadsheet selected</figcaption></figure>
-<p>5. Configure the search filter — set Column range to &quot;A-CZ&quot;, then under Filter select &quot;Email (A)&quot; as the column, &quot;Text operators: Equal to&quot; as the operator, and map the email field from your webhook module as the value. This tells Make.com to look for an existing row where the email matches.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-02.png" alt="Search Rows filter — Email column A filtered by webhook email address using Text operators Equal to" width="1060" loading="lazy"><figcaption>Search Rows filter — Email column A filtered by webhook email address using Text operators Equal to</figcaption></figure>
-<p>6. Add a Router module — click the + button after Search Rows and select &quot;Router&quot; from the flow control tools. The Router splits your scenario into two branches: one for existing leads (update) and one for new leads (insert).</p>
-<p>7. Configure the first branch filter — click the line between the Router and the first branch module. Label it &quot;Lead Exists&quot; and set the condition to: &quot;2. Total number of bundles&quot; — &quot;Greater than&quot; — &quot;0&quot;. This branch runs only when Search Rows found a matching email.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-03.png" alt="Router filter — Lead Exists condition with Total number of bundles greater than 0" width="1060" loading="lazy"><figcaption>Router filter — Lead Exists condition with Total number of bundles greater than 0</figcaption></figure>
-<p>8. On the &quot;Lead Exists&quot; branch, add a Google Sheets &quot;Update a Row&quot; module. Connect it to the same spreadsheet and map the fields. For the Row number, map the row number from the Search Rows result — this tells Make.com which row to update.</p>
-<p>9. Map the Update a Row fields — Email (A) maps to the existing email from Search Rows. Name (B) and Phone (C) map from the webhook data to keep details fresh. For Source (D), use a formula that appends the new source only if it&#x27;s not already listed. In the formula editor, enter: if(contains(2. Source (D); 1. source); 2. Source (D); 2. Source (D) + &quot;; &quot; + 1. source) — this prevents &quot;Website; Website&quot; duplicates while correctly producing &quot;Facebook; Website&quot; when a lead comes from a second channel.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-05.png" alt="Update a Row field mapping — Email, Name, Phone and Source formula with contains logic to prevent duplicate sources" width="1060" loading="lazy"><figcaption>Update a Row field mapping — Email, Name, Phone and Source formula with contains logic to prevent duplicate sources</figcaption></figure>
-<p>10. For the remaining Update fields — First Seen (E) maps to the existing value from Search Rows (you never overwrite the original date). Last Updated (F) uses the formula: formatDate(now; &quot;YYYY-MM-DD&quot;) — this stamps today&#x27;s date every time the row is updated. Notes (G) maps to the existing notes from Search Rows to preserve the original entry.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-06.png" alt="Update a Row continued — First Seen preserved from existing row, Last Updated with formatDate formula, Notes kept from origin" width="1060" loading="lazy"><figcaption>Update a Row continued — First Seen preserved from existing row, Last Updated with formatDate formula, Notes kept from original</figcaption></figure>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> The Source formula uses the if/contains pattern to prevent duplicate source names: if the source already contains &quot;Website&quot;, it keeps it as-is. If not, it appends &quot;; Website&quot; to the existing value. When you clone this for Facebook and Typeform scenarios, the same formula works — just the source value changes.</div>
-<p>11. Configure the second branch as a fallback route — click the wrench icon on the second Router branch line. Set &quot;Set the route as a fallback&quot; to Yes. A fallback route runs only when no other branch matches — so if the lead doesn&#x27;t exist (Search Rows returned 0 results), this branch fires automatically. No condition needed.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-09.png" alt="Fallback route configuration — New Lead branch set as fallback, no condition required" width="1060" loading="lazy"><figcaption>Fallback route configuration — New Lead branch set as fallback, no condition required</figcaption></figure>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> Using a fallback route instead of an explicit &quot;equals 0&quot; filter is cleaner and more reliable. If you later add more branches to the Router, the fallback always catches whatever didn&#x27;t match — no risk of a lead slipping between two filters.</div>
-<p>12. On the fallback &quot;New Lead&quot; branch, add a Google Sheets &quot;Add a Row&quot; module. Map all fields directly from the webhook: Email (A) from the webhook email, Name (B) from name, Phone (C) from phone, Source (D) from source, First Seen (E) using formatDate(now; &quot;YYYY-MM-DD&quot;), Last Updated (F) using the same formula, and Notes (G) from notes.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-07.png" alt="Add a Row field mapping — all fields mapped directly from webhook data with formatDate for dates" width="1060" loading="lazy"><figcaption>Add a Row field mapping — all fields mapped directly from webhook data with formatDate for dates</figcaption></figure>
-<p>13. Save the scenario — your canvas should now show four connected modules: Custom Webhook → Google Sheets Search Rows → Router → two branches (Update a Row and Add a Row).</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-10.png" alt="Complete webhook scenario — Custom Webhook, Search Rows, Router with Lead Exists and fallback New Lead branches" width="1060" loading="lazy"><figcaption>Complete webhook scenario — Custom Webhook, Search Rows, Router with Lead Exists and fallback New Lead branches</figcaption></figure>
-<p>14. Test the upsert logic — click &quot;Run once&quot;, then send a new lead via browser URL (use a new email that doesn&#x27;t exist in the sheet). Check your Google Sheet — a new row should appear. Then run again with the same email but change the source parameter to &quot;Referral&quot; — the existing row should update with the new source appended and Last Updated refreshed.</p>
 <h2 id="how-to-add-typeform-as-a-second-source-scenario-2">How to Add Typeform as a Second Source (Scenario 2)</h2>
 <p>The Typeform scenario uses identical upsert logic — the only difference is the trigger module and how fields are mapped from Typeform&#x27;s response structure.</p>
 <p>1. Create a new scenario in Make.com. Click the + button and search for &quot;Typeform&quot; — select the Watch Responses module marked INSTANT. This uses webhooks to trigger the moment someone submits, instead of polling every 15 minutes.</p>

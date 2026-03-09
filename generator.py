@@ -137,20 +137,26 @@ CATEGORIES = {
 #                   Ako Meta: nije postavljen, prvih 155 karaktera postaje meta description
 #                   Primer: Introduction: Every time someone fills out your lead form...
 #
-#   H2:             Sekcijski naslov
+#   H2:             Sekcijski naslov — zatvara otvorenu listu koraka
 #                   Primer: H2: Why Zapier Gets Expensive for Small Business
 #
-#   H3:             Podsekcijski naslov (unutar H2 sekcije)
+#   H3:             Podsekcijski naslov (unutar H2 sekcije) — NE zatvara listu koraka
 #                   Primer: H3: On Make.com
 #
 #   Tech Tip:       Žuti info box sa praktičnim savetom
+#                   Unutar Workflow Steps: prikazuje se inline između koraka (ne zatvara listu)
+#                   Izvan Workflow Steps: prikazuje se kao standalone blok
 #                   Primer: Tech Tip: Add a Slack notification as a third step...
 #
 #   CTA:            Inline poziv na akciju sa default (Make.com) affiliate linkom
+#                   Unutar Workflow Steps: prikazuje se inline između koraka (ne zatvara listu)
+#                   Izvan Workflow Steps: prikazuje se kao standalone blok
 #                   Primer: CTA: Build this automation for free — no credit card required.
 #
 #   CTA[key]:       Inline poziv na akciju sa specifičnim affiliate linkom
-#                   Dostupni ključevi: make, typeform (dodaj nove u AFFILIATE_LINKS)
+#                   Dostupni ključevi: make, typeform, airtable, newsletter
+#                   (dodaj nove u AFFILIATE_LINKS dict iznad)
+#                   Unutar Workflow Steps: prikazuje se inline između koraka (ne zatvara listu)
 #                   Primer: CTA[typeform]: Build your intake form for free.
 #                   Primer: CTA[make]: Build this automation on Make.com's free plan.
 #                   Primer: CTA[newsletter]: Get one tested automation tutorial per week.
@@ -158,7 +164,10 @@ CATEGORIES = {
 #
 #   Workflow Steps: Otvara numerisanu listu koraka sa H2 naslovom iznad
 #                   Tekst posle taga postaje naslov sekcije
-#                   Lista se zatvara na prvom sledećem tagu (Verdict, H2, itd.)
+#                   Lista se zatvara na: Verdict, H2, Table, FAQ, Internal Links,
+#                   Workflow Steps, Python Snippet, Introduction, ili novi page separator (---)
+#                   NE zatvara se na: Image, Screenshot, Tech Tip, CTA, H3 — ovi se
+#                   prikazuju inline između koraka
 #                   Primer: Workflow Steps: How to Connect Facebook Leads to Google Sheets
 #
 #   Verdict:        Završni zaključni blok — zatvara listu koraka ako je otvorena
@@ -180,12 +189,14 @@ CATEGORIES = {
 #
 #   Screenshot:     Placeholder box dok nemaš pravu sliku
 #                   Zameni sa Image: kada imaš screenshot
+#                   Unutar Workflow Steps: prikazuje se inline između koraka (ne zatvara listu)
 #                   Primer: Screenshot: Make.com canvas with Stripe trigger
 #
 #   Image:          Prava slika — format: putanja|Caption tekst
 #                   Caption postaje i alt attribute (max 125 karaktera)
 #                   SEO best practice: počni caption sa "Make.com [tema] —"
-#                   Unutar Workflow Steps: automatski se prikazuje između koraka
+#                   Unutar Workflow Steps: prikazuje se inline između koraka (ne zatvara listu)
+#                   Prva Image: u članku se koristi za Article schema "image" polje
 #                   Primer: Image: assets/screenshots/make-trigger.png|Make.com Stripe automation — Watch Events trigger setup
 #
 #   Python Snippet: Code blok sa sintax highlightom
@@ -194,6 +205,13 @@ CATEGORIES = {
 #   ---             Separator između stranica u input.txt
 #
 #   Sve ostale linije → <p> paragraf
+#
+# SCHEMA MARKUP:
+#   Article schema:  Uvek se generiše. Uključuje author (Organization: IntegrateHub.io)
+#                    i image (prva Image: iz članka, apsolutni URL) za rich result eligibility.
+#   HowTo schema:    Generiše se za Type: how-to stranice. Sakuplja sve korake iz
+#                    Workflow Steps bloka (Image/Tech Tip/CTA ne prekidaju brojanje).
+#   FAQ schema:      Generiše se ako postoji FAQ: blok.
 # -----------------------------------------------------------------------
 
 
@@ -240,19 +258,30 @@ def format_date_display(date_str):
         return date_str
 
 
-def build_article_schema(title, meta_desc, date_published, date_modified=None):
+def build_article_schema(title, meta_desc, date_published, date_modified=None, image_path=None):
     """Generiše Article schema markup."""
     schema = {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": title,
         "description": meta_desc,
+        "author": {
+            "@type": "Organization",
+            "name": "IntegrateHub.io",
+            "url": "https://integratehub.io"
+        },
         "publisher": {
             "@type": "Organization",
             "name": "IntegrateHub.io",
             "url": "https://integratehub.io"
         }
     }
+    if image_path:
+        # Ensure absolute URL for schema
+        if not image_path.startswith('http'):
+            schema["image"] = f"https://integratehub.io/{image_path.lstrip('/')}"
+        else:
+            schema["image"] = image_path
     if date_published:
         schema["datePublished"] = date_published
     if date_modified:
@@ -363,6 +392,7 @@ def format_content(text, page_type='how-to'):
     internal_links = []
     current_faq_q = None
     meta_description = ""
+    first_image = ""  # Za Article schema image
     howto_steps = []  # Za HowTo schema
     h2_headings = []  # Za TOC generaciju
 
@@ -491,19 +521,25 @@ def format_content(text, page_type='how-to'):
             h3_text = line_stripped.replace('H3:', '').strip()
             html_parts.append(f'<h3>{html.escape(h3_text)}</h3>')
 
-        # --- Tech Tip ---
+        # --- Tech Tip (list-safe: does NOT close Workflow Steps) ---
         elif line_stripped.startswith('Tech Tip:'):
-            close_open_blocks()
+            if not in_list:
+                close_open_blocks()
             tip_text = line_stripped.replace('Tech Tip:', '').strip()
-            html_parts.append(
+            tip_html = (
                 f'<div class="tech-tip">'
                 f'<strong>💡 Pro Tip:</strong> {process_inline_links(tip_text)}'
                 f'</div>'
             )
+            if in_list:
+                html_parts.append(f'<li class="step-image">{tip_html}</li>')
+            else:
+                html_parts.append(tip_html)
 
-        # --- CTA (supports CTA: and CTA[key]:) ---
+        # --- CTA (supports CTA: and CTA[key]:) (list-safe: does NOT close Workflow Steps) ---
         elif line_stripped.startswith('CTA'):
-            close_open_blocks()
+            if not in_list:
+                close_open_blocks()
             cta_match = re.match(r'^CTA\[(\w+)\]:\s*(.*)', line_stripped)
             if cta_match:
                 affiliate_key = cta_match.group(1).lower()
@@ -512,10 +548,14 @@ def format_content(text, page_type='how-to'):
                 affiliate_key = "make"
                 cta_text = line_stripped.replace('CTA:', '').strip()
             affiliate = AFFILIATE_LINKS.get(affiliate_key, AFFILIATE_LINKS["make"])
-            html_parts.append(
+            cta_html = (
                 f'<p class="inline-cta">{process_inline_links(cta_text)} '
                 f'<a href="{affiliate["url"]}" rel="sponsored noopener">{affiliate["cta_text"]}</a></p>'
             )
+            if in_list:
+                html_parts.append(f'<li class="step-image">{cta_html}</li>')
+            else:
+                html_parts.append(cta_html)
 
         # --- Workflow Steps ---
         elif line_stripped.startswith('Workflow Steps:'):
@@ -560,7 +600,7 @@ def format_content(text, page_type='how-to'):
             in_internal_links = True
             internal_links = []
 
-        # --- Screenshot placeholder ---
+        # --- Screenshot placeholder (list-safe) ---
         elif line_stripped.startswith('Screenshot:'):
             if not in_list:
                 close_open_blocks()
@@ -574,7 +614,7 @@ def format_content(text, page_type='how-to'):
                 f'</div>'
             )
 
-        # --- Image ---
+        # --- Image (list-safe) ---
         elif line_stripped.startswith('Image:'):
             if not in_list:
                 close_open_blocks()
@@ -586,6 +626,8 @@ def format_content(text, page_type='how-to'):
             else:
                 img_path = image_data.strip()
                 alt_text = ''
+            if not first_image:
+                first_image = img_path
             alt_attr = alt_text[:125] if alt_text else ''
             figure_html = (
                 f'<figure class="screenshot">'
@@ -655,7 +697,7 @@ def format_content(text, page_type='how-to'):
     if page_type == 'how-to' and howto_steps:
         schema_parts.insert(0, None)  # Placeholder — title dolazi iz generate_site
 
-    return '\n'.join(html_parts), meta_description, schema_parts, howto_steps, h2_headings
+    return '\n'.join(html_parts), meta_description, schema_parts, howto_steps, h2_headings, first_image
 
 
 def generate_index(template_html, links):
@@ -751,7 +793,7 @@ def generate_site():
             print(f"⚠️  Preskačem entry bez slug/title")
             continue
 
-        main_body, meta_desc, schema_parts, howto_steps, h2_headings = format_content(entry, page_type)
+        main_body, meta_desc, schema_parts, howto_steps, h2_headings, first_image = format_content(entry, page_type)
 
         # --- Reading time ---
         reading_time = estimate_reading_time(entry)
@@ -786,8 +828,8 @@ def generate_site():
 
         # --- Schema markup ---
         all_schemas = []
-        # Article schema (uvek)
-        all_schemas.append(build_article_schema(title, meta_desc, date_published, date_updated))
+        # Article schema (uvek) — sa author i image
+        all_schemas.append(build_article_schema(title, meta_desc, date_published, date_updated, first_image))
         # HowTo schema (samo za how-to)
         if page_type == 'how-to' and howto_steps:
             all_schemas.append(build_howto_schema(title, howto_steps))

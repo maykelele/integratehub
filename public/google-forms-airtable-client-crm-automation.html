@@ -16,11 +16,17 @@
   "@type": "Article",
   "headline": "Google Forms to Airtable CRM Automation + Slack Alerts (Make.com)",
   "description": "Google Forms to Airtable CRM automation with Make.com — auto-capture client intake data and alert your team on Slack in under 25 minutes.",
+  "author": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
   "publisher": {
     "@type": "Organization",
     "name": "IntegrateHub.io",
     "url": "https://integratehub.io"
   },
+  "image": "https://integratehub.io/assets/screenshots/screenshot-gforms-airtable-01.png",
   "datePublished": "2026-03-09",
   "dateModified": "2026-03-09"
 }
@@ -60,6 +66,54 @@
       "position": 5,
       "name": "Step 5",
       "text": "Test the trigger to get sample data — click \"Run once\" at the bottom of the canvas, then open your Google Form preview in another tab and submit a test response. Return to Make.com — the Google Forms ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Step 6",
+      "text": "Add an Airtable module — click the + button after Google Forms, search for \"Airtable\" and select \"Create a Record.\" If you haven't connected Airtable yet, click \"Create a connection,\" select Airtable ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 7,
+      "name": "Step 7",
+      "text": "Select your Base (\"Client CRM\") and Table (\"Leads\") from the dropdowns. Airtable fields appear automatically. Map the first fields from the Google Forms trigger: for Name, expand the Answers collectio..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 8,
+      "name": "Step 8",
+      "text": "Scroll down and map the remaining form fields. Company maps to \"Answers: Company Name\", Service to \"Answers: Service Needed\", Budget to \"Answers: Budget Range\", and Description to \"Answers: Project De..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 9,
+      "name": "Step 9",
+      "text": "Add a Slack module — click the + button after Airtable, search for \"Slack\" and select \"Send a Message.\" Connect your Slack workspace through OAuth. Set Channel type to \"Public channel\" and select your..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 10,
+      "name": "Step 10",
+      "text": "Test the full scenario — click \"Run once,\" then submit another test response through your Google Form. All three modules should fire with green checkmarks and \"1\" badges."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 11,
+      "name": "Step 11",
+      "text": "Verify the results in Airtable — open your Client CRM base, Leads table. A new row should appear with all the mapped fields populated, Status set to \"New,\" and Source set to \"Google Forms.\""
+    },
+    {
+      "@type": "HowToStep",
+      "position": 12,
+      "name": "Step 12",
+      "text": "Check your Slack channel — the #new-client channel should show a formatted notification with the lead's name, email, company, service, and budget."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 13,
+      "name": "Step 13",
+      "text": "Activate the scenario and set the polling schedule — click the toggle to turn the scenario on, then click the clock icon or the scheduling area to set your polling interval. The free plan minimum is 1..."
     }
   ]
 }
@@ -378,27 +432,27 @@
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-07.png" alt="Make.com Google Forms — Choose where to start dialog with From now on selected" width="1060" loading="lazy"><figcaption>Make.com Google Forms — Choose where to start dialog with From now on selected</figcaption></figure></li>
 <li>Test the trigger to get sample data — click &quot;Run once&quot; at the bottom of the canvas, then open your Google Form preview in another tab and submit a test response. Return to Make.com — the Google Forms module should show a green checkmark with a &quot;1&quot; badge. Click the output bubble to inspect the data structure.</li>
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-08.png" alt="Make.com Google Forms output — nested Answers structure with field names as collections" width="1060" loading="lazy"><figcaption>Make.com Google Forms output — nested Answers structure with field names as collections</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> Google Forms returns a complex nested data structure — not flat field values like Typeform or Stripe. Each answer appears under Answers as a named collection (e.g., &quot;Answers: Full Name&quot;, &quot;Answers: Email Address&quot;), and the actual text value is nested one level deeper. When mapping fields in the next steps, you need to expand each answer collection and select the text value inside it — not the collection itself. If you map the collection directly, Airtable will receive an object instead of a text string and throw a parsing error.</div></li>
+<li>Add an Airtable module — click the + button after Google Forms, search for &quot;Airtable&quot; and select &quot;Create a Record.&quot; If you haven&#x27;t connected Airtable yet, click &quot;Create a connection,&quot; select Airtable OAuth as the connection type, and authorize access to your bases.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-09.png" alt="Make.com module search — Airtable app with Create a Record option" width="1060" loading="lazy"><figcaption>Make.com module search — Airtable app with Create a Record option</figcaption></figure></li>
+<li>Select your Base (&quot;Client CRM&quot;) and Table (&quot;Leads&quot;) from the dropdowns. Airtable fields appear automatically. Map the first fields from the Google Forms trigger: for Name, expand the Answers collection and select &quot;Answers: Full Name&quot; — Make.com will insert the correct nested path to the text value. Do the same for Email, mapping it to &quot;Answers: Email Address.&quot;</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-10.png" alt="Make.com Airtable module — Base and Table selected with Name mapped from Google Forms" width="1060" loading="lazy"><figcaption>Make.com Airtable module — Base and Table selected with Name mapped from Google Forms</figcaption></figure></li>
+<li>Scroll down and map the remaining form fields. Company maps to &quot;Answers: Company Name&quot;, Service to &quot;Answers: Service Needed&quot;, Budget to &quot;Answers: Budget Range&quot;, and Description to &quot;Answers: Project Description.&quot; For Date Added, leave it empty or use the now function if you want the current timestamp. For Status, click the &quot;Map&quot; toggle to enable manual input and type &quot;New.&quot; For Source, enable Map and type &quot;Google Forms.&quot;</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-11.png" alt="Make.com Airtable field mapping — Service, Budget, Description mapped with Date Added and Status fields" width="1060" loading="lazy"><figcaption>Make.com Airtable field mapping — Service, Budget, Description mapped with Date Added and Status fields</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> If you see a [422] error saying &quot;Cannot parse value for field Service&quot; or similar, it means the value from Google Forms doesn&#x27;t match Airtable&#x27;s expected format. The simplest fix is to change Service and Budget columns in Airtable from Single Select to Single line text — this accepts any value without exact matching. You can convert them back to Single Select later once you&#x27;ve confirmed the data flows correctly, and Airtable will auto-create options from your existing values.</div></li>
+<li>Add a Slack module — click the + button after Airtable, search for &quot;Slack&quot; and select &quot;Send a Message.&quot; Connect your Slack workspace through OAuth. Set Channel type to &quot;Public channel&quot; and select your notification channel (e.g., #new-client). In the Text field, compose a message using mapped fields. A useful pattern: map the Name and Email from the Airtable module output (not the Google Forms module) — this confirms the data actually made it into your CRM, and gives you access to the Airtable record URL.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-14.png" alt="Make.com Slack module — channel selected and message template with mapped client fields" width="1060" loading="lazy"><figcaption>Make.com Slack module — channel selected and message template with mapped client fields</figcaption></figure></li>
+<li>Test the full scenario — click &quot;Run once,&quot; then submit another test response through your Google Form. All three modules should fire with green checkmarks and &quot;1&quot; badges.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-17.png" alt="Make.com Google Forms Airtable Slack automation — successful test run with green checkmarks" width="1060" loading="lazy"><figcaption>Make.com Google Forms Airtable Slack automation — successful test run with green checkmarks</figcaption></figure></li>
+<li>Verify the results in Airtable — open your Client CRM base, Leads table. A new row should appear with all the mapped fields populated, Status set to &quot;New,&quot; and Source set to &quot;Google Forms.&quot;</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-13.png" alt="Airtable Client CRM — two lead records auto-populated from Google Forms submissions" width="1060" loading="lazy"><figcaption>Airtable Client CRM — two lead records auto-populated from Google Forms submissions</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-15.png" alt="Airtable record detail — James Thornton with all fields populated and Status set to New" width="1060" loading="lazy"><figcaption>Airtable record detail — James Thornton with all fields populated and Status set to New</figcaption></figure></li>
+<li>Check your Slack channel — the #new-client channel should show a formatted notification with the lead&#x27;s name, email, company, service, and budget.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-16.png" alt="Slack new lead notification — client details from Google Forms displayed in team channel" width="1060" loading="lazy"><figcaption>Slack new lead notification — client details from Google Forms displayed in team channel</figcaption></figure></li>
+<li>Activate the scenario and set the polling schedule — click the toggle to turn the scenario on, then click the clock icon or the scheduling area to set your polling interval. The free plan minimum is 15 minutes. For optimal operation usage, consider using Advanced scheduling to restrict polling to business hours only.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-18.png" alt="Make.com scenario scheduling — polling interval set to 15 minutes with Advanced scheduling option" width="1060" loading="lazy"><figcaption>Make.com scenario scheduling — polling interval set to 15 minutes with Advanced scheduling option</figcaption></figure></li>
+<li class="step-image"><p class="inline-cta">Start building this automation on Make.com&#x27;s free plan — 1,000 operations per month, enough for hundreds of new leads. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p></li>
 </ol>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> Google Forms returns a complex nested data structure — not flat field values like Typeform or Stripe. Each answer appears under Answers as a named collection (e.g., &quot;Answers: Full Name&quot;, &quot;Answers: Email Address&quot;), and the actual text value is nested one level deeper. When mapping fields in the next steps, you need to expand each answer collection and select the text value inside it — not the collection itself. If you map the collection directly, Airtable will receive an object instead of a text string and throw a parsing error.</div>
-<p>6. Add an Airtable module — click the + button after Google Forms, search for &quot;Airtable&quot; and select &quot;Create a Record.&quot; If you haven&#x27;t connected Airtable yet, click &quot;Create a connection,&quot; select Airtable OAuth as the connection type, and authorize access to your bases.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-09.png" alt="Make.com module search — Airtable app with Create a Record option" width="1060" loading="lazy"><figcaption>Make.com module search — Airtable app with Create a Record option</figcaption></figure>
-<p>7. Select your Base (&quot;Client CRM&quot;) and Table (&quot;Leads&quot;) from the dropdowns. Airtable fields appear automatically. Map the first fields from the Google Forms trigger: for Name, expand the Answers collection and select &quot;Answers: Full Name&quot; — Make.com will insert the correct nested path to the text value. Do the same for Email, mapping it to &quot;Answers: Email Address.&quot;</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-10.png" alt="Make.com Airtable module — Base and Table selected with Name mapped from Google Forms" width="1060" loading="lazy"><figcaption>Make.com Airtable module — Base and Table selected with Name mapped from Google Forms</figcaption></figure>
-<p>8. Scroll down and map the remaining form fields. Company maps to &quot;Answers: Company Name&quot;, Service to &quot;Answers: Service Needed&quot;, Budget to &quot;Answers: Budget Range&quot;, and Description to &quot;Answers: Project Description.&quot; For Date Added, leave it empty or use the now function if you want the current timestamp. For Status, click the &quot;Map&quot; toggle to enable manual input and type &quot;New.&quot; For Source, enable Map and type &quot;Google Forms.&quot;</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-11.png" alt="Make.com Airtable field mapping — Service, Budget, Description mapped with Date Added and Status fields" width="1060" loading="lazy"><figcaption>Make.com Airtable field mapping — Service, Budget, Description mapped with Date Added and Status fields</figcaption></figure>
-<div class="tech-tip"><strong>💡 Pro Tip:</strong> If you see a [422] error saying &quot;Cannot parse value for field Service&quot; or similar, it means the value from Google Forms doesn&#x27;t match Airtable&#x27;s expected format. The simplest fix is to change Service and Budget columns in Airtable from Single Select to Single line text — this accepts any value without exact matching. You can convert them back to Single Select later once you&#x27;ve confirmed the data flows correctly, and Airtable will auto-create options from your existing values.</div>
-<p>9. Add a Slack module — click the + button after Airtable, search for &quot;Slack&quot; and select &quot;Send a Message.&quot; Connect your Slack workspace through OAuth. Set Channel type to &quot;Public channel&quot; and select your notification channel (e.g., #new-client). In the Text field, compose a message using mapped fields. A useful pattern: map the Name and Email from the Airtable module output (not the Google Forms module) — this confirms the data actually made it into your CRM, and gives you access to the Airtable record URL.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-14.png" alt="Make.com Slack module — channel selected and message template with mapped client fields" width="1060" loading="lazy"><figcaption>Make.com Slack module — channel selected and message template with mapped client fields</figcaption></figure>
-<p>10. Test the full scenario — click &quot;Run once,&quot; then submit another test response through your Google Form. All three modules should fire with green checkmarks and &quot;1&quot; badges.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-17.png" alt="Make.com Google Forms Airtable Slack automation — successful test run with green checkmarks" width="1060" loading="lazy"><figcaption>Make.com Google Forms Airtable Slack automation — successful test run with green checkmarks</figcaption></figure>
-<p>11. Verify the results in Airtable — open your Client CRM base, Leads table. A new row should appear with all the mapped fields populated, Status set to &quot;New,&quot; and Source set to &quot;Google Forms.&quot;</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-13.png" alt="Airtable Client CRM — two lead records auto-populated from Google Forms submissions" width="1060" loading="lazy"><figcaption>Airtable Client CRM — two lead records auto-populated from Google Forms submissions</figcaption></figure>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-15.png" alt="Airtable record detail — James Thornton with all fields populated and Status set to New" width="1060" loading="lazy"><figcaption>Airtable record detail — James Thornton with all fields populated and Status set to New</figcaption></figure>
-<p>12. Check your Slack channel — the #new-client channel should show a formatted notification with the lead&#x27;s name, email, company, service, and budget.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-16.png" alt="Slack new lead notification — client details from Google Forms displayed in team channel" width="1060" loading="lazy"><figcaption>Slack new lead notification — client details from Google Forms displayed in team channel</figcaption></figure>
-<p>13. Activate the scenario and set the polling schedule — click the toggle to turn the scenario on, then click the clock icon or the scheduling area to set your polling interval. The free plan minimum is 15 minutes. For optimal operation usage, consider using Advanced scheduling to restrict polling to business hours only.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-gforms-airtable-18.png" alt="Make.com scenario scheduling — polling interval set to 15 minutes with Advanced scheduling option" width="1060" loading="lazy"><figcaption>Make.com scenario scheduling — polling interval set to 15 minutes with Advanced scheduling option</figcaption></figure>
-<p class="inline-cta">Start building this automation on Make.com&#x27;s free plan — 1,000 operations per month, enough for hundreds of new leads. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
 <div class="verdict"><strong>Bottom line:</strong> Every form submission that sits unprocessed in Google Forms is a lead losing interest. This automation takes 25 minutes to build and gives your team a structured CRM with instant notifications — for $0 per month. Google Forms handles unlimited responses for free, Airtable&#x27;s free plan stores 1,000 client records with views and filters, and Make.com&#x27;s free plan runs the connection between them. Set your polling interval to 60 minutes during business hours to stay well within the free operation limit, and upgrade to the Core plan ($9/month) only if you need faster response times.</div>
 <div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <div class="faq-item"><h3 class="faq-q">Does Google Forms work with Make.com&#x27;s free plan?</h3><p class="faq-a">Yes. The Watch Responses module works on all Make.com plans. The key constraint is polling operations — each check costs 1 operation regardless of whether there are new responses. Set polling to 60-minute intervals during business hours to keep usage under 220 operations per month for polling alone, leaving over 750 operations for processing actual leads.</p></div>
