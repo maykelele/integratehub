@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://integratehub.io/stripe-subscription-cancelled-automation">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%230868b4'/><text x='50' y='68' font-size='55' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>IH</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)</title>
+    <meta name="description" content="Stripe subscription cancelled automation with Make.com — send a goodbye email, log every cancellation in Google Sheets, and alert your team on Slack...">
+    <meta property="og:title" content="Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)">
+    <meta property="og:description" content="Stripe subscription cancelled automation with Make.com — send a goodbye email, log every cancellation in Google Sheets, and alert your team on Slack...">
+    <meta property="og:type" content="article">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)",
+  "description": "Stripe subscription cancelled automation with Make.com — send a goodbye email, log every cancellation in Google Sheets, and alert your team on Slack...",
+  "author": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "IntegrateHub.io",
+    "url": "https://integratehub.io"
+  },
+  "image": "https://integratehub.io/assets/screenshots/screenshot-stripe-cancellation-05.png",
+  "datePublished": "2026-03-11",
+  "dateModified": "2026-03-11"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Step 1",
+      "text": "Log in to Make.com and create a new scenario. Click the large + button on the canvas and search for \"Stripe.\" Select the Watch Events module — this is an INSTANT (webhook) trigger that fires the momen..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Step 2",
+      "text": "Click \"Create a webhook\" to configure the trigger. Set a name (e.g., \"My Watch Events webhook\"), connect your Stripe account, then select Group: \"Customer - subscription\" and Event: \"Customer subscrip..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Step 3",
+      "text": "Test the trigger by cancelling a test subscription. In your Stripe sandbox, go to Customers → select your test customer → find the active subscription → click the \"...\" menu → Cancel subscription. Cho..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Step 4",
+      "text": "Return to Make.com — the Watch Events module should show a green checkmark with a \"1\" badge. Click the output bubble to inspect the data. You'll see the full subscription object including customer ID,..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Step 5",
+      "text": "Add a Stripe \"Retrieve a Customer\" module. Click the + button after Watch Events and search for Stripe again. Select \"Retrieve a Customer.\" When a subscription is deleted, the webhook payload includes..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Step 6",
+      "text": "Map the Customer ID field. In the Retrieve a Customer configuration, set Customer ID to \"1. Object: Customer\" from the Watch Events output. This is the customer's Stripe ID (starts with cus_) that tel..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 7,
+      "name": "Step 7",
+      "text": "Add a Gmail \"Send an email\" module. Click + and add Gmail. Connect your Google account when prompted. Set the To field to \"2. Email\" from the Retrieve a Customer module — this is the cancelled custome..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 8,
+      "name": "Step 8",
+      "text": "Configure the email subject and body. For the Subject, type \"We're sorry to see you go — your\" and then map \"2. Discount: Subscription\" to insert the plan name, followed by \"subscription.\" For the Bod..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 9,
+      "name": "Step 9",
+      "text": "Verify the email arrives. After running the test, check the inbox of your test customer. You should see a personalized email with the plan name in the subject line and the customer's name in the body."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 10,
+      "name": "Step 10",
+      "text": "Add a Google Sheets \"Add a Row\" module. Click + and add Google Sheets. Select your spreadsheet (\"Subscription Cancellations\") and sheet (\"Log\"). Make sure your spreadsheet already has column headers i..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 11,
+      "name": "Step 11",
+      "text": "Map each column to the corresponding data. Date uses a formatDate formula: formatDate(1. Created; \"MM/DD/YYYY\") to convert the Unix timestamp into a readable date. Customer Name and Email come from mo..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 12,
+      "name": "Step 12",
+      "text": "Add a Slack \"Send a Message\" module as the final step. Connect your Slack workspace, set Channel type to \"Public channel\" and select your #churn channel. In the Text field, compose a message using map..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 13,
+      "name": "Step 13",
+      "text": "Save the scenario and run a final end-to-end test. Your complete canvas should show five modules connected: Stripe Watch Events → Stripe Retrieve a Customer → Gmail Send an email → Google Sheets Add a..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 14,
+      "name": "Step 14",
+      "text": "Verify the results. Check three places: your Google Sheets \"Subscription Cancellations\" spreadsheet should have a new row with the cancellation date, customer details, subscription ID, and plan amount..."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does this work for subscriptions cancelled by the customer and by the admin?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The customer.subscription.deleted event fires regardless of who initiates the cancellation — whether the customer cancels through the Customer Portal, you cancel it from the Stripe dashboard, or the subscription is cancelled automatically due to repeated payment failures. All three scenarios trigger the automation identically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if the same customer cancels and resubscribes multiple times?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each cancellation triggers a separate run. Every event creates a new row in Google Sheets, sends a new email, and posts a new Slack message. Your spreadsheet becomes a chronological log of all cancellation events — useful for spotting repeat churners."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add a cancellation feedback survey instead of the \"reply to this email\" approach?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — you could link to a Typeform or Google Form in the email body. But for most small businesses, the reply approach works better. Customers are far more likely to reply to a short personal email than click through to a separate survey. Keep it simple until your volume justifies the complexity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The Feedback field is empty in my Google Sheets row — is something broken?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Probably not. In Stripe's sandbox, the cancellation_details.feedback field often returns empty even when the customer selects a reason in the portal. This is a known sandbox limitation. In production with live subscriptions and real Customer Portal cancellations, the field populates correctly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many operations does this use on the free plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each cancellation uses 5 operations (one per module). The Make.com free plan includes 1,000 operations per month, so this automation alone handles 200 cancellations. If you run other scenarios alongside it, subtract their usage — but most small businesses see 5-20 cancellations per month, which uses only 25-100 operations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this alongside the Stripe failed payment automation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Both scenarios run independently on separate webhooks. The [failed payment automation](/stripe-payment-failed-automation) listens for invoice.payment_failed events, while this one listens for customer.subscription.deleted. They don't interfere with each other and can share the same Stripe connection in Make.com. Together, they cover the two most critical subscription lifecycle events."
+      }
+    }
+  ]
+}
+</script>
+    <style>
+        :root {
+            --primary: #2d3436;
+            --accent: #0868b4;
+            --text: #2d3436;
+            --light-bg: #f9f9f9;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        /* WIDER CONTAINER */
+        .container { max-width: 1060px; margin: 0 auto; padding: 40px 30px; }
+        .header-inner { max-width: 1060px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; gap: 20px; }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+        .back-link { font-size: 0.9rem; color: var(--accent); text-decoration: underline; display: flex; align-items: center; gap: 4px; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* BREADCRUMB */
+        .breadcrumb { font-size: 0.85rem; color: #595959; margin-bottom: 20px; }
+        .breadcrumb a { color: var(--accent); text-decoration: underline; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* ARTICLE META */
+        .article-meta { font-size: 0.85rem; color: #595959; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .article-meta time { color: #595959; }
+        .article-meta .separator { color: #ccc; }
+        .article-meta .category-badge {
+            background: #f0f4f8; color: var(--accent); padding: 2px 10px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none;
+        }
+
+        /* CONTENT */
+        .content { margin-top: 30px; }
+        h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
+        .intro {
+            font-size: 1.15rem; color: #444; margin-bottom: 25px;
+            line-height: 1.8; border-left: 4px solid var(--accent); padding-left: 20px;
+        }
+        h2 { font-size: 1.4rem; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: var(--primary); }
+        h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; color: var(--primary); }
+        p { margin: 0 0 18px 0; }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: #f7f9fc; border: 1px solid #e0e8f0; border-radius: 8px;
+            padding: 20px 24px; margin: 0 0 30px 0;
+        }
+        .toc-title {
+            font-size: 0.85rem; color: #595959; text-transform: uppercase;
+            letter-spacing: 0.06em; margin: 0 0 12px 0; font-weight: 700;
+        }
+        .toc ol { margin: 0; padding-left: 20px; }
+        .toc li { margin-bottom: 6px; font-size: 0.95rem; }
+        .toc a { color: var(--accent); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* TECH TIP */
+        .tech-tip {
+            background: #fff3cd; border-left: 4px solid #ffc107;
+            padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0;
+        }
+        .tech-tip strong { display: block; margin-bottom: 6px; }
+
+        /* VERDICT */
+        .verdict {
+            background: #f0f8ff; border-left: 4px solid var(--accent);
+            padding: 20px 24px; margin: 30px 0; border-radius: 0 8px 8px 0;
+            font-size: 1.05rem; line-height: 1.7;
+        }
+        .verdict strong { color: var(--accent); }
+
+        .inline-cta { background: #f0f8ff; padding: 16px 20px; border-radius: 8px; margin: 25px 0; font-size: 1.05rem; line-height: 1.7; }
+        .inline-cta a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+        /* COMPARISON TABLE */
+        .table-wrapper {
+            overflow-x: auto; margin: 20px 0 30px 0;
+            border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .comparison-table thead tr { background: var(--accent); color: white; }
+        .comparison-table th { padding: 12px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .comparison-table td { padding: 11px 16px; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table tbody tr:nth-child(even) { background: #f7f9fc; }
+        .comparison-table tbody tr:hover { background: #eef5ff; }
+
+        /* STEPS */
+        .steps { padding-left: 0; list-style: none; counter-reset: steps; }
+        .steps li { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+        .steps li::before {
+            content: counter(steps); background: var(--accent); color: white;
+            width: 28px; height: 28px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.85rem; flex-shrink: 0; margin-top: 2px;
+        }
+        .steps li.step-image { display: block; padding-left: 0; margin-bottom: 20px; counter-increment: none; }
+        .steps li.step-image::before { display: none; }
+
+        /* FAQ */
+        .faq-section { margin: 40px 0 20px 0; }
+        .faq-section h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid #eee; margin-bottom: 24px; }
+        .faq-item { margin-bottom: 24px; }
+        .faq-q { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin: 0 0 6px 0; }
+        .faq-a { color: #444; margin: 0; line-height: 1.7; }
+
+        /* RELATED GUIDES */
+        .related-guides {
+            background: #f7f9fc; border: 1px solid #e0e8f0;
+            border-radius: 8px; padding: 20px 24px; margin: 30px 0;
+        }
+        .related-guides h3 { font-size: 0.85rem; color: #595959; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px 0; }
+        .related-guides ul { margin: 0; padding-left: 18px; }
+        .related-guides li { margin-bottom: 6px; }
+        .related-guides a { color: var(--accent); text-decoration: underline; font-weight: 500; }
+        .related-guides a:hover { text-decoration: underline; }
+
+        /* SCREENSHOT PLACEHOLDER */
+        .screenshot-placeholder {
+            background: #f0f4f8; border: 2px dashed #b0c4d8;
+            border-radius: 8px; margin: 24px 0; padding: 32px 20px; text-align: center;
+        }
+        .screenshot-placeholder-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .screenshot-icon { font-size: 2rem; }
+        .screenshot-label { color: #6b8cae; font-size: 0.9rem; font-style: italic; }
+
+        /* SCREENSHOT IMAGE */
+        .screenshot { margin: 24px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .screenshot img { width: 100%; display: block; }
+        .screenshot figcaption { background: #f7f9fc; color: #595959; font-size: 0.82rem; padding: 8px 14px; text-align: center; font-style: italic; }
+
+        /* CODE */
+        pre {
+            background: #2d3436; color: #55efc4; padding: 20px; border-radius: 8px;
+            overflow-x: auto; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; margin: 20px 0; line-height: 1.6;
+        }
+        code { font-family: 'Courier New', monospace; }
+
+        /* CTA */
+        .cta-card { background: linear-gradient(135deg, #e3f2fd, #f0f8ff); border: 1px solid var(--accent); padding: 30px; margin: 40px 0; border-radius: 12px; text-align: center; }
+        .cta-card h2 { border: none; margin-top: 0; font-size: 1.5rem; }
+        .cta-card p { color: #555; margin-bottom: 20px; }
+        .btn { background: var(--accent); color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+        .btn:hover { background: #0773c5; }
+
+        /* FOOTER */
+        footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
+        footer a { color: var(--accent); text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            h1 { font-size: 1.7rem; }
+            .container { padding: 20px 16px; }
+            .comparison-table th, .comparison-table td { padding: 9px 10px; font-size: 0.88rem; }
+            .article-meta { gap: 4px; }
+        }
+
+        /* INDEX CARD GRID */
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+        .card { border: 1px solid #eee; border-radius: 10px; transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .card a { display: block; padding: 25px; text-decoration: none; color: inherit; }
+        .card h2 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); border: none; padding: 0; }
+        .card p { margin: 0 0 15px 0; color: #666; font-size: 0.95rem; }
+        .card .card-meta { font-size: 0.78rem; color: #999; margin-bottom: 8px; }
+        .read-more { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        @media (min-width: 600px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 900px) { .card-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
+        <a href="/" class="back-link">← All Guides</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="/" rel="noopener">Home</a> › <a href="/" rel="noopener">Payments &amp; Invoicing</a> › Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)
+    </div>
+
+    <main class="content">
+        <h1>Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)</h1>
+        <div class="article-meta"><time datetime="2026-03-11">Mar 11, 2026</time> <span class="separator">·</span> <span>⏱ 12 min read</span> <span class="separator">·</span> <span>🛠 ~25 min build</span> <span class="separator">·</span> <span class="category-badge">Payments &amp; Invoicing</span></div>
+
+        <nav class="toc">
+<p class="toc-title">In This Guide</p>
+<ol><li><a href="#why-most-businesses-miss-subscription-cancellations" rel="noopener">Why Most Businesses Miss Subscription Cancellations</a></li>
+<li><a href="#doesn-t-stripe-already-send-cancellation-emails" rel="noopener">Doesn&#x27;t Stripe Already Send Cancellation Emails?</a></li>
+<li><a href="#how-the-stripe-cancellation-automation-works" rel="noopener">How the Stripe Cancellation Automation Works</a></li>
+<li><a href="#why-you-need-a-stripe-cancellation-workflow-not-just-alerts" rel="noopener">Why You Need a Stripe Cancellation Workflow (Not Just Alerts)</a></li>
+<li><a href="#stripe-cancellation-feedback-where-it-comes-from" rel="noopener">Stripe Cancellation Feedback — Where It Comes From</a></li>
+<li><a href="#what-you-need-before-starting" rel="noopener">What You Need Before Starting</a></li>
+<li><a href="#how-to-build-the-stripe-cancellation-automation" rel="noopener">How to Build the Stripe Cancellation Automation</a></li>
+<li><a href="#frequently-asked-questions" rel="noopener">Frequently Asked Questions</a></li>
+</ol>
+</nav>
+
+        <p class="intro">A customer cancels their subscription in Stripe. You find out three weeks later when someone finally checks the dashboard. By then, there&#x27;s no chance of saving them — you don&#x27;t know why they left, when it happened, or whether anyone followed up. This Stripe subscription cancelled automation fixes the blind spot: the moment a subscription ends, Make.com sends the customer a personal email, logs the cancellation with feedback data in Google Sheets, and alerts your team on Slack. Five modules, 25 minutes to build, runs forever.</p>
+<h2 id="why-most-businesses-miss-subscription-cancellations">Why Most Businesses Miss Subscription Cancellations</h2>
+<p>Stripe logs every cancellation — but logging is not the same as acting on it. The event sits in your Stripe dashboard alongside hundreds of other events, and unless someone is checking daily, it gets buried. The real cost is not the lost subscription itself. It&#x27;s the lost information: why did they cancel? Was it price, missing features, or a competitor? Stripe actually collects this feedback through its Customer Portal — but the data stays inside Stripe where your sales and support teams never see it. A simple automation that pushes cancellation data to where your team already works — email, spreadsheets, Slack — turns a silent churn event into an actionable signal.</p>
+<h2 id="doesn-t-stripe-already-send-cancellation-emails">Doesn&#x27;t Stripe Already Send Cancellation Emails?</h2>
+<p>Stripe can send automated emails for subscription events — but only if you configure them, and they come with significant limitations. Stripe&#x27;s built-in emails are Stripe-branded and generic. Customers often mistake them for transactional noise or outright spam. You can&#x27;t customize the tone, add a personal touch, or invite direct replies. And critically, Stripe&#x27;s emails are one-directional: the customer gets a notification, but nobody on your team knows it happened. The automation in this guide sends the email from your own Gmail account — so it looks like a real person reaching out — and simultaneously notifies your team so someone can follow up while the cancellation is still fresh.</p>
+<h2 id="how-the-stripe-cancellation-automation-works">How the Stripe Cancellation Automation Works</h2>
+<p>When a customer&#x27;s subscription is deleted in Stripe, Make.com catches the event instantly via webhook and runs five actions in sequence: it retrieves the customer&#x27;s full profile (name and email), sends a personalized goodbye email from your Gmail, logs the cancellation details in a Google Sheets tracker, and posts a notification in your team&#x27;s Slack channel.</p>
+<h2>Automation Flow — Step by Step</h2>
+<div class="table-wrapper"><table class="comparison-table"><thead><tr><th>Step</th><th>What Happens</th><th>Tool</th></tr></thead><tbody><tr><td>1</td><td>Stripe detects a subscription cancellation</td><td>Stripe Webhook</td></tr><tr><td>2</td><td>Make.com retrieves the customer&#x27;s name and email</td><td>Stripe API</td></tr><tr><td>3</td><td>Customer receives a personalized email from your Gmail</td><td>Gmail</td></tr><tr><td>4</td><td>Cancellation data is logged in Google Sheets</td><td>Google Sheets</td></tr><tr><td>5</td><td>Your team gets an alert in Slack with the details</td><td>Slack</td></tr></tbody></table></div>
+<p>The whole scenario uses 5 operations per run. On Make.com&#x27;s free plan (1,000 operations/month), that&#x27;s enough to handle 200 cancellations per month — far more than most small SaaS businesses or freelancers will see.</p>
+<h2 id="why-you-need-a-stripe-cancellation-workflow-not-just-alerts">Why You Need a Stripe Cancellation Workflow (Not Just Alerts)</h2>
+<p>A one-off Slack notification tells you someone left. A cancellation workflow tells you why they left, how much revenue you lost, and whether there&#x27;s a pattern. The difference matters once you have 3-6 months of data in your Google Sheets log. You can filter by feedback reason and spot trends: if 40% of cancellations say &quot;too expensive,&quot; that&#x27;s a pricing signal. If most cancellations cluster around month 2-3, your onboarding has a gap. The Sheets log this automation builds is not just a record — it becomes your churn dataset. Some SaaS teams take this a step further and add a short exit survey link in the goodbye email instead of the &quot;reply to this email&quot; approach. That works at scale, but for most small businesses, the personal reply invitation converts better and requires zero additional tooling.</p>
+<p class="inline-cta">Build this automation on Make.com&#x27;s free plan — 1,000 operations per month, no credit card required. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p>
+<h2 id="stripe-cancellation-feedback-where-it-comes-from">Stripe Cancellation Feedback — Where It Comes From</h2>
+<p>Before building the automation, it&#x27;s worth understanding how Stripe collects cancellation feedback. When a customer cancels through the Stripe Customer Portal, Stripe can show a feedback form asking why they&#x27;re leaving. The customer selects a reason — too expensive, no longer needed, found an alternative, or other — and optionally adds a comment.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-05.png" alt="Stripe Customer Portal — cancellation feedback form with reason options" width="1060" loading="lazy"><figcaption>Stripe Customer Portal — cancellation feedback form with reason options</figcaption></figure>
+<p>This feedback is stored in the webhook payload under cancellation_details.feedback and gets passed to Make.com automatically. You don&#x27;t need to build a survey or add any extra tools — Stripe handles collection, and your automation handles distribution.</p>
+<p>To enable cancellation feedback collection: go to Stripe Dashboard → Settings → Billing → Customer portal → Cancellations → toggle on &quot;Collect a cancellation reason.&quot; If this toggle is off, the feedback field will arrive empty in your automation.</p>
+<h2 id="what-you-need-before-starting">What You Need Before Starting</h2>
+<p>You&#x27;ll need four things ready before opening Make.com. A Stripe account with at least one test subscription (sandbox mode is fine — no real payments involved). A Gmail account for sending the cancellation email. A Google Sheets spreadsheet called &quot;Subscription Cancellations&quot; with a sheet named &quot;Log&quot; and these column headers in row 1: Date, Customer Name, Email, Subscription ID, Plan Amount, Interval, Feedback, Reason. A Slack workspace with a notification channel — this guide uses #churn.</p>
+<figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-01.png" alt="Stripe sandbox — test customer with active Pro Plan subscription" width="1060" loading="lazy"><figcaption>Stripe sandbox — test customer with active Pro Plan subscription</figcaption></figure>
+<h2 id="how-to-build-the-stripe-cancellation-automation">How to Build the Stripe Cancellation Automation</h2>
+<ol class="steps">
+<li>Log in to Make.com and create a new scenario. Click the large + button on the canvas and search for &quot;Stripe.&quot; Select the Watch Events module — this is an INSTANT (webhook) trigger that fires the moment Stripe sends an event, using zero operations while idle.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-03.png" alt="Make.com scenario canvas — Stripe Watch Events module with Create a webhook button" width="1060" loading="lazy"><figcaption>Make.com scenario canvas — Stripe Watch Events module with Create a webhook button</figcaption></figure></li>
+<li>Click &quot;Create a webhook&quot; to configure the trigger. Set a name (e.g., &quot;My Watch Events webhook&quot;), connect your Stripe account, then select Group: &quot;Customer - subscription&quot; and Event: &quot;Customer subscription deleted.&quot; This tells Make.com to listen only for subscription cancellation events — nothing else.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-04.png" alt="Make.com Stripe webhook config — Group set to Customer-subscription and Event set to deleted" width="1060" loading="lazy"><figcaption>Make.com Stripe webhook config — Group set to Customer-subscription and Event set to deleted</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> This webhook uses the Customer group, not the Invoice group. If you&#x27;ve built our <a href="/stripe-payment-failed-automation" rel="noopener">Stripe failed payment automation</a>, you used Invoice → Invoice payment failed. This one listens for a completely different event — customer.subscription.deleted — which fires when a subscription is actually cancelled, not when a payment fails. You can run both scenarios simultaneously on the same Stripe connection.</div></li>
+<li>Test the trigger by cancelling a test subscription. In your Stripe sandbox, go to Customers → select your test customer → find the active subscription → click the &quot;...&quot; menu → Cancel subscription. Choose &quot;End of the current period&quot; and click &quot;Cancel subscription.&quot;</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-02.png" alt="Stripe dashboard — Cancel subscription modal with End of current period selected" width="1060" loading="lazy"><figcaption>Stripe dashboard — Cancel subscription modal with End of current period selected</figcaption></figure></li>
+<li>Return to Make.com — the Watch Events module should show a green checkmark with a &quot;1&quot; badge. Click the output bubble to inspect the data. You&#x27;ll see the full subscription object including customer ID, cancellation timestamps, plan details, and cancellation_details with the feedback field.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-06.png" alt="Make.com Stripe webhook output — subscription payload with customer ID and cancellation details" width="1060" loading="lazy"><figcaption>Make.com Stripe webhook output — subscription payload with customer ID and cancellation details</figcaption></figure></li>
+<li>Add a Stripe &quot;Retrieve a Customer&quot; module. Click the + button after Watch Events and search for Stripe again. Select &quot;Retrieve a Customer.&quot; When a subscription is deleted, the webhook payload includes the customer&#x27;s ID but not their name or email. This module fetches the full customer profile so you can use their name and email address in the following steps.</li>
+<li>Map the Customer ID field. In the Retrieve a Customer configuration, set Customer ID to &quot;1. Object: Customer&quot; from the Watch Events output. This is the customer&#x27;s Stripe ID (starts with cus_) that tells Make.com which customer profile to look up.</li>
+<li>Add a Gmail &quot;Send an email&quot; module. Click + and add Gmail. Connect your Google account when prompted. Set the To field to &quot;2. Email&quot; from the Retrieve a Customer module — this is the cancelled customer&#x27;s email address.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-07.png" alt="Make.com Gmail module — To field mapped to customer email from Retrieve a Customer" width="1060" loading="lazy"><figcaption>Make.com Gmail module — To field mapped to customer email from Retrieve a Customer</figcaption></figure></li>
+<li>Configure the email subject and body. For the Subject, type &quot;We&#x27;re sorry to see you go — your&quot; and then map &quot;2. Discount: Subscription&quot; to insert the plan name, followed by &quot;subscription.&quot; For the Body, set Body type to &quot;Collection of contents&quot; and write a short, personal message using the customer&#x27;s name from module 2.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-08.png" alt="Make.com Gmail module — Subject with plan name and Body with personalized cancellation message" width="1060" loading="lazy"><figcaption>Make.com Gmail module — Subject with plan name and Body with personalized cancellation message</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> Keep the email short and human. This is not a marketing email — it&#x27;s a genuine acknowledgment. The template used in this guide confirms the cancellation, invites feedback through a simple &quot;just reply to this email&quot; line, and mentions the option to resubscribe. No links to surveys, no discount offers, no upsells. A reply-friendly email gets 3-5x more responses than a formal feedback form.</div></li>
+<li>Verify the email arrives. After running the test, check the inbox of your test customer. You should see a personalized email with the plan name in the subject line and the customer&#x27;s name in the body.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-09.png" alt="Email inbox — cancellation confirmation with customer name and plan details" width="1060" loading="lazy"><figcaption>Email inbox — cancellation confirmation with customer name and plan details</figcaption></figure></li>
+<li>Add a Google Sheets &quot;Add a Row&quot; module. Click + and add Google Sheets. Select your spreadsheet (&quot;Subscription Cancellations&quot;) and sheet (&quot;Log&quot;). Make sure your spreadsheet already has column headers in row 1 — Make.com uses them to generate the mapping fields.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-10.png" alt="Make.com Google Sheets module — Subscription Cancellations spreadsheet and Log sheet selected" width="1060" loading="lazy"><figcaption>Make.com Google Sheets module — Subscription Cancellations spreadsheet and Log sheet selected</figcaption></figure></li>
+<li>Map each column to the corresponding data. Date uses a formatDate formula: formatDate(1. Created; &quot;MM/DD/YYYY&quot;) to convert the Unix timestamp into a readable date. Customer Name and Email come from module 2 (Retrieve a Customer). Subscription ID maps to &quot;1. Object: ID&quot;. For Plan Amount, use the formula parseNumber(1. Object: Plan: amount_decimal / 100; ) to convert cents to dollars.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-12.png" alt="Make.com Google Sheets mapping — Date formula, Name, Email, Subscription ID, and Plan Amount fields" width="1060" loading="lazy"><figcaption>Make.com Google Sheets mapping — Date formula, Name, Email, Subscription ID, and Plan Amount fields</figcaption></figure></li>
+<li>Add a Slack &quot;Send a Message&quot; module as the final step. Connect your Slack workspace, set Channel type to &quot;Public channel&quot; and select your #churn channel. In the Text field, compose a message using mapped fields — include the customer name, email, plan amount, billing interval, and feedback reason from the Stripe webhook data.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-13.png" alt="Make.com Slack module — churn channel selected with cancellation alert message template" width="1060" loading="lazy"><figcaption>Make.com Slack module — churn channel selected with cancellation alert message template</figcaption></figure></li>
+<li>Save the scenario and run a final end-to-end test. Your complete canvas should show five modules connected: Stripe Watch Events → Stripe Retrieve a Customer → Gmail Send an email → Google Sheets Add a Row → Slack Send a Message. Cancel another test subscription in Stripe to trigger the full flow.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-15.png" alt="Make.com complete scenario — five modules connected with green checkmarks after successful test" width="1060" loading="lazy"><figcaption>Make.com complete scenario — five modules connected with green checkmarks after successful test</figcaption></figure></li>
+<li>Verify the results. Check three places: your Google Sheets &quot;Subscription Cancellations&quot; spreadsheet should have a new row with the cancellation date, customer details, subscription ID, and plan amount. Your Slack #churn channel should show the formatted alert. And the test customer&#x27;s inbox should have the goodbye email.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-14.png" alt="Google Sheets Subscription Cancellations — cancellation row with date, customer name, and plan amount" width="1060" loading="lazy"><figcaption>Google Sheets Subscription Cancellations — cancellation row with date, customer name, and plan amount</figcaption></figure></li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-stripe-cancellation-16.png" alt="Slack churn channel — cancellation alert with customer name, plan, and subscription ID" width="1060" loading="lazy"><figcaption>Slack churn channel — cancellation alert with customer name, plan, and subscription ID</figcaption></figure></li>
+<li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> The Feedback field may appear empty in your test results — this is a known Stripe sandbox behavior. In production, when real customers cancel through your Customer Portal and select a reason, the cancellation_details.feedback value populates correctly with values like &quot;too_expensive&quot;, &quot;unused&quot;, or &quot;switched_service&quot;. Your Google Sheets log will capture these reasons automatically once real cancellations come through.</div></li>
+<li class="step-image"><p class="inline-cta">Start building this automation on Make.com&#x27;s free plan — 5 operations per cancellation means the free tier handles 200 cancellations per month. <a href="https://www.make.com/en/register?pc=integratehub" rel="sponsored noopener">Start free on Make.com →</a></p></li>
+</ol>
+<div class="verdict"><strong>Bottom line:</strong> Every subscription cancellation you miss is a customer you could have saved — or at least learned from. Stripe logs the data, but nobody sees it unless you push it to where your team actually works. This automation takes 25 minutes to build, uses 5 operations per run, and fits comfortably on Make.com&#x27;s free plan. The goodbye email shows customers you care, the Sheets log builds your churn dataset over time, and the Slack alert makes sure someone follows up while the conversation is still warm. Start with a free Make.com account and build it today.</div>
+<div class="faq-section"><h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<div class="faq-item"><h3 class="faq-q">Does this work for subscriptions cancelled by the customer and by the admin?</h3><p class="faq-a">Yes. The customer.subscription.deleted event fires regardless of who initiates the cancellation — whether the customer cancels through the Customer Portal, you cancel it from the Stripe dashboard, or the subscription is cancelled automatically due to repeated payment failures. All three scenarios trigger the automation identically.</p></div>
+<div class="faq-item"><h3 class="faq-q">What happens if the same customer cancels and resubscribes multiple times?</h3><p class="faq-a">Each cancellation triggers a separate run. Every event creates a new row in Google Sheets, sends a new email, and posts a new Slack message. Your spreadsheet becomes a chronological log of all cancellation events — useful for spotting repeat churners.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I add a cancellation feedback survey instead of the &quot;reply to this email&quot; approach?</h3><p class="faq-a">Yes — you could link to a Typeform or Google Form in the email body. But for most small businesses, the reply approach works better. Customers are far more likely to reply to a short personal email than click through to a separate survey. Keep it simple until your volume justifies the complexity.</p></div>
+<div class="faq-item"><h3 class="faq-q">The Feedback field is empty in my Google Sheets row — is something broken?</h3><p class="faq-a">Probably not. In Stripe&#x27;s sandbox, the cancellation_details.feedback field often returns empty even when the customer selects a reason in the portal. This is a known sandbox limitation. In production with live subscriptions and real Customer Portal cancellations, the field populates correctly.</p></div>
+<div class="faq-item"><h3 class="faq-q">How many operations does this use on the free plan?</h3><p class="faq-a">Each cancellation uses 5 operations (one per module). The Make.com free plan includes 1,000 operations per month, so this automation alone handles 200 cancellations. If you run other scenarios alongside it, subtract their usage — but most small businesses see 5-20 cancellations per month, which uses only 25-100 operations.</p></div>
+<div class="faq-item"><h3 class="faq-q">Can I use this alongside the Stripe failed payment automation?</h3><p class="faq-a">Yes. Both scenarios run independently on separate webhooks. The <a href="/stripe-payment-failed-automation" rel="noopener">failed payment automation</a> listens for invoice.payment_failed events, while this one listens for customer.subscription.deleted. They don&#x27;t interfere with each other and can share the same Stripe connection in Make.com. Together, they cover the two most critical subscription lifecycle events.</p></div>
+</div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/stripe-payment-failed-automation" rel="noopener">Stripe Failed Payment Alerts: Auto-Email + Slack</a></li><li><a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">Stripe New Customer: Auto-Track in Airtable + Slack</a></li><li><a href="/make-com-free-plan-what-you-can-build" rel="noopener">Make.com Free Plan: What You Can Actually Build</a></li></ul></div>
+    </main>
+
+    <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px; margin:40px 0 30px 0; text-align:center;">
+        <h2 style="border:none; margin-top:0; font-size:1.3rem; color:#2d3436;">Get automation tutorials in your inbox</h2>
+        <p style="color:#555; margin-bottom:20px; font-size:1rem;">One practical workflow per week. No fluff, no spam — just tested automations for service businesses.</p>
+        <a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=article_cta" target="_blank" rel="noopener nofollow" style="background:#0868b4; color:white; padding:14px 30px; border-radius:6px; text-decoration:none; display:inline-block; font-weight:600; font-size:1rem; transition:background 0.2s;">Subscribe free →</a>
+    </div>
+
+    <div class="cta-card" style="padding:0; background:none; border:none;">
+        <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored noopener">
+            <img 
+                src="assets/banners/AD-728x90 – 2.png" 
+                alt="Set up your own workflows for free with Make.com"
+                style="width:100%; border-radius:12px; display:block; cursor:pointer;"
+            >
+        </a>
+    </div>
+
+    <footer>
+        <span>© 2026 IntegrateHub.io</span>
+        <span>
+            <a href="about">About</a>
+            &nbsp;·&nbsp;
+            <a href="affiliate-disclosure">Affiliate Disclosure</a>
+            &nbsp;·&nbsp;
+            <a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=footer" target="_blank" rel="noopener nofollow">Newsletter</a>
+            &nbsp;·&nbsp;
+            <a href="privacy-policy">Privacy Policy</a>
+            &nbsp;·&nbsp;
+            <a href="/">← All Guides</a>
+        </span>
+    </footer>
+
+</div>
+
+</body>
+</html>

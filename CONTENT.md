@@ -84,6 +84,6 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - **Subscribe URL:** https://automationfix.beehiiv.com/subscribe
 - **Handle:** automationfix.beehiiv.com
 - **Status:** Active — first test issue sent March 2026
-- **Workflow:** Each new article = repurposed newsletter issue (~45 min)
+- **Workflow:** Each week new articles = repurposed newsletter issue (~45 min)
 - **CTA tag:** CTA[newsletter]: in input.txt for inline opt-in
 - **UTM pattern:** ?utm_source=integratehub&utm_medium=article_cta (site), ?utm_source=newsletter&utm_medium=email&utm_campaign=issue_XX (email)

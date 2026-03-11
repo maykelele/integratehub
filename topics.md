@@ -65,7 +65,7 @@ Nedelja 5-6:
 Stripe new customer → Google Drive folder + welcome email + Slack alert (multi-step, visoka vrednost)
 Weekly client report → automatski svaki ponedeljak Google Sheets + email summary
 Lead goes cold → 24h automatic Slack reminder to team
-Typeform → AI Agent qualification → Slack (advanced verzija istog workflow-a)
+Typeform → AI Agent lead qualification → Slack (advanced verzija istog workflow-a)
 
 
 Nedelja 7-8:
