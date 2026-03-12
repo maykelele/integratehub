@@ -202,25 +202,20 @@
 
         /* READING PROGRESS BAR */
         .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
+            width: 0%;
             height: 3px;
             background: var(--accent);
-            z-index: 200;
-            width: 0%;
             transition: width 0.1s linear;
         }
     </style>
 </head>
 <body>
 
-<div class="progress-bar" id="progressBar"></div>
-
 <header>
     <div class="header-inner">
         <a href="/" class="logo">IntegrateHub<span style="color:var(--accent)">.io</span></a>
         <a href="/" class="back-link">← All Guides</a>
+        <div class="progress-bar" id="progressBar"></div>
     </div>
 </header>
 
