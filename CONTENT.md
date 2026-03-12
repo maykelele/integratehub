@@ -1,6 +1,6 @@
 # IntegrateHub.io — Content & Roadmap
 
-## Published Articles (10) | In Progress (0)
+## Published Articles (13) | In Progress (0)
 
 | # | Slug | Type | Date | Category |
 |---|------|------|------|----------|
@@ -14,9 +14,21 @@
 | 8 | multi-source-lead-tracking-google-sheets-automation | how-to | 2026-03-02 | lead-capture |
 | 9 | make-com-free-plan-what-you-can-build | guide | 2026-03-05 | automation-strategy |
 | 10 | lead-follow-up-slack-reminder-automation | how-to | 2026-03-03 | lead-capture |
-| 11 | tripe-new-customer-airtable-tracker-automation | how-to | 2026-03-04 | onboarding |
+| 11 | stripe-new-customer-airtable-tracker-automation | how-to | 2026-03-04 | onboarding |
 | 12 | google-forms-airtable-client-crm-automation | how-to | 2026-03-09 | lead-capture |
 | 13 | stripe-subscription-cancelled-automation | how-to | 2026-03-11 | payments |
+
+### Category Breakdown
+- **lead-capture:** 4 articles (#2, #8, #10, #12)
+- **onboarding:** 4 articles (#4, #6, #7, #11)
+- **payments:** 2 articles (#3, #13)
+- **comparisons:** 2 articles (#1, #5)
+- **automation-strategy:** 1 article (#9)
+
+### Standalone Pages (Type: page)
+- about
+- affiliate-disclosure
+- privacy-policy
 
 ### Pending Internal Links
 
@@ -24,15 +36,15 @@ Do NOT update sitemap lastmod on these — internal link additions are not subst
 
 ## Affiliate Programs
 
-| Partner | Status | Link |
-|---------|--------|------|
-| Make.com | ✅ ACTIVE | https://www.make.com/en/register?pc=integratehub |
-| Typeform | ✅ ACTIVE | https://typeform.cello.so/vGdCoE97A4Z |
-| Beehiiv (newsletter) | ✅ ACTIVE | https://automationfix.beehiiv.com/subscribe |
-| Calendly | ❌ No program | — |
-| Pipedrive | ❌ Deprioritized | HubSpot competitor, difficult affiliate registration. Not pursuing. |
-| HubSpot | ❌ Rejected (reapply at 1K monthly visitors) | Rejected March 2026 — site below 1,000 monthly visitors minimum. Reapply when GSC confirms 1K+. No HubSpot articles until approved. |
-| Airtable | ✅ ACTIVE | https://airtable.com/invite/r/wuQK7yct | Not affiliate, but can be used as a credit for airtable subscriptions; We should write articles where Airtable is involved; since it can attract traffic. |
+| Partner | Status | Link | Notes |
+|---------|--------|------|-------|
+| Make.com | ✅ ACTIVE | https://www.make.com/en/register?pc=integratehub | 35% recurring commission |
+| Typeform | ✅ ACTIVE | https://typeform.cello.so/vGdCoE97A4Z | |
+| Airtable | ✅ ACTIVE | https://airtable.com/invite/r/wuQK7yct | Credits, not cash. Write articles where Airtable is involved — attracts traffic. |
+| Beehiiv (newsletter) | ✅ ACTIVE | https://automationfix.beehiiv.com/subscribe | Not affiliate — audience ownership |
+| HubSpot | ❌ Rejected | — | Reapply when GSC confirms ~1,000 monthly visitors. No HubSpot articles until approved. |
+| Calendly | ❌ No program | — | |
+| Pipedrive | ❌ Deprioritized | — | HubSpot competitor, difficult affiliate registration. Not pursuing. |
 
 **Rule:** Don't write an article for a planned affiliate tool until the affiliate is approved. No point driving traffic without earning from it.
 
@@ -40,28 +52,25 @@ Do NOT update sitemap lastmod on these — internal link additions are not subst
 
 This is a living list — reorder based on what makes sense, not rigid scheduling.
 
-### Next 5 Articles (Active Queue)
+### Next Up
 
 | Priority | Idea | Type | Category | Affiliates | Notes |
 |----------|------|------|----------|------------|-------|
 | #14 | Make.com vs Zapier Professional plan — specific pricing breakdown | comparison | comparisons | Make.com | Rebalances content mix toward 70/30. High buyer intent. Link to #1 and #9. Needs fresh pricing research + "Last verified" date. |
-| #15 | Weekly client report: Google Sheets → email every Monday | how-to | reporting | Make.com | Scheduled automation pattern. Agency use case. Scheduling + email formatting. |
+| #15 | Weekly client report: Google Sheets → email every Monday | how-to | reporting | Make.com | Scheduled automation pattern. Agency use case. Scheduling + email formatting. New category: reporting. |
 
 ### Ready to Write (Backlog)
 - Typeform → OpenAI lead qualification → Google Sheets + Slack (AI layer; requires Make.com Core plan)
 - Gmail + OpenAI: Auto-draft replies to new lead emails (requires Core plan)
 - Google Docs + OpenAI: Auto-generate client proposals from intake form data (requires Core plan)
 - Filter Calendly bookings → only qualified leads to CRM
-- ~~Stripe new customer → Google Drive folder + welcome email + Slack~~ → Replaced by #11 (Airtable version avoids overlap with #7)
 - Stripe daily balance → Google Sheets + Slack summary (freelancer/agency daily financial snapshot)
 - Airtable + Google Calendar sync for client bookings (onboarding events auto-created from Airtable)
 - WordPress form lead → Google Sheets + Slack + auto-reply email (huge keyword cluster, different audience from #2)
 - Make.com Error Handling: How to Prevent Duplicate Data and Partial Failures (from real experience)
 
 ### Requires New Affiliate First
-- HubSpot free → Google Sheets real-time sync (needs HubSpot affiliate — applied March 2026, waiting)
-- ~~Auto-assign leads from contact form + Pipedrive~~ → Deprioritized with Pipedrive
-- ~~Airtable as automation database~~ → Replaced by concrete Airtable articles (#11, #12)
+- HubSpot free → Google Sheets real-time sync (needs HubSpot affiliate — reapply at 1K visitors)
 
 ### Authority Series (after 15+ articles, phase 2)
 - Why Most Automations Break After 3-6 Months
@@ -82,7 +91,8 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - **Name:** The Automation Fix
 - **Subscribe URL:** https://automationfix.beehiiv.com/subscribe
 - **Handle:** automationfix.beehiiv.com
-- **Status:** Active — first test issue sent March 2026
+- **Status:** Active — issue #02 covers articles #10 and #11; article #12 goes in next issue
 - **Workflow:** Each week new articles = repurposed newsletter issue (~45 min)
 - **CTA tag:** CTA[newsletter]: in input.txt for inline opt-in
 - **UTM pattern:** ?utm_source=integratehub&utm_medium=article_cta (site), ?utm_source=newsletter&utm_medium=email&utm_campaign=issue_XX (email)
+- **Rule:** One weekly roundup regardless of article count. Clean URLs (no .html) in newsletter links.

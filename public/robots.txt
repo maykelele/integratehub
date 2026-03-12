@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+Disallow: /about
+Disallow: /privacy-policy
+Disallow: /affiliate-disclosure
+
 Sitemap: https://integratehub.io/sitemap.xml

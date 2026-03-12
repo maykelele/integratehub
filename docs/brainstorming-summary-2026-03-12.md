@@ -12,7 +12,7 @@
 
 **Trenutne kategorije:**
 - lead-capture (4 članka)
-- onboarding (3 članka)
+- onboarding (4 članka)
 - payments (2 članka)
 - comparisons (2 članka)
 - automation-strategy (1 članak)
@@ -84,13 +84,14 @@ faq_items       → article_id, question, answer
 
 **Faza 1 (~15 članaka, uz category pages):**
 - ~~Reading progress bar~~ ✅ Implementiran (ispod sticky headera, prati header automatski)
-- ~~Header sa logomark + tekst umesto plain text~~ ✅ Implementiran (logo-full-horizontal.png, height: 44px)
+- ~~Header sa logomark + tekst umesto plain text~~ ✅ Implementiran (logo-full-horizontal.png, height: 32px)
 - ~~Puniji footer~~ ✅ Implementiran (3 kolone: Browse by Topic, Site, Stay Updated)
 - ~~Scroll-to-top dugme~~ ✅ Implementirano (gornji centar, pojavljuje se samo pri scroll-up, nestaje pri scroll-down)
-- Homepage hero tekst + CTA
-- Kategorijske kartice ispod hero-a ("Browse by Topic" sa brojem članaka)
-- "Latest tutorials" sekcija (poslednih 4-6 članaka kao card grid)
-- Navigacija: kategorije u headeru (flat linkovi ili dropdown)
+- ~~Header navigacija~~ ✅ Implementirano (March 12): "Topics ▾" dropdown pill + "Comparisons" shortcut pill + search icon (placeholder). Desktop-only — mobile zadržava "← All Guides".
+- Homepage hero tekst + CTA → **SLEDEĆI KORAK**
+- Kategorijske kartice ispod hero-a ("Browse by Topic" sa brojem članaka) → **SLEDEĆI KORAK**
+- "Latest tutorials" sekcija (poslednih 4-6 članaka kao card grid) → **SLEDEĆI KORAK**
+- Category pages (`/category/[slug]`) → **SLEDEĆI KORAK** (prerequisite za funkcionalne nav linkove)
 
 **Faza 2 (~20-25 članaka):**
 - Sticky sidebar TOC (zahteva layout promenu na dvostubačni)
@@ -101,6 +102,12 @@ faq_items       → article_id, question, answer
 **Ne dirati:** članak layout (funkcionalan), boje/tipografija (rade), newsletter CTA pozicija.
 
 **Trade-off za sticky sidebar TOC:** Smanjuje content width sa 1060px na ~750px — screenshotovi postaju manji. Razmotriti floating TOC kao alternativu.
+
+### Header nav skaliranje
+- **Trenutno (5 kategorija):** pill-ovi + dropdown rade
+- **Na 7-8 kategorija:** dropdown skalira bez problema (samo dodaj linkove u listu)
+- **Na 10+ kategorija:** i dalje OK — dropdown je neograničen
+- Search ikona je placeholder — aktivirati kad search funkcionalnost bude implementirana
 
 ---
 
@@ -144,8 +151,10 @@ faq_items       → article_id, question, answer
 - Stare ručno održavane HTML fajlove obrisati iz `public/`
 
 ### Za budućnost
-- Category pages (na 15-18 članaka) — `/category/[slug]` sa filtriranim card gridom
-- Footer linkovi "Browse by Topic" trenutno svi vode na `/` — ažurirati kad category pages budu ready
+- Category pages (`/category/[slug]`) — filtriran card grid po kategoriji → **SLEDEĆI KORAK**
+- Footer linkovi "Browse by Topic" → prave category URL-ove (kad pages budu ready)
+- Header dropdown linkovi → prave category URL-ove (kad pages budu ready)
+- Breadcrumb kategorija → prave category URL-ove (kad pages budu ready)
 
 ---
 
@@ -162,20 +171,23 @@ faq_items       → article_id, question, answer
 - [x] Scroll-to-top dugme (scroll-up only, gornji centar)
 - [x] `Type: page` podrška u generator.py
 - [x] About, Affiliate Disclosure, Privacy Policy prebačeni u input.txt
+- [x] Header navigacija: Topics ▾ dropdown + Comparisons pill + search icon
+
+### Sledeći korak (pre članaka #14 i #15)
+- [ ] Category pages u generator.py (`/category/[slug]`)
+- [ ] Homepage redesign: hero + kategorijske kartice + latest tutorials
+- [ ] Linkovi profunkcionišu: header dropdown, footer, breadcrumb → prave category URL-ove
+- [ ] Comparisons pill u headeru → `/category/comparisons`
+- [ ] Ažuriraj CONTEXT.md i CONTENT.md ✅ ZAVRŠENO
 
 ### Narednih 30 dana
 - [ ] Završi članak #14 (Make.com vs Zapier comparison)
 - [ ] Završi članak #15 (weekly client report automation)
-- [ ] Homepage redesign: hero + kategorijske kartice + latest tutorials
-- [ ] Navigacija: kategorije u headeru
 - [ ] Welcome email sequence u Beehiivu
-- [ ] Ažuriraj CONTEXT.md sa svim implementiranim promenama
 
 ### Na 15-18 članaka
 - [ ] Split input.txt na pojedinačne `content/[slug].txt` fajlove
 - [ ] Generator.py refactor: čita direktorijum umesto jednog fajla
-- [ ] Category pages u generator.py
-- [ ] Footer "Browse by Topic" linkovi → prave category URL-ove
 
 ### Na 20-25 članaka
 - [ ] Supabase tabele + migracija
@@ -186,23 +198,3 @@ faq_items       → article_id, question, answer
 ### Na 25-30 članaka
 - [ ] Custom dashboard za stale content alerts
 - [ ] Automatski internal linkovi (hibrid: ručni + auto-dopuna)
-
----
-
-## Ažuriranja za projektne fajlove
-
-**CONTEXT.md — dodati:**
-- Logo paket lokacija i naming convention
-- Favicon/og:image meta tagovi
-- Progress bar implementacija
-- `Type: page` podrška u generatoru
-- Scroll-to-top dugme ponašanje
-- Standalone stranice sada idu kroz generator (ne ručno)
-- Category pages kao generator feature (planirano)
-
-**CONTENT.md — dodati:**
-- Napomena o nadolazećem input.txt split-u
-- Kategorizacija sa brojem članaka
-- About, Affiliate Disclosure, Privacy Policy kao `Type: page` entries
-
-**STRATEGY-v2.md — ne menjati sad** (sledeći review: Checkpoint 1, September 2026)
