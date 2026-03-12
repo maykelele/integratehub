@@ -1,5 +1,5 @@
 # IntegrateHub.io — Brainstorming Summary
-**Date:** March 12, 2026
+**Date:** March 12, 2026 (updated after implementation session)
 **Context:** 13 articles published, approaching article #15 milestone
 
 ---
@@ -83,13 +83,14 @@ faq_items       → article_id, question, answer
 ### Elementi za implementaciju
 
 **Faza 1 (~15 članaka, uz category pages):**
+- ~~Reading progress bar~~ ✅ Implementiran (ispod sticky headera, prati header automatski)
+- ~~Header sa logomark + tekst umesto plain text~~ ✅ Implementiran (logo-full-horizontal.png, height: 44px)
+- ~~Puniji footer~~ ✅ Implementiran (3 kolone: Browse by Topic, Site, Stay Updated)
+- ~~Scroll-to-top dugme~~ ✅ Implementirano (gornji centar, pojavljuje se samo pri scroll-up, nestaje pri scroll-down)
 - Homepage hero tekst + CTA
 - Kategorijske kartice ispod hero-a ("Browse by Topic" sa brojem članaka)
 - "Latest tutorials" sekcija (poslednih 4-6 članaka kao card grid)
 - Navigacija: kategorije u headeru (flat linkovi ili dropdown)
-- Puniji footer (kategorije + site linkovi + newsletter)
-- Reading progress bar (trivijalna implementacija, ~15 linija CSS/JS)
-- Header sa logomark + tekst umesto plain text
 
 **Faza 2 (~20-25 članaka):**
 - Sticky sidebar TOC (zahteva layout promenu na dvostubačni)
@@ -125,41 +126,56 @@ faq_items       → article_id, question, answer
 | logomark-white.svg | `public/assets/branding/` | Za tamne/plave pozadine |
 | favicon.svg | `public/assets/branding/` | White on blue, rounded square |
 | logo-full-horizontal.svg | `public/assets/branding/` | Mark + tekst za header |
-| logo-full-horizontal.png | `public/assets/branding/` | Raster verzija (napraviti u Figmi) |
+| logo-full-horizontal.png | `public/assets/branding/` | Raster verzija — **deployed u headeru** |
 | og-default.png (1200x630) | `public/assets/branding/` | Social sharing default |
-
-**Template promene (za sledeći deploy):**
-```html
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:image" content="https://integratehub.io/assets/branding/og-default.png">
-```
 
 ---
 
-## 6. Prioritizovani akcioni plan
+## 6. Generator — nove funkcionalnosti
 
-### Odmah (sledeći deploy)
-- [ ] Sačuvaj logo paket u `public/assets/branding/`
-- [ ] favicon.png i apple-touch-icon.png u `public/` root
-- [ ] Zameni stari inline SVG favicon u template.html
-- [ ] Dodaj og:image meta tag u template.html
-- [ ] Dodaj reading progress bar u template.html
+### Implementirano (March 12, 2026)
+
+**`Type: page` podrška:**
+- Standalone stranice (about, affiliate-disclosure, privacy-policy) sada idu kroz generator
+- `Type: page` u input.txt → generiše stranicu bez: article meta, TOC, newsletter CTA, banner CTA
+- Breadcrumb: samo Home › Title (bez kategorije)
+- Schema: WebPage umesto Article/HowTo
+- Ne pojavljuje se u index card gridu
+- Stare ručno održavane HTML fajlove obrisati iz `public/`
+
+### Za budućnost
+- Category pages (na 15-18 članaka) — `/category/[slug]` sa filtriranim card gridom
+- Footer linkovi "Browse by Topic" trenutno svi vode na `/` — ažurirati kad category pages budu ready
+
+---
+
+## 7. Prioritizovani akcioni plan
+
+### ~~Odmah (sledeći deploy)~~ ✅ ZAVRŠENO (March 12, 2026)
+- [x] Sačuvaj logo paket u `public/assets/branding/`
+- [x] favicon.png i apple-touch-icon.png u `public/` root
+- [x] Zameni stari inline SVG favicon u template.html
+- [x] Dodaj og:image meta tag u template.html
+- [x] Dodaj reading progress bar u template.html
+- [x] Header: logomark + tekst umesto plain text
+- [x] Puniji footer (3 kolone)
+- [x] Scroll-to-top dugme (scroll-up only, gornji centar)
+- [x] `Type: page` podrška u generator.py
+- [x] About, Affiliate Disclosure, Privacy Policy prebačeni u input.txt
 
 ### Narednih 30 dana
 - [ ] Završi članak #14 (Make.com vs Zapier comparison)
 - [ ] Završi članak #15 (weekly client report automation)
 - [ ] Homepage redesign: hero + kategorijske kartice + latest tutorials
 - [ ] Navigacija: kategorije u headeru
-- [ ] Header: logomark + tekst umesto plain text
-- [ ] Puniji footer
 - [ ] Welcome email sequence u Beehiivu
-- [ ] logo-full-horizontal.png napraviti u Figmi
+- [ ] Ažuriraj CONTEXT.md sa svim implementiranim promenama
 
 ### Na 15-18 članaka
 - [ ] Split input.txt na pojedinačne `content/[slug].txt` fajlove
 - [ ] Generator.py refactor: čita direktorijum umesto jednog fajla
 - [ ] Category pages u generator.py
+- [ ] Footer "Browse by Topic" linkovi → prave category URL-ove
 
 ### Na 20-25 članaka
 - [ ] Supabase tabele + migracija
@@ -179,10 +195,14 @@ faq_items       → article_id, question, answer
 - Logo paket lokacija i naming convention
 - Favicon/og:image meta tagovi
 - Progress bar implementacija
-- Category pages kao generator feature
+- `Type: page` podrška u generatoru
+- Scroll-to-top dugme ponašanje
+- Standalone stranice sada idu kroz generator (ne ručno)
+- Category pages kao generator feature (planirano)
 
 **CONTENT.md — dodati:**
 - Napomena o nadolazećem input.txt split-u
 - Kategorizacija sa brojem članaka
+- About, Affiliate Disclosure, Privacy Policy kao `Type: page` entries
 
 **STRATEGY-v2.md — ne menjati sad** (sledeći review: Checkpoint 1, September 2026)
