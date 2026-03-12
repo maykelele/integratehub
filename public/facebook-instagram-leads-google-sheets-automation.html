@@ -483,10 +483,8 @@
 
 </div>
 
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Jump to top</button>
 <script>
-
-    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Jump to top</button>
-
     window.addEventListener('scroll', function() {
         var bar = document.getElementById('progressBar');
         if (!bar) return;
