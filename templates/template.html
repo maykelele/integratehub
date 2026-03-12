@@ -178,8 +178,14 @@
         .btn:hover { background: #0773c5; }
 
         /* FOOTER */
-        footer { margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; font-size: 0.8rem; color: #636e72; display: flex; justify-content: space-between; align-items: center; }
+        footer { margin-top: 50px; padding: 40px 0 20px 0; border-top: 1px solid #eee; font-size: 0.85rem; color: #636e72; }
         footer a { color: var(--accent); text-decoration: underline; }
+        .footer-grid { display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 30px; }
+        .footer-col h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #999; margin: 0 0 10px 0; }
+        .footer-col ul { list-style: none; margin: 0; padding: 0; }
+        .footer-col li { margin-bottom: 6px; }
+        .footer-bottom { border-top: 1px solid #eee; padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+        @media (max-width: 700px) { .footer-grid { gap: 24px; } .footer-bottom { flex-direction: column; gap: 8px; } }
 
         /* RESPONSIVE */
         @media (max-width: 700px) {
@@ -208,6 +214,32 @@
             background: var(--accent);
             transition: width 0.1s linear;
         }
+
+        /* SCROLL TO TOP */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2d3436dd;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 18px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 90;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.04em;
+        }
+        .scroll-top.visible { opacity: 1; pointer-events: auto; }
+        .scroll-top:hover { background: #2d3436; }
+
     </style>
 </head>
 <body>
@@ -252,23 +284,46 @@
     </div>
 
     <footer>
-        <span>© 2026 IntegrateHub.io</span>
-        <span>
-            <a href="about">About</a>
-            &nbsp;·&nbsp;
-            <a href="affiliate-disclosure">Affiliate Disclosure</a>
-            &nbsp;·&nbsp;
-            <a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=footer" target="_blank" rel="noopener nofollow">Newsletter</a>
-            &nbsp;·&nbsp;
-            <a href="privacy-policy">Privacy Policy</a>
-            &nbsp;·&nbsp;
-            <a href="/">← All Guides</a>
-        </span>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Browse by Topic</h4>
+                <ul>
+                    <li><a href="/">Lead Capture</a></li>
+                    <li><a href="/">Client Onboarding</a></li>
+                    <li><a href="/">Payments & Invoicing</a></li>
+                    <li><a href="/">Comparisons</a></li>
+                    <li><a href="/">Automation Strategy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Site</h4>
+                <ul>
+                    <li><a href="/">All Guides</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/affiliate-disclosure">Affiliate Disclosure</a></li>
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Stay Updated</h4>
+                <ul>
+                    <li><a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=footer" target="_blank" rel="noopener nofollow">The Automation Fix Newsletter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 IntegrateHub.io</span>
+            <span>Automation guides for service businesses</span>
+        </div>
     </footer>
+
 
 </div>
 
 <script>
+
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Jump to top</button>
+
     window.addEventListener('scroll', function() {
         var bar = document.getElementById('progressBar');
         if (!bar) return;
