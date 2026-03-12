@@ -464,6 +464,7 @@
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Jump to top</button>
 <script>
+    var lastScroll = window.scrollY;
     window.addEventListener('scroll', function() {
         var bar = document.getElementById('progressBar');
         if (bar) {
@@ -473,10 +474,13 @@
         }
         var btn = document.getElementById('scrollTop');
         if (btn) {
-            btn.classList.toggle('visible', window.scrollY > 400);
+            var show = window.scrollY > 400 && window.scrollY < lastScroll;
+            btn.classList.toggle('visible', show);
         }
+        lastScroll = window.scrollY;
     });
 </script>
+
 
 </body>
 </html>
