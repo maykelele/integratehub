@@ -801,34 +801,39 @@ def generate_site():
 
         main_body, meta_desc, schema_parts, howto_steps, h2_headings, first_image = format_content(entry, page_type)
 
+        # --- Page type: page (standalone pages like About, Privacy, etc.) ---
+        is_standalone = (page_type == 'page')
+
         # --- Reading time ---
         reading_time = estimate_reading_time(entry)
 
-        # --- TOC ---
-        toc_html = build_toc(h2_headings)
+        # --- TOC (skip for standalone pages) ---
+        toc_html = '' if is_standalone else build_toc(h2_headings)
 
-        # --- Article meta (date + reading time + category) ---
-        meta_parts = []
-        if date_published:
-            display_date = format_date_display(date_published)
-            meta_parts.append(f'<time datetime="{html.escape(date_published)}">{html.escape(display_date)}</time>')
-            if date_updated and date_updated != date_published:
-                updated_display = format_date_display(date_updated)
-                meta_parts.append(f'<span>(Updated {html.escape(updated_display)})</span>')
-        meta_parts.append(f'<span class="separator">·</span>')
-        meta_parts.append(f'<span>⏱ {reading_time} min read</span>')
-        if build_time:
+        # --- Article meta (skip for standalone pages) ---
+        if is_standalone:
+            article_meta_html = ''
+        else:
+            meta_parts = []
+            if date_published:
+                display_date = format_date_display(date_published)
+                meta_parts.append(f'<time datetime="{html.escape(date_published)}">{html.escape(display_date)}</time>')
+                if date_updated and date_updated != date_published:
+                    updated_display = format_date_display(date_updated)
+                    meta_parts.append(f'<span>(Updated {html.escape(updated_display)})</span>')
             meta_parts.append(f'<span class="separator">·</span>')
-            meta_parts.append(f'<span>🛠 ~{html.escape(build_time)} min build</span>')
-        if category and category in CATEGORIES:
-            meta_parts.append(f'<span class="separator">·</span>')
-            meta_parts.append(f'<span class="category-badge">{html.escape(CATEGORIES[category])}</span>')
-        article_meta_html = f'<div class="article-meta">{" ".join(meta_parts)}</div>'
+            meta_parts.append(f'<span>⏱ {reading_time} min read</span>')
+            if build_time:
+                meta_parts.append(f'<span class="separator">·</span>')
+                meta_parts.append(f'<span>🛠 ~{html.escape(build_time)} min build</span>')
+            if category and category in CATEGORIES:
+                meta_parts.append(f'<span class="separator">·</span>')
+                meta_parts.append(f'<span class="category-badge">{html.escape(CATEGORIES[category])}</span>')
+            article_meta_html = f'<div class="article-meta">{" ".join(meta_parts)}</div>'
 
-        # --- Breadcrumb ---
+        # --- Breadcrumb (simplified for standalone pages) ---
         breadcrumb_parts = [f'<a href="/" rel="noopener">Home</a>']
-        # Kategorija u breadcrumb — link ka index za sad, later ka category stranici
-        if category and category in CATEGORIES:
+        if not is_standalone and category and category in CATEGORIES:
             breadcrumb_parts.append(
                 f'<a href="/" rel="noopener">{html.escape(CATEGORIES[category])}</a>'
             )
@@ -837,11 +842,30 @@ def generate_site():
 
         # --- Schema markup ---
         all_schemas = []
-        # Article schema (uvek) — sa author i image
-        all_schemas.append(build_article_schema(title, meta_desc, date_published, date_updated, first_image))
-        # HowTo schema (samo za how-to)
-        if page_type == 'how-to' and howto_steps:
-            all_schemas.append(build_howto_schema(title, howto_steps))
+        if is_standalone:
+            # WebPage schema for standalone pages
+            wp_schema = {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": title,
+                "description": meta_desc,
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "IntegrateHub.io",
+                    "url": "https://integratehub.io"
+                }
+            }
+            all_schemas.append(
+                f'<script type="application/ld+json">\n'
+                f'{json.dumps(wp_schema, indent=2, ensure_ascii=False)}\n'
+                f'</script>'
+            )
+        else:
+            # Article schema (uvek) — sa author i image
+            all_schemas.append(build_article_schema(title, meta_desc, date_published, date_updated, first_image))
+            # HowTo schema (samo za how-to)
+            if page_type == 'how-to' and howto_steps:
+                all_schemas.append(build_howto_schema(title, howto_steps))
         # FAQ i ostali schema
         for s in schema_parts:
             if s is not None:
@@ -862,20 +886,33 @@ def generate_site():
         page = page.replace('{{TOC}}', toc_html)
         page = page.replace('{{BREADCRUMB}}', breadcrumb_html)
 
+        # Hide newsletter CTA and banner on standalone pages
+        if is_standalone:
+            page = page.replace(
+                '<div class="newsletter-cta"',
+                '<!-- newsletter hidden on page --><div class="newsletter-cta" style="display:none"'
+            )
+            page = page.replace(
+                '<div class="cta-card"',
+                '<!-- cta hidden on page --><div class="cta-card" style="display:none"'
+            )
+
         output_path = os.path.join(OUTPUT_DIR, f"{slug}.html")
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(page)
 
         print(f"✅ Generisano [{page_type}]: {slug}.html — {reading_time} min read, date: {date_published or 'N/A'}, category: {category or 'N/A'}")
 
-        links.append({
-            'slug': slug,
-            'title': title,
-            'type': page_type,
-            'description': meta_desc,
-            'date': date_published,
-            'category': category,
-        })
+        # Standalone pages don't appear in index
+        if not is_standalone:
+            links.append({
+                'slug': slug,
+                'title': title,
+                'type': page_type,
+                'description': meta_desc,
+                'date': date_published,
+                'category': category,
+            })
 
     index_html = generate_index(template_html, links)
     with open(os.path.join(OUTPUT_DIR, 'index.html'), 'w', encoding='utf-8') as f:

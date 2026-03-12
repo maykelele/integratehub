@@ -1,3 +1,108 @@
+Slug: about
+Title: About IntegrateHub.io
+Type: page
+Meta: IntegrateHub.io was built by automation practitioners who got tired of paying Zapier prices. Honest guides for small business owners.
+
+Introduction: Built by automation practitioners. Written for business owners.
+
+We got tired of paying $49/month for Zapier to run three workflows that cost $9/month on Make.com. So we built the resource we wished existed when we were figuring this out.
+
+H2: Why This Site Exists
+
+Most automation tutorials are written for developers — full of API jargon, code snippets, and assumptions that you already know what a webhook is. Business owners and operations teams don't need that. They need to know: "How do I stop copying Facebook leads into a spreadsheet every morning?"
+
+IntegrateHub.io exists to answer that question. Step by step, for real workflows that real businesses actually run.
+
+H2: Our Approach
+
+We tell you when a tool is not the right choice — including the ones we earn commissions on. We include honest cost math, not just "it's cheaper" claims. Every guide is written for someone who has never built an automation before. We test workflows before writing about them. We update guides when tools change their pricing or features.
+
+H2: How We Make Money
+
+Some links on this site are affiliate links. When you click a link and sign up for a paid plan, we may earn a commission — at no extra cost to you. This is how we keep the site free and the guides coming.
+
+We are transparent about this on every page and in our [Affiliate Disclosure](/affiliate-disclosure). Affiliate relationships never determine what we recommend — our readers' trust is worth more than any individual commission.
+
+H2: What's Coming
+
+We're building out guides for the most common small business automation problems — lead management, reporting, client onboarding, invoice processing, and more. If there's a workflow you want us to cover, reach out at [hello@integratehub.io](mailto:hello@integratehub.io).
+
+---
+Slug: affiliate-disclosure
+Title: Affiliate Disclosure
+Type: page
+Meta: Affiliate disclosure for IntegrateHub.io — how we earn commissions and how it affects our content.
+
+Introduction: Some links on this site are affiliate links. If you click one and sign up for a paid plan, we earn a small commission — at no extra cost to you. This never influences which tools we recommend or what we write.
+
+H2: What This Means
+
+IntegrateHub.io participates in affiliate programs, including the Make.com affiliate program. This means that when you click certain links on our site and subsequently purchase a paid subscription, we may receive a commission from the software provider.
+
+This disclosure is required by the Federal Trade Commission (FTC) and similar regulatory bodies in other jurisdictions. We believe in full transparency with our readers.
+
+H2: How It Affects Our Content
+
+It doesn't. Every guide on IntegrateHub.io is written to help business owners solve real automation problems. We include "When to stay on Zapier" sections, honest limitations, and alternatives precisely because our goal is to give you accurate information — not to maximize clicks.
+
+If a tool isn't the right fit for your situation, we'll tell you. Our long-term credibility matters more than any individual commission.
+
+H2: Which Links Are Affiliate Links
+
+Affiliate links on this site are primarily links to Make.com (make.com). These links may include a tracking parameter (such as ?pc=integratehub) that identifies us as the referral source. Clicking these links does not cost you anything extra — pricing is identical whether you arrive via our link or directly.
+
+H2: Our Editorial Standards
+
+We only write about tools we have researched thoroughly and believe offer genuine value. Affiliate relationships do not determine which tools we cover — our content is driven by what our readers need to know.
+
+H2: Questions
+
+If you have any questions about our affiliate relationships or how we make money, feel free to contact us at [hello@integratehub.io](mailto:hello@integratehub.io).
+
+---
+Slug: privacy-policy
+Title: Privacy Policy
+Type: page
+Meta: Privacy Policy for IntegrateHub.io — how we collect, use, and protect your information.
+
+Introduction: IntegrateHub.io operates the website integratehub.io. This Privacy Policy explains how we collect, use, and protect information when you visit our site. Last updated: March 2026.
+
+H2: Information We Collect
+
+We do not require you to create an account or provide personal information to read our guides. We may collect anonymous usage data through analytics tools (such as page views and traffic sources) to understand which content is most useful to our readers.
+
+H2: Cookies
+
+Our website may use cookies for basic analytics purposes. These cookies do not identify you personally. You can disable cookies in your browser settings at any time without affecting your ability to read our content.
+
+H2: Third-Party Links and Affiliate Disclosure
+
+Our site contains affiliate links to third-party services, including Make.com. When you click these links and sign up for a paid plan, we may earn a commission at no additional cost to you. We only recommend tools we believe provide genuine value. For full details, see our [Affiliate Disclosure](/affiliate-disclosure).
+
+Third-party websites linked from our site have their own privacy policies. We are not responsible for their content or privacy practices.
+
+H2: Analytics
+
+We may use third-party analytics services to collect anonymous information about how visitors use our site. This data helps us improve our content. These services may use cookies to collect information, but this data is aggregated and does not personally identify you.
+
+H2: Data Security
+
+We do not collect, store, or sell personal data. We take reasonable measures to protect any information processed through our site.
+
+H2: Children's Privacy
+
+IntegrateHub.io is not directed at children under the age of 13. We do not knowingly collect personal information from children.
+
+H2: Changes to This Policy
+
+We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date. Continued use of the site after changes constitutes acceptance of the updated policy.
+
+H2: Contact
+
+If you have questions about this Privacy Policy, you can contact us at [privacy@integratehub.io](mailto:privacy@integratehub.io).
+
+---
+
 Slug: zapier-too-expensive-make-com-alternative
 Title: Zapier Too Expensive? Make.com Saves You Up to $840/year
 Type: comparison
