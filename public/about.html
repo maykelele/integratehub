@@ -63,14 +63,27 @@
         .back-link:hover { text-decoration: underline; }
 
         /* HEADER NAV */
-        .header-nav { display: none; align-items: center; gap: 6px; margin-left: auto; }
-        .header-nav a {
-            font-size: 0.78rem; color: var(--accent); text-decoration: none;
-            padding: 5px 14px; border-radius: 20px; transition: all 0.2s;
-            white-space: nowrap; font-weight: 600; letter-spacing: 0.01em;
+        .header-nav { display: none; align-items: center; margin-left: auto; }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-btn {
+            font-size: 0.82rem; color: var(--accent); font-weight: 600;
+            padding: 6px 16px; border-radius: 20px; cursor: pointer;
             background: #f0f4f8; border: 1px solid #e0e8f0;
+            transition: all 0.2s; font-family: inherit; letter-spacing: 0.01em;
         }
-        .header-nav a:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .nav-dropdown-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .nav-dropdown-menu {
+            display: none; position: absolute; top: calc(100% + 8px); right: 0;
+            background: white; border-radius: 10px; box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+            min-width: 200px; padding: 6px 0; z-index: 200;
+        }
+        .nav-dropdown-menu a {
+            display: block; padding: 10px 20px; font-size: 0.88rem; color: var(--primary);
+            text-decoration: none; transition: background 0.15s;
+        }
+        .nav-dropdown-menu a:hover { background: #f0f4f8; color: var(--accent); }
+        .nav-dropdown.open .nav-dropdown-menu { display: block; }
+        .nav-dropdown.open .nav-dropdown-btn { background: var(--accent); color: white; border-color: var(--accent); }
         @media (min-width: 900px) { .header-nav { display: flex; } .back-link { display: none; } }
 
         /* BREADCRUMB */
@@ -274,11 +287,16 @@
     <div class="header-inner">
         <a href="/" class="logo"><img src="/assets/branding/logo-full-horizontal.png" alt="IntegrateHub.io" height="32" width="208"></a>
         <nav class="header-nav">
-            <a href="/">Lead Capture</a>
-            <a href="/">Onboarding</a>
-            <a href="/">Payments</a>
-            <a href="/">Comparisons</a>
-            <a href="/">Strategy</a>
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-btn">Topics ▾</button>
+                <div class="nav-dropdown-menu">
+                    <a href="/">Lead Capture</a>
+                    <a href="/">Client Onboarding</a>
+                    <a href="/">Payments & Invoicing</a>
+                    <a href="/">Comparisons</a>
+                    <a href="/">Automation Strategy</a>
+                </div>
+            </div>
         </nav>
         <a href="/" class="back-link">← All Guides</a>
     </div>
@@ -381,6 +399,18 @@
         }
         lastScroll = window.scrollY;
     });
+    // Dropdown toggle
+    var dropBtn = document.querySelector('.nav-dropdown-btn');
+    var dropWrap = document.querySelector('.nav-dropdown');
+    if (dropBtn && dropWrap) {
+        dropBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropWrap.classList.toggle('open');
+        });
+        document.addEventListener('click', function() {
+            dropWrap.classList.remove('open');
+        });
+    }
 </script>
 
 
