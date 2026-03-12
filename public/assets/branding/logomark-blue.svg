@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- IntegrateHub.io Logomark — Brand Blue on White -->
+  
+  <line x1="100" y1="100" x2="100" y2="28" stroke="#0868b4" stroke-width="14" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="100" y2="172" stroke="#0868b4" stroke-width="14" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="28" y2="100" stroke="#0868b4" stroke-width="14" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="172" y2="100" stroke="#0868b4" stroke-width="14" stroke-linecap="round"/>
+  
+  <circle cx="100" cy="100" r="24" fill="#0868b4"/>
+  <circle cx="100" cy="100" r="12" fill="white"/>
+  
+  <rect x="80" y="8" width="40" height="40" rx="10" fill="#0868b4"/>
+  <rect x="88" y="16" width="24" height="24" rx="6" fill="white"/>
+  
+  <rect x="80" y="152" width="40" height="40" rx="10" fill="#0868b4"/>
+  <rect x="88" y="160" width="24" height="24" rx="6" fill="white"/>
+  
+  <rect x="8" y="80" width="40" height="40" rx="10" fill="#0868b4"/>
+  <rect x="16" y="88" width="24" height="24" rx="6" fill="white"/>
+  
+  <rect x="152" y="80" width="40" height="40" rx="10" fill="#0868b4"/>
+  <rect x="160" y="88" width="24" height="24" rx="6" fill="white"/>
+</svg>

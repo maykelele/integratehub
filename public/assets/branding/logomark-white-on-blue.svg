@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- IntegrateHub.io Favicon — White on Brand Blue -->
+  
+  <!-- Blue rounded square background -->
+  <rect width="256" height="256" rx="48" fill="#0868b4"/>
+  
+  <!-- Mark scaled and centered (mark is 200x200 in original, scale to ~170 and center) -->
+  <g transform="translate(128,128) scale(0.82) translate(-100,-100)">
+    <line x1="100" y1="100" x2="100" y2="28" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    <line x1="100" y1="100" x2="100" y2="172" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    <line x1="100" y1="100" x2="28" y2="100" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    <line x1="100" y1="100" x2="172" y2="100" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    
+    <circle cx="100" cy="100" r="24" fill="white"/>
+    <circle cx="100" cy="100" r="12" fill="#0868b4"/>
+    
+    <rect x="80" y="8" width="40" height="40" rx="10" fill="white"/>
+    <rect x="88" y="16" width="24" height="24" rx="6" fill="#0868b4"/>
+    
+    <rect x="80" y="152" width="40" height="40" rx="10" fill="white"/>
+    <rect x="88" y="160" width="24" height="24" rx="6" fill="#0868b4"/>
+    
+    <rect x="8" y="80" width="40" height="40" rx="10" fill="white"/>
+    <rect x="16" y="88" width="24" height="24" rx="6" fill="#0868b4"/>
+    
+    <rect x="152" y="80" width="40" height="40" rx="10" fill="white"/>
+    <rect x="160" y="88" width="24" height="24" rx="6" fill="#0868b4"/>
+  </g>
+</svg>

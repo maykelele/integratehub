@@ -16,6 +16,7 @@
 | 10 | lead-follow-up-slack-reminder-automation | how-to | 2026-03-03 | lead-capture |
 | 11 | tripe-new-customer-airtable-tracker-automation | how-to | 2026-03-04 | onboarding |
 | 12 | google-forms-airtable-client-crm-automation | how-to | 2026-03-09 | lead-capture |
+| 13 | stripe-subscription-cancelled-automation | how-to | 2026-03-11 | payments |
 
 ### Pending Internal Links
 
@@ -43,8 +44,7 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 
 | Priority | Idea | Type | Category | Affiliates | Notes |
 |----------|------|------|----------|------------|-------|
-| #13 | Make.com vs Zapier Professional plan — specific pricing breakdown | comparison | comparisons | Make.com | Rebalances content mix toward 70/30. High buyer intent. Link to #1 and #9. Needs fresh pricing research + "Last verified" date. |
-| #14 | Stripe subscription cancelled → feedback email + Google Sheets log | how-to | payments | Make.com | Churn prevention angle. Strong pain point, low competition. Extends Stripe series (#3, #11). |
+| #14 | Make.com vs Zapier Professional plan — specific pricing breakdown | comparison | comparisons | Make.com | Rebalances content mix toward 70/30. High buyer intent. Link to #1 and #9. Needs fresh pricing research + "Last verified" date. |
 | #15 | Weekly client report: Google Sheets → email every Monday | how-to | reporting | Make.com | Scheduled automation pattern. Agency use case. Scheduling + email formatting. |
 
 ### Ready to Write (Backlog)
@@ -74,8 +74,7 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - 70% how-to tutorials (affiliate conversion)
 - 20% comparison articles (higher buyer intent)
 - 10% guides/resource content (authority, internal links)
-- Current: 8 how-to / 2 comparison / 1 guide = 70% / 20% / 10% ✅
-- After next 5: 8 how-to / 2 comparison / 1 guide = 73% / 20% / 7% (on target)
+- Current: 10 how-to / 2 comparison / 1 guide = 77% / 15% / 8% ✅
 
 ## Newsletter
 

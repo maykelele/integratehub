@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 80" width="520" height="80">
+  <!-- IntegrateHub.io — Full Horizontal Logo (mark + text) -->
+  
+  <!-- Logomark scaled to 64x64, vertically centered -->
+  <g transform="translate(8,8) scale(0.32)">
+    <line x1="100" y1="100" x2="100" y2="28" stroke="#0868b4" stroke-width="14" stroke-linecap="round"/>
+    <line x1="100" y1="100" x2="100" y2="172" stroke="#0868b4" stroke-width="14" stroke-linecap="round"/>
+    <line x1="100" y1="100" x2="28" y2="100" stroke="#0868b4" stroke-width="14" stroke-linecap="round"/>
+    <line x1="100" y1="100" x2="172" y2="100" stroke="#0868b4" stroke-width="14" stroke-linecap="round"/>
+    
+    <circle cx="100" cy="100" r="24" fill="#0868b4"/>
+    <circle cx="100" cy="100" r="12" fill="white"/>
+    
+    <rect x="80" y="8" width="40" height="40" rx="10" fill="#0868b4"/>
+    <rect x="88" y="16" width="24" height="24" rx="6" fill="white"/>
+    
+    <rect x="80" y="152" width="40" height="40" rx="10" fill="#0868b4"/>
+    <rect x="88" y="160" width="24" height="24" rx="6" fill="white"/>
+    
+    <rect x="8" y="80" width="40" height="40" rx="10" fill="#0868b4"/>
+    <rect x="16" y="88" width="24" height="24" rx="6" fill="white"/>
+    
+    <rect x="152" y="80" width="40" height="40" rx="10" fill="#0868b4"/>
+    <rect x="160" y="88" width="24" height="24" rx="6" fill="white"/>
+  </g>
+  
+  <!-- Text: IntegrateHub.io -->
+  <text x="84" y="48" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="700" fill="#2d3436" letter-spacing="-0.5">IntegrateHub</text>
+  <text x="370" y="48" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="700" fill="#0868b4" letter-spacing="-0.5">.io</text>
+</svg>
