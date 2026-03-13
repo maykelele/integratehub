@@ -809,14 +809,17 @@ def generate_index(template_html, links, active_categories=None, category_counts
         </div>
     """
 
-    # --- All Guides ---
-    all_cards = ''.join(build_card(l) for l in sorted_links)
-    all_guides_html = f"""
+    # --- All Guides (preostali članci koji nisu u Latest) ---
+    remaining_links = sorted_links[6:]
+    all_guides_html = ""
+    if remaining_links:
+        remaining_cards = ''.join(build_card(l) for l in remaining_links)
+        all_guides_html = f"""
         <hr class="home-divider">
         <div class="home-section">
-            <p class="section-label">All Guides</p>
+            <p class="section-label">More Guides</p>
             <div class="card-grid">
-                {all_cards}
+                {remaining_cards}
             </div>
         </div>
     """
@@ -1144,7 +1147,7 @@ def generate_category_pages(template_html, links, active_categories):
         page = page.replace('{{MAIN_CONTENT}}', cat_content)
         page = page.replace('{{SCHEMA_MARKUP}}', '')
         page = page.replace('{{SLUG}}', f'category/{cat_slug}')
-        page = page.replace('{{CANONICAL_URL}}', f'category/{cat_slug}')
+        page = page.replace('{{CANONICAL_URL}}', f'category/{cat_slug}/')
         page = page.replace('{{ARTICLE_META}}', '')
         page = page.replace('{{TOC}}', '')
         page = page.replace('{{BREADCRUMB}}',
