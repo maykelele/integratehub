@@ -95,13 +95,32 @@ AFFILIATE_LINKS = {
 # Koristi se za breadcrumb i buduće category stranice
 # -----------------------------------------------------------------------
 CATEGORIES = {
-    "lead-capture": "Lead Capture",
-    "payments": "Payments & Invoicing",
-    "onboarding": "Client Onboarding",
-    "comparisons": "Comparisons",
-    "automation-strategy": "Automation Strategy",
-    # Dodaj nove kategorije ovde
+    "lead-capture": {
+        "name": "Lead Capture",
+        "description": "Automate how you capture, qualify, and route leads from forms, ads, and landing pages.",
+    },
+    "payments": {
+        "name": "Payments & Invoicing",
+        "description": "Automate payment tracking, failed payment alerts, and invoice workflows.",
+    },
+    "onboarding": {
+        "name": "Client Onboarding",
+        "description": "Automate client intake, welcome sequences, and project setup after signing.",
+    },
+    "comparisons": {
+        "name": "Comparisons",
+        "description": "Side-by-side comparisons of automation tools — pricing, features, and real trade-offs.",
+    },
+    "automation-strategy": {
+        "name": "Automation Strategy",
+        "description": "Strategic guides on when, why, and how to automate your business workflows.",
+    },
+    # Dodaj nove kategorije ovde — format:
+    # "slug": { "name": "Display Name", "description": "Opis za category page." },
 }
+
+# Minimum broj članaka da bi kategorija dobila svoju stranicu i pojavila se u navigaciji
+CATEGORY_MIN_ARTICLES = 3
 
 # -----------------------------------------------------------------------
 # PODRŽANI TAGOVI U input.txt:
@@ -225,6 +244,14 @@ def extract_field(lines, prefix):
     return next(
         (l.replace(prefix, '').strip() for l in lines if l.startswith(prefix)), ""
     )
+
+
+def cat_name(slug):
+    """Vraća display name kategorije iz CATEGORIES dict-a."""
+    cat = CATEGORIES.get(slug)
+    if not cat:
+        return slug.replace('-', ' ').title()
+    return cat["name"] if isinstance(cat, dict) else cat
 
 
 def estimate_reading_time(text):
@@ -717,7 +744,7 @@ def generate_index(template_html, links):
             description = description[:150] + '...'
 
         date_display = format_date_display(l.get('date', ''))
-        category_name = CATEGORIES.get(l.get('category', ''), '')
+        category_name = cat_name(l.get('category', '')) if l.get('category') else ''
         meta_parts = []
         if date_display:
             meta_parts.append(date_display)
@@ -828,14 +855,16 @@ def generate_site():
                 meta_parts.append(f'<span>🛠 ~{html.escape(build_time)} min build</span>')
             if category and category in CATEGORIES:
                 meta_parts.append(f'<span class="separator">·</span>')
-                meta_parts.append(f'<span class="category-badge">{html.escape(CATEGORIES[category])}</span>')
+                meta_parts.append(f'<span class="category-badge">{html.escape(cat_name(category))}</span>')
             article_meta_html = f'<div class="article-meta">{" ".join(meta_parts)}</div>'
 
         # --- Breadcrumb (simplified for standalone pages) ---
         breadcrumb_parts = [f'<a href="/" rel="noopener">Home</a>']
         if not is_standalone and category and category in CATEGORIES:
+            cat_display = cat_name(category)
+            # Link ide na category page samo ako postoji (placeholder se zameni posle)
             breadcrumb_parts.append(
-                f'<a href="/" rel="noopener">{html.escape(CATEGORIES[category])}</a>'
+                f'<a href="{{{{CAT_LINK_{category}}}}}" rel="noopener">{html.escape(cat_display)}</a>'
             )
         breadcrumb_parts.append(f'{html.escape(title)}')
         breadcrumb_html = ' › '.join(breadcrumb_parts)
@@ -914,11 +943,181 @@ def generate_site():
                 'category': category,
             })
 
+    # --- Izračunaj koje kategorije imaju dovoljno članaka ---
+    category_counts = {}
+    for l in links:
+        cat = l.get('category')
+        if cat:
+            category_counts[cat] = category_counts.get(cat, 0) + 1
+
+    active_categories = sorted(
+        [slug for slug, count in category_counts.items()
+         if count >= CATEGORY_MIN_ARTICLES and slug in CATEGORIES],
+        key=lambda s: list(CATEGORIES.keys()).index(s)
+    )
+
+    print(f"\n📂 Aktivne kategorije (>={CATEGORY_MIN_ARTICLES} članaka): {active_categories}")
+    for slug, count in category_counts.items():
+        if count < CATEGORY_MIN_ARTICLES:
+            print(f"   ⏳ {slug}: {count} članaka (treba {CATEGORY_MIN_ARTICLES})")
+
+    # --- Zameni breadcrumb category link placeholdere u svim generisanim stranicama ---
+    for fname in os.listdir(OUTPUT_DIR):
+        fpath = os.path.join(OUTPUT_DIR, fname)
+        if not fpath.endswith('.html') or os.path.isdir(fpath):
+            continue
+        with open(fpath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        changed = False
+        for cat_slug in CATEGORIES:
+            placeholder = f'{{{{CAT_LINK_{cat_slug}}}}}'
+            if placeholder in content:
+                if cat_slug in active_categories:
+                    replacement = f'/category/{cat_slug}'
+                else:
+                    replacement = '/'
+                content = content.replace(placeholder, replacement)
+                changed = True
+        if changed:
+            with open(fpath, 'w', encoding='utf-8') as f:
+                f.write(content)
+
+    # --- Generiši index ---
     index_html = generate_index(template_html, links)
+    index_html = inject_dynamic_nav(index_html, active_categories)
     with open(os.path.join(OUTPUT_DIR, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(index_html)
 
-    print(f"\n🚀 Gotovo! Generisano {len(links)} stranica + index.html")
+    # --- Generiši category pages ---
+    generate_category_pages(template_html, links, active_categories)
+
+    # --- Inject dynamic nav u sve article/page HTML fajlove ---
+    for fname in os.listdir(OUTPUT_DIR):
+        fpath = os.path.join(OUTPUT_DIR, fname)
+        if not fname.endswith('.html') or fname == 'index.html' or os.path.isdir(fpath):
+            continue
+        with open(fpath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        content = inject_dynamic_nav(content, active_categories)
+        with open(fpath, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+    # --- Inject dynamic nav u category page HTML fajlove ---
+    cat_dir = os.path.join(OUTPUT_DIR, 'category')
+    if os.path.isdir(cat_dir):
+        for cat_slug in os.listdir(cat_dir):
+            idx_path = os.path.join(cat_dir, cat_slug, 'index.html')
+            if os.path.isfile(idx_path):
+                with open(idx_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                content = inject_dynamic_nav(content, active_categories)
+                with open(idx_path, 'w', encoding='utf-8') as f:
+                    f.write(content)
+
+    total = len(links) + len(active_categories) + 1
+    print(f"\n🚀 Gotovo! Generisano {len(links)} članaka + {len(active_categories)} category stranica + index.html")
+
+
+def inject_dynamic_nav(page_html, active_categories):
+    """Zamenjuje hardkodirane header dropdown i footer category linkove sa dinamičkim."""
+
+    # --- Header dropdown menu ---
+    dropdown_links = '\n'.join(
+        f'                    <a href="/category/{slug}">{html.escape(cat_name(slug))}</a>'
+        for slug in active_categories
+    )
+    page_html = re.sub(
+        r'(<div class="nav-dropdown-menu">)\s*.*?\s*(</div>\s*</div>\s*</nav>)',
+        rf'\1\n{dropdown_links}\n                \2',
+        page_html,
+        flags=re.DOTALL
+    )
+
+    # --- Header Comparisons pill ---
+    if 'comparisons' in active_categories:
+        page_html = page_html.replace(
+            '<a href="/" class="nav-pill">Comparisons</a>',
+            '<a href="/category/comparisons" class="nav-pill">Comparisons</a>'
+        )
+
+    # --- Footer "Browse by Topic" ---
+    footer_links = '\n'.join(
+        f'                    <li><a href="/category/{slug}">{html.escape(cat_name(slug))}</a></li>'
+        for slug in active_categories
+    )
+    page_html = re.sub(
+        r'(<h4>Browse by Topic</h4>\s*<ul>)\s*.*?\s*(</ul>)',
+        rf'\1\n{footer_links}\n                \2',
+        page_html,
+        flags=re.DOTALL
+    )
+
+    return page_html
+
+
+def generate_category_pages(template_html, links, active_categories):
+    """Generiše /category/[slug]/index.html za svaku aktivnu kategoriju."""
+    for cat_slug in active_categories:
+        cat_info = CATEGORIES[cat_slug]
+        cat_display = cat_info["name"] if isinstance(cat_info, dict) else cat_info
+        cat_desc = cat_info.get("description", "") if isinstance(cat_info, dict) else ""
+
+        cat_links = [l for l in links if l.get('category') == cat_slug]
+        cat_links_sorted = sorted(cat_links, key=lambda x: x.get('date', ''), reverse=True)
+
+        cards = ""
+        for l in cat_links_sorted:
+            description = l.get('description', '')
+            if len(description) > 150:
+                description = description[:150] + '...'
+            date_display = format_date_display(l.get('date', ''))
+            meta_line = date_display
+
+            cards += f"""
+        <div class="card">
+            <a href="/{l['slug']}" rel="noopener">
+                {'<p class="card-meta">' + html.escape(meta_line) + '</p>' if meta_line else ''}
+                <h2>{html.escape(l['title'])}</h2>
+                <p>{html.escape(description)}</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>"""
+
+        cat_content = f"""
+        <p class="intro">{html.escape(cat_desc)}</p>
+        <div class="card-grid">
+            {cards}
+        </div>
+    """
+
+        page = template_html.replace('{{TITLE}}', f'{cat_display} Guides | IntegrateHub.io')
+        page = page.replace('{{META_DESCRIPTION}}', cat_desc[:155])
+        page = page.replace('{{MAIN_CONTENT}}', cat_content)
+        page = page.replace('{{SCHEMA_MARKUP}}', '')
+        page = page.replace('{{SLUG}}', f'category/{cat_slug}')
+        page = page.replace('{{CANONICAL_URL}}', f'category/{cat_slug}')
+        page = page.replace('{{ARTICLE_META}}', '')
+        page = page.replace('{{TOC}}', '')
+        page = page.replace('{{BREADCRUMB}}',
+            f'<a href="/" rel="noopener">Home</a> › {html.escape(cat_display)}')
+        page = page.replace('{{AFFILIATE_LINK}}', MAKE_AFFILIATE_LINK)
+
+        page = page.replace(
+            '<a href="/" class="back-link">← All Guides</a>', '')
+        page = page.replace(
+            '<div class="breadcrumb">\n        \n    </div>', '')
+        page = page.replace(
+            '<div class="newsletter-cta"',
+            '<!-- newsletter hidden on category --><div class="newsletter-cta" style="display:none"'
+        )
+
+        cat_dir = os.path.join(OUTPUT_DIR, 'category', cat_slug)
+        os.makedirs(cat_dir, exist_ok=True)
+        output_path = os.path.join(cat_dir, 'index.html')
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(page)
+
+        print(f"📁 Category page: /category/{cat_slug}/ — {len(cat_links)} članaka")
 
 
 if __name__ == "__main__":
