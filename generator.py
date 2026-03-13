@@ -732,27 +732,28 @@ def format_content(text, page_type='how-to'):
     return '\n'.join(html_parts), meta_description, schema_parts, howto_steps, h2_headings, first_image
 
 
-def generate_index(template_html, links):
-    """Generiše index.html sa listom svih integracija."""
-    # Sortiraj po datumu (najnoviji prvi), pa po naslovu kao fallback
+def generate_index(template_html, links, active_categories=None, category_counts=None):
+    """Generiše index.html sa hero, category karticama, latest tutorials, i svim člancima."""
+    if active_categories is None:
+        active_categories = []
+    if category_counts is None:
+        category_counts = {}
+
     sorted_links = sorted(links, key=lambda x: x.get('date', ''), reverse=True)
 
-    cards = ""
-    for l in sorted_links:
+    def build_card(l, show_category=True):
         description = l.get('description', '')
         if len(description) > 150:
             description = description[:150] + '...'
-
         date_display = format_date_display(l.get('date', ''))
-        category_name = cat_name(l.get('category', '')) if l.get('category') else ''
+        category_name = cat_name(l.get('category', '')) if l.get('category') and show_category else ''
         meta_parts = []
         if date_display:
             meta_parts.append(date_display)
         if category_name:
             meta_parts.append(category_name)
         meta_line = ' · '.join(meta_parts)
-
-        cards += f"""
+        return f"""
         <div class="card">
             <a href="/{l['slug']}" rel="noopener">
                 {'<p class="card-meta">' + html.escape(meta_line) + '</p>' if meta_line else ''}
@@ -762,15 +763,61 @@ def generate_index(template_html, links):
             </a>
         </div>"""
 
-    index_content = f"""
-        <p class="intro">
-            Step-by-step automation guides for business owners and operations teams.
-            Stop copying data between apps — let Make.com do it automatically.
-        </p>
-        <div class="card-grid">
-            {cards}
+    # --- Hero ---
+    hero_html = f"""
+        <div class="hero">
+            <h1>Automate Your Business with Make.com</h1>
+            <p>Step-by-step tutorials for service businesses, freelancers, and agencies. Build real workflows — no code required.</p>
+            <a href="{MAKE_AFFILIATE_LINK}" target="_blank" rel="sponsored noopener" class="btn">Start free on Make.com →</a>
         </div>
     """
+
+    # --- Browse by Topic ---
+    category_cards_html = ""
+    if active_categories:
+        cat_cards = ""
+        for slug in active_categories:
+            count = category_counts.get(slug, 0)
+            display = cat_name(slug)
+            cat_cards += f"""
+            <a href="/category/{slug}" class="category-card">
+                <h3>{html.escape(display)}</h3>
+                <span class="cat-count">{count} guide{'s' if count != 1 else ''}</span>
+            </a>"""
+
+        category_cards_html = f"""
+        <div class="home-section">
+            <p class="section-label">Browse by Topic</p>
+            <div class="category-grid">
+                {cat_cards}
+            </div>
+        </div>
+        """
+
+    # --- Latest Tutorials (6 najnovijih) ---
+    latest_cards = ''.join(build_card(l) for l in sorted_links[:6])
+    latest_html = f"""
+        <div class="home-section">
+            <p class="section-label">Latest Tutorials</p>
+            <div class="card-grid">
+                {latest_cards}
+            </div>
+        </div>
+    """
+
+    # --- All Guides ---
+    all_cards = ''.join(build_card(l) for l in sorted_links)
+    all_guides_html = f"""
+        <hr class="home-divider">
+        <div class="home-section">
+            <p class="section-label">All Guides</p>
+            <div class="card-grid">
+                {all_cards}
+            </div>
+        </div>
+    """
+
+    index_content = hero_html + category_cards_html + latest_html + all_guides_html
 
     page = template_html.replace('{{TITLE}}', 'Make.com Integration Guides | IntegrateHub.io')
     page = page.replace('{{META_DESCRIPTION}}',
@@ -779,9 +826,8 @@ def generate_index(template_html, links):
     page = page.replace('{{MAIN_CONTENT}}', index_content)
     page = page.replace('{{SCHEMA_MARKUP}}', '')
     page = page.replace('{{SLUG}}', 'index')
-    page = page.replace('{{CANONICAL_URL}}', '')  # homepage canonical = https://integratehub.io/
+    page = page.replace('{{CANONICAL_URL}}', '')
 
-    # Index nema article meta, TOC, ili breadcrumb detalje
     page = page.replace('{{ARTICLE_META}}', '')
     page = page.replace('{{TOC}}', '')
     page = page.replace('{{BREADCRUMB}}', '')
@@ -792,10 +838,7 @@ def generate_index(template_html, links):
         '<div class="breadcrumb">\n        \n    </div>', '')
 
     page = page.replace('{{AFFILIATE_LINK}}', MAKE_AFFILIATE_LINK)
-    page = page.replace(
-        '<div class="newsletter-cta"',
-        '<!-- newsletter hidden on index --><div class="newsletter-cta" style="display:none"'
-    )
+    # Newsletter CTA je VIDLJIV na homepage-u (ne sakrivamo ga)
     return page
 
 
@@ -983,7 +1026,7 @@ def generate_site():
                 f.write(content)
 
     # --- Generiši index ---
-    index_html = generate_index(template_html, links)
+    index_html = generate_index(template_html, links, active_categories, category_counts)
     index_html = inject_dynamic_nav(index_html, active_categories)
     with open(os.path.join(OUTPUT_DIR, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(index_html)
