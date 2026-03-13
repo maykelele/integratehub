@@ -1,5 +1,5 @@
 # IntegrateHub.io — Brainstorming Summary
-**Date:** March 12, 2026 (updated after implementation session)
+**Date:** March 13, 2026 (updated after design/category implementation session)
 **Context:** 13 articles published, approaching article #15 milestone
 
 ---
@@ -11,11 +11,13 @@
 **Razlog:** Čitaoci razmišljaju u terminima problema ("kako da automatizujem onboarding"), ne alata ("Typeform automation"). Business kategorije se poklapaju sa search intent-om i prirodno grupišu članke za internal linking.
 
 **Trenutne kategorije:**
-- lead-capture (4 članka)
-- onboarding (4 članka)
-- payments (2 članka)
-- comparisons (2 članka)
-- automation-strategy (1 članak)
+- lead-capture (4 članka) ✅ aktivna (category page generisan)
+- onboarding (4 članka) ✅ aktivna (category page generisan)
+- payments (2 članka) — ispod praga
+- comparisons (2 članka) — ispod praga (dodaj #14 Make.com vs Zapier → aktivira se)
+- automation-strategy (1 članak) — ispod praga
+
+**Prag za aktivaciju:** 3+ članaka (konfigurisano u `CATEGORY_MIN_ARTICLES` u generator.py). Kategorija sa <3 članaka i dalje radi u breadcrumbu i article meta, ali nema svoju stranicu niti se pojavljuje u navigaciji.
 
 **Buduće kategorije** (dodati kad imaju 3+ članka): reporting, invoicing, client-communication, project-management.
 
@@ -85,13 +87,13 @@ faq_items       → article_id, question, answer
 **Faza 1 (~15 članaka, uz category pages):**
 - ~~Reading progress bar~~ ✅ Implementiran (ispod sticky headera, prati header automatski)
 - ~~Header sa logomark + tekst umesto plain text~~ ✅ Implementiran (logo-full-horizontal.png, height: 32px)
-- ~~Puniji footer~~ ✅ Implementiran (3 kolone: Browse by Topic, Site, Stay Updated)
+- ~~Puniji footer~~ ✅ Implementiran (3 kolone: Site, Browse by Topic, Stay Updated)
 - ~~Scroll-to-top dugme~~ ✅ Implementirano (gornji centar, pojavljuje se samo pri scroll-up, nestaje pri scroll-down)
 - ~~Header navigacija~~ ✅ Implementirano (March 12): "Topics ▾" dropdown pill + "Comparisons" shortcut pill + search icon (placeholder). Desktop-only — mobile zadržava "← All Guides".
-- Homepage hero tekst + CTA → **SLEDEĆI KORAK**
-- Kategorijske kartice ispod hero-a ("Browse by Topic" sa brojem članaka) → **SLEDEĆI KORAK**
-- "Latest tutorials" sekcija (poslednih 4-6 članaka kao card grid) → **SLEDEĆI KORAK**
-- Category pages (`/category/[slug]`) → **SLEDEĆI KORAK** (prerequisite za funkcionalne nav linkove)
+- ~~Category pages~~ ✅ Implementirano (March 13): `/category/[slug]/index.html`, dinamički generisane samo za kategorije sa 3+ članaka. Filtrirani card grid, intro opis iz CATEGORIES dict-a, breadcrumb Home › Category.
+- ~~Homepage redesign~~ ✅ Implementirano (March 13): Hero (naslov + tagline + CTA) → Browse by Topic kartice (sa opisom i brojem članaka) → Latest Tutorials (6) → More Guides (preostali). Hero ima blagi plavi gradijent. Newsletter CTA vidljiv na homepage-u.
+- ~~Dinamički nav/footer~~ ✅ Implementirano (March 13): `inject_dynamic_nav()` zamenjuje hardkodirane linkove u header dropdown i footer sa pravim `/category/[slug]` URL-ovima. Samo aktivne kategorije (3+) se prikazuju. Comparisons pill automatski linkuje kad comparisons dostigne 3+.
+- ~~Breadcrumb linkovi~~ ✅ Implementirano (March 13): Breadcrumb kategorija linkuje na `/category/[slug]` ako category page postoji, inače na `/`.
 
 **Faza 2 (~20-25 članaka):**
 - Sticky sidebar TOC (zahteva layout promenu na dvostubačni)
@@ -150,11 +152,38 @@ faq_items       → article_id, question, answer
 - Ne pojavljuje se u index card gridu
 - Stare ručno održavane HTML fajlove obrisati iz `public/`
 
+### Implementirano (March 13, 2026)
+
+**Category pages (`/category/[slug]`):**
+- `CATEGORIES` dict proširen sa `description` poljem za svaku kategoriju
+- `CATEGORY_MIN_ARTICLES = 3` — prag za generisanje category page
+- `generate_category_pages()` — kreira `/category/[slug]/index.html` sa filtriranim card gridom
+- Canonical URL-ovi sa trailing slash (`/category/lead-capture/`) — matcha Cloudflare serving
+- Kategorije sa <3 članaka rade u breadcrumbu/meta ali nemaju stranicu
+
+**Dinamička navigacija:**
+- `inject_dynamic_nav()` — regex zamenjuje hardkodirane linkove u header dropdown i footer
+- Samo aktivne kategorije (3+) prikazane u navigaciji
+- Comparisons pill automatski linkuje kad comparisons dostigne 3+ članaka
+- Breadcrumb placeholder sistem: `{{CAT_LINK_[slug]}}` zamenjuje se sa `/category/[slug]` ili `/`
+
+**Homepage redesign:**
+- Hero sekcija: naslov + tagline + affiliate CTA dugme, blagi plavi gradijent pozadina
+- Browse by Topic: category kartice sa opisom i brojem članaka
+- Latest Tutorials: 6 najnovijih članaka
+- More Guides: preostali članci (bez duplikata)
+- Newsletter CTA vidljiv na homepage-u
+- `<h1>` title uklonjen sa homepage-a (hero ga zamenjuje)
+
+**Footer:**
+- Redosled kolona: Site → Browse by Topic → Stay Updated
+
+**Banner fix:**
+- `src="/assets/banners/..."` (apsolutna putanja) umesto relativne — rešava broken slike na nested stranicama
+
 ### Za budućnost
-- Category pages (`/category/[slug]`) — filtriran card grid po kategoriji → **SLEDEĆI KORAK**
-- Footer linkovi "Browse by Topic" → prave category URL-ove (kad pages budu ready)
-- Header dropdown linkovi → prave category URL-ove (kad pages budu ready)
-- Breadcrumb kategorija → prave category URL-ove (kad pages budu ready)
+- Automatsko generisanje sitemap.xml — odloženo (lastmod problem: design promene ne smeju ažurirati lastmod, a detekcija content-only promena zahteva hash/diff logiku)
+- Category pages za preostale kategorije — automatski kad dostignu 3+ članaka
 
 ---
 
@@ -173,15 +202,19 @@ faq_items       → article_id, question, answer
 - [x] About, Affiliate Disclosure, Privacy Policy prebačeni u input.txt
 - [x] Header navigacija: Topics ▾ dropdown + Comparisons pill + search icon
 
-### Sledeći korak (pre članaka #14 i #15)
-- [ ] Category pages u generator.py (`/category/[slug]`)
-- [ ] Homepage redesign: hero + kategorijske kartice + latest tutorials
-- [ ] Linkovi profunkcionišu: header dropdown, footer, breadcrumb → prave category URL-ove
-- [ ] Comparisons pill u headeru → `/category/comparisons`
-- [ ] Ažuriraj CONTEXT.md i CONTENT.md ✅ ZAVRŠENO
+### ~~Sledeći korak~~ ✅ ZAVRŠENO (March 13, 2026)
+- [x] Category pages u generator.py (`/category/[slug]`)
+- [x] Homepage redesign: hero + kategorijske kartice + latest tutorials
+- [x] Linkovi profunkcionišu: header dropdown, footer, breadcrumb → prave category URL-ove
+- [x] Comparisons pill u headeru → automatski kad dostigne 3+
+- [x] Ažuriraj CONTEXT.md i CONTENT.md
+- [x] Canonical trailing slash fix za category pages
+- [x] Banner apsolutna putanja fix
+- [x] Footer kolone reorder (Site prvo)
+- [x] Ručno dodati category pages u sitemap.xml (bez lastmod)
 
 ### Narednih 30 dana
-- [ ] Završi članak #14 (Make.com vs Zapier comparison)
+- [ ] Završi članak #14 (Make.com vs Zapier comparison) → aktivira comparisons kategoriju
 - [ ] Završi članak #15 (weekly client report automation)
 - [ ] Welcome email sequence u Beehiivu
 

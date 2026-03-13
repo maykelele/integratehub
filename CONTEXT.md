@@ -12,12 +12,14 @@
 - **Generator/template changes:** Provide patches (find → replace) for Sasa to apply to local files. No direct file editing.
 - **Anonymity:** hard constraint — no personal branding anywhere.
 - **URLs:** no .html extensions anywhere — canonicals, internal links, sitemap, index cards all use clean URLs (e.g. /slug not /slug.html). Cloudflare Pages redirects .html to clean URLs.
+- **Category page URLs:** use trailing slash in canonicals (`/category/lead-capture/`) because Cloudflare serves folder/index.html with trailing slash.
 - **Example emails in tables:** use [at] instead of @ (e.g. sarah[at]brightwave.co) to avoid Cloudflare Email Obfuscation ghost links.
 - **Page titles:** no brand suffix on articles. Only homepage keeps " | IntegrateHub.io". Aim for under 60 chars but don't sacrifice keywords.
 - **Standalone pages** (about, privacy-policy, affiliate-disclosure): now go through generator.py as `Type: page` entries. No longer manually maintained.
-- **Sitemap lastmod:** only update for substantial content changes, NOT for internal link additions or typo fixes.
+- **Sitemap:** manually maintained. Only update lastmod for substantial content changes, NOT for internal link additions, typo fixes, or design/template changes. Category pages added manually without lastmod.
 - **Internal linking:** add links to related articles on every new publish.
 - **Screenshots:** screenshot-[topic]-[number].png. When cloning similar scenarios, screenshot only differences.
+- **Banner images:** use absolute paths (`/assets/banners/...`) in template — relative paths break on nested pages like `/category/[slug]/`.
 - **1 quality article/week > 3 mediocre ones.**
 
 ## Content Rules
@@ -60,9 +62,18 @@ Logomark: Variation 6C — central hub circle + 4 connected endpoint nodes (roun
 
 ### Header
 - Logo: `logo-full-horizontal.png` (height: 32px, width: 208px)
-- Navigation: "Topics ▾" dropdown (pill button, click-to-open, lists all categories), "Comparisons" shortcut pill, search icon (placeholder — goes to `/` until search is implemented)
+- Navigation: "Topics ▾" dropdown (pill button, click-to-open, lists active categories dynamically), "Comparisons" shortcut pill (links to `/category/comparisons` when active, otherwise `/`), search icon (placeholder — goes to `/` until search is implemented)
 - On desktop (900px+): nav visible, "← All Guides" hidden
 - On mobile (<900px): nav hidden, "← All Guides" visible
+- Nav content is dynamically injected by `inject_dynamic_nav()` — only categories with 3+ articles appear
+
+### Homepage Layout
+- Hero: centered title + tagline + affiliate CTA button, subtle blue gradient background
+- Browse by Topic: category cards with description + article count (only active categories)
+- Latest Tutorials: 6 most recent articles as card grid
+- More Guides: remaining articles (no duplicates with Latest)
+- Newsletter CTA: visible at bottom
+- H1 from template hidden — hero provides the page heading
 
 ### Reading Progress Bar
 - Thin blue bar directly under sticky header
@@ -75,14 +86,14 @@ Logomark: Variation 6C — central hub circle + 4 connected endpoint nodes (roun
 - Disappears when near top of page (scrollY < 400)
 
 ### Footer
-- 3 columns: Browse by Topic, Site, Stay Updated
-- Browse by Topic links currently go to `/` — update when category pages are built
+- 3 columns: Site, Browse by Topic, Stay Updated
+- Browse by Topic links dynamically injected — only active categories (3+) shown
 - Newsletter link goes to Beehiiv subscribe with UTM
 
 ### Meta Tags
 - `og:image` → `/assets/branding/og-default.png`
 - Favicon: PNG (32px) + apple-touch-icon (192px)
-- Canonical URLs use clean paths (no .html)
+- Canonical URLs use clean paths (no .html); category pages use trailing slash
 
 ## Generator Features (generator.py)
 
@@ -97,13 +108,24 @@ Logomark: Variation 6C — central hub circle + 4 connected endpoint nodes (roun
 ### Categories
 ```
 CATEGORIES = {
-    "lead-capture": "Lead Capture",
-    "payments": "Payments & Invoicing",
-    "onboarding": "Client Onboarding",
-    "comparisons": "Comparisons",
-    "automation-strategy": "Automation Strategy",
+    "lead-capture": { "name": "Lead Capture", "description": "..." },
+    "payments": { "name": "Payments & Invoicing", "description": "..." },
+    "onboarding": { "name": "Client Onboarding", "description": "..." },
+    "comparisons": { "name": "Comparisons", "description": "..." },
+    "automation-strategy": { "name": "Automation Strategy", "description": "..." },
 }
+CATEGORY_MIN_ARTICLES = 3
 ```
+
+Category pages are auto-generated at `/category/[slug]/index.html` only when a category reaches 3+ articles. The `description` field is displayed on the category page intro and in homepage category cards.
+
+### Category System Flow
+1. Generator counts articles per category from input.txt
+2. Categories with 3+ articles become "active"
+3. Active categories get: category page, header dropdown link, footer link, breadcrumb link
+4. Inactive categories: breadcrumb links to `/`, no nav presence, no category page
+5. `inject_dynamic_nav()` replaces hardcoded template links with dynamic ones on every build
+6. Adding a new category: add to CATEGORIES dict + use in articles → auto-activates at 3+
 
 ### Affiliate Links
 ```
@@ -143,6 +165,8 @@ AFFILIATE_LINKS = {
 - **`dateDifference()` doesn't exist in Make.com.** Use `addDays(now; -1)` compared against `parseDate(field; "YYYY-MM-DD")` for date comparisons.
 - **`site:` operator in GSC is unreliable.** ~2-week GSC data lag is normal.
 - **www-to-non-www:** Cloudflare redirect rule active (301).
+- **Cloudflare Pages + trailing slash:** Cloudflare serves `/category/slug/index.html` as `/category/slug/` (with trailing slash). Canonical URLs for category pages must include trailing slash to avoid mismatch warnings in Screaming Frog.
+- **Sitemap lastmod pitfall:** Automatic sitemap generation would set lastmod on every build (including design-only changes). Detecting content-only changes requires file hashing or git diff — not worth the complexity yet. Keep sitemap manual.
 
 ## Generator Backlog (all resolved)
 1. ~~Image alt tag fix~~ — FIXED.
@@ -160,12 +184,18 @@ AFFILIATE_LINKS = {
 - Business-themed categories (by function, not by tool) — matches search intent better.
 - "comparisons" kept as category despite not being a business function — "I want to compare tools" is a valid use case.
 - External AI reviews (Gemini, ChatGPT) useful for article feedback but require critical filtering — Gemini incorrectly claimed Google Forms uses instant webhook triggers.
+- Category activation threshold set at 3 articles — shows only substantive categories in navigation, avoids sparse pages.
+- Header dropdown and footer "Browse by Topic" show only active categories — consistent with threshold, no dead links.
+- Automatic sitemap generation deferred — lastmod accuracy problem with design-only rebuilds.
+- Homepage "More Guides" section ensures all articles are reachable even if their category isn't active yet.
+- Footer column order: Site → Browse by Topic → Stay Updated (Site first for usability).
 
 ## Planned Architecture Changes
 
 ### Near-term (15-18 articles)
-- **Category pages:** `/category/[slug]` with filtered card grid — generator.py new function. Header dropdown, footer, and breadcrumb links all point to these.
-- **Homepage redesign:** Hero section + "Browse by Topic" category cards + "Latest Tutorials" grid.
+- ~~Category pages~~ ✅ DONE
+- ~~Homepage redesign~~ ✅ DONE
+- ~~Dynamic nav/footer~~ ✅ DONE
 - **Split input.txt:** One `content/[slug].txt` file per article. Generator reads directory instead of single file. Format within files stays identical.
 
 ### Medium-term (20-25 articles)
