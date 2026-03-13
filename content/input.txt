@@ -1890,7 +1890,7 @@ Slug: make-com-vs-zapier-pricing-comparison
 Title: Make.com vs Zapier Pricing: Real Cost Breakdown for Small Business
 Type: comparison
 Date: 2026-03-13
-Category: comparisons
+Category: comparison
 
 Meta: Make.com vs Zapier pricing compared side by side — exact cost math for small business workflows. See which plan saves more at every usage level.
 
