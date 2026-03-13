@@ -282,6 +282,76 @@
         .scroll-top.visible { opacity: 1; pointer-events: auto; }
         .scroll-top:hover { background: #2d3436; }
 
+        /* HOMEPAGE HERO */
+        .hero {
+            text-align: center;
+            padding: 40px 0 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin: 0 0 12px 0;
+            color: var(--primary);
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 0 0 24px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero .btn { font-size: 0.95rem; }
+
+        /* HOMEPAGE SECTION HEADINGS */
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #999;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+        }
+
+        /* CATEGORY CARDS (Browse by Topic) */
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 48px;
+        }
+        .category-card {
+            background: #f7f9fc;
+            border: 1px solid #e0e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            display: block;
+        }
+        .category-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 12px rgba(8,104,180,0.1);
+        }
+        .category-card h3 {
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+            color: var(--accent);
+        }
+        .category-card .cat-count {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 500px) { .category-grid { grid-template-columns: 1fr; } }
+
+        /* HOMEPAGE SECTIONS SPACING */
+        .home-section { margin-bottom: 48px; }
+        .home-divider { border: none; border-top: 1px solid #eee; margin: 0 0 40px 0; }
+
     </style>
 </head>
 <body>
@@ -318,12 +388,87 @@
         
 
         
-        <p class="intro">
-            Step-by-step automation guides for business owners and operations teams.
-            Stop copying data between apps — let Make.com do it automatically.
-        </p>
-        <div class="card-grid">
-            
+        <div class="hero">
+            <h1>Automate Your Business with Make.com</h1>
+            <p>Step-by-step tutorials for service businesses, freelancers, and agencies. Build real workflows — no code required.</p>
+            <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored noopener" class="btn">Start free on Make.com →</a>
+        </div>
+    
+        <div class="home-section">
+            <p class="section-label">Browse by Topic</p>
+            <div class="category-grid">
+                
+            <a href="/category/lead-capture" class="category-card">
+                <h3>Lead Capture</h3>
+                <span class="cat-count">4 guides</span>
+            </a>
+            <a href="/category/onboarding" class="category-card">
+                <h3>Client Onboarding</h3>
+                <span class="cat-count">4 guides</span>
+            </a>
+            </div>
+        </div>
+        
+        <div class="home-section">
+            <p class="section-label">Latest Tutorials</p>
+            <div class="card-grid">
+                
+        <div class="card">
+            <a href="/stripe-subscription-cancelled-automation" rel="noopener">
+                <p class="card-meta">Mar 11, 2026 · Payments &amp; Invoicing</p>
+                <h2>Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)</h2>
+                <p>Stripe subscription cancelled automation with Make.com — send a goodbye email, log every cancellation in Google Sheets, and alert your team on Slack.....</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/google-forms-airtable-client-crm-automation" rel="noopener">
+                <p class="card-meta">Mar 09, 2026 · Lead Capture</p>
+                <h2>Google Forms to Airtable CRM Automation + Slack Alerts (Make.com)</h2>
+                <p>Google Forms to Airtable CRM automation with Make.com — auto-capture client intake data and alert your team on Slack in under 25 minutes.</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">
+                <p class="card-meta">Mar 04, 2026 · Client Onboarding</p>
+                <h2>Stripe New Customer: Auto-Track in Airtable + Slack</h2>
+                <p>Stripe new customer automation with Make.com — auto-add clients to Airtable and send Slack notifications the moment someone signs up.</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/lead-follow-up-slack-reminder-automation" rel="noopener">
+                <p class="card-meta">Mar 03, 2026 · Lead Capture</p>
+                <h2>Lead Follow-Up Slack Alert: No Contact in 24h</h2>
+                <p>Automate lead follow-up reminders with Make.com and Slack. Get alerts when leads go cold for 24+ hours — no leads slip through the cracks.</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/make-com-free-plan-what-you-can-build" rel="noopener">
+                <p class="card-meta">Mar 02, 2026 · Automation Strategy</p>
+                <h2>Make.com Free Plan: What You Can Actually Build</h2>
+                <p>Make.com free plan includes 1,000 operations and 2 active scenarios. See exactly what you can build, when to upgrade, and real math on limits.</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/multi-source-lead-tracking-google-sheets-automation" rel="noopener">
+                <p class="card-meta">Mar 01, 2026 · Lead Capture</p>
+                <h2>Track Leads from Multiple Sources in One Google Sheet</h2>
+                <p>Track leads from Facebook, Typeform, and website forms in one Google Sheet using Make.com. Upsert logic prevents duplicates automatically.</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>
+            </div>
+        </div>
+    
+        <hr class="home-divider">
+        <div class="home-section">
+            <p class="section-label">All Guides</p>
+            <div class="card-grid">
+                
         <div class="card">
             <a href="/stripe-subscription-cancelled-automation" rel="noopener">
                 <p class="card-meta">Mar 11, 2026 · Payments &amp; Invoicing</p>
@@ -428,11 +573,12 @@
                 <span class="read-more">Read guide →</span>
             </a>
         </div>
+            </div>
         </div>
     
     </main>
 
-    <!-- newsletter hidden on index --><div class="newsletter-cta" style="display:none" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px; margin:40px 0 30px 0; text-align:center;">
+    <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px; margin:40px 0 30px 0; text-align:center;">
         <h2 style="border:none; margin-top:0; font-size:1.3rem; color:#2d3436;">Get automation tutorials in your inbox</h2>
         <p style="color:#555; margin-bottom:20px; font-size:1rem;">One practical workflow per week. No fluff, no spam — just tested automations for service businesses.</p>
         <a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=article_cta" target="_blank" rel="noopener nofollow" style="background:#0868b4; color:white; padding:14px 30px; border-radius:6px; text-decoration:none; display:inline-block; font-weight:600; font-size:1rem; transition:background 0.2s;">Subscribe free →</a>

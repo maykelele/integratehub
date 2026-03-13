@@ -425,6 +425,76 @@
         .scroll-top.visible { opacity: 1; pointer-events: auto; }
         .scroll-top:hover { background: #2d3436; }
 
+        /* HOMEPAGE HERO */
+        .hero {
+            text-align: center;
+            padding: 40px 0 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin: 0 0 12px 0;
+            color: var(--primary);
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 0 0 24px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero .btn { font-size: 0.95rem; }
+
+        /* HOMEPAGE SECTION HEADINGS */
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #999;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+        }
+
+        /* CATEGORY CARDS (Browse by Topic) */
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 48px;
+        }
+        .category-card {
+            background: #f7f9fc;
+            border: 1px solid #e0e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            display: block;
+        }
+        .category-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 12px rgba(8,104,180,0.1);
+        }
+        .category-card h3 {
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+            color: var(--accent);
+        }
+        .category-card .cat-count {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 500px) { .category-grid { grid-template-columns: 1fr; } }
+
+        /* HOMEPAGE SECTIONS SPACING */
+        .home-section { margin-bottom: 48px; }
+        .home-divider { border: none; border-top: 1px solid #eee; margin: 0 0 40px 0; }
+
     </style>
 </head>
 <body>
