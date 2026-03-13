@@ -779,9 +779,13 @@ def generate_index(template_html, links, active_categories=None, category_counts
         for slug in active_categories:
             count = category_counts.get(slug, 0)
             display = cat_name(slug)
+            cat_info = CATEGORIES.get(slug, {})
+            cat_desc = cat_info.get("description", "") if isinstance(cat_info, dict) else ""
+            desc_html = f'<p class="cat-desc">{html.escape(cat_desc)}</p>' if cat_desc else ''
             cat_cards += f"""
             <a href="/category/{slug}" class="category-card">
                 <h3>{html.escape(display)}</h3>
+                {desc_html}
                 <span class="cat-count">{count} guide{'s' if count != 1 else ''}</span>
             </a>"""
 
@@ -838,6 +842,8 @@ def generate_index(template_html, links, active_categories=None, category_counts
         '<div class="breadcrumb">\n        \n    </div>', '')
 
     page = page.replace('{{AFFILIATE_LINK}}', MAKE_AFFILIATE_LINK)
+    # Sakrij H1 na homepage-u — hero ga zamenjuje
+    page = page.replace('<h1>Make.com Integration Guides | IntegrateHub.io</h1>', '')
     # Newsletter CTA je VIDLJIV na homepage-u (ne sakrivamo ga)
     return page
 

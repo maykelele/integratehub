@@ -297,9 +297,10 @@
         /* HOMEPAGE HERO */
         .hero {
             text-align: center;
-            padding: 40px 0 30px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 40px;
+            padding: 48px 20px 40px 20px;
+            margin: -40px -30px 40px -30px;
+            background: linear-gradient(180deg, #f0f6fb 0%, #ffffff 100%);
+            border-bottom: 1px solid #e0e8f0;
         }
         .hero h1 {
             font-size: 2rem;
@@ -310,10 +311,9 @@
         .hero p {
             font-size: 1.1rem;
             color: #555;
-            margin: 0 0 24px 0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 24px auto;
+            max-width: 560px;
+            line-height: 1.6;
         }
         .hero .btn { font-size: 0.95rem; }
 
@@ -338,7 +338,7 @@
             background: #f7f9fc;
             border: 1px solid #e0e8f0;
             border-radius: 10px;
-            padding: 20px;
+            padding: 18px 20px;
             text-decoration: none;
             color: inherit;
             transition: all 0.2s;
@@ -347,15 +347,23 @@
         .category-card:hover {
             border-color: var(--accent);
             box-shadow: 0 2px 12px rgba(8,104,180,0.1);
+            background: #edf4fa;
         }
         .category-card h3 {
-            margin: 0 0 4px 0;
+            margin: 0 0 6px 0;
             font-size: 1rem;
             color: var(--accent);
         }
+        .category-card .cat-desc {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+            margin: 0 0 8px 0;
+        }
         .category-card .cat-count {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #999;
+            font-weight: 600;
         }
         @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 500px) { .category-grid { grid-template-columns: 1fr; } }
@@ -425,7 +433,7 @@
     <!-- cta hidden on page --><div class="cta-card" style="display:none" style="padding:0; background:none; border:none;">
         <a href="https://www.make.com/en/register?pc=integratehub" target="_blank" rel="sponsored noopener">
             <img 
-                src="/assets/banners/AD-728x90 – 2.png" 
+                src="assets/banners/AD-728x90 – 2.png" 
                 alt="Set up your own workflows for free with Make.com"
                 style="width:100%; border-radius:12px; display:block; cursor:pointer;"
             >
