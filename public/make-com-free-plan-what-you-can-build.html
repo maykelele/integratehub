@@ -583,18 +583,18 @@
 <div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/make-com-vs-zapier-pricing-comparison" rel="noopener">Make.com vs Zapier Pricing Breakdown</a></li><li><a href="/facebook-instagram-leads-google-sheets-automation" rel="noopener">Facebook &amp; Instagram Leads to Google Sheets</a></li><li><a href="/typeform-client-intake-google-sheets-automation" rel="noopener">Typeform to Google Sheets and Slack</a></li><li><a href="/calendly-booking-onboarding-checklist-automation" rel="noopener">Calendly Automation: Onboarding Checklist</a></li><li><a href="/stripe-payment-failed-automation" rel="noopener">Stripe Payment Failed: Alert Your Team</a></li><li><a href="/typeform-welcome-email-google-drive-automation" rel="noopener">Typeform to Welcome Email + Google Drive</a></li><li><a href="/multi-source-lead-tracking-google-sheets-automation" rel="noopener">Track Leads from Multiple Sources in Google Sheets</a></li><li><a href="/zapier-too-expensive-make-com-alternative" rel="noopener">Zapier Too Expensive? Make.com Alternative</a></li><li><a href="/make-com-vs-n8n-small-business" rel="noopener">Make.com vs n8n for Small Business</a></li><li><a href="/lead-follow-up-slack-reminder-automation" rel="noopener">Lead Follow-Up Slack Reminder</a></li><li><a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">Stripe New Customer: Track in Airtable + Slack</a></li><li><a href="/google-sheets-weekly-report-email-automation" rel="noopener">Send Weekly Client Reports from Google Sheets</a></li></ul></div>
     </main>
 
-    <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px 30px 10px 30px; margin:40px 0 30px 0; text-align:center;">
+    <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:24px 30px 0 30px; margin:40px 0 30px 0; text-align:center;">
         <h2 style="border:none; margin-top:0; font-size:1.3rem; color:#2d3436;">Get automation tutorials in your inbox</h2>
-        <p style="color:#555; margin-bottom:16px; font-size:1rem;">One practical workflow per week. No fluff, no spam — just tested automations for service businesses.</p>
+        <p style="color:#555; margin-bottom:12px; font-size:1rem;">One practical workflow per week. No fluff, no spam — just tested automations for service businesses.</p>
         <iframe src="https://subscribe-forms.beehiiv.com/e3be6eff-20a1-4784-9177-26c93af85803" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%; max-width:480px; height:55px; margin:0 auto; border-radius:0; background-color:transparent; display:block; overflow:hidden;"></iframe>
         <script>
             window.addEventListener('message', function(e) {
-                if (e.data && e.data.type === 'beehiiv:styles') {
-                    var f = document.querySelector('iframe.beehiiv-embed[src="' + e.data.payload.src + '"]');
-                    if (f) { f.style.height = e.data.payload.height; f.style.width = e.data.payload.width; }
-                } else if (e.data && e.data.type === 'beehiiv:child-loaded') {
+                if (e.data && e.data.type === 'beehiiv:child-loaded') {
                     var f = document.querySelector('iframe.beehiiv-embed[src="' + e.data.payload.src + '"]');
                     if (f) { f.style.height = '2000px'; f.style.width = '5000px'; f.contentWindow.postMessage({type:'beehiiv:parent-loaded'}, '*'); }
+                } else if (e.data && e.data.type === 'beehiiv:styles') {
+                    var f = document.querySelector('iframe.beehiiv-embed[src="' + e.data.payload.src + '"]');
+                    if (f) { f.style.width = e.data.payload.width; f.style.height = '55px'; }
                 } else if (e.data && e.data.type === 'beehiiv:success-toast') {
                     var doc = (new DOMParser()).parseFromString(e.data.payload.templateString, 'text/html');
                     var frag = document.createDocumentFragment();
