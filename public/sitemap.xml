@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://integratehub.io/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -105,6 +105,13 @@
   <url>
     <loc>https://integratehub.io/make-com-vs-zapier-pricing-comparison</loc>
     <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://integratehub.io/google-sheets-weekly-report-email-automation</loc>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
