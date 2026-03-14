@@ -103,7 +103,7 @@ Logomark: Variation 6C — central hub circle + 4 connected endpoint nodes (roun
 - `Type: page` — standalone pages (about, privacy, disclosure). No article meta, no TOC, no newsletter CTA, no banner CTA. Breadcrumb: Home › Title only. Schema: WebPage.
 
 ### Supported Tags
-`Slug:`, `Title:`, `Type:`, `Date:`, `Updated:`, `Build Time:`, `Category:`, `Meta:`, `Introduction:`, `H2:`, `H3:`, `Image:`, `Table:`, `Tech Tip:`, `CTA:`, `CTA[key]:`, `Workflow Steps:`, `Verdict:`, `FAQ:`, `Internal Links:`, `Python Snippet:`
+`Slug:`, `Title:`, `Type:`, `Date:`, `Updated:`, `Build Time:`, `Category:`, `Meta:`, `Introduction:`, `H2:`, `H3:`, `Image:`, `Table:`, `Tech Tip:`, `CTA:`, `CTA[key]:`, `Workflow Steps:`, `Verdict:`, `FAQ:`, `Internal Links:`, `Python Snippet:`, `Code Block:`
 
 ### Categories
 ```
@@ -113,6 +113,7 @@ CATEGORIES = {
     "onboarding": { "name": "Client Onboarding", "description": "..." },
     "comparisons": { "name": "Comparisons", "description": "..." },
     "automation-strategy": { "name": "Automation Strategy", "description": "..." },
+    "reporting": { "name": "Reporting", "description": "..." },
 }
 CATEGORY_MIN_ARTICLES = 3
 ```
@@ -164,6 +165,9 @@ AFFILIATE_LINKS = {
 - **Polling is correct when "absence of action" is the trigger:** Webhook triggers can't detect that something didn't happen (e.g. no follow-up in 24h). Polling (scheduled check) is the only option for time-based inactivity detection. Cost: ~720 ops/month at 60-min interval.
 - **`dateDifference()` doesn't exist in Make.com.** Use `addDays(now; -1)` compared against `parseDate(field; "YYYY-MM-DD")` for date comparisons.
 - **`site:` operator in GSC is unreliable.** ~2-week GSC data lag is normal.
+- **Make.com Schedule trigger doesn't consume credits.** It's a timer that starts the scenario, not a processing module. Only modules that handle data consume credits.
+- **Make.com Iterator consumes 1 credit per bundle (per iteration).** Not free. For N items: N credits. Formula for scenario with Iterator: count fixed modules + (modules-per-iteration × N).
+- **Make.com Code Block tag:** `Code Block:` in input.txt renders as `<pre><code>` without an H2 heading. Terminates on empty line. Use for inline code snippets within articles (e.g., HTML templates). `Python Snippet:` still works for code with its own H2.
 - **www-to-non-www:** Cloudflare redirect rule active (301).
 - **Cloudflare Pages + trailing slash:** Cloudflare serves `/category/slug/index.html` as `/category/slug/` (with trailing slash). Canonical URLs for category pages must include trailing slash to avoid mismatch warnings in Screaming Frog.
 - **Sitemap lastmod pitfall:** Automatic sitemap generation would set lastmod on every build (including design-only changes). Detecting content-only changes requires file hashing or git diff — not worth the complexity yet. Keep sitemap manual.

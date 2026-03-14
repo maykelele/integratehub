@@ -1,6 +1,6 @@
 # IntegrateHub.io — Content & Roadmap
 
-## Published Articles (13) | In Progress (0)
+## Published Articles (15) | In Progress (0)
 
 | # | Slug | Type | Date | Category |
 |---|------|------|------|----------|
@@ -17,14 +17,16 @@
 | 11 | stripe-new-customer-airtable-tracker-automation | how-to | 2026-03-04 | onboarding |
 | 12 | google-forms-airtable-client-crm-automation | how-to | 2026-03-09 | lead-capture |
 | 13 | stripe-subscription-cancelled-automation | how-to | 2026-03-11 | payments |
-| 14 | zapier-too-expensive-make-com-alternative | comparison | 2026-02-19 | comparisons |
+| 14 | make-com-vs-zapier-pricing-comparison | comparison | 2026-03-13 | comparisons |
+| 15 | google-sheets-weekly-report-email-automation | how-to | 2026-03-14 | reporting |
 
 ### Category Breakdown
 - **lead-capture:** 4 articles (#2, #8, #10, #12)
 - **onboarding:** 4 articles (#4, #6, #7, #11)
 - **payments:** 2 articles (#3, #13)
-- **comparisons:** 2 articles (#1, #5, #9, 14#)
-- **automation-strategy:** 0 article ()
+- **comparisons:** 3 articles (#1, #5, #14) ✅ activates category page
+- **automation-strategy:** 1 article (#9)
+- **reporting:** 1 article (#15) — new category, needs 2 more for activation
 
 ### Standalone Pages (Type: page)
 - about
@@ -57,10 +59,9 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 
 | Priority | Idea | Type | Category | Affiliates | Notes |
 |----------|------|------|----------|------------|-------|
-| #15 | Weekly client report: Google Sheets → email every Monday | how-to | reporting | Make.com | Scheduled automation pattern. Agency use case. Scheduling + email formatting. New category: reporting. |
+| #16 | Typeform → OpenAI lead qualification → Google Sheets + Slack | how-to | lead-capture | Make.com, Typeform | AI layer; requires Make.com Core plan. First AI-powered article. |
 
 ### Ready to Write (Backlog)
-- Typeform → OpenAI lead qualification → Google Sheets + Slack (AI layer; requires Make.com Core plan)
 - Gmail + OpenAI: Auto-draft replies to new lead emails (requires Core plan)
 - Google Docs + OpenAI: Auto-generate client proposals from intake form data (requires Core plan)
 - Filter Calendly bookings → only qualified leads to CRM
@@ -83,7 +84,7 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - 70% how-to tutorials (affiliate conversion)
 - 20% comparison articles (higher buyer intent)
 - 10% guides/resource content (authority, internal links)
-- Current: 10 how-to / 4 comparison / 0 guide = 71% / 29% / 0% ✅
+- Current: 11 how-to / 3 comparison / 1 guide = 73% / 20% / 7% ✅
 
 ## Newsletter
 
@@ -91,7 +92,7 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - **Name:** The Automation Fix
 - **Subscribe URL:** https://automationfix.beehiiv.com/subscribe
 - **Handle:** automationfix.beehiiv.com
-- **Status:** Active — issue #02 covers articles #10 and #11; article #12 goes in next issue
+- **Status:** Active — article #15 goes in next issue
 - **Workflow:** Each week new articles = repurposed newsletter issue (~45 min)
 - **CTA tag:** CTA[newsletter]: in input.txt for inline opt-in
 - **UTM pattern:** ?utm_source=integratehub&utm_medium=article_cta (site), ?utm_source=newsletter&utm_medium=email&utm_campaign=issue_XX (email)
