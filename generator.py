@@ -429,8 +429,14 @@ def format_content(text, page_type='how-to'):
     h2_headings = []  # Za TOC generaciju
 
     def close_open_blocks():
-        nonlocal in_list, in_table, in_faq, in_internal_links
+        nonlocal in_list, in_table, in_faq, in_internal_links, in_code_block, code_lines
         nonlocal table_rows, faq_items, internal_links, current_faq_q
+
+        if in_code_block and code_lines:
+            escaped_code = html.escape('\n'.join(code_lines))
+            html_parts.append(f'<pre><code>{escaped_code}</code></pre>')
+            code_lines = []
+            in_code_block = False
 
         if in_list:
             html_parts.append('</ol>')
@@ -505,7 +511,7 @@ def format_content(text, page_type='how-to'):
 
         is_new_tag = any(line_stripped.startswith(tag) for tag in [
             'Introduction:', 'Meta:', 'Tech Tip:', 'CTA', 'Workflow Steps:', 'Verdict:',
-            'Python Snippet:', 'Table:', 'FAQ:', 'Internal Links:',
+            'Python Snippet:', 'Code Block:', 'Table:', 'FAQ:', 'Internal Links:',
             'Screenshot:', 'Image:', 'H2:', 'H3:',
             'Slug:', 'Title:', 'Type:', 'Date:', 'Updated:', 'Category:', 'Build Time:', '---'
         ])
@@ -514,7 +520,7 @@ def format_content(text, page_type='how-to'):
             close_open_blocks()
 
         if not line_stripped:
-            if in_table:
+            if in_table or in_code_block:
                 close_open_blocks()
             continue
 
@@ -679,6 +685,12 @@ def format_content(text, page_type='how-to'):
             in_code_block = True
             code_lines = []
 
+        # --- Code Block (inline, no H2) ---
+        elif line_stripped.startswith('Code Block:'):
+            close_open_blocks()
+            in_code_block = True
+            code_lines = []
+
         # --- Unutar code bloka ---
         elif in_code_block:
             code_lines.append(line)
@@ -720,10 +732,6 @@ def format_content(text, page_type='how-to'):
 
     # Zatvaranje svih otvorenih blokova
     close_open_blocks()
-
-    if in_code_block and code_lines:
-        escaped_code = html.escape('\n'.join(code_lines))
-        html_parts.append(f'<pre><code>{escaped_code}</code></pre>')
 
     # HowTo schema za how-to stranice
     if page_type == 'how-to' and howto_steps:

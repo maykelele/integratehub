@@ -2073,7 +2073,7 @@ A scheduled trigger fires at a time you define — a specific day and hour — a
 
 Tech Tip: Make.com's scheduler uses your account timezone, which you can check under Account → Profile. If your clients are in a different timezone, adjust accordingly — an 8 AM trigger in Europe/Belgrade sends at 2 AM Eastern. For global teams, consider running at a time that works across timezones, or create separate scheduled scenarios per region.
 
-CTA[make]: Build this automation on Make.com's free plan — 1,000 credits per month, no credit card required.
+CTA[make]: Build this on Make.com's free plan — no credit card required.
 
 H2: What You Need Before Starting
 
@@ -2125,7 +2125,7 @@ Image: assets/screenshots/screenshot-weekly-report-10.png|Gmail module — Subje
 
 9. Paste the HTML email template into the Content field. In the Content field, you'll combine regular HTML markup with Make.com mapping tokens to create a formatted report. The template below creates a clean table with the client's metrics. You don't need to know HTML — copy the template from the section below ("The HTML Email Template"), paste it into the Content field, and then replace the placeholder names with the correct Make.com mapping tokens by clicking each placeholder and selecting the corresponding field from the mapping panel.
 
-CTA: Start building scheduled automations today — Make.com's free plan includes 1,000 credits per month.
+CTA: Build scheduled automations on Make.com — free plan, 1,000 credits/month.
 
 10. Test the full scenario. Save the scenario and click "Run once." Since the schedule trigger passes control immediately during manual runs, the scenario will execute the full chain: search for active clients, iterate through each one, pull their metrics, and send the emails. Check your inbox (or the client test email) for the formatted report.
 
@@ -2143,13 +2143,32 @@ CTA[newsletter]: Get one tested automation tutorial per week — no fluff, no sp
 
 H2: The HTML Email Template
 
-If you've never worked with HTML before, don't worry — you don't need to write any code. HTML stands for HyperText Markup Language — it's the formatting language that makes emails and web pages look structured instead of plain text. The template below is ready to copy and paste directly into the Gmail module's Content field in Make.com.
+The Gmail module needs HTML code to format the email as a professional report instead of plain text. HTML (HyperText Markup Language) is the formatting language behind emails and web pages — but you don't need to learn it. You have two options for getting the template into Make.com.
 
-After pasting, you'll replace the placeholder text (shown in brackets like [Client Name]) with Make.com mapping tokens by clicking each placeholder and selecting the corresponding field from the mapping panel. The template creates a clean, professional email with a metrics table and optional notes section. It works in all major email clients including Gmail, Outlook, and Apple Mail.
+The quickest approach: ask any AI chatbot (ChatGPT, Claude, Gemini) to generate an HTML email template for you. Tell it something like: "Generate a simple HTML email template for a weekly client report. Include a heading with the client name, a subheading with the week date, a table with three rows: Leads Generated, Meetings Booked, and Revenue, and a small footer note saying the report was generated automatically." The chatbot will give you clean HTML code that you can paste directly into the Gmail module's Content field. This approach also makes it easy to customize — just describe what you want changed and the chatbot updates the code for you.
 
-To get the template ready for Make.com: set Body type to "Raw HTML" in the Gmail module (this is important — it tells Make.com to interpret the code as formatting, not display it as text). Then paste the entire block below into the Content field:
+If you prefer a ready-made template, copy the code block below and paste it into the Content field after setting Body type to "Raw HTML" in the Gmail module:
 
-&lt;div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;"&gt; &lt;h2 style="color: #1a1a2e;"&gt;Weekly Report — [Client Name]&lt;/h2&gt; &lt;p style="color: #555;"&gt;Week of [Week Date]&lt;/p&gt; &lt;table style="width: 100%; border-collapse: collapse; margin: 20px 0;"&gt; &lt;tr style="background: #f0f4ff;"&gt; &lt;td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;"&gt;Leads Generated&lt;/td&gt; &lt;td style="padding: 12px; border: 1px solid #ddd; text-align: center;"&gt;[Leads Generated]&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;"&gt;Meetings Booked&lt;/td&gt; &lt;td style="padding: 12px; border: 1px solid #ddd; text-align: center;"&gt;[Meetings Booked]&lt;/td&gt; &lt;/tr&gt; &lt;tr style="background: #f0f4ff;"&gt; &lt;td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;"&gt;Revenue&lt;/td&gt; &lt;td style="padding: 12px; border: 1px solid #ddd; text-align: center;"&gt;[Revenue]&lt;/td&gt; &lt;/tr&gt; &lt;/table&gt; &lt;p style="color: #888; font-size: 12px; margin-top: 30px;"&gt;This report was generated automatically. Reply to this email with any questions.&lt;/p&gt; &lt;/div&gt;
+Code Block:
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+  <h2 style="color: #1a1a2e;">Weekly Report — [Client Name]</h2>
+  <p style="color: #555;">Week of [Week Date]</p>
+  <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <tr style="background: #f0f4ff;">
+      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Leads Generated</td>
+      <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">[Leads Generated]</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Meetings Booked</td>
+      <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">[Meetings Booked]</td>
+    </tr>
+    <tr style="background: #f0f4ff;">
+      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Revenue</td>
+      <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">[Revenue]</td>
+    </tr>
+  </table>
+  <p style="color: #888; font-size: 12px; margin-top: 30px;">This report was generated automatically. Reply to this email with any questions.</p>
+</div>
 
 After pasting, click each bracketed placeholder and replace it with the corresponding Make.com mapping token: [Client Name] becomes the Client Name (A) field from module 2, [Week Date] becomes the formatDate formula, and each metric becomes the matching column from module 4 (the Weekly Metrics Search Rows).
 
