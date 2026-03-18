@@ -73,72 +73,54 @@
       "@type": "HowToStep",
       "position": 6,
       "name": "Step 6",
-      "text": "Scroll down to Advanced settings (toggle it on at the bottom of the module). Find the Instructions field — this is the system-level prompt that tells the AI how to behave. This is where you define you..."
+      "text": "Scroll down to Advanced settings (toggle it on at the bottom of the module). Find the Instructions field — this is the system-level prompt that tells the AI how to behave. It acts as a system message ..."
     },
     {
       "@type": "HowToStep",
       "position": 7,
       "name": "Step 7",
-      "text": "The Instructions field acts as a system message — think of it as the AI's job description. It runs before the user prompt and shapes every response. Here's the exact prompt to use:"
+      "text": "Still in Advanced settings, scroll to the Output Format section. Set Output Format Type to \"JSON Schema.\" This is what guarantees the AI returns structured data you can map directly in Make.com — no p..."
     },
     {
       "@type": "HowToStep",
       "position": 8,
       "name": "Step 8",
-      "text": "\"You are a lead qualification assistant for a service business. Analyze the lead's request, budget, and timeline, then classify them. Scoring rules: Hot: Budget $5K+, timeline within 2 weeks, clear pr..."
+      "text": "Set Temperature to 0.3 and Max Output Tokens to 150. Temperature controls randomness — lower values make the output more consistent and deterministic. For classification tasks where you want the same ..."
     },
     {
       "@type": "HowToStep",
       "position": 9,
       "name": "Step 9",
-      "text": "Notice this prompt doesn't include instructions about JSON formatting. That's because the JSON Schema you'll configure in the next step handles output structure at the API level — the model is forced ..."
+      "text": "Test the OpenAI module. Click \"Run once.\" The Typeform trigger replays the last captured submission, and the OpenAI module processes it. Check the output — you should see \"result: score\" with a value ..."
     },
     {
       "@type": "HowToStep",
       "position": 10,
       "name": "Step 10",
-      "text": "Still in Advanced settings, scroll to the Output Format section. Set Output Format Type to \"JSON Schema.\" This is what guarantees the AI returns structured data you can map directly in Make.com — no p..."
+      "text": "Add Google Sheets — Add a Row. Click + and search for \"Google Sheets.\" Select Add a Row. Connect your Google account, then select your \"Lead Tracker AI\" spreadsheet and the \"Leads\" sheet. Map each col..."
     },
     {
       "@type": "HowToStep",
       "position": 11,
       "name": "Step 11",
-      "text": "Set Temperature to 0.3 and Max Output Tokens to 150. Temperature controls randomness — lower values make the output more consistent and deterministic. For classification tasks where you want the same ..."
+      "text": "Add a filter between Google Sheets and Slack. Click the connection line after the Google Sheets module (or click + and you'll see the option to add a filter on the link). Name the filter \"Hot and Warm..."
     },
     {
       "@type": "HowToStep",
       "position": 12,
       "name": "Step 12",
-      "text": "Test the OpenAI module. Click \"Run once.\" The Typeform trigger replays the last captured submission, and the OpenAI module processes it. Check the output — you should see \"result: score\" with a value ..."
+      "text": "Add Slack — Send a Message. Click + after the filter and search for \"Slack.\" Select Send a Message. Connect your Slack account, set Channel Type to \"Public channel,\" and select your #hot-leads channel..."
     },
     {
       "@type": "HowToStep",
       "position": 13,
       "name": "Step 13",
-      "text": "Add Google Sheets — Add a Row. Click + and search for \"Google Sheets.\" Select Add a Row. Connect your Google account, then select your \"Lead Tracker AI\" spreadsheet and the \"Leads\" sheet. Map each col..."
+      "text": "Test the complete scenario. Click \"Run once\" and submit a new Typeform response. If your test lead has a high budget and urgent timeline, all four modules should show green checkmarks, a new row shoul..."
     },
     {
       "@type": "HowToStep",
       "position": 14,
       "name": "Step 14",
-      "text": "Add a filter between Google Sheets and Slack. Click the connection line after the Google Sheets module (or click + and you'll see the option to add a filter on the link). Name the filter \"Hot and Warm..."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 15,
-      "name": "Step 15",
-      "text": "Add Slack — Send a Message. Click + after the filter and search for \"Slack.\" Select Send a Message. Connect your Slack account, set Channel Type to \"Public channel,\" and select your #hot-leads channel..."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 16,
-      "name": "Step 16",
-      "text": "Test the complete scenario. Click \"Run once\" and submit a new Typeform response. If your test lead has a high budget and urgent timeline, all four modules should show green checkmarks, a new row shoul..."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 17,
-      "name": "Step 17",
       "text": "Verify all three scoring paths. Submit three test leads to cover every classification: one clearly Hot (high budget, urgent timeline, detailed request), one Warm (mid-range budget or moderate timeline..."
     }
   ]
@@ -638,11 +620,8 @@
 <li>Configure the OpenAI module — model and prompt. Set the Model to gpt-5-mini (or the most cost-effective model available in the dropdown — look for descriptions mentioning &quot;faster&quot; and &quot;cost-efficient&quot;). Set Prompt Type to &quot;Text prompt.&quot; In the Prompt field, type labels and map each Typeform field from the mapping panel. The prompt should look like this when complete:</li>
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-lead-qualify-05.png" alt="OpenAI Generate a Response — gpt-5-mini selected, Text prompt with mapped Typeform fields for Name, Company, Request, Budget," width="1060" loading="lazy"><figcaption>OpenAI Generate a Response — gpt-5-mini selected, Text prompt with mapped Typeform fields for Name, Company, Request, Budget, and Timeline</figcaption></figure></li>
 <li>The prompt is the user-level message — it&#x27;s the data the AI will analyze. Each line labels a field so the model knows what it&#x27;s looking at. You don&#x27;t need to include the Email field in the prompt because it&#x27;s irrelevant to scoring — it goes directly to Google Sheets later.</li>
-<li>Scroll down to Advanced settings (toggle it on at the bottom of the module). Find the Instructions field — this is the system-level prompt that tells the AI how to behave. This is where you define your scoring rules. Paste the following:</li>
+<li>Scroll down to Advanced settings (toggle it on at the bottom of the module). Find the Instructions field — this is the system-level prompt that tells the AI how to behave. It acts as a system message that runs before the user prompt and shapes every response. Paste the following scoring rules: &quot;You are a lead qualification assistant for a service business. Analyze the lead&#x27;s request, budget, and timeline, then classify them. Scoring rules: Hot: Budget $5K+, timeline within 2 weeks, clear project scope. Warm: Budget $1K-$5K OR timeline within 1 month, some project clarity. Cold: Budget under $1K, &quot;just exploring&quot;, vague or unclear request. When budget and timeline suggest different scores, lean toward the lower score.&quot; Notice this prompt doesn&#x27;t include instructions about JSON formatting — the JSON Schema you&#x27;ll configure in the next step handles output structure at the API level, so the prompt stays focused on scoring logic.</li>
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-lead-qualify-06.png" alt="OpenAI Instructions field — system prompt with scoring rules for Hot, Warm, and Cold classifications" width="1060" loading="lazy"><figcaption>OpenAI Instructions field — system prompt with scoring rules for Hot, Warm, and Cold classifications</figcaption></figure></li>
-<li>The Instructions field acts as a system message — think of it as the AI&#x27;s job description. It runs before the user prompt and shapes every response. Here&#x27;s the exact prompt to use:</li>
-<li>&quot;You are a lead qualification assistant for a service business. Analyze the lead&#x27;s request, budget, and timeline, then classify them. Scoring rules: Hot: Budget $5K+, timeline within 2 weeks, clear project scope. Warm: Budget $1K-$5K OR timeline within 1 month, some project clarity. Cold: Budget under $1K, &quot;just exploring&quot;, vague or unclear request. When budget and timeline suggest different scores, lean toward the lower score.&quot;</li>
-<li>Notice this prompt doesn&#x27;t include instructions about JSON formatting. That&#x27;s because the JSON Schema you&#x27;ll configure in the next step handles output structure at the API level — the model is forced to return exactly the fields you define, regardless of what the Instructions say. This keeps the prompt focused on what matters: the scoring logic.</li>
 <li class="step-image"><div class="tech-tip"><strong>💡 Pro Tip:</strong> The scoring rules in the Instructions field are yours to customize. If your business considers $2K+ budgets &quot;Hot,&quot; change the thresholds. If &quot;timeline within 1 week&quot; matters more than budget, rewrite the rules. The AI follows whatever criteria you define — it doesn&#x27;t have opinions about what makes a good lead. Keep the rules specific and mutually exclusive so the model doesn&#x27;t have to guess which category a borderline lead falls into.</div></li>
 <li>Still in Advanced settings, scroll to the Output Format section. Set Output Format Type to &quot;JSON Schema.&quot; This is what guarantees the AI returns structured data you can map directly in Make.com — no parsing, no regex, no guessing. A Schema Name field appears — enter something like &quot;lead_qualification.&quot; Then paste the JSON from the &quot;JSON Schema for Lead Qualification&quot; section below into the Schema field. The screenshot shows the completed schema:</li>
 <li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-lead-qualify-07.png" alt="OpenAI Output Format — JSON Schema with score (enum: Hot, Warm, Cold) and reason (string) properties" width="1060" loading="lazy"><figcaption>OpenAI Output Format — JSON Schema with score (enum: Hot, Warm, Cold) and reason (string) properties</figcaption></figure></li>
