@@ -171,6 +171,11 @@ AFFILIATE_LINKS = {
 - **www-to-non-www:** Cloudflare redirect rule active (301).
 - **Cloudflare Pages + trailing slash:** Cloudflare serves `/category/slug/index.html` as `/category/slug/` (with trailing slash). Canonical URLs for category pages must include trailing slash to avoid mismatch warnings in Screaming Frog.
 - **Sitemap lastmod pitfall:** Automatic sitemap generation would set lastmod on every build (including design-only changes). Detecting content-only changes requires file hashing or git diff — not worth the complexity yet. Keep sitemap manual.
+- Make.com OpenAI module (Generate a Response) works on Free plan — standard third-party app integration. Make.com's native "AI Tools" and "AI Agents" require paid plan. Don't confuse the two.
+- OpenAI Generate a Response module costs exactly 1 Make.com credit per execution, regardless of token count.
+- OpenAI JSON Schema output (Structured Outputs) produces directly mappable fields in Make.com — no Parse JSON module needed. "result: score" and "result: reason" appear in mapping panel.
+- gpt-5-mini available in Make.com OpenAI module as of March 2026.
+- Python Snippet: and Code Block: tags break Workflow Steps <ol> numbering. Never place these inside Workflow Steps. Use a separate H2 section and reference it from the step.
 
 ## Generator Backlog (all resolved)
 1. ~~Image alt tag fix~~ — FIXED.
@@ -178,6 +183,7 @@ AFFILIATE_LINKS = {
 3. ~~rel="noopener" on internal links~~ — SKIPPED (cosmetic, zero SEO/UX impact).
 4. ~~HowTo schema truncation~~ — FIXED. Tech Tip and CTA tags render inline in step lists.
 5. ~~Article schema enrichment~~ — FIXED. Author (Organization) + image (first Image tag).
+6. Support Code Block: inside Workflow Steps without breaking <ol> — render as <li class="step-code"> similar to Image: handling. Low priority — workaround exists.
 
 ## Key Decisions Log
 - Homepage stays Make.com focused until 15+ articles.
