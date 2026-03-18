@@ -43,90 +43,84 @@
       "@type": "HowToStep",
       "position": 1,
       "name": "Step 1",
-      "text": "We start with the website webhook scenario because it's the easiest to test — you send data directly to a URL without needing a Facebook ad or Typeform submission."
+      "text": "Create a free Make.com account — no credit card required. Click \"Create a new scenario\" on your dashboard."
     },
     {
       "@type": "HowToStep",
       "position": 2,
       "name": "Step 2",
-      "text": "Create a free Make.com account — no credit card required. Click \"Create a new scenario\" on your dashboard."
+      "text": "Click the + button on the canvas and search for \"Webhooks\" — select \"Custom webhook.\" Click \"Add\" to create a new webhook, name it (e.g. \"Website Contact Form\"), and click Save. Make.com generates a u..."
     },
     {
       "@type": "HowToStep",
       "position": 3,
       "name": "Step 3",
-      "text": "Click the + button on the canvas and search for \"Webhooks\" — select \"Custom webhook.\" Click \"Add\" to create a new webhook, name it (e.g. \"Website Contact Form\"), and click Save. Make.com generates a u..."
+      "text": "Click \"Run once\" to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?..."
     },
     {
       "@type": "HowToStep",
       "position": 4,
       "name": "Step 4",
-      "text": "Click \"Run once\" to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?..."
+      "text": "Add a Google Sheets module — click the + button after the webhook, search for \"Google Sheets\" and select \"Search Rows.\" Connect your Google account, select your \"Lead Tracker Master\" spreadsheet, and ..."
     },
     {
       "@type": "HowToStep",
       "position": 5,
       "name": "Step 5",
-      "text": "Add a Google Sheets module — click the + button after the webhook, search for \"Google Sheets\" and select \"Search Rows.\" Connect your Google account, select your \"Lead Tracker Master\" spreadsheet, and ..."
+      "text": "Configure the search filter — set Column range to \"A-CZ\", then under Filter select \"Email (A)\" as the column, \"Text operators: Equal to\" as the operator, and map the email field from your webhook modu..."
     },
     {
       "@type": "HowToStep",
       "position": 6,
       "name": "Step 6",
-      "text": "Configure the search filter — set Column range to \"A-CZ\", then under Filter select \"Email (A)\" as the column, \"Text operators: Equal to\" as the operator, and map the email field from your webhook modu..."
+      "text": "Add a Router module — click the + button after Search Rows and select \"Router\" from the flow control tools. The Router splits your scenario into two branches: one for existing leads (update) and one f..."
     },
     {
       "@type": "HowToStep",
       "position": 7,
       "name": "Step 7",
-      "text": "Add a Router module — click the + button after Search Rows and select \"Router\" from the flow control tools. The Router splits your scenario into two branches: one for existing leads (update) and one f..."
+      "text": "Configure the first branch filter — click the line between the Router and the first branch module. Label it \"Lead Exists\" and set the condition to: \"2. Total number of bundles\" — \"Greater than\" — \"0\"...."
     },
     {
       "@type": "HowToStep",
       "position": 8,
       "name": "Step 8",
-      "text": "Configure the first branch filter — click the line between the Router and the first branch module. Label it \"Lead Exists\" and set the condition to: \"2. Total number of bundles\" — \"Greater than\" — \"0\"...."
+      "text": "On the \"Lead Exists\" branch, add a Google Sheets \"Update a Row\" module. Connect it to the same spreadsheet and map the fields. For the Row number, map the row number from the Search Rows result — this..."
     },
     {
       "@type": "HowToStep",
       "position": 9,
       "name": "Step 9",
-      "text": "On the \"Lead Exists\" branch, add a Google Sheets \"Update a Row\" module. Connect it to the same spreadsheet and map the fields. For the Row number, map the row number from the Search Rows result — this..."
+      "text": "Map the Update a Row fields — Email (A) maps to the existing email from Search Rows. Name (B) and Phone (C) map from the webhook data to keep details fresh. For Source (D), use a formula that appends ..."
     },
     {
       "@type": "HowToStep",
       "position": 10,
       "name": "Step 10",
-      "text": "Map the Update a Row fields — Email (A) maps to the existing email from Search Rows. Name (B) and Phone (C) map from the webhook data to keep details fresh. For Source (D), use a formula that appends ..."
+      "text": "For the remaining Update fields — First Seen (E) maps to the existing value from Search Rows (you never overwrite the original date). Last Updated (F) uses the formula: formatDate(now; \"YYYY-MM-DD\") —..."
     },
     {
       "@type": "HowToStep",
       "position": 11,
       "name": "Step 11",
-      "text": "For the remaining Update fields — First Seen (E) maps to the existing value from Search Rows (you never overwrite the original date). Last Updated (F) uses the formula: formatDate(now; \"YYYY-MM-DD\") —..."
+      "text": "Configure the second branch as a fallback route — click the wrench icon on the second Router branch line. Set \"Set the route as a fallback\" to Yes. A fallback route runs only when no other branch matc..."
     },
     {
       "@type": "HowToStep",
       "position": 12,
       "name": "Step 12",
-      "text": "Configure the second branch as a fallback route — click the wrench icon on the second Router branch line. Set \"Set the route as a fallback\" to Yes. A fallback route runs only when no other branch matc..."
+      "text": "On the fallback \"New Lead\" branch, add a Google Sheets \"Add a Row\" module. Map all fields directly from the webhook: Email (A) from the webhook email, Name (B) from name, Phone (C) from phone, Source ..."
     },
     {
       "@type": "HowToStep",
       "position": 13,
       "name": "Step 13",
-      "text": "On the fallback \"New Lead\" branch, add a Google Sheets \"Add a Row\" module. Map all fields directly from the webhook: Email (A) from the webhook email, Name (B) from name, Phone (C) from phone, Source ..."
+      "text": "Save the scenario — your canvas should now show four connected modules: Custom Webhook → Google Sheets Search Rows → Router → two branches (Update a Row and Add a Row)."
     },
     {
       "@type": "HowToStep",
       "position": 14,
       "name": "Step 14",
-      "text": "Save the scenario — your canvas should now show four connected modules: Custom Webhook → Google Sheets Search Rows → Router → two branches (Update a Row and Add a Row)."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 15,
-      "name": "Step 15",
       "text": "Test the upsert logic — click \"Run once\", then send a new lead via browser URL (use a new email that doesn't exist in the sheet). Check your Google Sheet — a new row should appear. Then run again with..."
     }
   ]

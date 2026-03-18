@@ -723,12 +723,22 @@ def format_content(text, page_type='how-to'):
         # --- Unutar liste koraka ---
         elif in_list:
             clean = line_stripped
+            is_new_step = False
             if len(clean) > 2 and clean[0].isdigit() and clean[1] in '.):':
                 clean = clean[2:].strip()
-            elif len(clean) > 3 and clean[0].isdigit() and clean[2] in '.):':
+                is_new_step = True
+            elif len(clean) > 3 and clean[0].isdigit() and clean[1].isdigit() and clean[2] in '.):':
                 clean = clean[3:].strip()
-            howto_steps.append(clean)
-            html_parts.append(f'<li>{process_inline_links(clean)}</li>')
+                is_new_step = True
+            if is_new_step:
+                howto_steps.append(clean)
+                html_parts.append(f'<li>{process_inline_links(clean)}</li>')
+            else:
+                # Continuation paragraph — append to previous <li>
+                if html_parts and html_parts[-1].endswith('</li>'):
+                    html_parts[-1] = html_parts[-1][:-5] + f'<p>{process_inline_links(clean)}</p></li>'
+                else:
+                    html_parts.append(f'<li>{process_inline_links(clean)}</li>')
 
         # --- Regularni paragraf ---
         else:
