@@ -122,6 +122,72 @@
       "position": 14,
       "name": "Step 14",
       "text": "Test the upsert logic — click \"Run once\", then send a new lead via browser URL (use a new email that doesn't exist in the sheet). Check your Google Sheet — a new row should appear. Then run again with..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 15,
+      "name": "Step 15",
+      "text": "Create a new scenario in Make.com. Click the + button and search for \"Typeform\" — select the Watch Responses module marked INSTANT. This uses webhooks to trigger the moment someone submits, instead of..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 16,
+      "name": "Step 16",
+      "text": "Click \"Add\" to create a new webhook — name it (e.g. \"Free Consultation Request webhook\"), connect your Typeform account through OAuth, and select your form from the Form ID dropdown."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 17,
+      "name": "Step 17",
+      "text": "Add the same module chain as the webhook scenario: Google Sheets Search Rows (same spreadsheet, same email filter) → Router → Update a Row on the \"Lead Exists\" branch → Add a Row on the fallback \"New ..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 18,
+      "name": "Step 18",
+      "text": "The key mapping difference is the Source formula in the Update module. Since Typeform doesn't send a \"source\" field, you hardcode the source name. In the Source (D) formula editor, enter: if(contains(..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 19,
+      "name": "Step 19",
+      "text": "Save the scenario. The complete Typeform scenario looks identical to the webhook version — same Search Rows, same Router, same two branches — just with a Typeform trigger instead of a Custom Webhook."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 20,
+      "name": "Step 20",
+      "text": "Test by submitting your Typeform with a test entry — use an email that already exists in the sheet from the webhook test. The Source column should update to show both channels (e.g. \"Website; Typeform..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 21,
+      "name": "Step 21",
+      "text": "Create a new scenario. Click + and search for \"Facebook Lead Ads\" — select the \"New Lead\" module (INSTANT webhook version). Click \"Create a webhook\", connect your Facebook account, select your Page, a..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 22,
+      "name": "Step 22",
+      "text": "Add the same module chain: Google Sheets Search Rows → Router → Update a Row / Add a Row. The structure is identical to the other two scenarios."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 23,
+      "name": "Step 23",
+      "text": "Map Facebook field data to your Google Sheet columns. For the Add a Row module (new leads): Email (A) maps to Field data: email, Name (B) to Field data: Full name, Phone (C) to Field data: Phone numbe..."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 24,
+      "name": "Step 24",
+      "text": "For the Update a Row module, the Source formula uses the same pattern with \"Facebook\" hardcoded: if(contains(2. Source (D); \"Facebook\"); 2. Source (D); 2. Source (D) + \"; Facebook\")"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 25,
+      "name": "Step 25",
+      "text": "Save the scenario. All three scenarios now live in your Make.com dashboard, each handling a different lead source but sharing the same Google Sheet and the same upsert logic."
     }
   ]
 }
@@ -602,7 +668,7 @@
 <p>This guide focuses on the core lead tracking workflow without a notification step — but you can add one easily. Add a Slack module on the &quot;New Lead&quot; branch of the Router to notify your team only when a brand new lead enters the system, not on every update. If your team doesn&#x27;t use Slack, swap it for Gmail, Microsoft Teams, or Google Chat — the rest of the workflow stays identical.</p>
 <h2 id="how-to-build-the-website-webhook-scenario-scenario-1">How to Build the Website Webhook Scenario (Scenario 1)</h2>
 <ol class="steps">
-<li>We start with the website webhook scenario because it&#x27;s the easiest to test — you send data directly to a URL without needing a Facebook ad or Typeform submission.</li>
+<p>We start with the website webhook scenario because it&#x27;s the easiest to test — you send data directly to a URL without needing a Facebook ad or Typeform submission.</p>
 <li>Create a free Make.com account — no credit card required. Click &quot;Create a new scenario&quot; on your dashboard.</li>
 <li>Click the + button on the canvas and search for &quot;Webhooks&quot; — select &quot;Custom webhook.&quot; Click &quot;Add&quot; to create a new webhook, name it (e.g. &quot;Website Contact Form&quot;), and click Save. Make.com generates a unique URL — this is the endpoint your website form will send data to.</li>
 <li>Click &quot;Run once&quot; to activate the webhook listener, then open a new browser tab and paste the webhook URL with test data appended as URL parameters. Use a URL like: https://hook.eu1.make.com/YOUR-CODE?name=Maria%20Santos&amp;email=maria[at]thegreenleaf.co&amp;phone=+447700900123&amp;source=Website&amp;notes=Inquiry%20via%20contact%20page — the browser will show &quot;Accepted&quot; and Make.com will capture the five fields automatically.</li>
@@ -631,29 +697,33 @@
 </ol>
 <h2 id="how-to-add-typeform-as-a-second-source-scenario-2">How to Add Typeform as a Second Source (Scenario 2)</h2>
 <p>The Typeform scenario uses identical upsert logic — the only difference is the trigger module and how fields are mapped from Typeform&#x27;s response structure.</p>
-<p>1. Create a new scenario in Make.com. Click the + button and search for &quot;Typeform&quot; — select the Watch Responses module marked INSTANT. This uses webhooks to trigger the moment someone submits, instead of polling every 15 minutes.</p>
-<p>2. Click &quot;Add&quot; to create a new webhook — name it (e.g. &quot;Free Consultation Request webhook&quot;), connect your Typeform account through OAuth, and select your form from the Form ID dropdown.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-11.png" alt="Typeform INSTANT webhook — connection established, Free Consultation Request form selected, webhook enabled" width="1060" loading="lazy"><figcaption>Typeform INSTANT webhook — connection established, Free Consultation Request form selected, webhook enabled</figcaption></figure>
-<p>3. Add the same module chain as the webhook scenario: Google Sheets Search Rows (same spreadsheet, same email filter) → Router → Update a Row on the &quot;Lead Exists&quot; branch → Add a Row on the fallback &quot;New Lead&quot; branch.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-14.png" alt="Typeform scenario Google Sheets connection — Search by path, Lead Tracker Master spreadsheet selected" width="1060" loading="lazy"><figcaption>Typeform scenario Google Sheets connection — Search by path, Lead Tracker Master spreadsheet selected</figcaption></figure>
-<p>4. The key mapping difference is the Source formula in the Update module. Since Typeform doesn&#x27;t send a &quot;source&quot; field, you hardcode the source name. In the Source (D) formula editor, enter: if(contains(2. Source (D); &quot;Typeform&quot;); 2. Source (D); 2. Source (D) + &quot;; Typeform&quot;) — this uses the literal string &quot;Typeform&quot; instead of a mapped field.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-13.png" alt="Typeform Update a Row mapping — Mappable Answers for Name and Phone, Source formula with hardcoded Typeform value" width="1060" loading="lazy"><figcaption>Typeform Update a Row mapping — Mappable Answers for Name and Phone, Source formula with hardcoded Typeform value</figcaption></figure>
-<p>5. Save the scenario. The complete Typeform scenario looks identical to the webhook version — same Search Rows, same Router, same two branches — just with a Typeform trigger instead of a Custom Webhook.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-12.png" alt="Complete Typeform scenario — Typeform Watch Responses, Search Rows, Router with Update and Add branches" width="1060" loading="lazy"><figcaption>Complete Typeform scenario — Typeform Watch Responses, Search Rows, Router with Update and Add branches</figcaption></figure>
-<p>6. Test by submitting your Typeform with a test entry — use an email that already exists in the sheet from the webhook test. The Source column should update to show both channels (e.g. &quot;Website; Typeform&quot;) and Last Updated should refresh.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-15.png" alt="Typeform live form — test submission with sample data" width="1060" loading="lazy"><figcaption>Typeform live form — test submission with sample data</figcaption></figure>
-<p class="inline-cta">Need a client intake form? Build one in minutes with Typeform&#x27;s drag-and-drop form builder. <a href="https://typeform.cello.so/vGdCoE97A4Z" rel="sponsored noopener">Try Typeform free →</a></p>
+<ol class="steps">
+<li>Create a new scenario in Make.com. Click the + button and search for &quot;Typeform&quot; — select the Watch Responses module marked INSTANT. This uses webhooks to trigger the moment someone submits, instead of polling every 15 minutes.</li>
+<li>Click &quot;Add&quot; to create a new webhook — name it (e.g. &quot;Free Consultation Request webhook&quot;), connect your Typeform account through OAuth, and select your form from the Form ID dropdown.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-11.png" alt="Typeform INSTANT webhook — connection established, Free Consultation Request form selected, webhook enabled" width="1060" loading="lazy"><figcaption>Typeform INSTANT webhook — connection established, Free Consultation Request form selected, webhook enabled</figcaption></figure></li>
+<li>Add the same module chain as the webhook scenario: Google Sheets Search Rows (same spreadsheet, same email filter) → Router → Update a Row on the &quot;Lead Exists&quot; branch → Add a Row on the fallback &quot;New Lead&quot; branch.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-14.png" alt="Typeform scenario Google Sheets connection — Search by path, Lead Tracker Master spreadsheet selected" width="1060" loading="lazy"><figcaption>Typeform scenario Google Sheets connection — Search by path, Lead Tracker Master spreadsheet selected</figcaption></figure></li>
+<li>The key mapping difference is the Source formula in the Update module. Since Typeform doesn&#x27;t send a &quot;source&quot; field, you hardcode the source name. In the Source (D) formula editor, enter: if(contains(2. Source (D); &quot;Typeform&quot;); 2. Source (D); 2. Source (D) + &quot;; Typeform&quot;) — this uses the literal string &quot;Typeform&quot; instead of a mapped field.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-13.png" alt="Typeform Update a Row mapping — Mappable Answers for Name and Phone, Source formula with hardcoded Typeform value" width="1060" loading="lazy"><figcaption>Typeform Update a Row mapping — Mappable Answers for Name and Phone, Source formula with hardcoded Typeform value</figcaption></figure></li>
+<li>Save the scenario. The complete Typeform scenario looks identical to the webhook version — same Search Rows, same Router, same two branches — just with a Typeform trigger instead of a Custom Webhook.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-12.png" alt="Complete Typeform scenario — Typeform Watch Responses, Search Rows, Router with Update and Add branches" width="1060" loading="lazy"><figcaption>Complete Typeform scenario — Typeform Watch Responses, Search Rows, Router with Update and Add branches</figcaption></figure></li>
+<li>Test by submitting your Typeform with a test entry — use an email that already exists in the sheet from the webhook test. The Source column should update to show both channels (e.g. &quot;Website; Typeform&quot;) and Last Updated should refresh.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-15.png" alt="Typeform live form — test submission with sample data" width="1060" loading="lazy"><figcaption>Typeform live form — test submission with sample data</figcaption></figure></li>
+<li class="step-image"><p class="inline-cta">Need a client intake form? Build one in minutes with Typeform&#x27;s drag-and-drop form builder. <a href="https://typeform.cello.so/vGdCoE97A4Z" rel="sponsored noopener">Try Typeform free →</a></p></li>
+</ol>
 <h2 id="how-to-add-facebook-lead-ads-as-a-third-source-scenario-3">How to Add Facebook Lead Ads as a Third Source (Scenario 3)</h2>
 <p>The Facebook scenario follows the same upsert pattern. The trigger is different, and the field names come from Facebook&#x27;s lead data structure instead of webhook parameters.</p>
-<p>1. Create a new scenario. Click + and search for &quot;Facebook Lead Ads&quot; — select the &quot;New Lead&quot; module (INSTANT webhook version). Click &quot;Create a webhook&quot;, connect your Facebook account, select your Page, and choose your lead form (e.g. &quot;Get Your Free Quote&quot;).</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-16.png" alt="Facebook Lead Ads New Lead webhook — connection configured with Page and Get Your Free Quote form selected" width="1060" loading="lazy"><figcaption>Facebook Lead Ads New Lead webhook — connection configured with Page and Get Your Free Quote form selected</figcaption></figure>
-<p>2. Add the same module chain: Google Sheets Search Rows → Router → Update a Row / Add a Row. The structure is identical to the other two scenarios.</p>
-<p>3. Map Facebook field data to your Google Sheet columns. For the Add a Row module (new leads): Email (A) maps to Field data: email, Name (B) to Field data: Full name, Phone (C) to Field data: Phone number, and Source (D) is hardcoded as &quot;Facebook&quot;.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-18.png" alt="Facebook Add a Row mapping — Field data mapped to columns with hardcoded Facebook source" width="1060" loading="lazy"><figcaption>Facebook Add a Row mapping — Field data mapped to columns with hardcoded Facebook source</figcaption></figure>
-<p>4. For the Update a Row module, the Source formula uses the same pattern with &quot;Facebook&quot; hardcoded: if(contains(2. Source (D); &quot;Facebook&quot;); 2. Source (D); 2. Source (D) + &quot;; Facebook&quot;)</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-17.png" alt="Facebook Update a Row mapping — Field data for Name and Phone, Source formula with hardcoded Facebook value" width="1060" loading="lazy"><figcaption>Facebook Update a Row mapping — Field data for Name and Phone, Source formula with hardcoded Facebook value</figcaption></figure>
-<p>5. Save the scenario. All three scenarios now live in your Make.com dashboard, each handling a different lead source but sharing the same Google Sheet and the same upsert logic.</p>
-<figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-20.png" alt="Make.com dashboard — Multi-source Leads folder with all three scenarios: Website Leads, Typeform Leads, Facebook Leads" width="1060" loading="lazy"><figcaption>Make.com dashboard — Multi-source Leads folder with all three scenarios: Website Leads, Typeform Leads, Facebook Leads</figcaption></figure>
+<ol class="steps">
+<li>Create a new scenario. Click + and search for &quot;Facebook Lead Ads&quot; — select the &quot;New Lead&quot; module (INSTANT webhook version). Click &quot;Create a webhook&quot;, connect your Facebook account, select your Page, and choose your lead form (e.g. &quot;Get Your Free Quote&quot;).</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-16.png" alt="Facebook Lead Ads New Lead webhook — connection configured with Page and Get Your Free Quote form selected" width="1060" loading="lazy"><figcaption>Facebook Lead Ads New Lead webhook — connection configured with Page and Get Your Free Quote form selected</figcaption></figure></li>
+<li>Add the same module chain: Google Sheets Search Rows → Router → Update a Row / Add a Row. The structure is identical to the other two scenarios.</li>
+<li>Map Facebook field data to your Google Sheet columns. For the Add a Row module (new leads): Email (A) maps to Field data: email, Name (B) to Field data: Full name, Phone (C) to Field data: Phone number, and Source (D) is hardcoded as &quot;Facebook&quot;.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-18.png" alt="Facebook Add a Row mapping — Field data mapped to columns with hardcoded Facebook source" width="1060" loading="lazy"><figcaption>Facebook Add a Row mapping — Field data mapped to columns with hardcoded Facebook source</figcaption></figure></li>
+<li>For the Update a Row module, the Source formula uses the same pattern with &quot;Facebook&quot; hardcoded: if(contains(2. Source (D); &quot;Facebook&quot;); 2. Source (D); 2. Source (D) + &quot;; Facebook&quot;)</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-17.png" alt="Facebook Update a Row mapping — Field data for Name and Phone, Source formula with hardcoded Facebook value" width="1060" loading="lazy"><figcaption>Facebook Update a Row mapping — Field data for Name and Phone, Source formula with hardcoded Facebook value</figcaption></figure></li>
+<li>Save the scenario. All three scenarios now live in your Make.com dashboard, each handling a different lead source but sharing the same Google Sheet and the same upsert logic.</li>
+<li class="step-image"><figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-20.png" alt="Make.com dashboard — Multi-source Leads folder with all three scenarios: Website Leads, Typeform Leads, Facebook Leads" width="1060" loading="lazy"><figcaption>Make.com dashboard — Multi-source Leads folder with all three scenarios: Website Leads, Typeform Leads, Facebook Leads</figcaption></figure></li>
+</ol>
 <h2 id="testing-the-complete-multi-source-setup">Testing the Complete Multi-Source Setup</h2>
 <p>Once all three scenarios are active, your Lead Tracker Master sheet populates automatically from every channel. Each lead appears once — with the Source column showing every channel they came through and the Last Updated column reflecting the most recent interaction.</p>
 <figure class="screenshot"><img src="assets/screenshots/screenshot-multi-leads-19.png" alt="Google Sheet with leads from all three sources — multi-source entries showing Facebook; Typeform and Facebook; Website in Sou" width="1060" loading="lazy"><figcaption>Google Sheet with leads from all three sources — multi-source entries showing Facebook; Typeform and Facebook; Website in Source column</figcaption></figure>

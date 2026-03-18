@@ -723,26 +723,45 @@ def format_content(text, page_type='how-to'):
         # --- Unutar liste koraka ---
         elif in_list:
             clean = line_stripped
-            is_new_step = False
-            if len(clean) > 2 and clean[0].isdigit() and clean[1] in '.):':
-                clean = clean[2:].strip()
-                is_new_step = True
-            elif len(clean) > 3 and clean[0].isdigit() and clean[1].isdigit() and clean[2] in '.):':
-                clean = clean[3:].strip()
-                is_new_step = True
-            if is_new_step:
+            is_numbered = (
+                (len(clean) > 2 and clean[0].isdigit() and clean[1] in '.):') or
+                (len(clean) > 3 and clean[0].isdigit() and clean[1].isdigit() and clean[2] in '.):')
+            )
+            if is_numbered:
+                # Strip the number prefix
+                if len(clean) > 3 and clean[0].isdigit() and clean[1].isdigit() and clean[2] in '.):':
+                    clean = clean[3:].strip()
+                else:
+                    clean = clean[2:].strip()
                 howto_steps.append(clean)
                 html_parts.append(f'<li>{process_inline_links(clean)}</li>')
             else:
-                # Continuation paragraph — append to previous <li>
+                # Continuation paragraph — append to previous <li> by replacing its closing tag
                 if html_parts and html_parts[-1].endswith('</li>'):
-                    html_parts[-1] = html_parts[-1][:-5] + f'<p>{process_inline_links(clean)}</p></li>'
+                    html_parts[-1] = html_parts[-1][:-5] + f'<br><br>{process_inline_links(clean)}</li>'
                 else:
-                    html_parts.append(f'<li>{process_inline_links(clean)}</li>')
-
-        # --- Regularni paragraf ---
+                    # Fallback: just add as paragraph if no previous <li> found
+                    html_parts.append(f'<p>{process_inline_links(clean)}</p>')
+ 
+        # --- Regularni paragraf (ili start nove numbered liste) ---
         else:
-            html_parts.append(f'<p>{process_inline_links(line_stripped)}</p>')
+            is_numbered = (
+                (len(line_stripped) > 2 and line_stripped[0].isdigit() and line_stripped[1] in '.):') or
+                (len(line_stripped) > 3 and line_stripped[0].isdigit() and line_stripped[1].isdigit() and line_stripped[2] in '.):')
+            )
+            if is_numbered:
+                # Auto-start a new <ol> for numbered lines outside Workflow Steps
+                html_parts.append('<ol class="steps">')
+                in_list = True
+                clean = line_stripped
+                if len(clean) > 3 and clean[0].isdigit() and clean[1].isdigit() and clean[2] in '.):':
+                    clean = clean[3:].strip()
+                else:
+                    clean = clean[2:].strip()
+                howto_steps.append(clean)
+                html_parts.append(f'<li>{process_inline_links(clean)}</li>')
+            else:
+                html_parts.append(f'<p>{process_inline_links(line_stripped)}</p>')
 
     # Zatvaranje svih otvorenih blokova
     close_open_blocks()
