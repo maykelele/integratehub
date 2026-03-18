@@ -1,6 +1,6 @@
 # IntegrateHub.io — Content & Roadmap
 
-## Published Articles (15) | In Progress (0)
+## Published Articles (16) | In Progress (0)
 
 | # | Slug | Type | Date | Category |
 |---|------|------|------|----------|
@@ -12,21 +12,22 @@
 | 6 | typeform-client-intake-google-sheets-automation | how-to | 2026-02-26 | onboarding |
 | 7 | typeform-welcome-email-google-drive-automation | how-to | 2026-02-28 | onboarding |
 | 8 | multi-source-lead-tracking-google-sheets-automation | how-to | 2026-03-02 | lead-capture |
-| 9 | make-com-free-plan-what-you-can-build | guide | 2026-03-05 | automation-strategy |
+| 9 | make-com-free-plan-what-you-can-build | guide | 2026-03-05 | comparisons |
 | 10 | lead-follow-up-slack-reminder-automation | how-to | 2026-03-03 | lead-capture |
 | 11 | stripe-new-customer-airtable-tracker-automation | how-to | 2026-03-04 | onboarding |
 | 12 | google-forms-airtable-client-crm-automation | how-to | 2026-03-09 | lead-capture |
 | 13 | stripe-subscription-cancelled-automation | how-to | 2026-03-11 | payments |
 | 14 | make-com-vs-zapier-pricing-comparison | comparison | 2026-03-13 | comparisons |
 | 15 | google-sheets-weekly-report-email-automation | how-to | 2026-03-14 | reporting |
+| 16 | typeform-openai-lead-qualification-automation | how-to | 2026-03-18 | lead-capture |
 
 ### Category Breakdown
-- **lead-capture:** 4 articles (#2, #8, #10, #12)
-- **onboarding:** 4 articles (#4, #6, #7, #11)
-- **payments:** 2 articles (#3, #13)
-- **comparisons:** 3 articles (#1, #5, #14) ✅ activates category page
-- **automation-strategy:** 1 article (#9)
-- **reporting:** 1 article (#15) — new category, needs 2 more for activation
+- **lead-capture:** 5 articles (#2, #8, #10, #12, #16) ✅ active
+- **onboarding:** 4 articles (#4, #6, #7, #11) ✅ active
+- **payments:** 2 articles (#3, #13) — needs 1 more for activation
+- **comparisons:** 4 articles (#1, #5, #9, #14) ✅ active
+- **automation-strategy:** 0 articles — category exists in generator but no articles yet
+- **reporting:** 1 article (#15)
 
 ### Standalone Pages (Type: page)
 - about
@@ -36,6 +37,9 @@
 ### Pending Internal Links
 
 Do NOT update sitemap lastmod on these — internal link additions are not substantial changes.
+
+Add to articles #2, #6, #8, #9, #10, #12:
+Typeform to OpenAI Lead Scoring (Auto-Qualify Leads)|/typeform-openai-lead-qualification-automation
 
 ## Affiliate Programs
 
@@ -59,13 +63,14 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 
 | Priority | Idea | Type | Category | Affiliates | Notes |
 |----------|------|------|----------|------------|-------|
-| #16 | Typeform → OpenAI lead qualification → Google Sheets + Slack | how-to | lead-capture | Make.com, Typeform | AI layer; requires Make.com Core plan. First AI-powered article. |
+| #17 | Stripe Daily Balance Summary → Google Sheets + Slack | how-to | payments | Make.com | Scheduled trigger, daily financial snapshot. 3rd payments article — activates category page. |
 
 ### Ready to Write (Backlog)
-- Gmail + OpenAI: Auto-draft replies to new lead emails (requires Core plan)
-- Google Docs + OpenAI: Auto-generate client proposals from intake form data (requires Core plan)
+- Gmail + OpenAI: Auto-draft replies to new lead emails
+- Google Docs + OpenAI: Auto-generate client proposals from intake form data
 - Filter Calendly bookings → only qualified leads to CRM
-- Stripe daily balance → Google Sheets + Slack summary (freelancer/agency daily financial snapshot)
+- Stripe Invoice Paid → Google Sheets log + thank-you email
+- Stripe Trial Ending → reminder email 3 days before expiry
 - Airtable + Google Calendar sync for client bookings (onboarding events auto-created from Airtable)
 - WordPress form lead → Google Sheets + Slack + auto-reply email (huge keyword cluster, different audience from #2)
 - Make.com Error Handling: How to Prevent Duplicate Data and Partial Failures (from real experience)
@@ -84,7 +89,8 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - 70% how-to tutorials (affiliate conversion)
 - 20% comparison articles (higher buyer intent)
 - 10% guides/resource content (authority, internal links)
-- Current: 11 how-to / 3 comparison / 1 guide = 73% / 20% / 7% ✅
+- Current: 12 how-to / 4 comparison / 0 guide = 75% / 25% / 0%
+- Note: #9 (free plan guide) is categorized as comparison in input.txt. Content mix skews toward comparison — next authority series articles will rebalance.
 
 ## Newsletter
 
@@ -92,7 +98,7 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - **Name:** The Automation Fix
 - **Subscribe URL:** https://automationfix.beehiiv.com/subscribe
 - **Handle:** automationfix.beehiiv.com
-- **Status:** Active — Issue #3 sent (articles #13, #14, #15). Next issue covers article #16+.
+- **Status:** Active — article #16 goes in next issue
 - **Workflow:** Each week new articles = repurposed newsletter issue (~45 min)
 - **CTA tag:** CTA[newsletter]: in input.txt for inline opt-in
 - **UTM pattern:** ?utm_source=integratehub&utm_medium=article_cta (site), ?utm_source=newsletter&utm_medium=email&utm_campaign=issue_XX (email)

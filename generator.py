@@ -112,9 +112,13 @@ CATEGORIES = {
         "description": "Side-by-side comparisons of automation tools — pricing, features, and real trade-offs.",
     },
     "automation-strategy": {
-        "name": "Automation Strategy",
-        "description": "Strategic guides on when, why, and how to automate your business workflows.",
+        "name": "Automation Best Practices",
+        "description": "Patterns, pitfalls, and proven approaches for building automations that actually last.",
     },
+    "reporting": {
+        "name": "Reporting",
+        "description": "Automate client reports, financial summaries, and recurring data exports.",
+},
     # Dodaj nove kategorije ovde — format:
     # "slug": { "name": "Display Name", "description": "Opis za category page." },
 }
@@ -149,7 +153,7 @@ CATEGORY_MIN_ARTICLES = 3
 #                   Primer: Build Time: 25
 #
 #   Category:       Kategorija članka — koristi se za breadcrumb i buduće filtriranje
-#                   Dostupne: lead-capture, payments, onboarding, comparisons, automation-strategy
+#                   Dostupne: lead-capture, payments, onboarding, comparisons, best-practices, reporting
 #                   Primer: Category: lead-capture
 #
 #   Meta:           SEO meta description — preporučeno, max 155 karaktera
