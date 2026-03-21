@@ -484,7 +484,8 @@
             color: #999;
             font-weight: 600;
         }
-        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 900px) { .category-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 500px) { .category-grid { grid-template-columns: 1fr; } }
 
         /* HOMEPAGE SECTIONS SPACING */
@@ -507,6 +508,7 @@
                 <button class="nav-dropdown-btn">Topics ▾</button>
                 <div class="nav-dropdown-menu">
                     <a href="/category/lead-capture">Lead Capture</a>
+                    <a href="/category/payments">Payments &amp; Invoicing</a>
                     <a href="/category/onboarding">Client Onboarding</a>
                     <a href="/category/comparisons">Comparisons</a>
                 </div>
@@ -520,12 +522,12 @@
 <div class="container">
 
     <div class="breadcrumb">
-        <a href="/" rel="noopener">Home</a> › <a href="/" rel="noopener">Payments &amp; Invoicing</a> › Stripe Payment Failed: Alert Team + Email Customer
+        <a href="/" rel="noopener">Home</a> › <a href="/category/payments" rel="noopener">Payments &amp; Invoicing</a> › Stripe Payment Failed: Alert Team + Email Customer
     </div>
 
     <main class="content">
         <h1>Stripe Payment Failed: Alert Team + Email Customer</h1>
-        <div class="article-meta"><time datetime="2026-02-22">Feb 22, 2026</time> <span class="separator">·</span> <span>⏱ 6 min read</span> <span class="separator">·</span> <span>🛠 ~20 min build</span> <span class="separator">·</span> <span class="category-badge">Payments &amp; Invoicing</span></div>
+        <div class="article-meta"><time datetime="2026-02-22">Feb 22, 2026</time> <span class="separator">·</span> <span>⏱ 7 min read</span> <span class="separator">·</span> <span>🛠 ~20 min build</span> <span class="separator">·</span> <span class="category-badge">Payments &amp; Invoicing</span></div>
 
         <nav class="toc">
 <p class="toc-title">In This Guide</p>
@@ -579,7 +581,7 @@
 <div class="faq-item"><h3 class="faq-q">Does this work for subscription renewals, not just one-time invoices?</h3><p class="faq-a">Yes. The invoice.payment_failed event covers both subscription renewals and one-time invoice payments. Any failed charge that generates a Stripe invoice will trigger this workflow.</p></div>
 <div class="faq-item"><h3 class="faq-q">Do I need a paid Make.com plan?</h3><p class="faq-a">The free Make.com plan includes 1,000 operations per month. Each time this scenario runs, it uses 3 operations — one per module. For most small businesses, the free plan is more than enough to get started.</p></div>
 </div>
-<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/zapier-too-expensive-make-com-alternative" rel="noopener">Zapier Too Expensive? Make.com Alternative</a></li><li><a href="/facebook-instagram-leads-google-sheets-automation" rel="noopener">Facebook &amp; Instagram Leads to Google Sheets</a></li><li><a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">Stripe New Customer: Track in Airtable + Slack</a></li><li><a href="/stripe-subscription-cancelled-automation" rel="noopener">Stripe Cancellation: Auto-Email + Google Sheets Log</a></li><li><a href="/typeform-openai-lead-qualification-automation" rel="noopener">Typeform to OpenAI Lead Scoring (Auto-Qualify Leads)</a></li></ul></div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/zapier-too-expensive-make-com-alternative" rel="noopener">Zapier Too Expensive? Make.com Alternative</a></li><li><a href="/facebook-instagram-leads-google-sheets-automation" rel="noopener">Facebook &amp; Instagram Leads to Google Sheets</a></li><li><a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">Stripe New Customer: Track in Airtable + Slack</a></li><li><a href="/stripe-subscription-cancelled-automation" rel="noopener">Stripe Cancellation: Auto-Email + Google Sheets Log</a></li><li><a href="/typeform-openai-lead-qualification-automation" rel="noopener">Typeform to OpenAI Lead Scoring (Auto-Qualify Leads)</a></li><li><a href="/stripe-daily-balance-tracker-automation" rel="noopener">Stripe Daily Balance Tracker: Google Sheets + Slack</a></li></ul></div>
     </main>
 
     <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px 30px 10px 30px; margin:40px 0 30px 0; text-align:center;">
@@ -634,6 +636,7 @@
                 <h4>Browse by Topic</h4>
                 <ul>
                     <li><a href="/category/lead-capture">Lead Capture</a></li>
+                    <li><a href="/category/payments">Payments &amp; Invoicing</a></li>
                     <li><a href="/category/onboarding">Client Onboarding</a></li>
                     <li><a href="/category/comparisons">Comparisons</a></li>
                 </ul>

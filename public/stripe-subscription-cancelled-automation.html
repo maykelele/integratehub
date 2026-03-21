@@ -524,7 +524,8 @@
             color: #999;
             font-weight: 600;
         }
-        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 900px) { .category-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 500px) { .category-grid { grid-template-columns: 1fr; } }
 
         /* HOMEPAGE SECTIONS SPACING */
@@ -547,6 +548,7 @@
                 <button class="nav-dropdown-btn">Topics ▾</button>
                 <div class="nav-dropdown-menu">
                     <a href="/category/lead-capture">Lead Capture</a>
+                    <a href="/category/payments">Payments &amp; Invoicing</a>
                     <a href="/category/onboarding">Client Onboarding</a>
                     <a href="/category/comparisons">Comparisons</a>
                 </div>
@@ -560,7 +562,7 @@
 <div class="container">
 
     <div class="breadcrumb">
-        <a href="/" rel="noopener">Home</a> › <a href="/" rel="noopener">Payments &amp; Invoicing</a> › Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)
+        <a href="/" rel="noopener">Home</a> › <a href="/category/payments" rel="noopener">Payments &amp; Invoicing</a> › Stripe Subscription Cancelled: Auto-Email + Google Sheets Log (Make.com)
     </div>
 
     <main class="content">
@@ -644,7 +646,7 @@
 <div class="faq-item"><h3 class="faq-q">How many operations does this use on the free plan?</h3><p class="faq-a">Each cancellation uses 5 operations (one per module). The Make.com free plan includes 1,000 operations per month, so this automation alone handles 200 cancellations. If you run other scenarios alongside it, subtract their usage — but most small businesses see 5-20 cancellations per month, which uses only 25-100 operations.</p></div>
 <div class="faq-item"><h3 class="faq-q">Can I use this alongside the Stripe failed payment automation?</h3><p class="faq-a">Yes. Both scenarios run independently on separate webhooks. The <a href="/stripe-payment-failed-automation" rel="noopener">failed payment automation</a> listens for invoice.payment_failed events, while this one listens for customer.subscription.deleted. They don&#x27;t interfere with each other and can share the same Stripe connection in Make.com. Together, they cover the two most critical subscription lifecycle events.</p></div>
 </div>
-<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/stripe-payment-failed-automation" rel="noopener">Stripe Failed Payment Alerts: Auto-Email + Slack</a></li><li><a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">Stripe New Customer: Auto-Track in Airtable + Slack</a></li><li><a href="/make-com-free-plan-what-you-can-build" rel="noopener">Make.com Free Plan: What You Can Actually Build</a></li></ul></div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/stripe-payment-failed-automation" rel="noopener">Stripe Failed Payment Alerts: Auto-Email + Slack</a></li><li><a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">Stripe New Customer: Auto-Track in Airtable + Slack</a></li><li><a href="/make-com-free-plan-what-you-can-build" rel="noopener">Make.com Free Plan: What You Can Actually Build</a></li><li><a href="/stripe-daily-balance-tracker-automation" rel="noopener">Stripe Daily Balance Tracker: Google Sheets + Slack</a></li></ul></div>
     </main>
 
     <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px 30px 10px 30px; margin:40px 0 30px 0; text-align:center;">
@@ -699,6 +701,7 @@
                 <h4>Browse by Topic</h4>
                 <ul>
                     <li><a href="/category/lead-capture">Lead Capture</a></li>
+                    <li><a href="/category/payments">Payments &amp; Invoicing</a></li>
                     <li><a href="/category/onboarding">Client Onboarding</a></li>
                     <li><a href="/category/comparisons">Comparisons</a></li>
                 </ul>

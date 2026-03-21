@@ -179,6 +179,7 @@ AFFILIATE_LINKS = {
 - Category "automation-strategy" renamed to "best-practices" (slug + name). 0 articles — no migration needed.
 - Category "reporting" added to generator (was missing for Article #15).
 
+
 ## Generator Backlog (all resolved)
 1. ~~Image alt tag fix~~ — FIXED.
 2. ~~Build time badge~~ — FIXED. `Build Time: 25` → `🛠 ~25 min`.

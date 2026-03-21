@@ -355,7 +355,8 @@
             color: #999;
             font-weight: 600;
         }
-        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 900px) { .category-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 500px) { .category-grid { grid-template-columns: 1fr; } }
 
         /* HOMEPAGE SECTIONS SPACING */
@@ -378,6 +379,7 @@
                 <button class="nav-dropdown-btn">Topics ▾</button>
                 <div class="nav-dropdown-menu">
                     <a href="/category/lead-capture">Lead Capture</a>
+                    <a href="/category/payments">Payments &amp; Invoicing</a>
                     <a href="/category/onboarding">Client Onboarding</a>
                     <a href="/category/comparisons">Comparisons</a>
                 </div>
@@ -414,6 +416,11 @@
                 <p class="cat-desc">Automate how you capture, qualify, and route leads from forms, ads, and landing pages.</p>
                 <span class="cat-count">5 guides</span>
             </a>
+            <a href="/category/payments" class="category-card">
+                <h3>Payments &amp; Invoicing</h3>
+                <p class="cat-desc">Automate payment tracking, failed payment alerts, and invoice workflows.</p>
+                <span class="cat-count">3 guides</span>
+            </a>
             <a href="/category/onboarding" class="category-card">
                 <h3>Client Onboarding</h3>
                 <p class="cat-desc">Automate client intake, welcome sequences, and project setup after signing.</p>
@@ -431,6 +438,14 @@
             <p class="section-label">Latest Tutorials</p>
             <div class="card-grid">
                 
+        <div class="card">
+            <a href="/stripe-daily-balance-tracker-automation" rel="noopener">
+                <p class="card-meta">Mar 21, 2026 · Payments &amp; Invoicing</p>
+                <h2>Stripe Daily Balance Tracker: Google Sheets + Slack (Make.com)</h2>
+                <p>Track your Stripe balance daily with Make.com. Log available, pending, and refund prefunding to Google Sheets and get Slack alerts when reserves drop.</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>
         <div class="card">
             <a href="/typeform-openai-lead-qualification-automation" rel="noopener">
                 <p class="card-meta">Mar 18, 2026 · Lead Capture</p>
@@ -471,14 +486,6 @@
                 <span class="read-more">Read guide →</span>
             </a>
         </div>
-        <div class="card">
-            <a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">
-                <p class="card-meta">Mar 04, 2026 · Client Onboarding</p>
-                <h2>Stripe New Customer: Auto-Track in Airtable + Slack</h2>
-                <p>Stripe new customer automation with Make.com — auto-add clients to Airtable and send Slack notifications the moment someone signs up.</p>
-                <span class="read-more">Read guide →</span>
-            </a>
-        </div>
             </div>
         </div>
     
@@ -487,6 +494,14 @@
             <p class="section-label">More Guides</p>
             <div class="card-grid">
                 
+        <div class="card">
+            <a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">
+                <p class="card-meta">Mar 04, 2026 · Client Onboarding</p>
+                <h2>Stripe New Customer: Auto-Track in Airtable + Slack</h2>
+                <p>Stripe new customer automation with Make.com — auto-add clients to Airtable and send Slack notifications the moment someone signs up.</p>
+                <span class="read-more">Read guide →</span>
+            </a>
+        </div>
         <div class="card">
             <a href="/lead-follow-up-slack-reminder-automation" rel="noopener">
                 <p class="card-meta">Mar 03, 2026 · Lead Capture</p>
@@ -624,6 +639,7 @@
                 <h4>Browse by Topic</h4>
                 <ul>
                     <li><a href="/category/lead-capture">Lead Capture</a></li>
+                    <li><a href="/category/payments">Payments &amp; Invoicing</a></li>
                     <li><a href="/category/onboarding">Client Onboarding</a></li>
                     <li><a href="/category/comparisons">Comparisons</a></li>
                 </ul>

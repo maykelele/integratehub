@@ -512,7 +512,8 @@
             color: #999;
             font-weight: 600;
         }
-        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 700px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 900px) { .category-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 500px) { .category-grid { grid-template-columns: 1fr; } }
 
         /* HOMEPAGE SECTIONS SPACING */
@@ -535,6 +536,7 @@
                 <button class="nav-dropdown-btn">Topics ▾</button>
                 <div class="nav-dropdown-menu">
                     <a href="/category/lead-capture">Lead Capture</a>
+                    <a href="/category/payments">Payments &amp; Invoicing</a>
                     <a href="/category/onboarding">Client Onboarding</a>
                     <a href="/category/comparisons">Comparisons</a>
                 </div>
@@ -662,7 +664,7 @@
 <div class="faq-item"><h3 class="faq-q">Can I use Outlook or another email provider instead of Gmail?</h3><p class="faq-a">Yes. Replace the Gmail module with the generic &quot;Email&quot; module (SMTP) or the Microsoft 365 Email module. The HTML template and mapping logic stay exactly the same — only the email sending module changes.</p></div>
 <div class="faq-item"><h3 class="faq-q">What happens if I add a new client to the Client List mid-week?</h3><p class="faq-a">The new client will be included in the next Monday&#x27;s run automatically, as long as their Status is &quot;Active&quot; and they have a corresponding row in the Weekly Metrics sheet for that week. No scenario changes needed.</p></div>
 </div>
-<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/multi-source-lead-tracking-google-sheets-automation" rel="noopener">Multi-Source Lead Tracking: Auto-Sync to Google Sheets</a></li><li><a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">Stripe New Customer: Auto-Track in Airtable + Slack</a></li><li><a href="/make-com-free-plan-what-you-can-build" rel="noopener">Make.com Free Plan: What You Can Actually Build</a></li></ul></div>
+<div class="related-guides"><h3>Related Guides</h3><ul><li><a href="/multi-source-lead-tracking-google-sheets-automation" rel="noopener">Multi-Source Lead Tracking: Auto-Sync to Google Sheets</a></li><li><a href="/stripe-new-customer-airtable-tracker-automation" rel="noopener">Stripe New Customer: Auto-Track in Airtable + Slack</a></li><li><a href="/make-com-free-plan-what-you-can-build" rel="noopener">Make.com Free Plan: What You Can Actually Build</a></li><li><a href="/stripe-daily-balance-tracker-automation" rel="noopener">Stripe Daily Balance Tracker: Google Sheets + Slack</a></li></ul></div>
     </main>
 
     <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px 30px 10px 30px; margin:40px 0 30px 0; text-align:center;">
@@ -717,6 +719,7 @@
                 <h4>Browse by Topic</h4>
                 <ul>
                     <li><a href="/category/lead-capture">Lead Capture</a></li>
+                    <li><a href="/category/payments">Payments &amp; Invoicing</a></li>
                     <li><a href="/category/onboarding">Client Onboarding</a></li>
                     <li><a href="/category/comparisons">Comparisons</a></li>
                 </ul>
