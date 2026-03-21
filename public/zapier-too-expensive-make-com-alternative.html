@@ -281,7 +281,7 @@
         footer { margin-top: 50px; padding: 40px 0 20px 0; border-top: 1px solid #eee; font-size: 0.85rem; color: #636e72; }
         footer a { color: var(--accent); text-decoration: underline; }
         .footer-grid { display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 30px; }
-        .footer-col h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #767676; margin: 0 0 10px 0; }
+        .footer-col .footer-heading { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #767676; margin: 0 0 10px 0; font-weight: 700; }
         .footer-col ul { list-style: none; margin: 0; padding: 0; }
         .footer-col li { margin-bottom: 6px; }
         .footer-bottom { border-top: 1px solid #eee; padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
@@ -673,7 +673,7 @@
     <div class="newsletter-cta" style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:12px; padding:30px 30px 10px 30px; margin:40px 0 30px 0; text-align:center;">
         <h2 style="border:none; margin-top:0; font-size:1.3rem; color:#2d3436;">Get automation tutorials in your inbox</h2>
         <p style="color:#555; margin-bottom:16px; font-size:1rem;">One practical workflow per week. No fluff, no spam — just tested automations for service businesses.</p>
-        <iframe src="https://subscribe-forms.beehiiv.com/e3be6eff-20a1-4784-9177-26c93af85803" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%; max-width:480px; height:55px; margin:0 auto; border-radius:0; background-color:transparent; display:block; overflow:hidden;"></iframe>
+        <iframe src="https://subscribe-forms.beehiiv.com/e3be6eff-20a1-4784-9177-26c93af85803" title="Newsletter signup form" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%; max-width:480px; height:55px; margin:0 auto; border-radius:0; background-color:transparent; display:block; overflow:hidden;"></iframe>
         <script>
             window.addEventListener('message', function(e) {
                 if (e.data && e.data.type === 'beehiiv:child-loaded') {
@@ -710,7 +710,7 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>Site</h4>
+                <span class="footer-heading">Site</span>
                 <ul>
                     <li><a href="/">All Guides</a></li>
                     <li><a href="/about">About</a></li>
@@ -719,16 +719,17 @@
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Browse by Topic</h4>
+                <span class="footer-heading">Browse by Topic</span>
                 <ul>
-                    <li><a href="/category/lead-capture">Lead Capture</a></li>
-                    <li><a href="/category/payments">Payments &amp; Invoicing</a></li>
-                    <li><a href="/category/onboarding">Client Onboarding</a></li>
-                    <li><a href="/category/comparisons">Comparisons</a></li>
+                    <li><a href="/">Lead Capture</a></li>
+                    <li><a href="/">Client Onboarding</a></li>
+                    <li><a href="/">Payments & Invoicing</a></li>
+                    <li><a href="/">Comparisons</a></li>
+                    <li><a href="/">Automation Strategy</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Stay Updated</h4>
+                <span class="footer-heading">Stay Updated</span>
                 <ul>
                     <li><a href="https://automationfix.beehiiv.com/subscribe?utm_source=integratehub&utm_medium=footer" target="_blank" rel="noopener nofollow">The Automation Fix Newsletter</a></li>
                 </ul>
