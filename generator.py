@@ -51,7 +51,8 @@ def process_inline_links(text):
 
 
 TEMPLATE_FILE = 'templates/template.html'
-CONTENT_FILE = 'content/input.txt'
+CONTENT_DIR = 'content'
+PAGES_DIR = 'pages'
 OUTPUT_DIR = 'public'
 MAKE_AFFILIATE_LINK = "https://www.make.com/en/register?pc=integratehub"
 
@@ -774,7 +775,7 @@ def format_content(text, page_type='how-to'):
 
 
 def generate_index(template_html, links, active_categories=None, category_counts=None):
-    """Generiše index.html sa hero, category karticama, latest tutorials, i svim člancima."""
+    """Generiše index.html sa hero, featured story, latest tutorials, topic lanes, explore, newsletter."""
     if active_categories is None:
         active_categories = []
     if category_counts is None:
@@ -782,10 +783,24 @@ def generate_index(template_html, links, active_categories=None, category_counts
 
     sorted_links = sorted(links, key=lambda x: x.get('date', ''), reverse=True)
 
+    # --- Banner image per category (fallback to default) ---
+    CATEGORY_BANNERS = {
+        'lead-capture': '/assets/banners/lead-capture.jpg',
+        'payments': '/assets/banners/payments.jpg',
+        'onboarding': '/assets/banners/onboarding.jpg',
+        'comparisons': '/assets/banners/comparisons.jpg',
+        'automation-strategy': '/assets/banners/automation-strategy.jpg',
+        'reporting': '/assets/banners/reporting.jpg',
+    }
+    DEFAULT_BANNER = '/assets/banners/default.jpg'
+
+    def get_banner(category):
+        return CATEGORY_BANNERS.get(category, DEFAULT_BANNER)
+
     def build_card(l, show_category=True):
         description = l.get('description', '')
-        if len(description) > 150:
-            description = description[:150] + '...'
+        if len(description) > 110:
+            description = description[:110] + '...'
         date_display = format_date_display(l.get('date', ''))
         category_name = cat_name(l.get('category', '')) if l.get('category') and show_category else ''
         meta_parts = []
@@ -813,34 +828,38 @@ def generate_index(template_html, links, active_categories=None, category_counts
         </div>
     """
 
-    # --- Browse by Topic ---
-    category_cards_html = ""
-    if active_categories:
-        cat_cards = ""
-        for slug in active_categories:
-            count = category_counts.get(slug, 0)
-            display = cat_name(slug)
-            cat_info = CATEGORIES.get(slug, {})
-            cat_desc = cat_info.get("description", "") if isinstance(cat_info, dict) else ""
-            desc_html = f'<p class="cat-desc">{html.escape(cat_desc)}</p>' if cat_desc else ''
-            cat_cards += f"""
-            <a href="/category/{slug}" class="category-card">
-                <h3>{html.escape(display)}</h3>
-                {desc_html}
-                <span class="cat-count">{count} guide{'s' if count != 1 else ''}</span>
-            </a>"""
+    # --- Featured Story ---
+    # Pick newest article with Featured: yes, fallback to newest overall
+    featured_links = [l for l in sorted_links if l.get('featured')]
+    featured = featured_links[0] if featured_links else sorted_links[0]
+    featured_slug = featured['slug']
+    featured_desc = featured.get('description', '')
+    if len(featured_desc) > 200:
+        featured_desc = featured_desc[:200] + '...'
+    featured_banner = get_banner(featured.get('category', ''))
+    featured_cat = cat_name(featured.get('category', '')) if featured.get('category') else ''
 
-        category_cards_html = f"""
+    featured_html = f"""
         <div class="home-section">
-            <p class="section-label">Browse by Topic</p>
-            <div class="category-grid">
-                {cat_cards}
+            <div class="featured-story">
+                <a href="/{html.escape(featured_slug)}" class="featured-story-link" rel="noopener">
+                    <div class="featured-image">
+                        <img src="{featured_banner}" alt="{html.escape(featured['title'])}" loading="lazy">
+                    </div>
+                    <div class="featured-content">
+                        {f'<span class="featured-label">{html.escape(featured_cat)}</span>' if featured_cat else '<span class="featured-label">Featured</span>'}
+                        <h2>{html.escape(featured['title'])}</h2>
+                        <p>{html.escape(featured_desc)}</p>
+                        <span class="read-more">Read guide →</span>
+                    </div>
+                </a>
             </div>
         </div>
-        """
+    """
 
-    # --- Latest Tutorials (6 najnovijih) ---
-    latest_cards = ''.join(build_card(l) for l in sorted_links[:6])
+    # --- Latest Tutorials (3 najnovijih, bez featured) ---
+    latest_links = [l for l in sorted_links if l['slug'] != featured_slug][:3]
+    latest_cards = ''.join(build_card(l) for l in latest_links)
     latest_html = f"""
         <div class="home-section">
             <p class="section-label">Latest Tutorials</p>
@@ -850,22 +869,77 @@ def generate_index(template_html, links, active_categories=None, category_counts
         </div>
     """
 
-    # --- All Guides (preostali članci koji nisu u Latest) ---
-    remaining_links = sorted_links[6:]
-    all_guides_html = ""
-    if remaining_links:
-        remaining_cards = ''.join(build_card(l) for l in remaining_links)
-        all_guides_html = f"""
-        <hr class="home-divider">
-        <div class="home-section">
-            <p class="section-label">More Guides</p>
-            <div class="card-grid">
-                {remaining_cards}
+    # --- Topic Lanes (active categories, sorted by most recent article date) ---
+    LANE_COLORS = ['#e88a3a', '#3aaa8c']  # warm orange, soft green — alternating
+
+    def newest_date_in_cat(cat_slug):
+        dates = [l.get('date', '') for l in sorted_links if l.get('category') == cat_slug]
+        return max(dates) if dates else ''
+
+    lanes_sorted = sorted(active_categories, key=newest_date_in_cat, reverse=True)
+
+    lanes_html = ""
+    for lane_index, cat_slug in enumerate(lanes_sorted):
+        cat_display = cat_name(cat_slug)
+        cat_color = LANE_COLORS[lane_index % 2]
+        cat_articles = [l for l in sorted_links if l.get('category') == cat_slug][:5]
+        if not cat_articles:
+            continue
+
+        lane_cards = ""
+        for l in cat_articles:
+            description = l.get('description', '')
+            if len(description) > 120:
+                description = description[:120] + '...'
+            date_display = format_date_display(l.get('date', ''))
+            lane_cards += f"""
+                <div class="lane-card">
+                    <div class="lane-card-accent" style="background:{cat_color};"></div>
+                    <a href="/{l['slug']}" rel="noopener">
+                        {'<p class="card-meta">' + html.escape(date_display) + '</p>' if date_display else ''}
+                        <h3>{html.escape(l['title'])}</h3>
+                        <p>{html.escape(description)}</p>
+                        <span class="read-more">Read guide →</span>
+                    </a>
+                </div>"""
+
+        # View All card at the end of the scroll
+        lane_cards += f"""
+                <div class="lane-card-viewall">
+                    <a href="/category/{cat_slug}" rel="noopener">
+                        <span class="viewall-arrow">→</span>
+                        View all
+                    </a>
+                </div>"""
+
+        lanes_html += f"""
+        <div class="home-section topic-lane">
+            <div class="lane-header">
+                <p class="section-label">{html.escape(cat_display)}</p>
+            </div>
+            <div class="lane-scroll">
+                {lane_cards}
             </div>
         </div>
-    """
+        """
 
-    index_content = hero_html + category_cards_html + latest_html + all_guides_html
+    # --- Explore Other Topics (articles in inactive categories) ---
+    active_set = set(active_categories)
+    orphan_links = [l for l in sorted_links if l.get('category') not in active_set]
+    explore_html = ""
+    if orphan_links:
+        orphan_cards = ''.join(build_card(l) for l in orphan_links)
+        explore_html = f"""
+        <hr class="home-divider">
+        <div class="home-section">
+            <p class="section-label">Explore Other Topics</p>
+            <div class="card-grid">
+                {orphan_cards}
+            </div>
+        </div>
+        """
+
+    index_content = hero_html + featured_html + latest_html + lanes_html + explore_html
 
     page = template_html.replace('{{TITLE}}', 'Make.com Integration Guides | IntegrateHub.io')
     page = page.replace('{{META_DESCRIPTION}}',
@@ -898,10 +972,16 @@ def generate_site():
     with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f:
         template_html = f.read()
 
-    with open(CONTENT_FILE, 'r', encoding='utf-8') as f:
-        raw = f.read()
-
-    integrations = [i.strip() for i in raw.split('---') if i.strip()]
+    # Read individual article files from content/ and pages/
+    integrations = []
+    for d in [CONTENT_DIR, PAGES_DIR]:
+        if os.path.isdir(d):
+            for fname in sorted(os.listdir(d)):
+                if fname.endswith('.txt') and fname != 'input.txt':
+                    with open(os.path.join(d, fname), 'r', encoding='utf-8') as f:
+                        content = f.read().strip()
+                    if content:
+                        integrations.append(content)
     links = []
 
     for entry in integrations:
@@ -914,6 +994,7 @@ def generate_site():
         date_updated = extract_field(lines, 'Updated:')
         category = extract_field(lines, 'Category:')
         build_time = extract_field(lines, 'Build Time:')
+        featured = extract_field(lines, 'Featured:').lower() in ('yes', 'true', '1')
 
         if not slug or not title:
             print(f"⚠️  Preskačem entry bez slug/title")
@@ -1034,6 +1115,7 @@ def generate_site():
                 'description': meta_desc,
                 'date': date_published,
                 'category': category,
+                'featured': featured,
             })
 
     # --- Izračunaj koje kategorije imaju dovoljno članaka ---

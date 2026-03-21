@@ -1,6 +1,6 @@
 # IntegrateHub.io — Content & Roadmap
 
-## Published Articles (16) | In Progress (0)
+## Published Articles (17) | In Progress (0)
 
 | # | Slug | Type | Date | Category |
 |---|------|------|------|----------|
@@ -20,11 +20,12 @@
 | 14 | make-com-vs-zapier-pricing-comparison | comparison | 2026-03-13 | comparisons |
 | 15 | google-sheets-weekly-report-email-automation | how-to | 2026-03-14 | reporting |
 | 16 | typeform-openai-lead-qualification-automation | how-to | 2026-03-18 | lead-capture |
+| 17 | stripe-daily-balance-tracker-automation | how-to | 2026-03-21 | payments |
 
 ### Category Breakdown
 - **lead-capture:** 5 articles (#2, #8, #10, #12, #16) ✅ active
 - **onboarding:** 4 articles (#4, #6, #7, #11) ✅ active
-- **payments:** 2 articles (#3, #13) — needs 1 more for activation
+- **payments:** 3 articles (#3, #13, #17) ✅ active
 - **comparisons:** 4 articles (#1, #5, #9, #14) ✅ active
 - **automation-strategy:** 0 articles — category exists in generator but no articles yet
 - **reporting:** 1 article (#15)
@@ -37,9 +38,6 @@
 ### Pending Internal Links
 
 Do NOT update sitemap lastmod on these — internal link additions are not substantial changes.
-
-Add to articles #2, #6, #8, #9, #10, #12:
-Typeform to OpenAI Lead Scoring (Auto-Qualify Leads)|/typeform-openai-lead-qualification-automation
 
 ## Affiliate Programs
 
@@ -63,10 +61,9 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 
 | Priority | Idea | Type | Category | Affiliates | Notes |
 |----------|------|------|----------|------------|-------|
-| #17 | Stripe Daily Balance Summary → Google Sheets + Slack | how-to | payments | Make.com | Scheduled trigger, daily financial snapshot. 3rd payments article — activates category page. |
+| #18 | Gmail + OpenAI: Auto-draft replies to new lead emails | how-to | lead-capture | Make.com, OpenAI | AI article #2 in series. Requires OpenAI API key. |
 
 ### Ready to Write (Backlog)
-- Gmail + OpenAI: Auto-draft replies to new lead emails
 - Google Docs + OpenAI: Auto-generate client proposals from intake form data
 - Filter Calendly bookings → only qualified leads to CRM
 - Stripe Invoice Paid → Google Sheets log + thank-you email
@@ -89,7 +86,7 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - 70% how-to tutorials (affiliate conversion)
 - 20% comparison articles (higher buyer intent)
 - 10% guides/resource content (authority, internal links)
-- Current: 12 how-to / 4 comparison / 0 guide = 75% / 25% / 0%
+- Current: 13 how-to / 4 comparison / 0 guide = 76% / 24% / 0%
 - Note: #9 (free plan guide) is categorized as comparison in input.txt. Content mix skews toward comparison — next authority series articles will rebalance.
 
 ## Newsletter
@@ -98,7 +95,7 @@ This is a living list — reorder based on what makes sense, not rigid schedulin
 - **Name:** The Automation Fix
 - **Subscribe URL:** https://automationfix.beehiiv.com/subscribe
 - **Handle:** automationfix.beehiiv.com
-- **Status:** Active — article #16 goes in next issue
+- **Status:** Active — articles #16-17 go in next issue (Issue #4)
 - **Workflow:** Each week new articles = repurposed newsletter issue (~45 min)
 - **CTA tag:** CTA[newsletter]: in input.txt for inline opt-in
 - **UTM pattern:** ?utm_source=integratehub&utm_medium=article_cta (site), ?utm_source=newsletter&utm_medium=email&utm_campaign=issue_XX (email)

@@ -1,0 +1,196 @@
+Slug: make-com-free-plan-what-you-can-build
+Title: Make.com Free Plan: What You Can Actually Build
+Type: comparison
+Date: 2026-03-02
+Featured: yes
+Category: comparisons
+
+Meta: Make.com free plan includes 1,000 operations and 2 active scenarios. See exactly what you can build, when to upgrade, and real math on limits.
+
+Introduction: Every article about Make.com mentions the free plan — but nobody shows you what 1,000 operations actually gets you in practice. Can you run a real business workflow on it, or is it just a demo tier that forces an upgrade? This guide breaks down the Make.com free plan with real math and real examples from automations we've built and tested, so you know exactly what fits, what doesn't, and when the $9/month Core plan (annual billing) becomes worth it.
+
+CTA[newsletter]: Get one tested automation tutorial per week — no fluff, no spam.
+
+H2: Make.com Free Plan Limits — What You Actually Get
+
+Make.com's free plan is not a trial — it has no time limit, no credit card requirement, and no feature lockout on core automation capabilities. Here's what's included as of early 2026, based on Make.com's official pricing page.
+
+Table: Make.com Free Plan — Full Breakdown
+Feature|Free Plan Limit|What It Means in Practice
+Operations (credits)|1,000 per month|Each standard module step uses 1 credit — a 3-step workflow uses 3 per run. AI modules (not available on free) may consume more
+Active scenarios|2 at a time|You can only have 2 scenarios turned ON simultaneously — build more, but only 2 run
+Minimum run interval|15 minutes|Polling triggers check every 15 min at fastest — webhook (INSTANT) triggers fire immediately
+Data transfer|0.5 GB (500 MB) per month|Covers most text-based workflows — large file transfers (images, PDFs) eat this faster
+Maximum file size|5 MB per file|Limits individual file uploads — fine for spreadsheets and text, too small for large images or videos
+App integrations|3,000+ apps|Same library as paid plans — no app restrictions
+Routers and filters|Included|You can build branching logic, conditional paths, and multi-step workflows
+Visual builder|Full access|Same drag-and-drop editor as Core, Pro, and Teams plans
+
+The key constraint is the combination of 1,000 operations and 2 active scenarios. Each individually is manageable — together they define what you can realistically automate.
+
+H2: How Operations Work — The Math That Matters
+
+An operation — Make.com now officially calls them "credits" — is consumed every time a module in your scenario processes data. Most standard modules (Google Sheets, Slack, Gmail, Stripe, etc.) cost 1 credit per step, though some advanced modules like Code or AI can consume more. If your scenario has 3 standard modules — trigger, Google Sheets, Slack — each run costs 3 credits. If the trigger checks for new data and finds nothing, that check still costs 1 credit on polling triggers. This is where the free plan math gets tricky.
+
+H3: Polling Triggers vs. Webhook (INSTANT) Triggers
+
+This distinction is critical for free plan users. A polling trigger — like "Watch New Rows" in Google Sheets — checks for data on a schedule. On the free plan, the minimum interval is 15 minutes. If that scenario runs 24/7, that means 4 checks per hour, 96 per day, roughly 2,880 per month — just from one trigger checking, even when there's no new data. Make's help center confirms that trigger modules use 1 credit per run even when no new data is found. In practice, you'll hit 1,000 credits in roughly 10 days and Make.com pauses the scenario — your automation goes dark for the remaining 20 days of the month.
+
+A webhook (INSTANT) trigger — like "Watch Responses INSTANT" in Typeform or "Watch Events" in Calendly — sits dormant and only fires when data arrives. Because there's no scheduled run, no credits are consumed while waiting. If you get 50 form submissions per month and each scenario runs 3 modules, that's 150 credits total. Massive difference.
+
+Tech Tip: On the free plan, always use INSTANT (webhook) triggers when available. They consume zero operations while idle — polling triggers burn through your 1,000 monthly limit even when nothing happens. This single choice is the difference between a usable free plan and one that runs dry in 10 days.
+
+H2: What You Can Actually Build on the Free Plan — Real Examples
+
+Here's where it gets practical. We've built and documented every automation below. The operations math is based on real scenarios, not theoretical estimates.
+
+Table: Real Automations That Fit the Free Plan
+Automation|Ops Per Run|Monthly Volume That Fits|Tutorial
+Facebook Leads → Google Sheets (2 modules)|2|Up to 500 leads/mo|Our Facebook Leads guide
+Typeform → Google Sheets + Slack (3 modules)|3|Up to 330 submissions/mo|Our Typeform Intake guide
+Calendly → Get Event → Google Sheets + Slack (4 modules)|4|Up to 250 bookings/mo|Our Calendly Onboarding guide
+Stripe failed payment → Retrieve Customer → Gmail (3 modules)|3|Up to 330 events/mo|Our Stripe Alerts guide
+Typeform → Google Drive folder → Share Link → Gmail (4 modules)|4|Up to 250 submissions/mo|Our Typeform Welcome Email guide
+
+The catch: you can only run 2 of these simultaneously. With 2 active scenarios, a realistic free plan setup might be one lead capture automation (Facebook or Typeform to Google Sheets) plus one notification automation (Calendly to Slack or Stripe to Gmail). That covers the highest-value workflows for most small businesses.
+
+H2: Realistic Free Plan Setup — A Working Example
+
+Here's a concrete scenario for a freelancer using the free plan to run two active automations side by side.
+
+H3: Scenario 1: Typeform Intake → Google Sheets + Slack (3 ops/run)
+
+A client fills out your intake form on Typeform. Make.com catches the submission instantly (webhook — 0 idle cost), adds the data to Google Sheets, and sends a Slack notification. At 30 new inquiries per month, that's 90 operations.
+
+H3: Scenario 2: Calendly Booking → Get Event → Google Sheets + Slack (4 ops/run)
+
+Someone books a discovery call. Make.com catches the event (webhook), fetches the event details, adds a row to your onboarding tracker, and pings your team on Slack. At 20 bookings per month, that's 80 operations.
+
+H3: Total: 170 operations per month — 17% of the free plan limit.
+
+That leaves 830 operations unused. The free plan is not just a demo tier for this kind of usage — it's genuinely sufficient for a freelancer or early-stage business processing low to moderate volume across two channels.
+
+H2: When the Free Plan Is NOT Enough
+
+The free plan breaks down in predictable ways. Here's when you'll hit the wall.
+
+H3: You Need More Than 2 Active Scenarios
+
+This is the most common upgrade trigger. If you want to run lead capture from Facebook, client intake from Typeform, and failed payment alerts from Stripe simultaneously — that's 3 scenarios. The free plan caps you at 2. You'd need to deactivate one to activate another, which means one workflow stops running until you manually switch it back.
+
+H3: You Use Polling Triggers
+
+Any scenario that uses a polling trigger (Watch New Rows, Watch New Emails, Watch New Leads via polling) will burn through operations fast. A single polling scenario checking every 15 minutes costs roughly 2,880 operations per month — almost 3x your entire free budget. If your integration doesn't support webhooks, the free plan won't work for continuous monitoring.
+
+H3: You Process High Volume
+
+Even with webhook triggers, volume can exceed the limit. A multi-source lead tracker running 3 scenarios at 4 operations each, processing 100 leads per month across all sources, uses 1,200 operations — just over the 1,000 limit. Our multi-source lead tracking guide uses 3 separate scenarios, which also exceeds the 2-scenario cap.
+
+H3: You Need Faster Polling
+
+The 15-minute minimum interval means polling triggers won't catch events faster than every 15 minutes. If you need near-real-time data checks (not webhook-triggered), the Core plan's 1-minute interval is a significant upgrade.
+
+Table: Free Plan Dealbreakers — Quick Reference
+Situation|Why Free Plan Fails|Solution
+3+ active workflows needed|2-scenario cap|Upgrade to Core ($9/mo) for unlimited scenarios
+Using polling triggers|Burns 2,880+ ops/mo on empty checks|Switch to webhook triggers or upgrade
+100+ leads/mo across 3+ sources|Ops exceed 1,000 and scenarios exceed 2|Upgrade to Core ($9/mo)
+Need real-time polling checks|15-minute minimum interval|Core offers 1-minute intervals
+
+CTA: If you're hitting any of these limits, Make.com's Core plan at $9/month removes all of them — unlimited scenarios, 10,000 operations, and 1-minute polling intervals.
+
+H2: Free Plan vs. Core Plan — What $9/Month Gets You
+
+The Core plan is where Make.com becomes a serious business tool. Here's exactly what changes for $9/month (billed annually — monthly billing runs slightly higher around $10.59/month).
+
+Table: Free vs. Core — Side-by-Side Comparison
+Feature|Free Plan ($0/mo)|Core Plan ($9/mo)|Why It Matters
+Operations|1,000/month|10,000/month|10x capacity — enough for 5-10 active workflows at moderate volume
+Active scenarios|2|Unlimited|Run every workflow simultaneously without juggling on/off states
+Minimum interval|15 minutes|1 minute|Polling triggers check much faster — critical for time-sensitive workflows
+Data transfer|0.5 GB/month|5 GB/month|10x data — handles file-heavy workflows like Google Drive automations
+Maximum file size|5 MB|100 MB|Free plan blocks large file uploads — Core handles images, PDFs, and documents
+Make AI Tools|Not available|Included|AI-powered modules (text generation, classification) require Core or higher
+Make AI Agents|Not available|Included|Building AI agents within Make.com requires a paid plan
+Make API access|No|Yes (60 calls/min)|Build custom integrations and trigger scenarios programmatically
+
+The $9/month upgrade is the single biggest value jump in Make.com's pricing tiers. You go from a carefully constrained sandbox — 2 scenarios, 5 MB file limit, no AI tools — to a platform that can realistically run a small business's entire automation stack with unlimited scenarios, 100 MB files, and AI capabilities. For context: running multi-step workflows on Zapier requires a paid plan starting at $19.99/month, and costs scale quickly with task volume — many small businesses end up paying $49/month or more for workflows that run comfortably on Make.com Core at $9/month.
+
+H2: How to Maximize the Free Plan Before Upgrading
+
+If you're not ready to pay, these strategies stretch the free plan as far as possible.
+
+Use webhook (INSTANT) triggers exclusively. This is non-negotiable on the free plan. Webhook triggers consume zero operations while idle — polling triggers will exhaust your budget before the month is half over.
+
+Choose your 2 active scenarios strategically. Pick the two workflows that deliver the highest business impact. A lead capture automation and a client notification automation typically provide the most value per operation spent.
+
+Turn off scenarios you're not actively using. You can build and save more than 2 scenarios — you just can't have more than 2 active simultaneously. If you only need a specific workflow on certain days or weeks, toggle it on as needed and deactivate the other.
+
+Minimize modules per scenario. Every module costs 1 operation per run. If you can achieve the same result with 3 modules instead of 4, you save 25% of operations over the month. Sometimes combining steps or removing optional modules makes the difference.
+
+Test with "Run once" instead of leaving scenarios active. When building and debugging, use the manual "Run once" button instead of activating the scenario. This gives you controlled, predictable operation usage during development.
+
+Tech Tip: Before upgrading, check your operation usage in Make.com's dashboard (Organization → Usage). If you're consistently using fewer than 500 operations per month, the free plan is still serving you well — don't upgrade out of anxiety. If you're hitting 800+ regularly, the Core plan at $9/month is the most cost-effective upgrade in the automation tool market.
+
+H2: Who the Free Plan Is Actually Built For
+
+The free plan works well for three specific groups. People evaluating Make.com before committing — you get the full visual builder, 3,000+ integrations, and enough operations to build and test 2-3 real workflows without spending anything. Freelancers and solopreneurs with low-volume workflows — if you process fewer than 50 events per month across 1-2 automations, the free plan handles it comfortably. Side projects and personal automation — managing a small newsletter, tracking a hobby project, or automating personal tasks that don't require high volume or multiple simultaneous scenarios.
+
+The free plan is not built for agencies managing multiple clients, businesses running 3+ concurrent workflows, or anyone relying on polling-based triggers for time-sensitive data.
+
+H2: Where Make.com's Free Plan Stands Against Competitors
+
+Zapier's free plan includes 100 tasks per month and limits you to two-step Zaps — one trigger and one action, no multi-step workflows. One important difference: Zapier triggers don't count as tasks, only actions do. So a two-step Zap uses 1 task per run, not 2. Zapier also allows unlimited Zaps (not capped at 5), but the 100-task monthly limit restricts how much they can actually run. Make.com's free plan gives you 10x the volume (1,000 credits), multi-step scenarios with routers, filters, and branching logic, and the same visual builder as paid plans. The trade-off is that Make.com limits you to 2 active scenarios, while Zapier lets you create as many two-step Zaps as your task budget allows. For most business use cases, one multi-step Make.com scenario replaces 2-3 Zapier Zaps — and you have far more capacity to run them.
+
+n8n offers a free self-hosted option with unlimited executions, but requires a server, Docker setup, and ongoing maintenance. n8n Cloud starts at around €20/month and charges per workflow execution (not per step like Make.com), which can be cheaper for complex scenarios but more expensive at low volume. If you have the technical skills, n8n's self-hosted tier is more powerful. If you don't, Make.com's free plan gets you running in minutes with zero infrastructure.
+
+H2: What Happens at the Edges — Details Most Articles Skip
+
+Credits reset each billing cycle. If you use 400 of your 1,000 monthly credits, the remaining 600 don't carry over — most users report that unused free plan credits simply expire at month's end. Plan your usage accordingly, especially if you have seasonal volume spikes.
+
+If you upgrade to Core and later downgrade to Free, Make.com deactivates all your scenarios. You'll need to manually choose which 2 to reactivate — the rest stay saved but dormant. If you built 8 active workflows on Core, going back to Free means 6 of them stop running immediately.
+
+The free plan includes access to Make.com's Data Store feature for storing key-value data within scenarios, but limits vary by plan and can change — check your plan's comparison page before relying on it for production workflows. For most automations in this guide, Google Sheets serves the same purpose without hitting Data Store constraints.
+
+One more nuance worth understanding: Make.com's help center confirms that trigger modules consume 1 credit per run even when no new data is found. This applies to all polling triggers — every scheduled check costs you, whether there's data or not. Webhook triggers eliminate this entirely because there's no scheduled run to charge for.
+
+H2: Apps Used in Free Plan Automations
+
+Every automation referenced in this guide uses tools with free tiers. Make.com orchestrates the workflows — the free plan includes 1,000 operations per month. Google Sheets stores data and serves as a lightweight database. Slack delivers team notifications instantly. Gmail sends automated emails from your personal account. Typeform captures client intake data through conversational forms. Calendly handles booking and scheduling. Stripe processes payments and triggers event alerts. Facebook Lead Ads captures leads from paid ad campaigns. All of these connect to Make.com on the free plan with no restrictions.
+
+Verdict: Make.com's free plan is more capable than most people assume — and more limited than the marketing suggests. With 1,000 operations, 2 active scenarios, and webhook triggers, you can run 1-2 genuine business workflows at low to moderate volume indefinitely. That's enough to validate whether automation works for your business before spending anything. But the moment you need a third concurrent workflow, process more than a few hundred events, or use polling triggers, the free plan becomes a bottleneck. The Core plan at $9/month removes every constraint that matters — unlimited scenarios, 10,000 operations, and 1-minute polling. For most small businesses, it's the best $9/month you'll spend. Start on the free plan, build your highest-value workflow today, and upgrade when the limits tell you to — not before.
+
+FAQ:
+Q: Is Make.com's free plan really free forever?
+A: Yes. There's no trial period and no credit card required. The free plan has no time limit — you can use it indefinitely as long as you stay within the 1,000 operations and 2 active scenarios per month.
+Q: What happens when I hit 1,000 operations?
+A: Your active scenarios pause until the next billing cycle (monthly reset). No data is lost, but no new events are processed until the limit resets or you upgrade. Make.com sends a warning at 80% usage so you can plan ahead.
+Q: Can I build more than 2 scenarios on the free plan?
+A: Yes — you can build and save as many scenarios as you want. The limit is on active (turned on) scenarios: only 2 can run simultaneously. You can switch which ones are active at any time.
+Q: Do webhook triggers use operations while waiting?
+A: No. Webhook (INSTANT) triggers don't consume credits while waiting — there's no scheduled run, so no credit is used. Credits are consumed only when data arrives and the scenario actually executes. This is why we recommend webhook triggers for every free plan automation.
+Q: Is the Core plan $9/month or more?
+A: $9/month when billed annually ($108/year). Monthly billing is higher — some sources list it around $10.59/month. Annual billing saves roughly 15% and is the better deal for any ongoing automation setup.
+Q: Can I use Make.com's AI features on the free plan?
+A: No. Make AI Tools and Make AI Agents are only available on Core ($9/mo) and above. The free plan includes the full visual builder and 3,000+ app integrations, but AI-powered modules require a paid plan.
+
+Q: Do unused credits roll over to the next month?
+A: Based on how Make.com's billing works, credits reset at the start of each cycle — unused credits on the free plan don't carry over. Check your Organization → Usage dashboard to confirm your current cycle.
+Q: What happens if I upgrade to Core and then downgrade back to Free?
+A: Make.com deactivates all your scenarios immediately. You'll need to manually choose which 2 to keep active — the rest stay saved but won't run until you reactivate them or upgrade again.
+
+Internal Links:
+Make.com vs Zapier Pricing Breakdown|/make-com-vs-zapier-pricing-comparison
+Facebook & Instagram Leads to Google Sheets|/facebook-instagram-leads-google-sheets-automation
+Typeform to Google Sheets and Slack|/typeform-client-intake-google-sheets-automation
+Calendly Automation: Onboarding Checklist|/calendly-booking-onboarding-checklist-automation
+Stripe Payment Failed: Alert Your Team|/stripe-payment-failed-automation
+Typeform to Welcome Email + Google Drive|/typeform-welcome-email-google-drive-automation
+Track Leads from Multiple Sources in Google Sheets|/multi-source-lead-tracking-google-sheets-automation
+Zapier Too Expensive? Make.com Alternative|/zapier-too-expensive-make-com-alternative
+Make.com vs n8n for Small Business|/make-com-vs-n8n-small-business
+Lead Follow-Up Slack Reminder|/lead-follow-up-slack-reminder-automation
+Stripe New Customer: Track in Airtable + Slack|/stripe-new-customer-airtable-tracker-automation
+Send Weekly Client Reports from Google Sheets|/google-sheets-weekly-report-email-automation
+Typeform to OpenAI Lead Scoring (Auto-Qualify Leads)|/typeform-openai-lead-qualification-automation
+Stripe Daily Balance Tracker: Google Sheets + Slack|/stripe-daily-balance-tracker-automation

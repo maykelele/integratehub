@@ -1,0 +1,40 @@
+Slug: privacy-policy
+Title: Privacy Policy
+Type: page
+Meta: Privacy Policy for IntegrateHub.io — how we collect, use, and protect your information.
+
+Introduction: IntegrateHub.io operates the website integratehub.io. This Privacy Policy explains how we collect, use, and protect information when you visit our site. Last updated: March 2026.
+
+H2: Information We Collect
+
+We do not require you to create an account or provide personal information to read our guides. We may collect anonymous usage data through analytics tools (such as page views and traffic sources) to understand which content is most useful to our readers.
+
+H2: Cookies
+
+Our website may use cookies for basic analytics purposes. These cookies do not identify you personally. You can disable cookies in your browser settings at any time without affecting your ability to read our content.
+
+H2: Third-Party Links and Affiliate Disclosure
+
+Our site contains affiliate links to third-party services, including Make.com. When you click these links and sign up for a paid plan, we may earn a commission at no additional cost to you. We only recommend tools we believe provide genuine value. For full details, see our [Affiliate Disclosure](/affiliate-disclosure).
+
+Third-party websites linked from our site have their own privacy policies. We are not responsible for their content or privacy practices.
+
+H2: Analytics
+
+We may use third-party analytics services to collect anonymous information about how visitors use our site. This data helps us improve our content. These services may use cookies to collect information, but this data is aggregated and does not personally identify you.
+
+H2: Data Security
+
+We do not collect, store, or sell personal data. We take reasonable measures to protect any information processed through our site.
+
+H2: Children's Privacy
+
+IntegrateHub.io is not directed at children under the age of 13. We do not knowingly collect personal information from children.
+
+H2: Changes to This Policy
+
+We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date. Continued use of the site after changes constitutes acceptance of the updated policy.
+
+H2: Contact
+
+If you have questions about this Privacy Policy, you can contact us at [privacy@integratehub.io](mailto:privacy@integratehub.io).

@@ -1,0 +1,30 @@
+Slug: affiliate-disclosure
+Title: Affiliate Disclosure
+Type: page
+Meta: Affiliate disclosure for IntegrateHub.io — how we earn commissions and how it affects our content.
+
+Introduction: Some links on this site are affiliate links. If you click one and sign up for a paid plan, we earn a small commission — at no extra cost to you. This never influences which tools we recommend or what we write.
+
+H2: What This Means
+
+IntegrateHub.io participates in affiliate programs, including the Make.com affiliate program. This means that when you click certain links on our site and subsequently purchase a paid subscription, we may receive a commission from the software provider.
+
+This disclosure is required by the Federal Trade Commission (FTC) and similar regulatory bodies in other jurisdictions. We believe in full transparency with our readers.
+
+H2: How It Affects Our Content
+
+It doesn't. Every guide on IntegrateHub.io is written to help business owners solve real automation problems. We include "When to stay on Zapier" sections, honest limitations, and alternatives precisely because our goal is to give you accurate information — not to maximize clicks.
+
+If a tool isn't the right fit for your situation, we'll tell you. Our long-term credibility matters more than any individual commission.
+
+H2: Which Links Are Affiliate Links
+
+Affiliate links on this site are primarily links to Make.com (make.com). These links may include a tracking parameter (such as ?pc=integratehub) that identifies us as the referral source. Clicking these links does not cost you anything extra — pricing is identical whether you arrive via our link or directly.
+
+H2: Our Editorial Standards
+
+We only write about tools we have researched thoroughly and believe offer genuine value. Affiliate relationships do not determine which tools we cover — our content is driven by what our readers need to know.
+
+H2: Questions
+
+If you have any questions about our affiliate relationships or how we make money, feel free to contact us at [hello@integratehub.io](mailto:hello@integratehub.io).

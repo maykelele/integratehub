@@ -1,0 +1,28 @@
+Slug: about
+Title: About IntegrateHub.io
+Type: page
+Meta: IntegrateHub.io was built by automation practitioners who got tired of paying Zapier prices. Honest guides for small business owners.
+
+Introduction: Built by automation practitioners. Written for business owners.
+
+We got tired of paying $49/month for Zapier to run three workflows that cost $9/month on Make.com. So we built the resource we wished existed when we were figuring this out.
+
+H2: Why This Site Exists
+
+Most automation tutorials are written for developers — full of API jargon, code snippets, and assumptions that you already know what a webhook is. Business owners and operations teams don't need that. They need to know: "How do I stop copying Facebook leads into a spreadsheet every morning?"
+
+IntegrateHub.io exists to answer that question. Step by step, for real workflows that real businesses actually run.
+
+H2: Our Approach
+
+We tell you when a tool is not the right choice — including the ones we earn commissions on. We include honest cost math, not just "it's cheaper" claims. Every guide is written for someone who has never built an automation before. We test workflows before writing about them. We update guides when tools change their pricing or features.
+
+H2: How We Make Money
+
+Some links on this site are affiliate links. When you click a link and sign up for a paid plan, we may earn a commission — at no extra cost to you. This is how we keep the site free and the guides coming.
+
+We are transparent about this on every page and in our [Affiliate Disclosure](/affiliate-disclosure). Affiliate relationships never determine what we recommend — our readers' trust is worth more than any individual commission.
+
+H2: What's Coming
+
+We're building out guides for the most common small business automation problems — lead management, reporting, client onboarding, invoice processing, and more. If there's a workflow you want us to cover, reach out at [hello@integratehub.io](mailto:hello@integratehub.io).

@@ -178,6 +178,10 @@ AFFILIATE_LINKS = {
 - Python Snippet: and Code Block: tags break Workflow Steps <ol>. Never place inside Workflow Steps — use separate H2 section.
 - Category "automation-strategy" renamed to "best-practices" (slug + name). 0 articles — no migration needed.
 - Category "reporting" added to generator (was missing for Article #15).
+- Stripe Balance API returns amounts in cents (integer). Always divide by 100 for display. `available`, `pending`, `refund_and_dispute_prefunding` are arrays — map first element for single-currency accounts.
+- `refund_and_dispute_prefunding` is nullable — only returned when prefunding is enabled on the Stripe account.
+- Make.com scheduled scenarios: no trigger module exists. Scheduling is configured at scenario level (clock icon). Credits: each scheduled run consumes credits for all modules (no free idle like webhooks).
+- parseNumber() needed in Make.com filters when dividing values — without it, result may be treated as string and numeric comparisons fail silently.
 
 
 ## Generator Backlog (all resolved)
@@ -202,6 +206,8 @@ AFFILIATE_LINKS = {
 - Automatic sitemap generation deferred — lastmod accuracy problem with design-only rebuilds.
 - Homepage "More Guides" section ensures all articles are reachable even if their category isn't active yet.
 - Footer column order: Site → Browse by Topic → Stay Updated (Site first for usability).
+- Category grid changed from repeat(3, 1fr) to repeat(4, 1fr) at 900px+ breakpoint — prevents orphaned card with 4 active categories. Scales to 8 before needing another layout change.
+- Scheduled trigger article (#17) introduces new content pattern: scenario-level scheduling instead of INSTANT webhook. Article explains credits difference.
 
 ## Planned Architecture Changes
 
@@ -210,6 +216,7 @@ AFFILIATE_LINKS = {
 - ~~Homepage redesign~~ ✅ DONE
 - ~~Dynamic nav/footer~~ ✅ DONE
 - **Split input.txt:** One `content/[slug].txt` file per article. Generator reads directory instead of single file. Format within files stays identical.
+- **Homepage category grid redesign:** Current 3-column grid breaks visually at 4+ categories (one card orphaned on second row). Changed to 4-column on 900px+ as quick fix. Needs fuller redesign consideration around 6-7 categories — options include 2-row layouts, featured categories, or collapsible sections.
 
 ### Medium-term (20-25 articles)
 - **Supabase migration:** Postgres DB replaces file-based content. Table Editor as free CRUD UI. REST API auto-generated. Schema: articles, internal_links, screenshots, pricing_claims, faq_items.
